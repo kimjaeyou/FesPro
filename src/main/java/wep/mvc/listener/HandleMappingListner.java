@@ -41,7 +41,7 @@ public class HandleMappingListner implements ServletContextListener {
 		Map<String,Controller>map=new HashMap<String, Controller>();
 		Map<String,Class<?>>classMap=new HashMap<String, Class<?>>();
 		
-		ResourceBundle rb = ResourceBundle.getBundle("actionMapping");
+		ResourceBundle rb = ResourceBundle.getBundle("actionMappings");
 		
 		try {
 			for (String key : rb.keySet()) {
