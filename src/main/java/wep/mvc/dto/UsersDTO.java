@@ -2,6 +2,7 @@ package wep.mvc.dto;
 
 public class UsersDTO {
 
+	private int user_seq;
 	private String user_id;
 	private String user_pw;
 	private String age;
@@ -10,7 +11,7 @@ public class UsersDTO {
 	private String email;
 	private String user_name;
 	private String disable;
-	private String tel;
+	private String user_tel;
 
 	public UsersDTO() {
 
@@ -21,8 +22,10 @@ public class UsersDTO {
 		this.user_pw = user_pw;
 	}
 
-	public UsersDTO(String user_id, String user_pw, String age, String addr, String gender, String email,
-			String user_name, String disable, String tel) {
+	public UsersDTO(int user_seq, String user_id, String user_pw, String age, String addr, String gender, String email,
+			String user_name, String disable, String user_tel) {
+		super();
+		this.user_seq = user_seq;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 		this.age = age;
@@ -31,7 +34,15 @@ public class UsersDTO {
 		this.email = email;
 		this.user_name = user_name;
 		this.disable = disable;
-		this.tel = tel;
+		this.user_tel = user_tel;
+	}
+
+	public int getUser_seq() {
+		return user_seq;
+	}
+
+	public void setUser_seq(int user_seq) {
+		this.user_seq = user_seq;
 	}
 
 	public String getUser_id() {
@@ -98,12 +109,12 @@ public class UsersDTO {
 		this.disable = disable;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getUser_tel() {
+		return user_tel;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setUser_tel(String user_tel) {
+		this.user_tel = user_tel;
 	}
 
 }
