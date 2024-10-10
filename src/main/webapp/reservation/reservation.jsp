@@ -217,7 +217,7 @@
                             <div class="input-group">
                                 
                                 <button class="btn btn-primary" id="button-search" type="button" style="width: 100%;">예약하기</button>
-                                
+                                <input type = "submit">
                             </div>
                         </div>
                     </div>
