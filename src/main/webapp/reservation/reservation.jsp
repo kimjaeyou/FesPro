@@ -75,13 +75,15 @@
             <div class="container">
                 <div class="text-center my-5">
                     <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
-                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+                    <p class="lead mb-0">기타내용</p>
                 </div>
             </div>
         </header>
         <!-- Page content-->
         <div class="container">
+        <form>
             <div class="row">
+            
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
@@ -93,7 +95,7 @@
                               <div class="row justify-content-center">
                                 <div class="col-md-10 text-center">
                                   <h2 class="mb-5 text-center">예약날짜 / 회차 선택</h2>
-                                  <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                                  <input type="text" class="form-control w-30 mx-auto mb-3" id="date" placeholder="Select date" disabled="">
                                   <form action="#" class="row">
                                     <div class="col-md-12">
                                       <div id="inline_cal"></div>
@@ -113,7 +115,7 @@
                                 <div class="card-body">
                                     <h2 class="card-title h4">회차</h2>
                                     <ul>
-                                        <li><a href="#!">1회 (0/16)</a></li>
+                                        <li><a href="#!">1회</a></li>
                                         <li><a href="#!">2회</a></li>
                                         <li><a href="#!">3회</a></li>
                                     </ul>
@@ -192,6 +194,7 @@
                     
                 </div>
             </div>
+            </form>
         </div>
         <!-- Footer-->
         
