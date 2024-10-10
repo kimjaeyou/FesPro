@@ -8,8 +8,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.ListPublicReservationCulture;
+import wep.mvc.dto.row;
 
-public class FesController implements Controller {
+public class MainController implements Controller {
 
 	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
@@ -26,8 +27,10 @@ public class FesController implements Controller {
 			throws ServletException, IOException, SQLException {
 		ServletContext app= req.getServletContext();
 		ListPublicReservationCulture list= (ListPublicReservationCulture)app.getAttribute("fesList");
+
 		req.setAttribute("list", list);
-		return new ModelAndView("fes/list.jsp");
+		
+		return new ModelAndView("index.jsp");
 	}
 	
 }
