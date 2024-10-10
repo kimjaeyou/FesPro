@@ -11,6 +11,10 @@ public class ReservationDTO {
 	private int resv_price;
 	private int resv_check;
 	
+	public ReservationDTO () {
+		
+	}
+	
 	public ReservationDTO(int reserv_seq, int user_seq, String sVCID, String svc_date, String svc_time, int resv_peo,
 			int resv_price) {
 		super();
