@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <h1>전체 회원 조회 페이지</h1>
- 
+<h1>대시보드 입니다</h1>
+<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>asdasd<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
 </body>
 </html>
