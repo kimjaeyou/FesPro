@@ -34,11 +34,14 @@
         <style>
             .num {text-align: right;}
             .chk {text-align: right; display: flex; justify-content: flex-end;}
+            .chkAll {text-align: center; display: flex; justify-content: center;}
             #chk {margin-right: 5px; zoom: 1.5;}
+            #chkAll {margin-right: 5px; zoom: 2.0;}
             .chkLabel {margin: 0;}
 
         </style>
-
+		
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
         <script>
             onload = () => {
@@ -64,6 +67,11 @@
             }
 
         </script>
+        <script type="text/javascript">
+        	$("#inline_cal").on("click", function(){
+        		
+        	})
+        </script>
 
 
     </head>
@@ -75,13 +83,15 @@
             <div class="container">
                 <div class="text-center my-5">
                     <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
-                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+                    <p class="lead mb-0">기타내용</p>
                 </div>
             </div>
         </header>
         <!-- Page content-->
         <div class="container">
+
             <div class="row">
+            
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
@@ -113,7 +123,7 @@
                                 <div class="card-body">
                                     <h2 class="card-title h4">회차</h2>
                                     <ul>
-                                        <li><a href="#!">1회 (0/16)</a></li>
+                                        <li><a href="#!">1회</a></li>
                                         <li><a href="#!">2회</a></li>
                                         <li><a href="#!">3회</a></li>
                                     </ul>
@@ -140,8 +150,12 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h2 class="card-title h4">신청자 정보</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                    <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p> -->
+                                    <!-- 신청자 정보 가져오기 -->
+                                    <p>이름 : <input type = "text" id="name" name="name"/></p>
+                                    <p>전화 : <input type = "text" id="phone" name="phone"/></p> 
+                                    <p>이메일 : <input type = "email" id="email" name="email"/></p>  
+                                    <!-- <a class="btn btn-primary" href="#!">Read more →</a> -->
                                 </div>
                             </div>
                         </div>
@@ -151,7 +165,12 @@
                                 <div class="card-body">
                                     <h2 class="card-title h4">동의절차</h2>
                                     <p class="card-text">개인정보 수집 및 이용안내 (필수)</p>
-                                    <a class="btn btn-primary" href="#!">동의합니다</a>
+                                    <!-- <a class="btn btn-primary" href="#!">동의합니다</a> -->
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
                                     <div class="chk"><input type="checkbox" id="chk"><label for="chk" class="chkLabel">동의합니다</label></div>
                                 </div>
                             </div>
@@ -161,8 +180,17 @@
                                     <div class="small text-muted">개인정보 제 3자 제공 (필수)</div>
                                     <h2 class="card-title h4">Post Title</h2>
                                     <p class="card-text">개인정보 제 3자 제공 (필수)</p>
-                                    <a class="btn btn-primary" href="#!" style="width: 100%;">예약하기</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <div class="chk"><input type="checkbox" id="chk"><label for="chk" class="chkLabel">동의합니다</label></div>
+                                    <!-- <a class="btn btn-primary" href="#!" style="width: 100%;">예약하기</a> -->
                                 </div>
+                            </div>
+                            <div class="chkAll">
+                            	<fieldset><input type="checkbox" id="chkAll"><label for="chkAll" class="chkLabel">전체동의</label></fieldset>
                             </div>
                         </div>
                     </div>
@@ -171,6 +199,9 @@
                 <!-- Side widgets-->
                 <div class="col-lg-4">
                     <!-- Search widget-->
+                    <form name = "resvForm" method = "post" action = "${path}/front">
+			        <input type = "hidden" name = "key" value = "reservation"/>
+			        <input type = "hidden" name = "methodName" value = "insert"/>
                     <div class="card mb-4">
                         <div class="card-header" style="font-weight: bold; font-size: x-large;">나의 예약 정보</div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);"><h4>행사명</h4>
@@ -186,12 +217,15 @@
                             <div class="input-group">
                                 
                                 <button class="btn btn-primary" id="button-search" type="button" style="width: 100%;">예약하기</button>
+                                
                             </div>
                         </div>
                     </div>
+                    </form>
                     
                 </div>
             </div>
+            
         </div>
         <!-- Footer-->
         
