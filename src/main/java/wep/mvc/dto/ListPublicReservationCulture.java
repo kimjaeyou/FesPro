@@ -40,16 +40,10 @@ public class ListPublicReservationCulture {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ListPublicReservationCulture [list_total_count=");
-		builder.append(list_total_count);
-		builder.append(", RESULT=");
-		builder.append(RESULT);
-		builder.append(", row=");
-		builder.append(row);
-		builder.append("]");
-		return builder.toString();
+		return "ListPublicReservationCulture [list_total_count=" + list_total_count + ", RESULT=" + RESULT + ", row="
+				+ row + ", getList_total_count()=" + getList_total_count() + ", getRESULT()=" + getRESULT()
+				+ ", getRow()=" + getRow() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
-	
 
 }
