@@ -1,7 +1,7 @@
 package wep.mvc.dto;
 
 public class UsersDTO {
-
+	private int USER_SEQ;
 	private String user_id;
 	private String user_pw;
 	private String age;
@@ -16,13 +16,15 @@ public class UsersDTO {
 
 	}
 
+
 	public UsersDTO(String user_id, String user_pw) {
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 	}
 
-	public UsersDTO(String user_id, String user_pw, String age, String addr, String gender, String email,
+	public UsersDTO(int user_seq,String user_id, String user_pw, String age, String addr, String gender, String email,
 			String user_name, String disable, String tel) {
+		this.USER_SEQ=user_seq;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 		this.age = age;
@@ -33,7 +35,16 @@ public class UsersDTO {
 		this.disable = disable;
 		this.tel = tel;
 	}
+	
+	
+	public int getUSER_SEQ() {
+		return USER_SEQ;
+	}
 
+	public void setUSER_SEQ(int uSER_SEQ) {
+		USER_SEQ = uSER_SEQ;
+	}
+	
 	public String getUser_id() {
 		return user_id;
 	}
