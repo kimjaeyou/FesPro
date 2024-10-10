@@ -34,7 +34,7 @@ public class HandleMappingListner implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent e) {
 		try {
-			Test();
+			Test(e);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -66,13 +66,13 @@ public class HandleMappingListner implements ServletContextListener {
 	}
 	
 	
-	public static void Test() throws IOException {
+	public static void Test(ServletContextEvent e) throws IOException {
 	    StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
 	    urlBuilder.append("/" + URLEncoder.encode("6d556870756c736d36336f756f456d", "UTF-8"));
 	    urlBuilder.append("/" + URLEncoder.encode("json", "UTF-8"));
 	    urlBuilder.append("/" + URLEncoder.encode("ListPublicReservationCulture", "UTF-8"));
 	    urlBuilder.append("/" + URLEncoder.encode("1", "UTF-8"));
-	    urlBuilder.append("/" + URLEncoder.encode("200", "UTF-8"));
+	    urlBuilder.append("/" + URLEncoder.encode("50", "UTF-8"));
 
 	    URL url = new URL(urlBuilder.toString());
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -207,9 +207,10 @@ public class HandleMappingListner implements ServletContextListener {
 	               
 	            }
 	            
-	            // dto에 파싱된 데이터가 들어간 상태
-	            System.out.println(dto);
 	            System.out.println(dto.getRow());
+	            ServletContext app= e.getServletContext();
+	            
+	            app.setAttribute("fesList", dto);//행사 데이터 application영역에 저장
 	            
 	        } else {
 	            System.out.println("ListPublicReservationCulture 데이터가 없습니다.");
