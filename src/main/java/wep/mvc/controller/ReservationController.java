@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class ReservationController implements Controller {
+	
+	public ReservationController () {
+		System.out.println("ReservationController 생성됨..");
+	}
 
 	public ModelAndView resv(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
@@ -26,7 +30,7 @@ public class ReservationController implements Controller {
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//
 		System.out.println("데이터 이동");
-		return null;
+		return new ModelAndView("reservation/resvSuccess.jsp");
 	}
 	
 	/**

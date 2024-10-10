@@ -30,6 +30,8 @@
         
         <!-- Style -->
         <link rel="stylesheet" href="css/style2.css">
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
 
         <style>
             .num {text-align: right;}
@@ -42,9 +44,39 @@
         </style>
 		
 		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+		
+		<script type="text/javascript">
+            // 사이드바에 선택한 값 입력
+			$(function () {
+				$(document).on("click", ".rd-day-body", function() {
+					let date = $("#result").val();
+					$("[data-form=date]").html(date);
+				})
+
+                $(document).on("click", ".datepicker-cell", function() {
+					let date = $("#datepicker1").val();
+					$("[data-form=date]").html(date);
+				})
+				
+				$(document).on("click", ".time", function() {
+					let time = $(this).text();
+					$("[data-form=time]").html(time);
+				})
+
+                $(document).on("click", "#button-search", function(){
+                    let peopleNum = $("#people-num").html();
+                    $("[data-form=peopleNum]").html(peopleNum);
+                })
+
+			}); // ready 끝
+		</script>
 
         <script>
             onload = () => {
+				// 인원수 제어
                 let plus = document.querySelector(".plus");
                 let minus = document.querySelector(".minus");
                 let result = document.getElementById("people-num");
@@ -64,15 +96,33 @@
                         result.innerHTML = i;
                     }
                 })
+                
+                // date picker 
+                const getDatePickerTitle = elem => {
+                    // From the label or the aria-label
+                    const label = elem.nextElementSibling;
+                    let titleText = '';
+                    if (label && label.tagName === 'LABEL') {
+                    titleText = label.textContent;
+                    } else {
+                    titleText = elem.getAttribute('aria-label') || '';
+                    }
+                    return titleText;
+                }
+                
+                const elems = document.querySelectorAll('.datepicker_input');
+                for (const elem of elems) {
+                    const datepicker = new Datepicker(elem, {
+                    // 'format': 'dd/mm/yyyy', // UK format
+                    'format': 'yyyy년 mm월 dd일', // UK format
+                    title: getDatePickerTitle(elem)
+                    });
+                }
+                
             }
 
         </script>
-        <script type="text/javascript">
-        	$("#inline_cal").on("click", function(){
-        		
-        	})
-        </script>
-
+        
 
     </head>
     <body>
@@ -103,12 +153,23 @@
                               <div class="row justify-content-center">
                                 <div class="col-md-10 text-center">
                                   <h2 class="mb-5 text-center">예약날짜 / 회차 선택</h2>
-                                  <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                                  <!-- <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
                                   <form action="#" class="row">
                                     <div class="col-md-12">
                                       <div id="inline_cal"></div>
                                     </div>
-                                  </form>
+                                  </form> -->
+	                                  <div class="form-floating mb-4 d-flex">
+	                                  <input 
+	                                         type="text"
+	                                         class="datepicker_input form-control border-2"
+	                                         id="datepicker1"
+	                                         required
+	                                         placeholder="DD/MM/YYYY"
+                                             
+                                             >
+	                                  <label for="datepicker1">날짜 선택</label>
+	                                </div>
                                 </div>
                               </div>
                                   
@@ -123,9 +184,9 @@
                                 <div class="card-body">
                                     <h2 class="card-title h4">회차</h2>
                                     <ul>
-                                        <li><a href="#!">1회</a></li>
-                                        <li><a href="#!">2회</a></li>
-                                        <li><a href="#!">3회</a></li>
+                                        <li><a href="#!" class="time">1회</a></li>
+                                        <li><a href="#!" class="time">2회</a></li>
+                                        <li><a href="#!" class="time">3회</a></li>
                                     </ul>
 
                                 </div>
@@ -140,7 +201,7 @@
                                     <div class="num">
                                         
                                         <button class="btn btn-primary minus" id="button-search" type="button" style="width: 10%;">-</button>
-                                        <span id="people-num" style="padding: 30px;" name="peopleNum">0</span>
+                                        <span id="people-num" style="padding: 30px;" name="peopleCount">0</span>
                                         <button class="btn btn-primary plus" id="button-search" type="button" style="width: 10%;">+</button>
                                     </div>
 
@@ -152,9 +213,13 @@
                                     <h2 class="card-title h4">신청자 정보</h2>
                                     <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p> -->
                                     <!-- 신청자 정보 가져오기 -->
-                                    <p>이름 : <input type = "text" id="name" name="name"/></p>
+                                     <table>
+                                        
+
+                                     </table>
+                                    <!-- <p>이름 : <input type = "text" id="name" name="name"/></p>
                                     <p>전화 : <input type = "text" id="phone" name="phone"/></p> 
-                                    <p>이메일 : <input type = "email" id="email" name="email"/></p>  
+                                    <p>이메일 : <input type = "email" id="email" name="email"/></p>   -->
                                     <!-- <a class="btn btn-primary" href="#!">Read more →</a> -->
                                 </div>
                             </div>
@@ -171,7 +236,7 @@
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <div class="chk"><input type="checkbox" id="chk"><label for="chk" class="chkLabel">동의합니다</label></div>
+                                    <div class="chk"><input type="checkbox" id="chk1" name = "agreement"><label for="chk" class="chkLabel">동의합니다</label></div>
                                 </div>
                             </div>
                             <!-- Blog post-->
@@ -185,13 +250,18 @@
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <div class="chk"><input type="checkbox" id="chk"><label for="chk" class="chkLabel">동의합니다</label></div>
+                                    <div class="chk"><input type="checkbox" id="chk2" name="agreement"><label for="chk" class="chkLabel">동의합니다</label></div>
                                     <!-- <a class="btn btn-primary" href="#!" style="width: 100%;">예약하기</a> -->
                                 </div>
                             </div>
-                            <div class="chkAll">
-                            	<fieldset><input type="checkbox" id="chkAll"><label for="chkAll" class="chkLabel">전체동의</label></fieldset>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="chkAll">
+                                        <input type="checkbox" id="chkAll"><label for="chkAll" class="chkLabel">전체동의</label>
+                                    </div>
+                                </div>
                             </div>
+                        </fieldset>
                         </div>
                     </div>
                     
@@ -205,18 +275,22 @@
                     <div class="card mb-4">
                         <div class="card-header" style="font-weight: bold; font-size: x-large;">나의 예약 정보</div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);"><h4>행사명</h4>
-                            <p>이용일자</p><p>이용회차<p>취소기간<p>취소수수료<p>
+                            <p>이용일자</p><p data-form="date">내용</p>
+                            <p>이용회차<p data-form="time">내용</p>
+                            <p>취소기간<p data-form="canclePeriod">내용</p>
+                            <p>취소수수료<p data-form="cancleFee">내용</p>
+                            <p>
                             <div style="border: 1px solid white; border-radius: 5%; padding: 15px; background-color: white;">
                                 <h5>결제금액</h5><hr>
-                                <p>이용인원</p>
-                                <p>이용요금</p>
-                                <p>할인/할증</p>
+                                <p>이용인원</p><p data-form="peopleNum">내용</p>
+                                <p>이용요금</p><p data-form="fee">내용</p>
+                                <p>할인/할증</p><p data-form="discount">내용</p>
                             </div>
                         </div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);">
                             <div class="input-group">
                                 
-                                <button class="btn btn-primary" id="button-search" type="button" style="width: 100%;">예약하기</button>
+                                <button class="btn btn-primary" id="button-search" style="width: 100%;">예약하기</button>
                                 <input type = "submit">
                             </div>
                         </div>
@@ -241,5 +315,17 @@
         <script src="js/rome.js"></script>
     
         <script src="js/main.js"></script>
+
+        <script type="text/javascript">
+        	$("#inline_cal").on("click", function(){
+        		
+        	})
+
+            document.querySelector("#chkAll").addEventListener("click", (e) => {
+                document.querySelectorAll("[name=agreement]").forEach((item, index)=>{
+                    item.checked = e.target.checked;
+                })
+            });
+        </script>
     </body>
 </html>

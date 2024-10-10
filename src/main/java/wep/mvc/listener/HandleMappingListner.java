@@ -33,11 +33,11 @@ public class HandleMappingListner implements ServletContextListener {
 	
 	@Override
 	public void contextInitialized(ServletContextEvent e) {
-		try {
-			Test(e);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+//		try {
+//			//Test(e);
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 		Map<String,Controller>map=new HashMap<String, Controller>();
 		Map<String,Class<?>>classMap=new HashMap<String, Class<?>>();
 		
