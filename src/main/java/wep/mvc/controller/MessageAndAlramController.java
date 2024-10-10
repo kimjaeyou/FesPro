@@ -11,7 +11,7 @@ public class MessageAndAlramController implements Controller {
 
 	public ModelAndView registration(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-
+		System.out.println("");
 		return new ModelAndView("index.jsp", true);
 	}
 
