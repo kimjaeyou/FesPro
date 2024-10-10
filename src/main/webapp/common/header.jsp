@@ -118,10 +118,10 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2">Features</a></li>
-                <li><a href="#" class="nav-link px-2">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2">About</a></li>
+                <li><a href="#" class="nav-link px-2">문화행사</a></li>
+                <li><a href="#" class="nav-link px-2">예약보기</a></li>
+                <li><a href="#" class="nav-link px-2">게시판</a></li>
+                <li><a href="#" class="nav-link px-2">공지사항</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
