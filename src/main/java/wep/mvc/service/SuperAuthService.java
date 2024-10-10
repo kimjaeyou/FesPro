@@ -13,7 +13,7 @@ public class SuperAuthService{
 	public List<UsersDTO> selectAll()
 	{
 		List<UsersDTO> list = new ArrayList<UsersDTO>();
-		list = dao.selectAll();
+		return list = dao.selectAll();
 		
 	}
 

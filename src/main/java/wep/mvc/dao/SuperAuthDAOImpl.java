@@ -19,7 +19,10 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 		List<UsersDTO> list = new ArrayList<UsersDTO>();
 		
 		try {
-			con=DbUtil.get
+			con=DbUtil.getConnection();
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
+		return null; 
 	}
 }
