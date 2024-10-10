@@ -1,6 +1,7 @@
 package wep.mvc.dto;
 
 public class HostDTO {
+
 	private int host_seq;
 	private String host_id;
 	private String host_pw;
