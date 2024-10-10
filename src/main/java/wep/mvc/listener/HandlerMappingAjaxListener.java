@@ -30,8 +30,6 @@ public class HandlerMappingAjaxListener implements ServletContextListener {
 	        	Class<?> className = Class.forName(value);
 	        	RestController controller = (RestController)className.getDeclaredConstructor().newInstance();
 	        	
-	        	System.out.println("controller = " + controller);
-	        	
 	        	maps.put(key, controller); 
 	        	clzMap.put(key, className);
 	        }
