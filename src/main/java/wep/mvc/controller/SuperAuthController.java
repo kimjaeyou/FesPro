@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.service.SuperAuthService;
 
 public class SuperAuthController implements Controller {
-	SuperAuthService service = new SuperAuthService()
+	SuperAuthService service = new SuperAuthService();
 	
 	public ModelAndView selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
