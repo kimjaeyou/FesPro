@@ -208,7 +208,6 @@ public class HandleMappingListner implements ServletContextListener {
 	            }
 	            
 	            // dto에 파싱된 데이터가 들어간 상태
-	            System.out.println(dto);
 	            System.out.println(dto.getRow());
 	            
 	        } else {

@@ -28,7 +28,6 @@ public class DispatcherServlet extends HttpServlet {
 		ServletContext app = config.getServletContext();
 		map = (Map<String, Controller>) app.getAttribute("map");
 		classMap = (Map<String, Class<?>>) app.getAttribute("classMap");
-		System.out.println(classMap);
 	}
 
 	@Override
