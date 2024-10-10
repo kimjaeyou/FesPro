@@ -2,224 +2,273 @@ package wep.mvc.dto;
 
 public class FesDTO {
 
-		private String	svcId;
-		private String	maxClassNm;
-		private String	minClassNm;
-		private String	svcStaion;
-		private String	svcNm;
-		private String	payatNm;
-		private String	placeNm;
-		private String	usetgtInfo;
-		private String	x;
-		private String	y;
-		private String	svcOpnbgnDt;
-		private String	svcOpnendDt;
-		private String	rcptbgnDt;
-		private String	areaNm;
-		private String	imgURL;
-		private String	dtlcont;
-		private String	telNo;
-		private String	vMax;
-		private String	vMin;
-		private String	revsdDay;
-		private String	revstdDayNm;
-		private int fesState;
-		private String updateDate;
-		private int	maxNum;
-		private int	price;
-		private int	hostSeq;
+		private String	SVCID; //서비스 아이디
+		private String	MAXCLASSNM; //대분류명
+		private String	MINCLASSNM; //소분류명
+		private String	SVCSTATNM; //서비스상태
+		private String	SVCNM; //서비스명
+		private String	PAYATNM; //결제방법
+		private String	PLACENM; //장소명
+		private String	USETGTINFO; //서비스대상
+		private String	X; //장소x좌표
+		private String	Y; //장소y좌표
+		private String	SVCOPNBGNDT; //서비스개시시작일시
+		private String	SVCOPNENDDT; //서비스개시종료일시
+		private String	RCPTBGNDT; //접수시작일시
+		private String	AREANM; //지역명
+		private String	IMGURL; //이미지경로
+		private String	DTLCONT; //상세내용
+		private String	TELNO; //전화번호
+		private String	V_MAX; //서비스이용 시작시간
+		private String	V_MIN; //서비스이용 종료시간
+		private String	REVSTDDAY; //취소기간 기준일까지
+		private String	REVSTDDAYNM; //취소기간 기준정보
+		private int Fes_state; //등록신청 정보(승인전, 승인완료, ...)
+		private String Update_date; //등록신청or수정신청 일시
+		private int	MAXNUM; //최대 인원수
+		private int	PRICE; //가격
+		private int	host_seq; //주최자 sequence
 		
-		
-		public FesDTO(String svcId, String maxClassNm, String minClassNm, String svcStaion, String svcNm,
-				String payatNm, String placeNm, String usetgtInfo, String x, String y, String svcOpnbgnDt,
-				String svcOpnendDt, String rcptbgnDt, String areaNm, String imgURL, String dtlcont, String telNo,
-				String vMax, String vMin, String revsdDay, String revstdDayNm, int fesState, String updateDate,
-				int maxNum, int price, int hostSeq) {
+		public FesDTO(String sVCID, String mAXCLASSNM, String mINCLASSNM, String sVCSTATNM, String sVCNM,
+				String pAYATNM, String pLACENM, String uSETGTINFO, String x, String y, String sVCOPNBGNDT,
+				String sVCOPNENDDT, String rCPTBGNDT, String aREANM, String iMGURL, String dTLCONT, String tELNO,
+				String v_MAX, String v_MIN, String rEVSTDDAY, String rEVSTDDAYNM, int fes_state, String update_date,
+				int mAXNUM, int pRICE, int host_seq) {
 			super();
-			this.svcId = svcId;
-			this.maxClassNm = maxClassNm;
-			this.minClassNm = minClassNm;
-			this.svcStaion = svcStaion;
-			this.svcNm = svcNm;
-			this.payatNm = payatNm;
-			this.placeNm = placeNm;
-			this.usetgtInfo = usetgtInfo;
-			this.x = x;
-			this.y = y;
-			this.svcOpnbgnDt = svcOpnbgnDt;
-			this.svcOpnendDt = svcOpnendDt;
-			this.rcptbgnDt = rcptbgnDt;
-			this.areaNm = areaNm;
-			this.imgURL = imgURL;
-			this.dtlcont = dtlcont;
-			this.telNo = telNo;
-			this.vMax = vMax;
-			this.vMin = vMin;
-			this.revsdDay = revsdDay;
-			this.revstdDayNm = revstdDayNm;
-			this.fesState = fesState;
-			this.updateDate = updateDate;
-			this.maxNum = maxNum;
-			this.price = price;
-			this.hostSeq = hostSeq;
+			SVCID = sVCID;
+			MAXCLASSNM = mAXCLASSNM;
+			MINCLASSNM = mINCLASSNM;
+			SVCSTATNM = sVCSTATNM;
+			SVCNM = sVCNM;
+			PAYATNM = pAYATNM;
+			PLACENM = pLACENM;
+			USETGTINFO = uSETGTINFO;
+			X = x;
+			Y = y;
+			SVCOPNBGNDT = sVCOPNBGNDT;
+			SVCOPNENDDT = sVCOPNENDDT;
+			RCPTBGNDT = rCPTBGNDT;
+			AREANM = aREANM;
+			IMGURL = iMGURL;
+			DTLCONT = dTLCONT;
+			TELNO = tELNO;
+			V_MAX = v_MAX;
+			V_MIN = v_MIN;
+			REVSTDDAY = rEVSTDDAY;
+			REVSTDDAYNM = rEVSTDDAYNM;
+			Fes_state = fes_state;
+			Update_date = update_date;
+			MAXNUM = mAXNUM;
+			PRICE = pRICE;
+			this.host_seq = host_seq;
 		}
-		public String getSvcId() {
-			return svcId;
+
+		public String getSVCID() {
+			return SVCID;
 		}
-		public String getMaxClassNm() {
-			return maxClassNm;
+
+		public void setSVCID(String sVCID) {
+			SVCID = sVCID;
 		}
-		public String getMinClassNm() {
-			return minClassNm;
+
+		public String getMAXCLASSNM() {
+			return MAXCLASSNM;
 		}
-		public String getSvcStaion() {
-			return svcStaion;
+
+		public void setMAXCLASSNM(String mAXCLASSNM) {
+			MAXCLASSNM = mAXCLASSNM;
 		}
-		public String getSvcNm() {
-			return svcNm;
+
+		public String getMINCLASSNM() {
+			return MINCLASSNM;
 		}
-		public String getPayatNm() {
-			return payatNm;
+
+		public void setMINCLASSNM(String mINCLASSNM) {
+			MINCLASSNM = mINCLASSNM;
 		}
-		public String getPlaceNm() {
-			return placeNm;
+
+		public String getSVCSTATNM() {
+			return SVCSTATNM;
 		}
-		public String getUsetgtInfo() {
-			return usetgtInfo;
+
+		public void setSVCSTATNM(String sVCSTATNM) {
+			SVCSTATNM = sVCSTATNM;
 		}
+
+		public String getSVCNM() {
+			return SVCNM;
+		}
+
+		public void setSVCNM(String sVCNM) {
+			SVCNM = sVCNM;
+		}
+
+		public String getPAYATNM() {
+			return PAYATNM;
+		}
+
+		public void setPAYATNM(String pAYATNM) {
+			PAYATNM = pAYATNM;
+		}
+
+		public String getPLACENM() {
+			return PLACENM;
+		}
+
+		public void setPLACENM(String pLACENM) {
+			PLACENM = pLACENM;
+		}
+
+		public String getUSETGTINFO() {
+			return USETGTINFO;
+		}
+
+		public void setUSETGTINFO(String uSETGTINFO) {
+			USETGTINFO = uSETGTINFO;
+		}
+
 		public String getX() {
-			return x;
+			return X;
 		}
-		public String getY() {
-			return y;
-		}
-		public String getSvcOpnbgnDt() {
-			return svcOpnbgnDt;
-		}
-		public String getSvcOpnendDt() {
-			return svcOpnendDt;
-		}
-		public String getRcptbgnDt() {
-			return rcptbgnDt;
-		}
-		public String getAreaNm() {
-			return areaNm;
-		}
-		public String getImgURL() {
-			return imgURL;
-		}
-		public String getDtlcont() {
-			return dtlcont;
-		}
-		public String getTelNo() {
-			return telNo;
-		}
-		public String getvMax() {
-			return vMax;
-		}
-		public String getvMin() {
-			return vMin;
-		}
-		public String getRevsdDay() {
-			return revsdDay;
-		}
-		public String getRevstdDayNm() {
-			return revstdDayNm;
-		}
-		public int getFesState() {
-			return fesState;
-		}
-		public String getUpdateDate() {
-			return updateDate;
-		}
-		public int getMaxNum() {
-			return maxNum;
-		}
-		public int getPrice() {
-			return price;
-		}
-		public int getHostSeq() {
-			return hostSeq;
-		}
-		public void setSvcId(String svcId) {
-			this.svcId = svcId;
-		}
-		public void setMaxClassNm(String maxClassNm) {
-			this.maxClassNm = maxClassNm;
-		}
-		public void setMinClassNm(String minClassNm) {
-			this.minClassNm = minClassNm;
-		}
-		public void setSvcStaion(String svcStaion) {
-			this.svcStaion = svcStaion;
-		}
-		public void setSvcNm(String svcNm) {
-			this.svcNm = svcNm;
-		}
-		public void setPayatNm(String payatNm) {
-			this.payatNm = payatNm;
-		}
-		public void setPlaceNm(String placeNm) {
-			this.placeNm = placeNm;
-		}
-		public void setUsetgtInfo(String usetgtInfo) {
-			this.usetgtInfo = usetgtInfo;
-		}
+
 		public void setX(String x) {
-			this.x = x;
+			X = x;
 		}
+
+		public String getY() {
+			return Y;
+		}
+
 		public void setY(String y) {
-			this.y = y;
+			Y = y;
 		}
-		public void setSvcOpnbgnDt(String svcOpnbgnDt) {
-			this.svcOpnbgnDt = svcOpnbgnDt;
+
+		public String getSVCOPNBGNDT() {
+			return SVCOPNBGNDT;
 		}
-		public void setSvcOpnendDt(String svcOpnendDt) {
-			this.svcOpnendDt = svcOpnendDt;
+
+		public void setSVCOPNBGNDT(String sVCOPNBGNDT) {
+			SVCOPNBGNDT = sVCOPNBGNDT;
 		}
-		public void setRcptbgnDt(String rcptbgnDt) {
-			this.rcptbgnDt = rcptbgnDt;
+
+		public String getSVCOPNENDDT() {
+			return SVCOPNENDDT;
 		}
-		public void setAreaNm(String areaNm) {
-			this.areaNm = areaNm;
+
+		public void setSVCOPNENDDT(String sVCOPNENDDT) {
+			SVCOPNENDDT = sVCOPNENDDT;
 		}
-		public void setImgURL(String imgURL) {
-			this.imgURL = imgURL;
+
+		public String getRCPTBGNDT() {
+			return RCPTBGNDT;
 		}
-		public void setDtlcont(String dtlcont) {
-			this.dtlcont = dtlcont;
+
+		public void setRCPTBGNDT(String rCPTBGNDT) {
+			RCPTBGNDT = rCPTBGNDT;
 		}
-		public void setTelNo(String telNo) {
-			this.telNo = telNo;
+
+		public String getAREANM() {
+			return AREANM;
 		}
-		public void setvMax(String vMax) {
-			this.vMax = vMax;
+
+		public void setAREANM(String aREANM) {
+			AREANM = aREANM;
 		}
-		public void setvMin(String vMin) {
-			this.vMin = vMin;
+
+		public String getIMGURL() {
+			return IMGURL;
 		}
-		public void setRevsdDay(String revsdDay) {
-			this.revsdDay = revsdDay;
+
+		public void setIMGURL(String iMGURL) {
+			IMGURL = iMGURL;
 		}
-		public void setRevstdDayNm(String revstdDayNm) {
-			this.revstdDayNm = revstdDayNm;
+
+		public String getDTLCONT() {
+			return DTLCONT;
 		}
-		public void setFesState(int fesState) {
-			this.fesState = fesState;
+
+		public void setDTLCONT(String dTLCONT) {
+			DTLCONT = dTLCONT;
 		}
-		public void setUpdateDate(String updateDate) {
-			this.updateDate = updateDate;
+
+		public String getTELNO() {
+			return TELNO;
 		}
-		public void setMaxNum(int maxNum) {
-			this.maxNum = maxNum;
+
+		public void setTELNO(String tELNO) {
+			TELNO = tELNO;
 		}
-		public void setPrice(int price) {
-			this.price = price;
+
+		public String getV_MAX() {
+			return V_MAX;
 		}
-		public void setHostSeq(int hostSeq) {
-			this.hostSeq = hostSeq;
+
+		public void setV_MAX(String v_MAX) {
+			V_MAX = v_MAX;
 		}
-		
-		
-		
+
+		public String getV_MIN() {
+			return V_MIN;
+		}
+
+		public void setV_MIN(String v_MIN) {
+			V_MIN = v_MIN;
+		}
+
+		public String getREVSTDDAY() {
+			return REVSTDDAY;
+		}
+
+		public void setREVSTDDAY(String rEVSTDDAY) {
+			REVSTDDAY = rEVSTDDAY;
+		}
+
+		public String getREVSTDDAYNM() {
+			return REVSTDDAYNM;
+		}
+
+		public void setREVSTDDAYNM(String rEVSTDDAYNM) {
+			REVSTDDAYNM = rEVSTDDAYNM;
+		}
+
+		public int getFes_state() {
+			return Fes_state;
+		}
+
+		public void setFes_state(int fes_state) {
+			Fes_state = fes_state;
+		}
+
+		public String getUpdate_date() {
+			return Update_date;
+		}
+
+		public void setUpdate_date(String update_date) {
+			Update_date = update_date;
+		}
+
+		public int getMAXNUM() {
+			return MAXNUM;
+		}
+
+		public void setMAXNUM(int mAXNUM) {
+			MAXNUM = mAXNUM;
+		}
+
+		public int getPRICE() {
+			return PRICE;
+		}
+
+		public void setPRICE(int pRICE) {
+			PRICE = pRICE;
+		}
+
+		public int getHost_seq() {
+			return host_seq;
+		}
+
+		public void setHost_seq(int host_seq) {
+			this.host_seq = host_seq;
+		}
+	
 }
