@@ -61,9 +61,9 @@
         $(function(){
         	//문화행사 조회
             $("#seletAllBtn").click(function(){
+            	
                $("#iFrame").attr("src", "festival/selectAll.jsp");
            });
-        	
         	
          });
         </script>
