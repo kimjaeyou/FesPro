@@ -118,7 +118,22 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2">문화행사</a></li>
+                <!-- <li><a href="#" class="nav-link px-2">문화행사</a></li> -->
+                                <li class="nav-item dropdown">
+		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		            문화체험
+		          </a>
+		          <ul class="dropdown-menu">
+		            <li><a class="dropdown-item" href="#">교육체험</a></li>
+		            <li><a class="dropdown-item" href="#">농장체험</a></li>
+		            <li><a class="dropdown-item" href="#">문화행사</a></li>
+		            <li><a class="dropdown-item" href="#">전시/관람</a></li>
+		            <li><a class="dropdown-item" href="#">단체봉사</a></li>
+		            <li><a class="dropdown-item" href="#">공원탐방</a></li>
+		            <li><a class="dropdown-item" href="#">서울형키즈카페</a></li>
+		            <li><a class="dropdown-item" href="#">산림여가</a></li>
+		          </ul>
+		        </li>
                 <li><a href="#" class="nav-link px-2">예약보기</a></li>
                 <li><a href="#" class="nav-link px-2">게시판</a></li>
                 <li><a href="#" class="nav-link px-2">공지사항</a></li>
