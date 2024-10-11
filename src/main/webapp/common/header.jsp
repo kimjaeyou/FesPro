@@ -4,7 +4,7 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-    <script src="../assets/js/color-modes.js"></script>
+    <script src="reservation/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="reservation/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -106,7 +106,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="headers.css" rel="stylesheet">
+    <!--  <link href="headers.css" rel="stylesheet">-->
 </head>
 <main>
     <div class="container">
@@ -148,4 +148,4 @@
         </header>
     </div>
 </main>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="reservation/assets/dist/js/bootstrap.bundle.min.js"></script>
