@@ -1,9 +1,9 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
+import com.google.gson.JsonObject;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,8 +16,42 @@ public class UserController implements Controller {
 
 	private UserService us = new UserServiceImpl();
 
+
+	// 회원가입
+	public ModelAndView insert(HttpServletRequest request, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String id = request.getParameter("username");
+		String pwd = request.getParameter("password");
+		String age = request.getParameter("age");
+		String addr = request.getParameter("address");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email1") + "@"
+					+ request.getParameter("email2") ;
+		String name = request.getParameter("name");
+		String disable = request.getParameter("hindrance");
+		String tel = request.getParameter("phone1") + "-"
+					+ request.getParameter("phone2") +"-"
+					+ request.getParameter("phone3");
+		
+		UsersDTO dto = new UsersDTO(id, pwd, Integer.parseInt(age), addr, gender, email, name,
+				disable, tel);
+
+		int result;
+		try {
+			result = us.insert(dto);
+			if (result == 1) {
+				return new ModelAndView("index.jsp", true);
+			} else {
+				// 에러페이지
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	// 로그인
-	public Object login(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse resp)
 	        throws ServletException, IOException, SQLException {
 
 	    String userId = request.getParameter("member-id");
@@ -37,22 +71,18 @@ public class UserController implements Controller {
 	}
 
 	// 아이디 중복체크
-	public ModelAndView idCheck(HttpServletRequest request, HttpServletResponse resp)
+	public Object idCheck(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		String id = request.getParameter("id");
-		try {
-			boolean result = us.idCheck(id);
-			PrintWriter out = resp.getWriter();
-			
-			if(result) out.print("중복입니다.");
-			else out.print("사용가능합니다.");
-					
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
+		String id = request.getParameter("id");
+		boolean result = us.idCheck(id);
+		
+		JsonObject obj = new JsonObject();
 
-		return new ModelAndView("index.jsp", true);
+		if(result) obj.addProperty("info", "중복입니다.");
+		else obj.addProperty("info","사용가능합니다.");
+		
+		return obj;
 	}
 
 	// 로그아웃
@@ -64,55 +94,16 @@ public class UserController implements Controller {
 		UsersDTO dto = new UsersDTO(userId, pwd);
 
 		HttpSession session = request.getSession();
-		session.setAttribute("loginUser", null);
+		session.setAttribute("index.jps", null);
 
 		return new ModelAndView("index.jsp", true);
 	}
 
-	// 회원가입
-	public ModelAndView insert(HttpServletRequest request, HttpServletResponse resp)
-			throws ServletException, IOException {
-		LocalDate date = LocalDate.now();
-		int year = date.getYear();
-
-		String id = request.getParameter("username");
-		String pwd = request.getParameter("password");
-		String age = request.getParameter("year");
-		String addr = request.getParameter("address");
-		String gender = request.getParameter("gender");
-		
-		String email = request.getParameter("email1") + "@"
-					+ request.getParameter("email2") ;
-		
-		String name = request.getParameter("name");
-		String disable = request.getParameter("hindrance");
-		
-		String tel = request.getParameter("phone1") + "-"
-					+ request.getParameter("phone2") +"-"
-					+ request.getParameter("phone3");
-
-		UsersDTO dto = new UsersDTO(id, pwd, year-Integer.parseInt(age), addr, Integer.parseInt(gender), email, name,
-				Integer.parseInt(disable), tel);
-
-		int result;
-		try {
-			result = us.insert(dto);
-			if (result == 1) {
-				return new ModelAndView("index.jsp", true);
-			} else {
-				// 에러페이지
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	// 회원탈퇴
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-
 		try {
 			int result = us.delete(id);
 			if (result == 1) {
@@ -131,12 +122,9 @@ public class UserController implements Controller {
 	// 회원수정
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		LocalDate date = LocalDate.now();
-		int year = date.getYear();
-
-		String pwd = request.getParameter("password");
-		String age = request.getParameter("year");
-		String addr = request.getParameter("address");
+		String pwd = request.getParameter("pw");
+		String age = request.getParameter("age");
+		String addr = request.getParameter("addr");
 		String gender = request.getParameter("gender");
 
 		String email = request.getParameter("email1") + "@"
@@ -145,13 +133,13 @@ public class UserController implements Controller {
 		String name = request.getParameter("name");
 		String disable = request.getParameter("hindrance");
 		
-		String tel = request.getParameter("phone1") + "-"
-					+ request.getParameter("phone2") +"-"
-					+ request.getParameter("phone3");
+		String tel = request.getParameter("tel1") + "-"
+					+ request.getParameter("tel2") +"-"
+					+ request.getParameter("tel3");
+		String id = request.getParameter("id");
 
-		UsersDTO dto = new UsersDTO( pwd, year-Integer.parseInt(age), addr, Integer.parseInt(gender), email, name,
-				Integer.parseInt(disable), tel);
-
+		UsersDTO dto = new UsersDTO(id, pwd, Integer.parseInt(age), addr, gender, email, name,
+				disable, tel);
 
 		try {
 			int result = us.update(dto);

@@ -33,7 +33,6 @@ img {
 	width: 100%;
 	height: 27%;
 }
-
 #card_main {
 	width: 24%;
 	height: 400px;

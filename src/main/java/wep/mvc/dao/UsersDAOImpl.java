@@ -13,31 +13,29 @@ public class UsersDAOImpl implements UsersDAO {
 	// 로그인
 	@Override
 	public UsersDTO login(UsersDTO usersDTO) throws SQLException {
-		Connection con=null;
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		UsersDTO dbDTO=null;
-		
-		String sql= "select user_id , user_pw from users where user_id=? and user_pw=?";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		UsersDTO dbDTO = null;
+
+		String sql = "select * from users where user_id=? and user_pw=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, usersDTO.getUser_id());
 			ps.setString(2, usersDTO.getUser_pw());
-			
+
 			rs = ps.executeQuery();
-			if(rs.next()) {
-				 dbDTO = new UsersDTO(rs.getString(1), 
-						 			  rs.getString(2));
+			if (rs.next()) {
+				dbDTO = new UsersDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
 			}
-			
-		}finally {
+
+		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return dbDTO;
 	}
-
-
 
 	// 회원가입
 	@Override
@@ -47,17 +45,17 @@ public class UsersDAOImpl implements UsersDAO {
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("INSERT INTO Users VALUES(user_seq.NEXTVAL,?, ?, ?, ?, ?, ?, ?, ?, ?)");
- 
+			ps = con.prepareStatement("INSERT INTO Users VALUES(user_seq.NEXTVAL,?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
+
 			ps.setString(1, usersDTO.getUser_id());
 			ps.setString(2, usersDTO.getUser_pw());
 			ps.setInt(3, usersDTO.getAge());
 			ps.setString(4, usersDTO.getAddr());
-			ps.setInt(5, usersDTO.getGender());
-			ps.setString(6, usersDTO.getEmail());
-			ps.setString(7, usersDTO.getUser_name());
-			ps.setInt(8, usersDTO.getDisable());
-			ps.setString(9, usersDTO.getUser_tel());
+			ps.setString(5, usersDTO.getEmail());
+			ps.setString(6, usersDTO.getUser_name());
+			ps.setString(7, usersDTO.getUser_tel());
+			ps.setString(8, usersDTO.getGender());
+			ps.setString(9, usersDTO.getDisable());
 			result = ps.executeUpdate();
 
 		} finally {
@@ -116,13 +114,18 @@ public class UsersDAOImpl implements UsersDAO {
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("");
+			ps = con.prepareStatement(
+					"update users	set user_pw=?, age=?, addr=?, gender=?, email=?, user_name=?, disable=?, user_tel=? where user_id=?");
 
-			ps.setString(1, usersDTO.getUser_name());
+			ps.setString(1, usersDTO.getUser_pw());
 			ps.setInt(2, usersDTO.getAge());
-			ps.setString(3, usersDTO.getUser_tel());
-			ps.setString(4, usersDTO.getAddr());
-			ps.setString(5, usersDTO.getUser_pw());
+			ps.setString(3, usersDTO.getAddr());
+			ps.setString(4, usersDTO.getGender());
+			ps.setString(5, usersDTO.getEmail());
+			ps.setString(6, usersDTO.getUser_name());
+			ps.setString(7, usersDTO.getDisable());
+			ps.setString(8, usersDTO.getUser_tel());
+			ps.setString(9, usersDTO.getUser_id());
 
 			result = ps.executeUpdate();
 		} catch (SQLException e) {

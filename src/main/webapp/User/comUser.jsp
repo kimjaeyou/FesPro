@@ -11,28 +11,36 @@
 <body>
     <div class="signup-container">
         <h2>기업 회원가입</h2>
-        <form id="corporate-signup-form">
+        <form id="corporate-signup-form" action="${pageContext.request.contextPath}/front">
+                <input type="hidden" name="key" value="host"  /> 
+                <input type="hidden" name="methodName" value="insert" />
+        
             <div class="form-group">
                 <label for="company-name">기업명</label>
-                <input type="text" id="company-name" name="company-name" placeholder="기업명을 입력하세요" required>
+                <input type="text" id="com-name" name="comname" placeholder="기업명을 입력하세요" required>
             </div>
 
             <div class="form-group">
                 <label for="representative-name">대표자명</label>
-                <input type="text" id="representative-name" name="representative-name" placeholder="대표자명을 입력하세요" required>
+                <input type="text" id="host-name" name="host-name" placeholder="대표자명을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Register-name">가입자명</label>
+                <input type="text" id="rep-name" name="rep-name" placeholder="가입자명을 입력하세요" required>
             </div>
 
             <div class="form-group">
                 <label for="username">아이디</label>
                 <div class="input-group">
-                    <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
+                    <input type="text" id="company-id" name="company-id" placeholder="아이디를 입력하세요." required>
                     <button type="button" id="check-username" class="check-btn">중복 체크</button>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호 입력 (최소 8자)" required>
+                <input type="password" id="company-pw" name="company-pw" placeholder="비밀번호를 입력하세요." required>
             </div>
 
             <div class="form-group">
@@ -44,13 +52,11 @@
             <div class="form-group">
                 <label for="contact-phone">전화번호</label>
                 <div class="input-group">
-                    <input type="text" id="contact-phone1" name="contact-phone1" maxlength="3" placeholder="010" class="phone-input" required>
-                    <input type="text" id="contact-phone2" name="contact-phone2" maxlength="4" placeholder="1234" class="phone-input" required>
-                    <input type="text" id="contact-phone3" name="contact-phone3" maxlength="4" placeholder="5678" class="phone-input" required>
+                    <input type="text" id="company-phone1" name="com-phone1" maxlength="3" placeholder="010" class="phone-input" required>
+                    <input type="text" id="company-phone2" name="com-phone2" maxlength="4" placeholder="1234" class="phone-input" required>
+                    <input type="text" id="company-phone3" name="com-phone3" maxlength="4" placeholder="5678" class="phone-input" required>
                 </div>
-                <p class="info-text">예: 010-1234-5678</p>
             </div>
-
             <button type="submit" class="signup-btn">가입하기</button>
         </form>
     </div>
