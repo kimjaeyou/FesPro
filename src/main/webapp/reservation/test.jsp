@@ -9,7 +9,7 @@
 <body>
     <form name = "resvForm" method = "post" action = "${path}/front">
         <input type = "hidden" name = "key" value = "reservation"/>
-        <input type = "hidden" name = "methodName" value = "selectByUserSeq"/>
+        <input type = "hidden" name = "methodName" value = "select"/>
         <button class="btn btn-primary" id="button-search">예약하기</button>
         <a href="${path}/front?key=reservation&methodName=insert">clicks</a>
         <input type = submit value=제출테스트>
