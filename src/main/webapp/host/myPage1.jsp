@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/header.jsp" />
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,6 +17,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <!-- <body class="sb-nav-fixed">
+
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             Navbar Brand
             <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
@@ -41,6 +43,7 @@
                 </li>
             </ul>
         </nav> -->
+
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-white" id="sidenavAccordion">
@@ -163,6 +166,8 @@
                         					</c:otherwise>
                         				</c:choose>
                         			</tbody>
+                        		</table>
+                        		<!-- 등록하러 가기 -->
                         	</div>
                         </div>
                     </div>

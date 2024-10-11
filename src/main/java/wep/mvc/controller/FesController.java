@@ -14,7 +14,7 @@ import wep.mvc.service.FesSerevice;
 import wep.mvc.service.FesSereviceImpl;
 
 public class FesController implements Controller {
-	private FesSerevice fesSerevice = new FesSereviceImpl();
+	//private FesSerevice fesSerevice = new FesSereviceImpl();
 	
 	//등록 신청(C)
 	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
@@ -51,6 +51,10 @@ public class FesController implements Controller {
 		
 		System.out.println("여기");
 		
+		//읽어온 데이터수(주최한 서비스 횟수)
+		
+		
 		return new ModelAndView("host/myPage1.jsp");
 	}
+
 }
