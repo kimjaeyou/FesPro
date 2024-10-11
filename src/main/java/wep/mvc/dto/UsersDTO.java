@@ -23,7 +23,6 @@ public class UsersDTO {
 		this.user_pw = user_pw;
 	}
 
-
 	public UsersDTO(int user_seq, String user_id, String user_pw, String age, String addr, String gender, String email,
 			String user_name, String disable, String user_tel) {
 		super();
