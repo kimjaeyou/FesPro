@@ -33,4 +33,34 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 		  }
 		  return list;
 		 }
+	 
+	 @Override
+		public UsersDTO selectById(String id){
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			UsersDTO user = null;
+			String sql = "SELECT * FROM USERS WHERE USER_ID=?";
+			try {
+			con=DbUtil.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+				
+				if(rs.next())
+				{
+					user = new UsersDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getString(10));
+				}
+			
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally
+			{
+				DbUtil.dbClose(con, ps, rs);;
+			}
+			
+			
+			return user;
+		}
 }

@@ -8,4 +8,6 @@ public interface SuperAuthDAO {
 
 	List<UsersDTO> selectAll();
 
+	UsersDTO selectById(String id);
+
 }

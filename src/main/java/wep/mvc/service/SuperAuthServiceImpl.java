@@ -16,5 +16,12 @@ public class SuperAuthServiceImpl implements SuperAuthService {
 		list = dao.selectAll();
 		return list;
 	}
+	
+	@Override
+	public UsersDTO selectById(String id) {
+		UsersDTO user = new UsersDTO();
+		user = dao.selectById(id);
+		return user;
+	}
 
 }

@@ -134,39 +134,11 @@
         // 특정 유저의 정보를 가져오는 함수
         $(function(){
         
-         function getUserInfo(userId) {
-            if (!userId) {
-                userId = $("#userId").val();
-                if (!userId) {
-                    alert("유저 ID를 입력하세요.");
-                    return;
-                }
-            }
-
-            $.ajax({
-                url: 'getUserInfo',
-                type: 'GET',
-                data: { userId: userId },
-                success: function(data) {
-                    var user = JSON.parse(data);
-                    // 상세보기 테이블에 유저 정보 표시 및 수정 가능하게 하기
-                    $("#userSeqField").val(user.user_seq);
-                    $("#userIdField").val(user.user_id);
-                    $("#userPwField").val(user.user_pw);
-                    $("#userNameField").val(user.user_name);
-                    $("#userAgeField").val(user.age);
-                    $("#userAddrField").val(user.addr);
-                    $("#userGenderField").val(user.gender);
-                    $("#userEmailField").val(user.email);
-                    $("#userTelField").val(user.user_tel);
-                    $("#userDisableField").val(user.disable);
-                }
-            });
-        }
+         
  
         // 모든 유저 정보를 가져오는 함수
          	function selectAll(){
-        	alert("앙아dddd");
+        	 alert("앙아dddd"); 
             $.ajax({
                 url: '${path}/ajax',
                 type: 'get',
@@ -200,7 +172,8 @@
                 }
             });
         };
-
+		
+        
         // 유저 정보 수정하는 함수
          function updateUserInfo() {
             var updatedUser = {
@@ -227,9 +200,49 @@
                 }
             });
         }
+         selectAll();
         
-        selectAll();
         }); 
+       
+    </script>
+    
+    <script type="text/javascript">
+    function getUserInfo(userId) {
+    	alert("dkdkdk");
+         if (!userId) {
+            userId = $("#userId").val();
+            if (!userId) {
+                alert("유저 ID를 입력하세요.");
+                return;
+            }
+        } 
+
+        $.ajax({
+            url: '${path}/ajax',
+            type: 'get',
+            dataType:"json",
+            data:{key:"superAuth" , methodName:"selectById", id: userId },
+            success: function(result) {
+				alert("뽀삐뽀삐뽀뽀삐뽀")
+                // 상세보기 테이블에 유저 정보 표시 및 수정 가능하게 하기
+                $("#userSeqField").val(result.user_seq);
+                $("#userIdField").val(result.user_id);
+                $("#userPwField").val(result.user_pw);
+                $("#userNameField").val(result.user_name);
+                $("#userAgeField").val(result.age);
+                $("#userAddrField").val(result.addr);
+                $("#userGenderField").val(result.gender);
+                $("#userEmailField").val(result.email);
+                $("#userTelField").val(result.user_tel);
+                $("#userDisableField").val(result.disable);
+            }
+            /* error: function(err){
+            	alert(err+"=> 에러..")
+            	console.log(err);
+            } */
+        });
+    }
+    
     </script>
 </body>
 </html>

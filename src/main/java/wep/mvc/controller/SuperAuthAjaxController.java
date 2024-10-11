@@ -33,7 +33,22 @@ public class SuperAuthAjaxController implements RestController {
 		out.print(jsonArry);
 		 
 	}
-
+	
+	public void selectById(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		UsersDTO user = new UsersDTO();
+		String id = request.getParameter("id");
+		user = service.selectById(id);
+		
+		//list를 응답할수 없기때문에 list를 jsonArray변환해서 보낸다.
+		  Gson gson = new Gson();
+		  String jsonUser = gson.toJson(user);
+		
+		PrintWriter out = response.getWriter();
+		out.print(jsonUser);
+		 
+	}
 	
 
 }

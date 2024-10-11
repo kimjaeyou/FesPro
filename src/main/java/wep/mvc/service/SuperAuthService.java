@@ -11,4 +11,6 @@ public interface SuperAuthService{
 	
 	public List<UsersDTO> selectAll();
 
+	UsersDTO selectById(String id);
+
 }
