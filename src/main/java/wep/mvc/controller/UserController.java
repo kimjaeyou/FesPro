@@ -5,15 +5,12 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import com.google.gson.JsonObject;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.UsersDTO;
-import wep.mvc.service.UserService;
-import wep.mvc.service.UserServiceImpl;
+
 
 public class UserController implements Controller {
 

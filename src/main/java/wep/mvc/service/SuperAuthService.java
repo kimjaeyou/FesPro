@@ -7,14 +7,8 @@ import wep.mvc.dao.SuperAuthDAO;
 import wep.mvc.dao.SuperAuthDAOImpl;
 import wep.mvc.dto.UsersDTO;
 
-public class SuperAuthService{
-	SuperAuthDAO dao = new SuperAuthDAOImpl();
+public interface SuperAuthService{
 	
-	public List<UsersDTO> selectAll()
-	{
-		List<UsersDTO> list = new ArrayList<UsersDTO>();
-		return list = dao.selectAll();
-		
-	}
+	public List<UsersDTO> selectAll();
 
 }
