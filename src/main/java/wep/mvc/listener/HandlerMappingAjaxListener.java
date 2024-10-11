@@ -19,7 +19,7 @@ public class HandlerMappingAjaxListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent e)  { 
         Map<String, RestController> maps = new HashMap<String, RestController>();
         Map<String, Class<?> > clzMap = new HashMap<String, Class<?>>();
-        
+        System.out.println("!!!!!!!!!!!!!!!!!!!!");
         //~.properties파일 로딩
        ResourceBundle rbs = ResourceBundle.getBundle("ajaxMapping"); //resources/ajaxMapping.properties
        
@@ -29,7 +29,8 @@ public class HandlerMappingAjaxListener implements ServletContextListener {
 	
 	        	Class<?> className = Class.forName(value);
 	        	RestController controller = (RestController)className.getDeclaredConstructor().newInstance();
-	        	
+	        	System.out.println(key);
+	        	System.out.println(controller);
 	        	maps.put(key, controller); 
 	        	clzMap.put(key, className);
 	        }

@@ -55,16 +55,23 @@
                 </nav>
             </div>
             <!-- iframe -->
-            <iframe src="festival/dashBoard.jsp" width="100%" height="800px" style="border:1px solid black;" id="iFrame" name="center"></iframe>
+            <!-- <iframe src="festival/dashBoard.jsp" width="100%" height="800px" style="border:1px solid black;" id="iFrame" name="center"></iframe> -->
+            <div id="contentDiv">
+            </div>
         </div>
         <script>
-        $(function(){
-        	//문화행사 조회
+       $(function(){
+        	/* //문화행사 조회
             $("#seletAllBtn").click(function(){
             	
                $("#iFrame").attr("src", "festival/selectAll.jsp");
-           });
-        	
+           }); */
+           
+           //문화행사 조회
+			  $("#seletAllBtn").click(function(){
+			  	// $("#contentDiv").load("festival/selectAll.jsp");
+				 $("#contentDiv").load("${path}/ajax?key=superfestival&methodName=selectAll");
+			  });
          });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
