@@ -50,5 +50,40 @@ public class SuperAuthAjaxController implements RestController {
 		 
 	}
 	
+	public void update(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		UsersDTO user = new UsersDTO();
+		String user_seq = request.getParameter("user_seq");
+		String user_id = request.getParameter("user_id");
+		String user_pw = request.getParameter("user_pw");
+		String user_name = request.getParameter("user_name");
+		String age = request.getParameter("age");
+		String addr = request.getParameter("addr");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		String user_tel = request.getParameter("user_tel");
+		String disable = request.getParameter("disable");
+		
+		
+		
+		UsersDTO userId = new UsersDTO(Integer.parseInt(user_seq),user_id,user_pw,
+		Integer.parseInt(age),addr,Integer.parseInt(gender),email,user_name,Integer.parseInt(disable),user_tel);
+		int result = service.update(user);
+		
+		//list를 응답할수 없기때문에 list를 jsonArray변환해서 보낸다.
+		
+		if(result != 0)
+		{
+		PrintWriter out = response.getWriter();
+		out.print("등록이 완료되었습니다.");
+		}
+		else
+		{
+			PrintWriter out = response.getWriter();
+			out.print("등록 실패");
+		}
+	}
+	
 
 }

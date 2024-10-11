@@ -174,32 +174,7 @@
         };
 		
         
-        // 유저 정보 수정하는 함수
-         function updateUserInfo() {
-            var updatedUser = {
-                user_seq: $("#userSeqField").val(),
-                user_id: $("#userIdField").val(),
-                user_pw: $("#userPwField").val(),
-                user_name: $("#userNameField").val(),
-                age: $("#userAgeField").val(),
-                addr: $("#userAddrField").val(),
-                gender: $("#userGenderField").val(),
-                email: $("#userEmailField").val(),
-                user_tel: $("#userTelField").val(),
-                disable: $("#userDisableField").val()
-            };
-
-            $.ajax({
-                url: 'updateUserInfo',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(updatedUser),
-                success: function(response) {
-                    alert("유저 정보가 수정되었습니다.");
-                    // 수정 후 필요한 동작 (예: 테이블 갱신 등)
-                }
-            });
-        }
+       
          selectAll();
         
         }); 
@@ -243,6 +218,35 @@
         });
     }
     
+    </script>
+    
+    <script type="text/javascript">
+    // 유저 정보 수정하는 함수
+    function updateUserInfo() {
+       var updatedUser = {
+           user_seq: $("#userSeqField").val(),
+           user_id: $("#userIdField").val(),
+           user_pw: $("#userPwField").val(),
+           user_name: $("#userNameField").val(),
+           age: $("#userAgeField").val(),
+           addr: $("#userAddrField").val(),
+           gender: $("#userGenderField").val(),
+           email: $("#userEmailField").val(),
+           user_tel: $("#userTelField").val(),
+           disable: $("#userDisableField").val()
+       };
+
+       $.ajax({
+           url: '{path}/ajax',
+           type: "get",
+           dataType:"text",
+           data: {key:"superAuth" , methodName:"update", $(updatedUser).serialize()},
+           success: function(result) {
+               alert(result);
+               // 수정 후 필요한 동작 (예: 테이블 갱신 등)
+           }
+       });
+   }
     </script>
 </body>
 </html>

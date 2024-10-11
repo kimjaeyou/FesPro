@@ -63,4 +63,35 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 			
 			return user;
 		}
+	 
+	 @Override
+	 public int update(UsersDTO user) {
+	  PreparedStatement ps = null;
+	  Connection con =null;
+	  int result=0;
+	  try {
+	   con = DbUtil.getConnection();
+	   ps = con.prepareStatement("update USERS set user_seq=?,user_id=?,user_pw=?,age=?,addr=?,gender=?,email=?,user_name=?,disable=?,user_tel=? where user_id=?");
+	   
+	   ps.setInt(1, user.getUser_seq());
+	   ps.setString(2, user.getUser_id());
+	   ps.setString(3, user.getUser_pw());
+	   ps.setInt(4, user.getAge());
+	   ps.setString(5, user.getAddr());
+	   ps.setInt(6, user.getGender());
+	   ps.setString(7, user.getEmail());
+	   ps.setString(8, user.getUser_name());
+	   ps.setInt(9, user.getDisable());
+	   ps.setString(10, user.getUser_tel());
+	   ps.setString(11, user.getUser_id());
+	   
+	   result = ps.executeUpdate();
+	  } catch (SQLException e) {
+	   e.printStackTrace();
+	  } finally {
+	   DbUtil.dbClose( con , ps);
+	  }
+	  return result;
+	 }
+	 
 }

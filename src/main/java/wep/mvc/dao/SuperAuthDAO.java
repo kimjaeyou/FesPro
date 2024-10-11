@@ -10,4 +10,6 @@ public interface SuperAuthDAO {
 
 	UsersDTO selectById(String id);
 
+	int update(UsersDTO user);
+
 }

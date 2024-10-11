@@ -13,4 +13,6 @@ public interface SuperAuthService{
 
 	UsersDTO selectById(String id);
 
+	int update(UsersDTO user);
+
 }
