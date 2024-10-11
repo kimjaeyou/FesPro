@@ -4,8 +4,6 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-    <script src="reservation/assets/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -19,7 +17,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="reservation/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${path}/reservation/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -114,7 +112,7 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="${path}/front?key=main&methodName=read" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img alt="logo" src="assets/img/FesProLogo_bg.png">
+                    <img alt="logo" src="${path}/assets/img/FesProLogo_bg.png">
                 </a>
             </div>
 
@@ -148,4 +146,4 @@
         </header>
     </div>
 </main>
-<script src="reservation/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
