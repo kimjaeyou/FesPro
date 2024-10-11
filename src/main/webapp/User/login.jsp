@@ -1,3 +1,5 @@
+<%@page import="wep.mvc.dto.UsersDTO"%>
+<%@page import="wep.mvc.dao.UsersDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,8 +18,7 @@
             <button class="tab-btn" id="corporate-tab" onclick="showSection('corporate')">기업 로그인</button>
             <button class="tab-btn" id="super-tab" onclick="showSection('super')">관리자 로그인</button>
         </div>
-        
-        
+     
         <!-- 일반회원 -->
         <div id="member-login" class="login-section active">
             <form id="member-login-form" method="get" action="${pageContext.request.contextPath}/front" onsubmit="return validateLogin('member')">
@@ -34,8 +35,6 @@
                 <button type="button" class="register-btn" onclick="location.href='choice.jsp';">회원가입하기</button>
             </form>
         </div>
-
-
 
 
         <!-- 기업회원 -->
@@ -55,6 +54,7 @@
                 <button type="button" class="register-btn" onclick="location.href='choice.jsp';">회원가입하기</button>
             </form>
         </div>
+
 
 
         <!-- 관리자 -->
