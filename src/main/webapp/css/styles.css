@@ -91,6 +91,7 @@
   }
 }
 
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -2682,6 +2683,16 @@ progress {
   --bs-btn-font-size: 0.875rem;
   --bs-btn-border-radius: 0.25rem;
 }
+
+/*방향 버튼 추가 -재영  */
+#direcBtn{
+	opacity : 0.5;
+}
+/*메인 행사 컨텐트*/
+#cardContent{
+	height : 400px;
+}
+
 
 .fade {
   transition: opacity 0.15s linear;
