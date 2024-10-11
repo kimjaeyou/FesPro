@@ -33,6 +33,7 @@ public class UsersDTO {
 
 	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr, int gender, String email,
 			String user_name, int disable, String user_tel) {
+
 		super();
 		this.user_seq = user_seq;
 		this.user_id = user_id;
