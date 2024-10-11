@@ -25,9 +25,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">전체 문화행사 조회</h1>
+                        <h1 class="mt-4">문화행사 승인</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">전체 문화행사의 목록을 출력합니다</li>
+                            <li class="breadcrumb-item active">대기 중인 문화행사의 목록을 보여줍니다</li>
                         </ol>
                         
                         <div class="card mb-4">

@@ -14,7 +14,7 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 	public List<FesDTO> selectAll() {
 		List<FesDTO> result=null;
 		
-		//더미 데이터
+		//더미 데이터 -> DB에서 가져오기로 수정
 		FesDTO fes1 = new FesDTO(
 			    "SVC001", "문화", "음악", "운영중", "서울재즈페스티벌", "현장결제", "서울 올림픽공원", "일반", "37.520454", "127.121788", 
 			    "2024-05-01", "2024-05-03", "2024-04-01", "서울", "https://example.com/image1.jpg", "서울에서 열리는 재즈 페스티벌", 
@@ -45,7 +45,7 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 			    "010-5555-6666", "26°C", "16°C", "2024-09-17", "수요일", 1, "2024-08-25", 3000, 10000, 1005
 			);
 		
-			result = new ArrayList();
+			result = new ArrayList<FesDTO>();
 			result.add(fes1);
 			result.add(fes2);
 			result.add(fes3);
