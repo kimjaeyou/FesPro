@@ -32,9 +32,8 @@ img {
 	<header class="bg-dark py-5">
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">Shop in style</h1>
-				<p class="lead fw-normal text-white-50 mb-0">With this shop
-					hompeage template</p>
+				<h1 class="display-4 fw-bolder">문화 체험 행사</h1>
+				<p class="lead fw-normal text-white-50 mb-0">서울시 문화 체험 행사</p>
 			</div>
 		</div>
 	</header>
@@ -57,21 +56,19 @@ img {
 										<!-- Product name-->
 										<h5 class="fw-bolder">${option.SVCNM}</h5>
 										<!-- Product price-->
-										${option.MAXCLASSNM}
+										${option.MINCLASSNM}
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<form action="movieReview" method="POST">
+										<form action="#" method="POST">
 											<input value="${option.SVCID}" name=movieCd type="hidden">
 											<input value="${option.SVCNM}" name=title type="hidden">
 											<input class="btn btn-outline-dark mt-auto" type="submit"
 												name="View options" value="더보기">
 										</form>
-										<%-- <a class="btn btn-outline-dark mt-auto"
-										href="movieReview?movieSeq=${option.movieSeq}&title=${option.title}">
-										View options</a> --%>
+										
 									</div>
 								</div>
 							</div>
