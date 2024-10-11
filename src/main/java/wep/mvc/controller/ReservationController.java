@@ -7,10 +7,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.ReservationDTO;
+import wep.mvc.service.ReservationService;
 import wep.mvc.service.ReservationServiceImpl;
 
 public class ReservationController implements Controller {
-	ReservationServiceImpl service = new ReservationServiceImpl();
+	ReservationService service = new ReservationServiceImpl();
 	
 	public ReservationController () {
 		System.out.println("ReservationController 생성됨..");
@@ -39,12 +40,17 @@ public class ReservationController implements Controller {
 		int fee = Integer.parseInt(request.getParameter("fee"));
 		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee);
 		
-		ReservationDTO reservation = new ReservationDTO(1, "1", date, time, peopelNum, fee);
+		ReservationDTO reservation = new ReservationDTO(1, null, date, time, peopelNum, fee);
 		
-		//int result = service.insert(reservation);
-		//System.out.println(result);
+		int result = service.insert(reservation);
+		System.out.println(result);
 		
-		return new ModelAndView("reservation/resvSuccess.jsp");
+		if(result != 0) {
+			return new ModelAndView("reservation/resvSuccess.jsp");
+		} else {
+			return new ModelAndView("reservation/fail.jsp");
+		}
+		
 	}
 	
 	/**

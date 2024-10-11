@@ -14,8 +14,6 @@ public class ReservationServiceImpl implements ReservationService {
 	 */
 	public int insert (ReservationDTO reservation) throws SQLException  {
 		int result = dao.insert(reservation);
-		
-		
 		return result;
 	}
 

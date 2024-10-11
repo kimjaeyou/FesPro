@@ -16,7 +16,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		PreparedStatement ps=null;
 		int result = 0;
 		
-		String sql= "insert into RESERVATION values(RESERV_SEQ.NEXTVAL(), ?, ?, SYSDATE, ?, ?, ?, ?, ?)";
+		String sql= "insert into RESERVATION values(RESERV_SEQ.NEXTVAL, ?, ?, SYSDATE, ?, ?, ?, ?, ?)";
 		// insert into RESERVATION values(RESERV_SEQ.NEXTVAL(), ?, ?, SYSDATE, ?, ?, ?, ?, ?)
 		try {
 			con = DbUtil.getConnection();

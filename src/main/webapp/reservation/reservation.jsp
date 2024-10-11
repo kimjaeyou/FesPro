@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="css/style2.css">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         <style>
             .num {text-align: right;}
@@ -40,6 +42,23 @@
             #chk {margin-right: 5px; zoom: 1.5;}
             #chkAll {margin-right: 5px; zoom: 2.0;}
             .chkLabel {margin: 0;}
+
+            table {
+                width: 100%;
+                padding: 20px;
+                border-top: solid black 2px;
+                border-bottom: solid black 2px;
+                border-right: none;
+                border-left: none;
+            }
+
+            th { text-align: center; background-color: rgba(204, 204, 204, 0.2); width: 20%;}
+
+            th, td { padding: 15px; border-bottom: solid rgba(199, 199, 199, 0.7) 1px;}
+
+            .bi-caret-right-fill { margin-bottom: 3px;}
+
+            [data-form] {color:blue}
 
         </style>
 		
@@ -132,6 +151,16 @@
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
+                    <div>
+                        <i class="bi bi-1-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>                        
+                    </div>
+                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약 완료 <br><br>
                     <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
                     <p class="lead mb-0">기타내용</p>
                 </div>
@@ -211,17 +240,18 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h2 class="card-title h4">신청자 정보</h2>
+                                    <hr>
                                     <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p> -->
                                     <!-- 신청자 정보 가져오기 -->
                                      <table>
                                         <tr>
-                                        	<td>이름</td><td name="applicantName">나가</td>
+                                        	<th>이름</td><td name="applicantName">나가</td>
                                         </tr>
                                         <tr>
-                                        	<td>전화</td><td name="applicantTel">010-0000-0000</td>
+                                        	<th>전화</td><td name="applicantTel">010-0000-0000</td>
                                         </tr>
                                         <tr>
-                                        	<td>이메일</td><td name="applicantMail">naga@spoon.com</td>
+                                        	<th>이메일</td><td name="applicantMail">naga@spoon.com</td>
                                         </tr>
 
                                      </table>
