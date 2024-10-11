@@ -158,6 +158,7 @@
                         								<p align="center"><span><a href="#">서비스 통계보기</a></span></p>
                         							</td>
                         						</tr>
+
                         						</c:forEach>
                         					</c:otherwise>
                         				</c:choose>

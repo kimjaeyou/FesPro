@@ -32,7 +32,6 @@ public class FesController implements Controller {
 			throws ServletException, IOException, SQLException {
 		ServletContext app= req.getServletContext();
 		ListPublicReservationCulture list= (ListPublicReservationCulture)app.getAttribute("fesList");
-		System.out.println("요청 ::::"+list);
 		req.setAttribute("list", list);
 		return new ModelAndView("fes/list.jsp");
 	}
