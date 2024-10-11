@@ -30,6 +30,12 @@ public class ReservationController implements Controller {
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//
 		System.out.println("데이터 이동");
+		String date = request.getParameter("date");
+		String time = request.getParameter("time");
+		String peopelNum = request.getParameter("peopleNum");
+		String fee = request.getParameter("fee");
+		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee);
+		
 		return new ModelAndView("reservation/resvSuccess.jsp");
 	}
 	

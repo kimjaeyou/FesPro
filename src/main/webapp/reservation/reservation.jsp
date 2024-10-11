@@ -53,6 +53,7 @@
 			$(function () {
 				$(document).on("click", ".rd-day-body", function() {
 					let date = $("#result").val();
+                    console.log(date);
 					$("[data-form=date]").html(date);
 				})
 
@@ -74,7 +75,7 @@
 			}); // ready 끝
 		</script>
 
-        <script>
+        <script type="text/javascript">
             onload = () => {
 				// 인원수 제어
                 let plus = document.querySelector(".plus");
@@ -118,7 +119,6 @@
                     title: getDatePickerTitle(elem)
                     });
                 }
-                
             }
 
         </script>
@@ -214,7 +214,15 @@
                                     <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p> -->
                                     <!-- 신청자 정보 가져오기 -->
                                      <table>
-                                        
+                                        <tr>
+                                        	<td>이름</td><td name="applicantName">나가</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>전화</td><td name="applicantTel">010-0000-0000</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>이메일</td><td name="applicantMail">naga@spoon.com</td>
+                                        </tr>
 
                                      </table>
                                     <!-- <p>이름 : <input type = "text" id="name" name="name"/></p>
@@ -272,26 +280,30 @@
                     <form name = "resvForm" method = "post" action = "${path}/front">
 			        <input type = "hidden" name = "key" value = "reservation"/>
 			        <input type = "hidden" name = "methodName" value = "insert"/>
+			        <input type = "hidden" name = "date"/>
+			        <input type = "hidden" name = "time"/>
+			        <input type = "hidden" name = "peopleNum"/>
+			        <input type = "hidden" name = "fee"/>
                     <div class="card mb-4">
                         <div class="card-header" style="font-weight: bold; font-size: x-large;">나의 예약 정보</div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);"><h4>행사명</h4>
-                            <p>이용일자</p><p data-form="date">내용</p>
-                            <p>이용회차<p data-form="time">내용</p>
+                            <p>이용일자</p><p data-form="date" name = "date">내용</p>
+                            <p>이용회차<p class = "selectTime" data-form="time" name = "time">내용</p>
                             <p>취소기간<p data-form="canclePeriod">내용</p>
                             <p>취소수수료<p data-form="cancleFee">내용</p>
                             <p>
                             <div style="border: 1px solid white; border-radius: 5%; padding: 15px; background-color: white;">
                                 <h5>결제금액</h5><hr>
-                                <p>이용인원</p><p data-form="peopleNum">내용</p>
-                                <p>이용요금</p><p data-form="fee">내용</p>
+                                <p>이용인원</p><p data-form="peopleNum" name="peopleNum">내용</p>
+                                <p>이용요금</p><p data-form="fee" name = "fee">0</p>
                                 <p>할인/할증</p><p data-form="discount">내용</p>
                             </div>
                         </div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);">
                             <div class="input-group">
                                 
-                                <button class="btn btn-primary" id="button-search" style="width: 100%;">예약하기</button>
-                                <input type = "submit">
+                                <button class="btn btn-primary" id="button-search" style="width: 100%;" type="button" onClick="sendInsert()">예약하기</button>
+                                
                             </div>
                         </div>
                     </div>
@@ -317,15 +329,31 @@
         <script src="js/main.js"></script>
 
         <script type="text/javascript">
-        	$("#inline_cal").on("click", function(){
+        	// $("#inline_cal").on("click", function(){
         		
-        	})
+        	// })
 
             document.querySelector("#chkAll").addEventListener("click", (e) => {
                 document.querySelectorAll("[name=agreement]").forEach((item, index)=>{
                     item.checked = e.target.checked;
                 })
             });
+
+            // 등록버튼
+            function sendInsert() {
+                let date = $("[data-form=date]").text();
+                let time = $(".selectTime").text();
+                let peopleNum = $("[data-form=peopleNum]").text();
+                let fee = $("[data-form=fee]").text();
+                console.log(date);
+                console.log(time);
+                console.log(peopleNum);
+                document.resvForm.date.value = date;
+                document.resvForm.time.value = time;
+                document.resvForm.peopleNum.value = peopleNum;
+                document.resvForm.fee.value = fee;
+                document.resvForm.submit();
+            }
         </script>
     </body>
 </html>
