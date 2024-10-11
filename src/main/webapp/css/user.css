@@ -1,0 +1,226 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.signup-container {
+    max-width: 900px; /* 회원가입 화면 크기 설정 */
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center; /* 제목 가운데 정렬 */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+
+
+.signup-btn {
+    width: 100%; /* 버튼을 전체 폭으로 설정 */
+    padding: 10px; /* 패딩 줄이기 */
+    background-color: #d3d3d3; /* 밝은 회색 */
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* 폰트 크기 줄이기 */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+    background-color: #c0c0c0; /* 더 밝은 회색 */
+}
+
+.input-group {
+    display: flex;
+    align-items: center; /* 버튼과 입력창 정렬 */
+    gap: 10px; /* 간격 설정 */
+}
+
+.check-btn {
+    padding: 6px 10px; /* 중복 체크 버튼 크기 조정 */
+    font-size: 14px; /* 버튼 폰트 크기 조정 */
+    background-color: #a9a9a9; /* 회색 버튼 배경색 */
+    color: white; /* 글자색 흰색 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 커서 모양 변경 */
+    transition: background-color 0.3s;
+    height: 40px; /* 버튼 세로 높이를 텍스트 창에 맞춤 */
+}
+
+.check-btn:hover {
+    background-color: #808080; /* 버튼 호버 시 색상 변경 */
+}
+
+.info-text {
+    font-size: 12px;
+    color: rgba(136, 136, 136, 0.7); /* 설명글씨 투명하게 */
+}
+
+.phone-input {
+    width: 60px; /* 전화번호 입력란의 너비 설정 */
+    padding: 5px; /* 패딩 추가 */
+}
+
+.date-input {
+    width: 15%; /* 생년월일 입력창 길이 설정 */
+}
+
+.email-input-container {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 5px; /* 입력란 사이의 간격 */
+}
+
+.email-input-container input {
+    width: 200px; /* 첫 번째 이메일 입력란 너비 */
+    padding: 10px; /* 패딩 추가 */
+}
+
+.email-input-container select {
+    width: 150px; /* 드롭다운 선택란 너비 */
+    padding: 10px; /* 패딩 추가 */
+}
+/* 이름 입력창 스타일 */
+input#name {
+    width: 85%; /* 이름 입력창 너비 설정 */
+    padding: 10px; /* 패딩 조정 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#name:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
+
+/* 아이디 입력창 스타일 */
+input#username {
+    width: 85%; /* 아이디 입력창 너비 설정 */
+    padding: 10px; /* 패딩 조정 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#username:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
+
+/* 비밀번호 입력창 스타일 */
+input#password,
+input#confirm-password {
+    width: 85%; /* 비밀번호 입력창 너비 설정 */
+    padding: 10px; /* 패딩 조정 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#password:focus,
+input#confirm-password:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
+
+/* 생년월일 입력창 스타일 */
+input#year,
+input#month,
+input#day {
+    width: 24%; /* 생년월일 입력창 너비 설정 */
+    padding: 10px; /* 패딩 조정 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#year:focus,
+input#month:focus,
+input#day:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
+
+/* 전화번호 입력창 스타일 */
+input#phone1,
+input#phone2,
+input#phone3 {
+    width: 25%; /* 전화번호 입력창 너비 설정 */
+    padding: 10px; /* 패딩 추가 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#phone1:focus,
+input#phone2:focus,
+input#phone3:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
+
+/* 이메일 입력창 스타일 */
+input#emailInput1,
+input#emailInput2 {
+    width: 250px; /* 이메일 입력창 너비 설정 */
+    padding: 10px; /* 패딩 추가 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#emailInput1:focus,
+input#emailInput2:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
+
+/* 주소 입력창 스타일 */
+input#address {
+    width: 80%; /* 주소 입력창 너비 설정 */
+    padding: 10px; /* 패딩 조정 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input#address:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 아웃라인 제거 */
+}
