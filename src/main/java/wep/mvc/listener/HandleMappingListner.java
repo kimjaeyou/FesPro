@@ -34,7 +34,7 @@ public class HandleMappingListner implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent e) {
 //		try {
-//			//Test(e);
+//			Test(e);
 //		} catch (IOException e1) {
 //			e1.printStackTrace();
 //		}
