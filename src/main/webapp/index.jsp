@@ -27,13 +27,29 @@ img {
 	width: 400px;
 	height: 250px;
 }
+
+#head {
+	background-image: url("assets/img/Main_bg.png");
+	width: 100%;
+	height: 27%;
+}
+
+#card_main {
+	width: 24%;
+	height: 400px;
+}
+
+#card_img {
+	width: 100%;
+	height: 30%;
+}
 </style>
 </head>
 <body>
-<jsp:include page="/common/alarm.jsp" />
+	<jsp:include page="/common/alarm.jsp" />
 
 	<!-- Masthead-->
-	<header class="masthead">
+	<header class="masthead" id="head">
 		<div class="container position-relative">
 			<div class="row justify-content-center">
 				<div class="col-xl-6">
@@ -41,24 +57,19 @@ img {
 						<!-- Page heading-->
 						<h1 class="mb-5">서울컬투</h1>
 
-						<form class="form-subscribe" id="contactForm"
-							action="#">
+						<form class="form-subscribe" id="contactForm" action="#">
 							<div class="row">
 								<div class="col">
 									<input class="form-control form-control-lg" id="search"
 										type="text" placeholder="검색" />
 								</div>
-								
+
 								<div class="col-auto">
-									<button class="btn btn-primary btn-lg"
-										id="submitButton">Submit</button>
+									<button class="btn btn-primary btn-lg" id="submitButton">Submit</button>
 								</div>
-								<div>
-								</div>
+								<div></div>
 							</div>
-							
-							
-							
+
 						</form>
 					</div>
 				</div>
@@ -69,6 +80,7 @@ img {
 	<section class="features-icons bg-light text-center">
 		<div class="container">
 			<div class="container px-4 px-lg-5 mt-5">
+				<h1>행사 목록</h1>
 				<c:if test="${not empty list}">
 					<div id="cardContent" class="container position-relative">
 						<!-- Cards container for pagination -->
@@ -76,10 +88,11 @@ img {
 							class="row gx-4 gx-lg-5 justify-content-center">
 							<c:forEach items="${list.row}" var="option" varStatus="status">
 								<!-- Ensure the columns take equal width and display horizontally -->
-								<div class="col-md-3 mb-5 card-item">
+								<div class="col-md-3 mb-5 card-item" id="card_main">
 									<div class="card h-100">
 										<!-- Product image-->
-										<img class="card-img-top" src="${option.IMGURL}" alt="..." />
+										<img id="card_img" class="card-img-top" src="${option.IMGURL}"
+											alt="..." />
 										<!-- Product details-->
 										<div class="card-body p-4">
 											<div class="text-center">
@@ -125,8 +138,14 @@ img {
 	</section>
 	<!-- Image Showcases-->
 	<section class="showcase">
-		<div class="container-fluid p-0"></div>
+		<div class="container">
+			<h1>추천</h1>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br>
+		</div>
 	</section>
+
+
 	<!-- Testimonials-->
 	<section class="testimonials text-center bg-light">
 		<div class="container">
@@ -140,10 +159,7 @@ img {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<!-- * *                               SB Forms JS                               * *-->
-	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 	<script type="text/javascript">
@@ -161,7 +177,6 @@ img {
 	        item.style.display = (index >= start && index < end) ? 'block' : 'none';
 	    });
 
-	    document.getElementById('page-info').textContent = page;
 	}
 
 	// 초기 페이지 로드
