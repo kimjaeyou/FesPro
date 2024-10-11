@@ -3,6 +3,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="wep.mvc.dto.BoardDTO" %>
 <%@ page import="wep.mvc.dao.BoardDAO" %>
+<%@ page import="wep.mvc.dao.BoardDAOImpl" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,7 @@
 
 
         // 데이터베이스에서 해당 글 정보 가져오기
-        BoardDAO boardDAO = new BoardDAO();
+        BoardDAO boardDAO = new BoardDAOImpl();
         BoardDTO bDTO = boardDAO.select(userSeq); 
         
         // 게시글이 존재하지 않는 경우 처리
