@@ -18,8 +18,10 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
+   <button><a href="User/update.jsp"> 이동</a></button>
+   
+    ${loginUser.user_id}
         <!-- Navigation-->
-		console.log(${loginUser.user_id})
         <!-- Masthead-->
         <header class="masthead">
             <div class="container position-relative">

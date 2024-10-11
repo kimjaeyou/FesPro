@@ -82,7 +82,7 @@ label {
     padding: 5px; /* 패딩 추가 */
 }
 
-.date-input {
+.age-input {
     width: 15%; /* 생년월일 입력창 길이 설정 */
 }
 
@@ -152,9 +152,7 @@ input#confirm-password:focus {
 }
 
 /* 생년월일 입력창 스타일 */
-input#year,
-input#month,
-input#day {
+input#age {
     width: 24%; /* 생년월일 입력창 너비 설정 */
     padding: 10px; /* 패딩 조정 */
     border: 1px solid #ccc;
@@ -164,9 +162,7 @@ input#day {
     transition: border-color 0.3s;
 }
 
-input#year:focus,
-input#month:focus,
-input#day:focus {
+input#age:focus {
     border-color: #007bff; /* 포커스 시 테두리 색상 */
     outline: none; /* 아웃라인 제거 */
 }
