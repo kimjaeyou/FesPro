@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:include page="/common/header.jsp"/>
+ <jsp:include page="/common/header.jsp"/> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,10 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="../css/My_styles.css" rel="stylesheet" />
+        <link href="${path}/css/My_styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
@@ -55,31 +55,28 @@
                 </nav>
             </div>
             <!-- iframe -->
-            <!-- <iframe src="festival/dashBoard.jsp" width="100%" height="800px" style="border:1px solid black;" id="iFrame" name="center"></iframe> -->
-            <div id="contentDiv">
-            </div>
+            <iframe src="" name="center" style="width:100%;  height:100vh; border:1px solid red;"></iframe>
         </div>
+        
+       
         <script>
        $(function(){
-        	/* //문화행사 조회
-            $("#seletAllBtn").click(function(){
-            	
-               $("#iFrame").attr("src", "festival/selectAll.jsp");
-           }); */
-           
            //문화행사 조회
 			  $("#seletAllBtn").click(function(){
-			  	// $("#contentDiv").load("festival/selectAll.jsp");
-				 $("#contentDiv").load("${path}/ajax?key=superfestival&methodName=selectAll");
-			  });
+				  //top.center.location.href="festival/selectAll.jsp" //서블릿 -- 서블리이 a.jsp로 이동 list 데이터로 가져와서... c:forEach
+				  top.center.location.href ="${path}/front?key=superfestival&methodName=selectAll";
+			 });
+           //문화행사 승인
+           
          });
         </script>
+        <!-- 사이드 바 화살표, 그림 -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../js/My_scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <!--  <script src="assets/demo/chart-area-demo.js"></script> -->
-        <!--<script src="assets/demo/chart-bar-demo.js"></script>-->
+        
+       <%--  <script src="${path}/js/My_scripts.js"></script> --%>
+    	<%--     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../js/datatables-simple-demo.js"></script>
+        <script src="${path}/js/datatables-simple-demo.js"></script> --%>
+     
     </body>
 </html>

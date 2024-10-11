@@ -10,19 +10,29 @@ import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import wep.mvc.dto.FesDTO;
+import wep.mvc.service.SuperFestivalService;
+import wep.mvc.service.SuperFestivalServiceImpl;
 
 
 public class SuperFestivalAjaxController implements RestController {
-
-	public void test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	SuperFestivalService service = new SuperFestivalServiceImpl();
 	
+	public SuperFestivalAjaxController() {
+		System.out.println("형우 / SuperFestivalAjaxController 생성자 Call");
 	}
 	
-	public ModelAndView selectAll(HttpServletRequest req, HttpServletResponse resp)
+	public void selectAll(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		System.out.println("selectAll() Call");
+		System.out.println("형우 / selectAll() Call");
 		
-        return null;
+		List<FesDTO> festivalList =  service.selectAll();
+		Gson g = new Gson();
+		String data = g.toJson(festivalList);
+		
+		PrintWriter out = resp.getWriter();
+		//out.print("형우 / selectAll 로직");
+		out.print(data);
 	}
 	
 
