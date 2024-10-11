@@ -358,6 +358,8 @@
                         					</c:otherwise>
                         				</c:choose>
                         			</tbody>
+                        		</table>
+                        		<!-- 등록하러 가기 -->
                         	</div>
                         </div>
                     </div>

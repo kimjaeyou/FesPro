@@ -51,6 +51,10 @@ public class FesController implements Controller {
 		
 		System.out.println("여기");
 		
+		//읽어온 데이터수(주최한 서비스 횟수)
+		
+		
 		return new ModelAndView("host/myPage1.jsp");
 	}
+
 }
