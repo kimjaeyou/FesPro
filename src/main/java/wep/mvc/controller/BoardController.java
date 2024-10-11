@@ -31,11 +31,6 @@ public class BoardController implements Controller {
 		return new ModelAndView("index.jsp", true);
 	}
 
-	public ModelAndView reSelect(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		return new ModelAndView("index.jsp", true);
-	}
 
 	public ModelAndView reDelete(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

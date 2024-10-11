@@ -1,8 +1,13 @@
 package wep.mvc.service;
 
+import java.util.List;
 
-public class SuperFestivalService{
+import wep.mvc.dto.FesDTO;
 
-	
+public interface SuperFestivalService{
+	/**
+	 * 모든행사 조회
+	 */
+	public List<FesDTO> selectAll();
 
 }
