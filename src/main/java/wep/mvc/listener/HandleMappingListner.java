@@ -207,7 +207,7 @@ public class HandleMappingListner implements ServletContextListener {
 	               
 	            }
 	            
-	            System.out.println(dto.getRow());
+	            //System.out.println(dto.getRow());
 	            ServletContext app= e.getServletContext();
 	            
 	            app.setAttribute("fesList", dto);//행사 데이터 application영역에 저장

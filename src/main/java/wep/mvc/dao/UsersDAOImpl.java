@@ -16,9 +16,9 @@ public class UsersDAOImpl implements UsersDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		UsersDTO dbDTO =null;
+		UsersDTO dbDTO=null;
 		
-		String sql= "select * from users where user_id=? and user_pw=?";
+		String sql= "select user_id , user_pw from users where user_id=? and user_pw=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -27,7 +27,8 @@ public class UsersDAOImpl implements UsersDAO {
 			
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				dbDTO = new UsersDTO(rs.getString(1), rs.getString(2));
+				 dbDTO = new UsersDTO(rs.getString(1), 
+						 			  rs.getString(2));
 			}
 			
 		}finally {

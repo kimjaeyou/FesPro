@@ -28,14 +28,14 @@ public class UserController implements Controller {
 	  
 	    //서비스 호출 
 	    UsersDTO dbDTO = us.login( new UsersDTO(userId, pwd) );
-
+	    System.out.println(dbDTO);
+	    
 	    if (dbDTO == null || !dbDTO.getUser_id().equals(userId) || !dbDTO.getUser_pw().equals(pwd)) {
 	    	// 로그인 실패했을때,,,모르겠닫
 		 }
 	    
 	    HttpSession session = request.getSession();
 	    session.setAttribute("loginUser", dbDTO);
-
 	    return new ModelAndView("index.jsp", true); 
 	}
 

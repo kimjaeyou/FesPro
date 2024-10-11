@@ -18,6 +18,14 @@ public class UsersDTO {
 	}
 
 
+	@Override
+	public String toString() {
+		return "UsersDTO [user_seq=" + user_seq + ", user_id=" + user_id + ", user_pw=" + user_pw + ", age=" + age
+				+ ", addr=" + addr + ", gender=" + gender + ", email=" + email + ", user_name=" + user_name
+				+ ", disable=" + disable + ", user_tel=" + user_tel + "]";
+	}
+
+
 	public UsersDTO(String user_id, String user_pw) {
 		this.user_id = user_id;
 		this.user_pw = user_pw;
