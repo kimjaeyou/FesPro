@@ -38,21 +38,16 @@
 			</div>
 
 			<div class="form-group">
-				<label for="confirm-password">비밀번호 확인</label> <input type="password"
-					id="confirm-password" name="confirm-password"
-					placeholder="비밀번호를 다시 입력하세요" required>
+				<label for="confirm-password">비밀번호 확인</label> 
+				<input type="password" id="confirm-password" name="confirm-password" placeholder="비밀번호를 다시 입력하세요" required>
 				<p id="password-match-message" class="info-text"></p>
 			</div>
 
 			<div class="form-group">
-				<label>생년월일</label>
+				<label for="age">나이</label>
 				<div class="input-group">
-					<input type="text" id="year" name="year" maxlength="4"
-						placeholder="년(YYYY)" class="date-input" required> <span>년</span>
-					<input type="text" id="month" name="month" maxlength="2"
-						placeholder="월(MM)" class="date-input" required> <span>월</span>
-					<input type="text" id="day" name="day" maxlength="2"
-						placeholder="일(DD)" class="date-input" required> <span>일</span>
+					<input type="text" id="age" name="age" maxlength="3"
+						placeholder="니이를 입력하세요." class="date-input" required> <span>세</span>
 				</div>
 			</div>
 
@@ -66,20 +61,11 @@
 					<input type="text" id="phone3" name="phone3" maxlength="4"
 						placeholder="5678" class="phone-input" required>
 				</div>
-				<p class="info-text">예: 010-1234-5678</p>
 			</div>
 			<label for="emailInput1">이메일</label>
 			<div class="email-input-container">
-				<input type="text" id="emailInput1" name="email1"
-					placeholder="이메일 입력" /> @ <input type="text" id="emailInput2"
-					name="email2" placeholder="이메일 입력" /> <select id="addressSelect"
-					class="address-select">
-					<option value="">주소 선택</option>
-					<option value="naver.com">naver.com</option>
-					<option value="daum.net">daum.net</option>
-					<option value="gmail.com">gmail.com</option>
-					<option value="kakao.com">kakao.com</option>
-				</select>
+				<input type="text" id="emailInput1" name="email1" placeholder="이메일 입력"  required/> @ 
+				<input type="text" id="emailInput2"	name="email2" placeholder="이메일 입력" required/> 
 			</div>
 
 			<br>
@@ -91,8 +77,8 @@
 			<div class="form-group">
 				<label>성별</label>
 				<div class="gender-container">
-					<label> <input type="radio" name="gender" value="0" required> 남성 
-					<input type="radio" name="gender" value="1"> 여성
+					<label> <input type="radio" name="gender" value="남성" required> 남성 
+					<input type="radio" name="gender" value="여성"> 여성
 					</label>
 				</div>
 			</div>
@@ -100,8 +86,8 @@
 			<div class="form-group">
 				<label>장애여부</label>
 				<div class="hindrance-container">
-					<label> <input type="radio" name="hindrance" value="1"> 예 
-					<input type="radio" name="hindrance" value="0"> 아니오
+					<label> <input type="radio" name="hindrance" value="O" required> 예 
+					<input type="radio" name="hindrance" value="X" > 아니오
 					</label>
 				</div>
 			</div>
