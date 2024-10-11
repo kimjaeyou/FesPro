@@ -95,7 +95,7 @@ img {
 		<div class="container">
 			<div class="container px-4 px-lg-5 mt-5">
 				<c:if test="${not empty list}">
-					<div class="container">
+					<div id="cardContent" class="container position-relative">
 						<!-- Cards container for pagination -->
 						<div id="card-container"
 							class="row gx-4 gx-lg-5 justify-content-center">
@@ -129,19 +129,19 @@ img {
 								</div>
 							</c:forEach>
 						</div>
-					</div>
 
-					<!-- Pagination controls -->
-					<div
-						class="pagination-controls d-flex justify-content-between align-items-center mt-3">
-						<input type="hidden" id="page-info" class="text-center" value="1">
+						<!-- Pagination controls: previous and next -->
+						<button id="direcBtn"
+							class="btn btn-dark position-absolute start-0 top-50 translate-middle-y"
+							onclick="prevPage()">이전</button>
+						<button id="direcBtn"
+							class="btn btn-dark position-absolute end-0 top-50 translate-middle-y"
+							onclick="nextPage()">다음</button>
 					</div>
-					<button class="btn btn-dark" onclick="prevPage()">이전</button>
-					<button class="btn btn-dark" onclick="nextPage()">다음</button>
+				</c:if>
+
+
 			</div>
-			</c:if>
-
-		</div>
 
 
 
