@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import wep.mvc.service.ReservationService;
 
 public class ReservationController implements Controller {
+
 	
 	public ReservationController () {
 		System.out.println("ReservationController 생성됨..");
