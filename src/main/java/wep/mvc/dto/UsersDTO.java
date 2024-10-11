@@ -5,12 +5,12 @@ public class UsersDTO {
 	private int user_seq;
 	private String user_id;
 	private String user_pw;
-	private String age;
+	private int age;
 	private String addr;
-	private String gender;
+	private int gender;
 	private String email;
 	private String user_name;
-	private String disable;
+	private int disable;
 	private String user_tel;
 
 	public UsersDTO() {
@@ -23,11 +23,39 @@ public class UsersDTO {
 		this.user_pw = user_pw;
 	}
 
-
-	public UsersDTO(int user_seq, String user_id, String user_pw, String age, String addr, String gender, String email,
-			String user_name, String disable, String user_tel) {
+	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr, int gender, String email,
+			String user_name, int disable, String user_tel) {
 		super();
 		this.user_seq = user_seq;
+		this.user_id = user_id;
+		this.user_pw = user_pw;
+		this.age = age;
+		this.addr = addr;
+		this.gender = gender;
+		this.email = email;
+		this.user_name = user_name;
+		this.disable = disable;
+		this.user_tel = user_tel;
+	}
+	
+	//회원수정
+	public UsersDTO( String user_pw, int age, String addr, int gender, String email,
+			String user_name, int disable, String user_tel) {
+		super();
+		this.user_pw = user_pw;
+		this.age = age;
+		this.addr = addr;
+		this.gender = gender;
+		this.email = email;
+		this.user_name = user_name;
+		this.disable = disable;
+		this.user_tel = user_tel; 
+	}
+	
+	//회원가입
+	public UsersDTO(String user_id, String user_pw, int age, String addr, int gender, String email,
+			String user_name, int disable, String user_tel) {
+		super();
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 		this.age = age;
@@ -70,12 +98,12 @@ public class UsersDTO {
 	}
 
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -90,12 +118,12 @@ public class UsersDTO {
 	}
 
 
-	public String getGender() {
+	public int getGender() {
 		return gender;
 	}
 
 
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 
@@ -120,12 +148,12 @@ public class UsersDTO {
 	}
 
 
-	public String getDisable() {
+	public int getDisable() {
 		return disable;
 	}
 
 
-	public void setDisable(String disable) {
+	public void setDisable(int disable) {
 		this.disable = disable;
 	}
 
@@ -138,5 +166,9 @@ public class UsersDTO {
 	public void setUser_tel(String user_tel) {
 		this.user_tel = user_tel;
 	}
+
+
+	
+
 
 }

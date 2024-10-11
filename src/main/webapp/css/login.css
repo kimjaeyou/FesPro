@@ -1,0 +1,90 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-container {
+    width: 700px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 60px;
+}
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+input[type="text"], input[type="password"] {
+    width: calc(100% - 30px);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+::placeholder {
+    color: #aaa;
+}
+.login-btn, .register-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #d3d3d3;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    display: inline-block;
+}
+.login-btn:hover, .register-btn:hover {
+    background-color: #c0c0c0;
+}
+.tab {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.tab button {
+    flex: 1;
+    padding: 15px;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.tab button.active {
+    background-color: #e9ecef;
+}
+.login-section {
+    display: none;
+}
+.login-section.active {
+    display: block;
+}
+.register-btn {
+    margin-top: 20px;
+}
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
