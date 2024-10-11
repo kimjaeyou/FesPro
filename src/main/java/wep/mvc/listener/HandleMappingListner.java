@@ -21,6 +21,7 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import wep.mvc.controller.Controller;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.dto.RESULT;
 import wep.mvc.dto.row;
@@ -210,8 +211,8 @@ public class HandleMappingListner implements ServletContextListener {
 	            //System.out.println(dto.getRow());
 	            ServletContext app= e.getServletContext();
 	            
-	            app.setAttribute("fesList", dto);//행사 데이터 application영역에 저장
-	            
+	            //app.setAttribute("fesList", dto);//행사 데이터 application영역에 저장
+	            Test2(e, dto.getRow());
 	        } else {
 	            System.out.println("ListPublicReservationCulture 데이터가 없습니다.");
 	        }
@@ -220,8 +221,22 @@ public class HandleMappingListner implements ServletContextListener {
 	        ex.printStackTrace();
 	        System.out.println("JSON 데이터 파싱 중 오류가 발생했습니다.");
 	    }
-	    
 	}
-
+	
+	public static void Test2(ServletContextEvent e, List<row> rowList){
+		List<FesDTO> fesDTOList = new ArrayList<FesDTO>();
+		for(row row1:rowList) {
+			fesDTOList.add(new FesDTO(row1.getSVCID(), row1.getMAXCLASSNM(), row1.getMINCLASSNM(), row1.getSVCSTATNM(),
+									  row1.getSVCNM(), row1.getPAYATNM(), row1.getPLACENM(), row1.getUSETGTINFO(),
+									  row1.getX(), row1.getY(), row1.getSVCOPNBGNDT(), row1.getSVCOPNENDDT(),
+									  row1.getRCPTBGNDT(), row1.getAREANM(), row1.getIMGURL(), row1.getDTLCONT(),
+									  row1.getTELNO(), row1.getV_MAX(), row1.getV_MIN(), row1.getREVSTDDAY(),
+									  row1.getREVSTDDAYNM(), 0, "111", 0, 0, 0));
+			
+		}
+		
+		ServletContext app = e.getServletContext();
+		app.setAttribute("fesList", fesDTOList);
+	}//Test2 End
 	
 }

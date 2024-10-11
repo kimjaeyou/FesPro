@@ -28,7 +28,7 @@ public class FesDTO {
 		private int	MAXNUM; //최대 인원수
 		private int	PRICE; //가격
 		private int	host_seq; //주최자 sequence
-		
+		public FesDTO() {}
 		public FesDTO(String sVCID, String mAXCLASSNM, String mINCLASSNM, String sVCSTATNM, String sVCNM,
 				String pAYATNM, String pLACENM, String uSETGTINFO, String x, String y, String sVCOPNBGNDT,
 				String sVCOPNENDDT, String rCPTBGNDT, String aREANM, String iMGURL, String dTLCONT, String tELNO,

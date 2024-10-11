@@ -86,7 +86,7 @@ img {
 						<!-- Cards container for pagination -->
 						<div id="card-container"
 							class="row gx-4 gx-lg-5 justify-content-center">
-							<c:forEach items="${list.row}" var="option" varStatus="status">
+							<c:forEach items="${list}" var="option" varStatus="status">
 								<!-- Ensure the columns take equal width and display horizontally -->
 								<div class="col-md-3 mb-5 card-item" id="card_main">
 									<div class="card h-100">
