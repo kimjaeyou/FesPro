@@ -30,7 +30,7 @@ img {
 </style>
 </head>
 <body>
-	<!-- Navigation-->
+<jsp:include page="/common/alarm.jsp" />
 
 	<!-- Masthead-->
 	<header class="masthead">
@@ -39,51 +39,26 @@ img {
 				<div class="col-xl-6">
 					<div class="text-center text-white">
 						<!-- Page heading-->
-						<h1 class="mb-5">문화 체험 행사</h1>
-						<!-- Signup form-->
-						<!-- * * * * * * * * * * * * * * *-->
-						<!-- * * SB Forms Contact Form * *-->
-						<!-- * * * * * * * * * * * * * * *-->
-						<!-- This form is pre-integrated with SB Forms.-->
-						<!-- To make this form functional, sign up at-->
-						<!-- https://startbootstrap.com/solution/contact-forms-->
-						<!-- to get an API token!-->
-
+						<h1 class="mb-5">서울컬투</h1>
 
 						<form class="form-subscribe" id="contactForm"
-							data-sb-form-api-token="API_TOKEN">
-							<!-- Email address input-->
+							action="#">
 							<div class="row">
 								<div class="col">
 									<input class="form-control form-control-lg" id="search"
-										type="email" placeholder="검색" />
-
+										type="text" placeholder="검색" />
 								</div>
+								
 								<div class="col-auto">
-									<button class="btn btn-primary btn-lg disabled"
-										id="submitButton" type="submit">Submit</button>
+									<button class="btn btn-primary btn-lg"
+										id="submitButton">Submit</button>
+								</div>
+								<div>
 								</div>
 							</div>
-							<!-- Submit success message-->
-							<!---->
-							<!-- This is what your users will see when the form-->
-							<!-- has successfully submitted-->
-							<div class="d-none" id="submitSuccessMessage">
-								<div class="text-center mb-3">
-									<div class="fw-bolder">Form submission successful!</div>
-									<p>To activate this form, sign up at</p>
-									<a class="text-white"
-										href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-								</div>
-							</div>
-							<!-- Submit error message-->
-							<!---->
-							<!-- This is what your users will see when there is-->
-							<!-- an error submitting the form-->
-							<div class="d-none" id="submitErrorMessage">
-								<div class="text-center text-danger mb-3">Error sending
-									message!</div>
-							</div>
+							
+							
+							
 						</form>
 					</div>
 				</div>
