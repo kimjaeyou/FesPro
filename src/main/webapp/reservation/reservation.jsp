@@ -106,12 +106,15 @@
                               <div class="row justify-content-center">
                                 <div class="col-md-10 text-center">
                                   <h2 class="mb-5 text-center">예약날짜 / 회차 선택</h2>
-                                  <!-- <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                                  <!-- calendar 17 -->
+                                  <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
                                   <form action="#" class="row">
                                     <div class="col-md-12">
                                       <div id="inline_cal"></div>
                                     </div>
-                                  </form> -->
+                                  </form>
+
+                                  <!-- vanilla js-date picker -->
 	                                  <div class="form-floating mb-4 d-flex">
 	                                  <input 
 	                                         type="text"
