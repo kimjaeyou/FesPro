@@ -35,4 +35,15 @@ public class MainController implements Controller {
 		return new ModelAndView("index.jsp");
 	}
 	
+	public ModelAndView oneSelec(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		ServletContext app= req.getServletContext();
+		
+		//List<FesDTO> list= (List<FesDTO>)app.getAttribute("fesList");
+		String sid=req.getParameter("SVCID");
+		System.out.println(sid);
+		
+		return new ModelAndView("index.jsp");
+	}
+	
 }
