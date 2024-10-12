@@ -11,8 +11,10 @@ public interface SuperAuthService{
 	
 	public List<UsersDTO> selectAll();
 
-	UsersDTO selectById(String id);
-
-	int update(UsersDTO user);
+	/*
+	 * UsersDTO selectById(String id);
+	 * 
+	 * int update(UsersDTO user);
+	 */
 
 }

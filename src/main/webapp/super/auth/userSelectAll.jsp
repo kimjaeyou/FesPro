@@ -1,252 +1,138 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<%-- <jsp:include page="/common/header.jsp"/> --%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e6f7ff;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-        h1 {
-            color: #0066cc;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #007acc;
-            text-align: left;
-        }
-        th {
-            background-color: #007acc;
-            color: white;
-        }
-        td {
-            background-color: #e6f7ff;
-        }
-        .btn {
-            background-color: #007acc;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #005f99;
-        }
-        input[type="text"] {
-            width: 90%;
-            padding: 5px;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+	rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+	crossorigin="anonymous"></script>
+
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>À¯Àú Á¤º¸ Á¶È¸ ¹× ¼öÁ¤</h1>
 
-        <!-- ID·Î À¯Àú °Ë»ö -->
-        <div>
-            <label for="userId">User ID:</label>
-            <input type="text" id="userId" placeholder="À¯Àú ID ÀÔ·Â">
-            <button class="btn" onclick="getUserInfo()">Á¶È¸</button>
-        </div>
+<div id="layoutSidenav_content">
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4">ì „ì²´ íšŒì› ì¡°íšŒ</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item active">ì „ì²´ íšŒì›ì˜ ëª©ë¡ì„ ì¶œë ¥í•©ë‹ˆë‹¤</li>
+			</ol>
 
-        <h2>À¯Àú »ó¼¼ Á¤º¸ (¼öÁ¤ °¡´É)</h2>
-        <table id="userDetail">
-            <tr>
-                <th>À¯Àú ¹øÈ£</th>
-                <th>ID</th>
-                <th>ºñ¹Ğ¹øÈ£</th>
-                <th>ÀÌ¸§</th>
-                <th>³ªÀÌ</th>
-                <th>ÁÖ¼Ò</th>
-                <th>¼ºº°</th>
-                <th>ÀÌ¸ŞÀÏ</th>
-                <th>ÀüÈ­¹øÈ£</th>
-                <th>»óÅÂ</th>
-            </tr>
-            <tr>
-                <td><input type="text" id="userSeqField" value=""></td>
-                <td><input type="text" id="userIdField" value=""></td>
-                <td><input type="text" id="userPwField" value=""></td>
-                <td><input type="text" id="userNameField" value=""></td>
-                <td><input type="text" id="userAgeField" value=""></td>
-                <td><input type="text" id="userAddrField" value=""></td>
-                <td><input type="text" id="userGenderField" value=""></td>
-                <td><input type="text" id="userEmailField" value=""></td>
-                <td><input type="text" id="userTelField" value=""></td>
-                <td><input type="text" id="userDisableField" value=""></td>
-            </tr>
-        </table>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i> ì „ì²´ íšŒì› í…Œì´ë¸”
+				</div>
+				<div class="card-body">
 
-        <button class="btn" onclick="updateUserInfo()">º¯°æ »çÇ× ÀúÀå</button>
+					<!-- í…Œì´ë¸” -->
+					<table id="datatablesSimple">
+						<thead>
+							<tr>
+								<th>ìœ ì € ìˆœë²ˆ</th>
+								<th>ì•„ì´ë””</th>
+								<th>ë¹„ë°€ë²ˆí˜¸</th>
+								<th>ì´ë¦„</th>
+								<th>ë‚˜ì´</th>
+								<th>ì£¼ì†Œ</th>
+								<th>ì„±ë³„</th>
+								<th>ì´ë©”ì¼</th>
+								<th>ì „í™”ë²ˆí˜¸</th>
+								<th>ì¥ì• ì—¬ë¶€</th>
+								<th>ë°´ ì—¬ë¶€</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<!-- ì„œë²„ì—ì„œ ì „ë‹¬ëœ DTO ë°ì´í„°ë¥¼ JSTLë¡œ ì¶œë ¥ -->
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>ìœ ì € ìˆœë²ˆ</th>
+								<th>ì•„ì´ë””</th>
+								<th>ë¹„ë°€ë²ˆí˜¸</th>
+								<th>ì´ë¦„</th>
+								<th>ë‚˜ì´</th>
+								<th>ì£¼ì†Œ</th>
+								<th>ì„±ë³„</th>
+								<th>ì´ë©”ì¼</th>
+								<th>ì „í™”ë²ˆí˜¸</th>
+								<th>ì¥ì• ì—¬ë¶€</th>
+								<th>ë°´ ì—¬ë¶€</th>
+							</tr>
+						</tfoot>
+						
+					</table>
 
-        <h2>¸ğµç À¯Àú Á¤º¸</h2>
-        <table id="allUsers">
-            <thead>
-                <tr>
-                    <th>À¯Àú ¼ø¹ø</th>
-                    <th>ID</th>
-                    <th>ºñ¹Ğ¹øÈ£</th>
-                    <th>ÀÌ¸§</th>
-                    <th>³ªÀÌ</th>
-                    <th>ÁÖ¼Ò</th>
-                    <th>¼ºº°</th>
-                    <th>ÀÌ¸ŞÀÏ</th>
-                    <th>ÀüÈ­¹øÈ£</th>
-                    <th>»óÅÂ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="user" items="">
-                    <tr>
-                        <td><a href="#" onclick="getUserInfo('')"></a></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// í˜ì´ì§€ê°€ ë¡œë”©ë˜ë©´ ìœ ì € ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜ í˜¸ì¶œ
+				loadUsers();
+			});
+		</script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        // Æ¯Á¤ À¯ÀúÀÇ Á¤º¸¸¦ °¡Á®¿À´Â ÇÔ¼ö
-        $(function(){
-        
-         
- 
-        // ¸ğµç À¯Àú Á¤º¸¸¦ °¡Á®¿À´Â ÇÔ¼ö
-         	function selectAll(){
-        	 alert("¾Ó¾Ædddd"); 
-            $.ajax({
-                url: '${path}/ajax',
-                type: 'get',
-                dataType:"json",
-                data:{key:"superAuth" , methodName:"selectAll"},
-                success: function(result) {
-                	//alert(result)
-                    var allUsersTable = $("#allUsers tbody");
-                    allUsersTable.empty();
-                    
-                    result.forEach(function(user) {
-                        allUsersTable.append(
-                            "<tr>" +
-                            "<td><a href='#' onclick='getUserInfo(\"" + user.user_id + "\")'>" + user.user_seq + "</a></td>" +
-                            "<td>" + user.user_id + "</td>" +
-                            "<td>" + user.user_pw + "</td>" +
-                            "<td>" + user.user_name + "</td>" +
-                            "<td>" + user.age + "</td>" +
-                            "<td>" + user.addr + "</td>" +
-                            "<td>" + user.gender + "</td>" +
-                            "<td>" + user.email + "</td>" +
-                            "<td>" + user.user_tel + "</td>" +
-                            "<td>" + user.disable + "</td>" +
-                            "</tr>"
-                        );
-                    });
-                },
-                error: function(err){
-                	alert(err+"=> ¿¡·¯..")
-                	console.log(err);
-                }
-            });
-        };
-		
-        
-       
-         selectAll();
-        
-        }); 
-       
-    </script>
-    
-    <script type="text/javascript">
-    function getUserInfo(userId) {
-    	alert("dkdkdk");
-         if (!userId) {
-            userId = $("#userId").val();
-            if (!userId) {
-                alert("À¯Àú ID¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
-                return;
-            }
-        } 
+		<script>
+			function loadUsers() {
+				$.ajax({
+					url : "${path}/ajax", // ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¬ URL
+					type : "get",
+					data : {
+						key : "superAuth",
+						methodName : "selectAll"
+					},
+					dataType : "json",
+					success : function(result) {
+						alert(result);
+						var usersTable = $("#tbody");
+						usersTable.empty(); // í…Œì´ë¸” ì´ˆê¸°í™”
 
-        $.ajax({
-            url: '${path}/ajax',
-            type: 'get',
-            dataType:"json",
-            data:{key:"superAuth" , methodName:"selectById", id: userId },
-            success: function(result) {
-				alert("»Ç»ß»Ç»ß»Ç»Ç»ß»Ç")
-                // »ó¼¼º¸±â Å×ÀÌºí¿¡ À¯Àú Á¤º¸ Ç¥½Ã ¹× ¼öÁ¤ °¡´ÉÇÏ°Ô ÇÏ±â
-                $("#userSeqField").val(result.user_seq);
-                $("#userIdField").val(result.user_id);
-                $("#userPwField").val(result.user_pw);
-                $("#userNameField").val(result.user_name);
-                $("#userAgeField").val(result.age);
-                $("#userAddrField").val(result.addr);
-                $("#userGenderField").val(result.gender);
-                $("#userEmailField").val(result.email);
-                $("#userTelField").val(result.user_tel);
-                $("#userDisableField").val(result.disable);
-            }
-            /* error: function(err){
-            	alert(err+"=> ¿¡·¯..")
-            	console.log(err);
-            } */
-        });
-    }
-    
-    </script>
-    
-    <script type="text/javascript">
-    // À¯Àú Á¤º¸ ¼öÁ¤ÇÏ´Â ÇÔ¼ö
-    function updateUserInfo() {
-       var updatedUser = {
-           user_seq: $("#userSeqField").val(),
-           user_id: $("#userIdField").val(),
-           user_pw: $("#userPwField").val(),
-           user_name: $("#userNameField").val(),
-           age: $("#userAgeField").val(),
-           addr: $("#userAddrField").val(),
-           gender: $("#userGenderField").val(),
-           email: $("#userEmailField").val(),
-           user_tel: $("#userTelField").val(),
-           disable: $("#userDisableField").val()
-       };
+						// ì„œë²„ì—ì„œ ë°›ì•„ì˜¨ ë°ì´í„°ë¥¼ í…Œì´ë¸”ì— ì¶”ê°€
+						$.each(result, function(index, user) {
+							usersTable.append("<tr>" + "<td>" + user.user_seq
+									+ "</td>" + "<td>" + user.user_id + "</td>"
+									+ "<td>" + user.user_pw + "</td>" + "<td>"
+									+ user.user_name + "</td>" + "<td>"
+									+ user.age + "</td>" + "<td>" + user.addr
+									+ "</td>" + "<td>" + user.gender + "</td>"
+									+ "<td>" + user.email + "</td>" + "<td>"
+									+ user.user_tel + "</td>" + "<td>"
+									+ user.disable + "</td>" + "<td>"
+									+ user.user_ben_check + "</td>" + "</tr>");
+						});
+					},
+					error : function(xhr, status, error) {
+						console.error("ë°ì´í„°ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ ë°œìƒ: " + error);
+					}
+				});
+			}
+		</script>
 
-       $.ajax({
-           url: '{path}/ajax',
-           type: "get",
-           dataType:"text",
-           data: {key:"superAuth" , methodName:"update", $(updatedUser).serialize()},
-           success: function(result) {
-               alert(result);
-               // ¼öÁ¤ ÈÄ ÇÊ¿äÇÑ µ¿ÀÛ (¿¹: Å×ÀÌºí °»½Å µî)
-           }
-       });
-   }
-    </script>
+	</main>
+
+</div>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+	crossorigin="anonymous"></script>
+<script src="${path}/js/datatables-simple-demo.js"></script>
 </body>
 </html>
