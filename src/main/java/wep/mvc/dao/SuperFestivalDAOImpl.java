@@ -11,7 +11,7 @@ import wep.mvc.dto.FesDTO;
 import wep.mvc.util.DbUtil;
 
 public class SuperFestivalDAOImpl implements SuperFestivalDAO {
-	
+
 	/**
 	 * 모든행사 조회
 	 */
@@ -67,5 +67,92 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return list;
+	}
+
+	/**
+	 * 행사 조회
+	 */
+	@Override
+	public FesDTO select(FesDTO fes) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		// List<FesDTO> list = new ArrayList<FesDTO>();
+		FesDTO result = null;
+
+		String sql = "select * from FES where SVCID = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, fes.getSVCID());
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String svcid = rs.getString("SVCID");
+				String MaxClassNm = rs.getString("MAXCLASSNM");
+				String MinClassNm = rs.getString("MINCLASSNM");
+				String svcStateNm = rs.getString("SVCSTATNM");
+				String svcNm = rs.getString("SVCNM");
+				String payAtNm = rs.getString("PAYATNM");
+				String placeNm = rs.getString("PLACENM");
+				String useTgtInfo = rs.getString("USETGTINFO");
+				String x = rs.getString("X");
+				String y = rs.getString("Y");
+				String svcOpnbgndt = rs.getString("SVCOPNBGNDT");
+				String svcOpnenddt = rs.getString("SVCOPNENDDT");
+				String rcptdgndt = rs.getString("RCPTBGNDT");
+				String areaNm = rs.getString("AREANM");
+				String imgUrl = rs.getString("IMGURL");
+				String dtlCont = rs.getString("DTLCONT");
+				String telNo = rs.getString("TELNO");
+				String vMax = rs.getString("V_MAX");
+				String vMin = rs.getString("V_MIN");
+				String revStdDay = rs.getString("REVSTDDAY");
+				String revStdDayNm = rs.getString("REVSTDDAYNM");
+				int fesState = rs.getInt("FES_STATE");
+				String updateDate = rs.getString("UPDATE_DATE");
+				int maxNum = rs.getInt("MAXNUM");
+				int price = rs.getInt("PRICE");
+				int hostSeq = rs.getInt("HOST_SEQ");
+
+				result = new FesDTO(svcid, MaxClassNm, MinClassNm, svcStateNm, svcNm, payAtNm, placeNm, useTgtInfo, x,
+						y, svcOpnbgndt, svcOpnenddt, rcptdgndt, areaNm, imgUrl, dtlCont, telNo, vMax, vMin, revStdDay,
+						revStdDayNm, fesState, updateDate, maxNum, price, hostSeq);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return result;
+	}
+
+	/**
+	 * 행사 수정
+	 */
+	@Override
+	public int update(FesDTO festivalDto, int state) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		String sql = "UPDATE FES SET FES_STATE = ? WHERE SVCID =?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, state);
+			ps.setString(2, festivalDto.getSVCID());
+
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
 	}
 }
