@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:include page="/common/header.jsp"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +12,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/detail_styles.css" rel="stylesheet" />
+        <link href="../css/detail_styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->

@@ -117,6 +117,9 @@
                         %>
                         <div class="container">
                         	<div clas="row">
+                        		<!-- 등록하러 가기 -->
+                        		<button><a href="${path}/host/write.jsp">서비스 등록하러 가기</a></button>
+                        		<hr>
                         		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
                         			<thead>
                         				<tr>
@@ -167,7 +170,7 @@
                         				</c:choose>
                         			</tbody>
                         		</table>
-                        		<!-- 등록하러 가기 -->
+                        		
                         	</div>
                         </div>
                     </div>

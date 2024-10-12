@@ -24,8 +24,8 @@
 <link href="css/styles.css" rel="stylesheet" />
 <style type="text/css">
 img {
-	width: 400px;
-	height: 250px;
+	width: 40%;
+	height: 100%;
 }
 
 #head {
@@ -35,7 +35,7 @@ img {
 }
 
 #card_main {
-	width: 24%;
+	width: 30%;
 	height: 400px;
 }
 
@@ -47,7 +47,6 @@ img {
 </head>
 <body>
 	<jsp:include page="/common/alarm.jsp" />
-
 	<!-- Masthead-->
 	<header class="masthead" id="head">
 		<div class="container position-relative">
@@ -56,20 +55,17 @@ img {
 					<div class="text-center text-white">
 						<!-- Page heading-->
 						<h1 class="mb-5">서울컬투</h1>
-
 						<form class="form-subscribe" id="contactForm" action="#">
 							<div class="row">
 								<div class="col">
 									<input class="form-control form-control-lg" id="search"
 										type="text" placeholder="검색" />
 								</div>
-
 								<div class="col-auto">
 									<button class="btn btn-primary btn-lg" id="submitButton">Submit</button>
 								</div>
 								<div></div>
 							</div>
-
 						</form>
 					</div>
 				</div>
@@ -105,11 +101,13 @@ img {
 										<!-- Product actions-->
 										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 											<div class="text-center">
-												<form action="#" method="POST">
-													<input value="${option.SVCID}" name="movieCd" type="hidden">
-													<input value="${option.SVCNM}" name="title" type="hidden">
-													<input class="btn btn-outline-dark mt-auto" type="submit"
-														name="View options" value="더보기">
+
+												<form action="${path}/front" method="post">
+													<input type="hidden" name="key" value="main" /> 
+													<input type="hidden" name="methodName" value="oneSelec" /> 
+													<input value="${option.SVCID}" name="sid" type="hidden">
+													<input class="btn btn-outline-dark mt-auto" 
+													type="submit" name="View options" value="더보기">
 												</form>
 											</div>
 										</div>
@@ -128,11 +126,7 @@ img {
 					</div>
 				</c:if>
 
-
 			</div>
-
-
-
 
 		</div>
 	</section>
@@ -158,13 +152,13 @@ img {
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
+	<!-- <script src="js/scripts.js"></script> -->
 
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 	<script type="text/javascript">
 	let currentPage = 1;
-	const itemsPerPage = 4;
+	const itemsPerPage = 3;
 	const items = document.querySelectorAll('.card-item');
 	const totalItems = items.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);

@@ -28,7 +28,12 @@ public class FesDTO {
 		private int	MAXNUM; //최대 인원수
 		private int	PRICE; //가격
 		private int	host_seq; //주최자 sequence
+		private String RCPTENDDT; //접수종료일시
+		
 		public FesDTO() {}
+		
+		
+
 		public FesDTO(String sVCID, String mAXCLASSNM, String mINCLASSNM, String sVCSTATNM, String sVCNM,
 				String pAYATNM, String pLACENM, String uSETGTINFO, String x, String y, String sVCOPNBGNDT,
 				String sVCOPNENDDT, String rCPTBGNDT, String aREANM, String iMGURL, String dTLCONT, String tELNO,
@@ -61,6 +66,43 @@ public class FesDTO {
 			MAXNUM = mAXNUM;
 			PRICE = pRICE;
 			this.host_seq = host_seq;
+		}
+
+
+
+		public FesDTO(String sVCID, String mAXCLASSNM, String mINCLASSNM, String sVCSTATNM, String sVCNM,
+				String pAYATNM, String pLACENM, String uSETGTINFO, String x, String y, String sVCOPNBGNDT,
+				String sVCOPNENDDT, String rCPTBGNDT, String aREANM, String iMGURL, String dTLCONT, String tELNO,
+				String v_MAX, String v_MIN, String rEVSTDDAY, String rEVSTDDAYNM, int fes_state, String update_date,
+				int mAXNUM, int pRICE, int host_seq, String rCPTENDDT) {
+			super();
+			SVCID = sVCID;
+			MAXCLASSNM = mAXCLASSNM;
+			MINCLASSNM = mINCLASSNM;
+			SVCSTATNM = sVCSTATNM;
+			SVCNM = sVCNM;
+			PAYATNM = pAYATNM;
+			PLACENM = pLACENM;
+			USETGTINFO = uSETGTINFO;
+			X = x;
+			Y = y;
+			SVCOPNBGNDT = sVCOPNBGNDT;
+			SVCOPNENDDT = sVCOPNENDDT;
+			RCPTBGNDT = rCPTBGNDT;
+			AREANM = aREANM;
+			IMGURL = iMGURL;
+			DTLCONT = dTLCONT;
+			TELNO = tELNO;
+			V_MAX = v_MAX;
+			V_MIN = v_MIN;
+			REVSTDDAY = rEVSTDDAY;
+			REVSTDDAYNM = rEVSTDDAYNM;
+			Fes_state = fes_state;
+			Update_date = update_date;
+			MAXNUM = mAXNUM;
+			PRICE = pRICE;
+			this.host_seq = host_seq;
+			RCPTENDDT = rCPTENDDT;
 		}
 
 		public String getSVCID() {
@@ -270,5 +312,14 @@ public class FesDTO {
 		public void setHost_seq(int host_seq) {
 			this.host_seq = host_seq;
 		}
-	
+
+		public String getRCPTENDDT() {
+			return RCPTENDDT;
+		}
+
+		public void setRCPTENDDT(String rCPTENDDT) {
+			RCPTENDDT = rCPTENDDT;
+		}
+		
+		
 }
