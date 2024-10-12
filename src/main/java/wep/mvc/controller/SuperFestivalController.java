@@ -30,9 +30,9 @@ public class SuperFestivalController implements Controller {
 	public ModelAndView allowFestival(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		System.out.println("형우 / allowFestival Call");
 		
-		List<FesDTO> list =  service.selectAll();
+		//List<FesDTO> list =  service.selectAll();
 		
-		req.setAttribute("festivalList", list);
+		//req.setAttribute("festivalList", list);
 		
 		return new ModelAndView("super/festival/allowFestival.jsp");
 	}
