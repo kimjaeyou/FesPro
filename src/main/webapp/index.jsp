@@ -35,7 +35,7 @@ img {
 }
 
 #card_main {
-	width: 24%;
+	width: 30%;
 	height: 400px;
 }
 
@@ -130,11 +130,7 @@ img {
 					</div>
 				</c:if>
 
-
 			</div>
-
-
-
 
 		</div>
 	</section>
@@ -166,7 +162,7 @@ img {
 
 	<script type="text/javascript">
 	let currentPage = 1;
-	const itemsPerPage = 4;
+	const itemsPerPage = 3;
 	const items = document.querySelectorAll('.card-item');
 	const totalItems = items.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
