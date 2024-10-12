@@ -35,6 +35,12 @@ public class MainController implements Controller {
 		return new ModelAndView("index.jsp");
 	}
 	
+	public ModelAndView oneSelec(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		String sid= req.getParameter("sid");
+		
+		return new ModelAndView("index.jsp");
+	}
 	
 	
 }
