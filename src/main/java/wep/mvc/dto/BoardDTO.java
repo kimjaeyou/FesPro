@@ -5,11 +5,12 @@ public class BoardDTO {
 	private int boardSeq;
 	private int categorySeq;
 	private int userSeq;
-	private String sub;
-	private String bContent;
+	private String sub; //제목 
+	private String bContent; //내용
 	private int hostSeq;
 	
 	
+	public BoardDTO() {}
 	public BoardDTO(int boardSeq, int categorySeq, int userSeq, String sub, String bContent, int hostSeq) {
 		super();
 		this.boardSeq = boardSeq;
@@ -19,6 +20,7 @@ public class BoardDTO {
 		this.bContent = bContent;
 		this.hostSeq = hostSeq;
 	}
+	
 	
 	
 	public int getBoardSeq() {

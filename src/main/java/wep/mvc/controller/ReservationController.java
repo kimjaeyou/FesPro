@@ -6,8 +6,15 @@ import java.sql.SQLException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import wep.mvc.dto.ReservationDTO;
+import wep.mvc.service.ReservationServiceImpl;
 
 public class ReservationController implements Controller {
+	ReservationServiceImpl service = new ReservationServiceImpl();
+	
+	public ReservationController () {
+		System.out.println("ReservationController 생성됨..");
+	}
 
 	public ModelAndView resv(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
@@ -23,10 +30,21 @@ public class ReservationController implements Controller {
 	/**
 	 * 예약 폼에서 입력한 값을 받아 DB에 넣는다
 	 */
-	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		//
 		System.out.println("데이터 이동");
-		return null;
+		String date = request.getParameter("date");
+		String time = request.getParameter("time");
+		int peopelNum = Integer.parseInt(request.getParameter("peopleNum"));
+		int fee = Integer.parseInt(request.getParameter("fee"));
+		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee);
+		
+		ReservationDTO reservation = new ReservationDTO(1, "1", date, time, peopelNum, fee);
+		
+		//int result = service.insert(reservation);
+		//System.out.println(result);
+		
+		return new ModelAndView("reservation/resvSuccess.jsp");
 	}
 	
 	/**

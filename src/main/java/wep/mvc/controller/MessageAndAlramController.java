@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class MessageAndAlramController implements Controller {
 
-	public ModelAndView registration(HttpServletRequest req, HttpServletResponse resp)
+	public ModelAndView mMove(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
 		
 		return new ModelAndView("index.jsp", true);

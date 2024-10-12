@@ -10,6 +10,9 @@ public class ReplyDTO {
 	
 	
 	
+	public ReplyDTO() {}
+
+
 	public ReplyDTO(int reqlSeq, int boardSeq, int userSeq, int reContent, int hostSeq) {
 		super();
 		this.reqlSeq = reqlSeq;

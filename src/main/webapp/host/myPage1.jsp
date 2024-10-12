@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="/common/header.jsp"/>
+<jsp:include page="/common/header.jsp" />
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,10 +13,11 @@
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="../css/My_styles.css" rel="stylesheet" />
+        <link href="css/My_styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <!-- <body class="sb-nav-fixed">
+
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             Navbar Brand
             <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
@@ -41,6 +43,7 @@
                 </li>
             </ul>
         </nav> -->
+
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-white" id="sidenavAccordion">
@@ -122,42 +125,49 @@
                         					<th style="background-color: #eeeeee; text-align: center;">서비스상태</th>
                         					<th style="background-color: #eeeeee; text-align: center;">등록(수정)신청일시</th>
                         					<th style="background-color: #eeeeee; text-align: center;">등록(수정)신청정보</th>
-                        					<th style="background-color: #eeeeee; text-align: center;">서비스 상세보기</th>
                         					<th style="background-color: #eeeeee; text-align: center;">서비스 통계보기</th>
                         				</tr>
                         			</thead>
                         			<tbody>
                         				<c:choose>
-                        					<c:when test="${empty requestScope.FesDTOList}" var="FesDTO">
+                        					<c:when test="${empty fesDTOList}">
                         						<tr>
                         							<td colspan="7">
-                        								<p align="center"><b><span style="font-size:9pt;">등록된 행사가 없습니다.</span></b></p>
+                        								<p align="center"><b><span>등록된 행사가 없습니다.</span></b></p>
                         							</td>
                         						</tr>
                         					</c:when>
                         					<c:otherwise>
-                        						<c:forEach items="${requestScope.FesDTOList}" var="FesDTO">
+                        						<c:forEach items="${fesDTOList}" var="FesDTO">
+												<tr>
                         							<td>
-                        								<p align="center"><span style="font-size:9pt;">${FesDTO.SVCID}</span></p>
+                        								<p align="center"><span>${FesDTO.SVCID}</span></p>
                         							</td>
                         							<td>
-                        								<p align="center"><span style="font-size:9pt;">${FesDTO.SVCNM}</span></p>
+                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=selectBySSVCID&SVCID=${FesDTO.SVCID}">${FesDTO.SVCNM}</a></span></p>
                         							</td>
                         							<td>
-                        								<p align="center"><span style="font-size:9pt;">${FesDTO.SVCSTATNM}</span></p>
+                        								<p align="center"><span>${FesDTO.SVCSTATNM}</span></p>
+                        							</td>
+                        							
+                        							<td>
+                        								<p align="center"><span>${FesDTO.getUpdate_date()}</span></p>
                         							</td>
                         							<td>
-                        								<p align="center"><span style="font-size:9pt;">${FesDTO.Update_date}</span></p>
+                        								<p align="center"><span>${FesDTO.getFes_state()}</span></p>
                         							</td>
+                        							
                         							<td>
-                        								<p align="center"><span style="font-size:9pt;">${FesDTO.Fes_state}</span></p>
+                        								<p align="center"><span><a href="#">서비스 통계보기</a></span></p>
                         							</td>
-                        							<td>
-                        								<p align="center"><span style="font-size:9pt;"><a href="#"></a></span></p>
-                        							</td>
+                        						</tr>
+
+                        						</c:forEach>
                         					</c:otherwise>
                         				</c:choose>
                         			</tbody>
+                        		</table>
+                        		<!-- 등록하러 가기 -->
                         	</div>
                         </div>
                     </div>
