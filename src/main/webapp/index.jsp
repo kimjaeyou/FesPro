@@ -33,6 +33,7 @@ img {
 	width: 100%;
 	height: 27%;
 }
+
 #card_main {
 	width: 24%;
 	height: 400px;
@@ -104,12 +105,13 @@ img {
 										<!-- Product actions-->
 										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 											<div class="text-center">
-												<form action="${path}/front" method="POST">
+
+												<form action="${path}/front" method="post">
+													<input type="hidden" name="key" value="main" /> 
+													<input type="hidden" name="methodName" value="oneSelec" /> 
 													<input value="${option.SVCID}" name="sid" type="hidden">
-													<input value="main" name="key" type="hidden">
-													<input value="selecOne" name="methodName" type="hidden">
-													<input class="btn btn-outline-dark mt-auto" type="submit"
-														name="View options" value="더보기">
+													<input class="btn btn-outline-dark mt-auto" 
+													type="submit" name="View options" value="더보기">
 												</form>
 											</div>
 										</div>
@@ -158,7 +160,7 @@ img {
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
+	<!-- <script src="js/scripts.js"></script> -->
 
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
