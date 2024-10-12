@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
 <head>
+	<script src="reservation/assets/js/color-modes.js"></script>
+	
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -112,7 +115,7 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="${path}/front?key=main&methodName=read" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img alt="logo" src="assets/img/FesProLogo_bg.png">
+                    <img alt="logo" src="${path}/assets/img/FesProLogo_bg.png">
                 </a>
             </div>
 
@@ -138,12 +141,48 @@
                 <li><a href="#" class="nav-link px-2">게시판</a></li>
                 <li><a href="#" class="nav-link px-2">공지사항</a></li>
             </ul>
+		<c:choose>
+        <c:when test="${not empty loginUser}" >
+	     <ul class="nav navbar-nav navbar-right">
+	     	<li class="active">(${loginUser.email}/${loginUser.user_id})님 로그인 중 입니다.</li>
+	     	<form id="member-update-form" method="get" action="${pageContext.request.contextPath}/front">
+          	<input type="hidden" name="key" value="user" /> 
+            <input type="hidden" name="methodName" value="logout" />
+	     	<li><a href="${pageContext.request.contextPath}/front?key=user&methodName=logout" class="btn btn-danger">Logout</a></li>
+	     	</form>
+	     </ul>
+		</c:when>
+	
+		<c:when test="${not empty logincom}">
+	     <ul class="nav navbar-nav navbar-right">
+	     	<li class="active">(${logincom.host_name}/${logincom.host_id})님 로그인 중 입니다.</li>
+	     	<form id="member-update-form" method="get" action="${pageContext.request.contextPath}/front">
+          	<input type="hidden" name="key" value="host" /> 
+            <input type="hidden" name="methodName" value="logout" />
+	     	<li><a href="${pageContext.request.contextPath}/front?key=user&methodName=logout" class="btn btn-danger">Logout</a></li>
+	     	</form>
+	     </ul>
 
-            <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
+		</c:when>
+	   <c:when test="${empty loginUser}">
+	         <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2"><a href="${path}/user/login.jsp"> Login</a></button>
+                <button type="button" class="btn btn-primary"><a href="${path}/user/choice.jsp">Sign-up</a></button>
             </div>
+		</c:when>
+	   <c:when test="${empty logincom}">
+	         <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2"><a href="${path}/user/login.jsp"> Login</a></button>
+                <button type="button" class="btn btn-primary"><a href="${path}/user/choice.jsp">Sign-up</a></button>
+            </div>
+		</c:when>
+	</c:choose>
+		
+	
         </header>
     </div>
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

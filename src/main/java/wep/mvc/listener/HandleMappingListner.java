@@ -231,7 +231,7 @@ public class HandleMappingListner implements ServletContextListener {
 									  row1.getX(), row1.getY(), row1.getSVCOPNBGNDT(), row1.getSVCOPNENDDT(),
 									  row1.getRCPTBGNDT(), row1.getAREANM(), row1.getIMGURL(), row1.getDTLCONT(),
 									  row1.getTELNO(), row1.getV_MAX(), row1.getV_MIN(), row1.getREVSTDDAY(),
-									  row1.getREVSTDDAYNM(), 0, "111", 0, 0, 0));
+									  row1.getREVSTDDAYNM(), 0, "111", 0, 0, 0, row1.getRCPTENDDT()));
 			
 		}
 		
