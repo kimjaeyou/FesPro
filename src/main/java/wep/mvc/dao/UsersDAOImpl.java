@@ -79,8 +79,6 @@ public class UsersDAOImpl implements UsersDAO {
 			if (rs.next()) {
 				result = true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
@@ -95,11 +93,10 @@ public class UsersDAOImpl implements UsersDAO {
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("delete from Users where user_id=?");
+			ps = con.prepareStatement("update users set user_ben_check = 0 where user_id = ?");
 			ps.setString(1, id);
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+
 		} finally {
 			DbUtil.dbClose(con, ps);
 		}
@@ -128,8 +125,6 @@ public class UsersDAOImpl implements UsersDAO {
 			ps.setString(9, usersDTO.getUser_id());
 
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			DbUtil.dbClose(con, ps);
 		}
