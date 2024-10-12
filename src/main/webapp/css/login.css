@@ -87,4 +87,17 @@ input:focus {
     text-align: center;
     margin-top: 10px;
     display: none;
+}.login-section {
+    display: none;
 }
+
+.login-section.active {
+    display: block;
+}
+
+.tab-btn.active {
+    background-color: #4CAF50;
+    color: black; 
+}
+
+
