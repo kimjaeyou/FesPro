@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
+
     <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -114,7 +115,7 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="${path}/front?key=main&methodName=read" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img alt="logo" src="assets/img/FesProLogo_bg.png">
+                    <img alt="logo" src="${path}/assets/img/FesProLogo_bg.png">
                 </a>
             </div>
 
