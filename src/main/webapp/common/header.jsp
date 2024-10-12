@@ -5,8 +5,6 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-	<script src="reservation/assets/js/color-modes.js"></script>
-	
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -19,8 +17,6 @@
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-    <link href="reservation/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {

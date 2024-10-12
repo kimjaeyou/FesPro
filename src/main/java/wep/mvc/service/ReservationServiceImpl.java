@@ -12,7 +12,7 @@ public class ReservationServiceImpl implements ReservationService {
 	/**
 	 * 예약 등록
 	 */
-	public int insert (ReservationDTO reservation) throws SQLException  {
+	public int insert (ReservationDTO reservation) throws SQLException {
 		int result = dao.insert(reservation);
 		return result;
 	}
@@ -23,6 +23,11 @@ public class ReservationServiceImpl implements ReservationService {
 		return null;
 	}
 
-	
+	@Override
+	public ReservationDTO selectByResvSeq(int resvSeq) throws SQLException {
+		ReservationDTO resvDTO = dao.selectByResvSeq(resvSeq);
+		return resvDTO;
+	}
+
 
 }

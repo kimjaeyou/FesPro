@@ -61,4 +61,20 @@ public class ReservationController implements Controller {
 		
 		return null;
 	}
+	
+	/**
+	 * 예약 직후 내역 확인 시 예약번호로 예약 내역을 검색해 가져온다
+	 */
+	public ModelAndView selectByResvSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		//
+		int resvSeq = Integer.parseInt(request.getParameter("resvSeq"));
+		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
+		request.setAttribute("resvDTO", resvDTO);
+		if(resvDTO != null) {
+			return new ModelAndView("reservation/resvDetail.jsp", false);
+		} else {
+			return new ModelAndView("reservation/fail.jsp", true);
+		}
+	}
+	
 }

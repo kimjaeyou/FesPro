@@ -47,4 +47,30 @@ public class ReservationDAOImpl implements ReservationDAO {
 		return null;
 	}
 
+	@Override
+	public ReservationDTO selectByResvSeq(int resvSeq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ReservationDTO dto = new ReservationDTO();
+		
+		// select * from reservation where resv_Seq = ? 
+		String sql = "select * from reservation where reserv_Seq = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, resvSeq);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				dto = new ReservationDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9));
+			}
+		
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return dto;
+	}
+
 }

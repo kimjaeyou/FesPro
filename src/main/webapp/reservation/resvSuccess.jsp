@@ -50,10 +50,20 @@
         <script>
             $(function () {
                 $(document).on("click", "#goMain", function(){
-                    location.href="${path}/index.jsp"
-                })
-
-            })
+                    location.href="${path}/index.jsp";
+                });
+                
+            }) // function end
+            
+            function sendSelect () {
+				let seq = $("[data-form=resvSeq]").text();
+				console.log(seq);
+                
+                document.goForm.key.value = "reservation";
+                document.goForm.methodName.value = "selectByResvSeq";
+                document.goForm.resvSeq.value = seq;
+                document.goForm.submit();
+            }
 
         </script>
 
@@ -84,7 +94,8 @@
             <table>
                 <tr>
                     <th>예약번호</td>
-                    <td name="resvNo">\${reservSeq}</td>
+                    <td name="resvNo" data-form="resvSeq">5</td>
+                    <!-- \${reservSeq} -->
                 </tr>
                 <tr>
                     <th>서비스명</td>
@@ -111,8 +122,14 @@
         </div>
 
         <div class="goBtn">
-            <button class="btn btn-outline-primary" id="goMain" style="width: 10%;" type="button">메인페이지 바로가기</button> &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" id="goDetail" style="width: 10%;" type="button">예약 상세 보기</button>
+            
+            <form name="goForm" method = "post" action = "${path}/front">
+	        	<input type = "hidden" name = "key"/>
+	        	<input type = "hidden" name = "methodName"/>
+	        	<input type = "hidden" name = "resvSeq"/>
+	        	<button class="btn btn-outline-primary" id="goMain" style="width: 10%;" type="button">메인페이지 바로가기</button> &nbsp;&nbsp;&nbsp;&nbsp;
+	            <button class="btn btn-primary" id="goDetail" style="width: 10%;" type="button" onClick = "sendSelect()">예약 상세 보기</button>
+            </form>
         </div>
     </body>
 
