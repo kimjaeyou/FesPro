@@ -26,7 +26,7 @@
 	font-size: 20px;
 }
 
-a {
+#yo1 a {
 	text-decoration-line: none;
 	color: black;
 	font: bold;
@@ -34,9 +34,9 @@ a {
 	border-top: 1px black solid;
 }
 
-img {
-	width: 80px;
-	height: 80px;
+#messageContainner img {
+	width: 100%;
+	height: 30%;
 }
 </style>
 </head>

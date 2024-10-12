@@ -24,8 +24,8 @@
 <link href="css/styles.css" rel="stylesheet" />
 <style type="text/css">
 img {
-	width: 400px;
-	height: 250px;
+	width: 40%;
+	height: 100%;
 }
 
 #head {
@@ -104,9 +104,10 @@ img {
 										<!-- Product actions-->
 										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 											<div class="text-center">
-												<form action="#" method="POST">
-													<input value="${option.SVCID}" name="movieCd" type="hidden">
-													<input value="${option.SVCNM}" name="title" type="hidden">
+												<form action="${path}/front" method="POST">
+													<input value="${option.SVCID}" name="sid" type="hidden">
+													<input value="main" name="key" type="hidden">
+													<input value="selecOne" name="methodName" type="hidden">
 													<input class="btn btn-outline-dark mt-auto" type="submit"
 														name="View options" value="더보기">
 												</form>
