@@ -46,7 +46,6 @@ img {
 </head>
 <body>
 	<jsp:include page="/common/alarm.jsp" />
-
 	<!-- Masthead-->
 	<header class="masthead" id="head">
 		<div class="container position-relative">
@@ -55,20 +54,17 @@ img {
 					<div class="text-center text-white">
 						<!-- Page heading-->
 						<h1 class="mb-5">서울컬투</h1>
-
 						<form class="form-subscribe" id="contactForm" action="#">
 							<div class="row">
 								<div class="col">
 									<input class="form-control form-control-lg" id="search"
 										type="text" placeholder="검색" />
 								</div>
-
 								<div class="col-auto">
 									<button class="btn btn-primary btn-lg" id="submitButton">Submit</button>
 								</div>
 								<div></div>
 							</div>
-
 						</form>
 					</div>
 				</div>

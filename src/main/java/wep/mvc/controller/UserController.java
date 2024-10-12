@@ -56,13 +56,13 @@ public class UserController implements Controller {
 	        throws ServletException, IOException, SQLException {
 
 	    String userId = request.getParameter("member-id");
-	    String pwd = request.getParameter("member-password");
+	    String userPw = request.getParameter("member-password");
 	  
 	    //서비스 호출 
-	    UsersDTO dbDTO = us.login( new UsersDTO(userId, pwd) );
+	    UsersDTO dbDTO = us.login( new UsersDTO(userId, userPw) );
 	    System.out.println(dbDTO);
 	    
-	    if (dbDTO == null || !dbDTO.getUser_id().equals(userId) || !dbDTO.getUser_pw().equals(pwd)) {
+	    if (dbDTO == null || !dbDTO.getUser_id().equals(userId)) {
 	    	// 로그인 실패했을때,,,모르겠닫
 		 }
 	    
@@ -95,7 +95,7 @@ public class UserController implements Controller {
 		UsersDTO dto = new UsersDTO(userId, pwd);
 
 		HttpSession session = request.getSession();
-		session.setAttribute("index.jps", null);
+		session.invalidate(); // 세션정보 무효화 시키기
 
 		return new ModelAndView("index.jsp", true);
 	}

@@ -18,6 +18,9 @@ public class UsersDTO {
 
 	}
 
+	public UsersDTO(String user_id) {
+		this.user_id = user_id;
+	}
 	public UsersDTO(String user_id, String user_pw) {
 		this.user_id = user_id;
 		this.user_pw = user_pw;
@@ -65,6 +68,24 @@ public class UsersDTO {
 		this.user_name = user_name;
 		this.disable = disable;
 		this.user_tel = user_tel;
+	}
+	
+	
+
+	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr, String gender, String email,
+			String user_name, String disable, String user_tel, int user_ben_check) {
+		super();
+		this.user_seq = user_seq;
+		this.user_id = user_id;
+		this.user_pw = user_pw;
+		this.age = age;
+		this.addr = addr;
+		this.gender = gender;
+		this.email = email;
+		this.user_name = user_name;
+		this.disable = disable;
+		this.user_tel = user_tel;
+		this.user_ben_check = user_ben_check;
 	}
 
 	public int getUser_seq() {
