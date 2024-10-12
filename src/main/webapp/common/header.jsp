@@ -4,7 +4,7 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-    <script src="../assets/js/color-modes.js"></script>
+    <script src="${path}/reservation/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -98,21 +98,23 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
+        img {
+        	width: 100px;
+        	height: 100px;
+        }
     </style>
 
 
     <!-- Custom styles for this template -->
-    <link href="headers.css" rel="stylesheet">
+    <!--  <link href="headers.css" rel="stylesheet">-->
 </head>
 <main>
     <div class="container">
         <header
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
-                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap" />
-                    </svg>
+                <a href="${path}/front?key=main&methodName=read" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <img alt="logo" src="assets/img/FesProLogo_bg.png">
                 </a>
             </div>
 
@@ -146,4 +148,4 @@
         </header>
     </div>
 </main>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

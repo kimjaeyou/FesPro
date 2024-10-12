@@ -1,5 +1,7 @@
 /bin/
 /build/
+/lib/
 .settings/
 .classpath
 .project
+.xml
