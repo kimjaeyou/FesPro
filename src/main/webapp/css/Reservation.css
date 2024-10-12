@@ -1,0 +1,276 @@
+/* 유의사항 리스트 스타일 */
+.card-body {
+  padding: 20px;
+  /* 내부 여백 */
+}
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  /* 테이블 넓이 크게 */
+  border-collapse: collapse;
+  /* 경계선 겹치지 않게 */
+  margin: 20px 0;
+  /* 위아래 여백 */
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* 테이블 헤더 스타일 */
+thead tr {
+  background-color: #f2f2f2;
+  /* 연한 회색 배경 */
+}
+
+/* 제목행 위에 굵은 실선 */
+thead tr:first-child {
+  border-top: 3px solid black;
+  /* 굵은 실선 */
+}
+
+/* 제목행 글씨체 굵게 */
+th {
+  font-weight: bold;
+  /* 글씨체 굵게 */
+  padding: 12px 15px;
+  /* 셀 패딩 */
+  border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+  /* 제목행과 그 아래의 연한 회색 실선 */
+  border-right: 1px solid rgba(211, 211, 211, 0.5);
+  /* 제목 셀 사이에 연한 회색 실선 */
+}
+
+/* 셀 스타일 */
+td {
+  padding: 12px 15px;
+  /* 셀 패딩 */
+  text-align: center;
+  /* 텍스트 가운데 정렬 */
+  border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+  /* 연한 회색 실선 */
+  border-right: 1px solid rgba(211, 211, 211, 0.5);
+  /* 열 사이에 연한 회색 실선 */
+}
+
+/* 마지막 열의 경계 제거 */
+td:last-child,
+th:last-child {
+  border-right: none;
+  /* 마지막 열 경계 제거 */
+}
+
+/* 헤더 이외의 행들에 반투명 실선 */
+tbody tr {
+  border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+  /* 반투명 실선 */
+}
+
+/* 행 사이사이에 연한 회색 실선 */
+tbody tr+tr {
+  border-top: 1px solid rgba(211, 211, 211, 0.5);
+  /* 연한 회색 실선 */
+}
+
+/* 검색 카드 스타일 */
+.search-card {
+  background-color: #f8f9fa;
+  /* 연한 흰색 배경 */
+  border: none;
+  /* 테두리 없음 */
+  padding: 30px;
+  /* 내부 여백 */
+  margin-bottom: 20px;
+  /* 카드 간 간격 */
+}
+
+/* 입력 필드 스타일 */
+#searchInput {
+  width: 40%;
+  /* 텍스트 입력창 너비 */
+}
+
+/* 버튼 스타일 */
+.btn-secondary {
+  background-color: gray;
+  /* 회색 배경 */
+  color: white;
+  /* 흰색 글씨 */
+}
+
+/* 본문 스타일 */
+body {
+  display: flex;
+  flex-direction: column;
+  /* 세로 방향으로 정렬 */
+  margin: 0;
+  /* 기본 여백 제거 */
+  height: 100vh;
+  /* 뷰포트 높이를 100%로 설정 */
+}
+
+/* 콘텐츠 스타일 */
+.content {
+  width: 100%;
+  /* 콘텐츠의 너비를 100%로 설정 */
+  max-width: 1200px;
+  /* 최대 너비 설정 */
+  padding: 20px;
+  /* 내부 여백 추가 */
+  box-sizing: border-box;
+  /* 패딩을 너비에 포함 */
+}
+
+
+/* 제목 스타일 */
+h5 {
+  text-align: left;
+  /* 제목 왼쪽 정렬 */
+  margin-top: 20px;
+  /* 제목 상단 여백 */
+}
+
+/* 입력 필드에 포커스 시 스타일 */
+#searchInput:focus {
+  border-color: #80bdff;
+  /* 포커스 시 테두리 색상 변경 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* 포커스 시 그림자 추가 */
+}
+
+/* 입력 필드에 포커스 시 스타일 */
+#searchInput:focus {
+  border-color: #80bdff;
+  /* 포커스 시 테두리 색상 변경 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* 포커스 시 그림자 추가 */
+}
+
+/* 버튼 스타일 */
+.btn-secondary {
+  height: 40px;
+  /* 버튼 높이 설정 */
+  font-size: 16px;
+  /* 버튼 폰트 크기 설정 */
+  padding: 0 15px;
+  /* 버튼 좌우 패딩 감소 */
+  background-color: #007bff;
+  /* 파란색 배경으로 변경 */
+  color: white;
+  /* 흰색 글씨 */
+  border: none;
+  /* 테두리 없음 */
+  border-radius: 5px;
+  /* 모서리 둥글게 처리 */
+  cursor: pointer;
+  /* 마우스 포인터 변경 */
+}
+
+.no-underline1 {
+  text-decoration: none;
+  /* 밑줄 제거 */
+}
+
+#startDate,
+#endDate {
+  border: 1px solid lightgray;
+  /* 연한 회색 테두리 */
+  width: 150px;
+  /* 원하는 가로 길이 설정 */
+  height: 40px;
+  /* 입력창 높이 설정 */
+  font-size: 16px;
+  /* 폰트 크기 설정 */
+  padding: 10px;
+  /* 입력 필드 내부 여백 */
+}
+
+
+
+.no-underline2 {
+  text-decoration: none;
+  /* 밑줄 제거 */
+  color: black;
+  /* 글자 색상 검은색으로 설정 */
+}
+
+/* 버튼 호버 시 스타일 */
+.btn-secondary:hover {
+  background-color: #0056b3;
+  /* 호버 시 더 진한 파란색으로 변경 */
+}
+
+#notice {
+  color: red;
+  /* 글씨 색상을 빨간색으로 설정 */
+  font-weight: bold;
+  /* 글씨체를 굵게 설정 */
+}
+
+
+/* 입력 필드 스타일 */
+#searchInput {
+  height: 40px;
+  /* 입력창 높이 설정 */
+  font-size: 16px;
+  /* 폰트 크기 설정 */
+  margin-right: 10px;
+  /* 버튼과의 간격을 위한 여백 */
+  padding: 10px;
+  /* 입력 필드 내부 여백 */
+  border: 1px solid #ced4da;
+  /* 연한 회색 테두리 */
+  border-radius: 5px;
+  /* 모서리 둥글게 처리 */
+  outline: none;
+  /* 포커스 시 테두리 강조 없애기 */
+}
+
+/* 신청일 입력 필드 스타일 */
+#applicationDate {
+  height: 40px;
+  /* 입력창 높이 설정 */
+  font-size: 16px;
+  /* 폰트 크기 설정 */
+  padding: 10px 15px;
+  /* 입력 필드 내부 여백 */
+  border: 1px solid #ced4da;
+  /* 연한 회색 테두리 */
+  border-radius: 5px;
+  /* 모서리 둥글게 처리 */
+  outline: none;
+  /* 포커스 시 테두리 강조 없애기 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* 전환 효과 추가 */
+}
+
+/* 입력 필드에 포커스 시 스타일 */
+#applicationDate:focus {
+  border-color: #80bdff;
+  /* 포커스 시 테두리 색상 변경 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* 포커스 시 그림자 추가 */
+}
+
+/* 입력 필드 비활성화 스타일 */
+#applicationDate:disabled {
+  background-color: #f9f9f9;
+  /* 비활성화 시 연한 배경색 */
+  border: 1px solid #e0e0e0;
+  /* 비활성화 시 테두리 색상 변경 */
+  color: #a0a0a0;
+  /* 비활성화 시 글자색 변경 */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* 화면 높이에 맞춰 조정 */
+}
+
+#layoutSidenav_content {
+  flex: 1;
+  /* 푸터가 항상 아래에 위치하도록 설정 */
+}
