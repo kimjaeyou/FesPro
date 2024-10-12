@@ -19,7 +19,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="${path}/reservation/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
