@@ -11,7 +11,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <!-- 부트스트랩 공용 css -->
         <link href="${path}/css/My_styles.css" rel="stylesheet" />
+        <!-- 카드 헤더쪽 아이콘들 -->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         
         <!-- jquery -->
@@ -46,10 +48,20 @@
                                 문화행사 관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts_fes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                             <div class="collapse" id="collapseLayouts_fes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="#"  id="selectAllBtn">문화행사 조회</a>
-                                    <a class="nav-link" href="#" id="allowBtn">문화행사 승인</a>
+                                </nav>
+                            </div>
+                            
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts_chart" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                차트
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts_chart" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#"  id="selectAllBtn">성별별 차트</a>
                                 </nav>
                             </div>
                 </nav>
@@ -66,11 +78,11 @@
 				  top.center.location.href ="${path}/front?key=superfestival&methodName=selectAll";
 			 });
            
-           //문화행사 승인
-			  $("#allowBtn").click(function(){
-				  top.center.location.href ="${path}/front?key=superfestival&methodName=allowFestival";
+           //차트
+			  $("#chartBtn").click(function(){
+				  //top.center.location.href ="${path}/front?key=superfestival&methodName=allowFestival";
+				  
 			 });
-           
          });
         </script>
         <!-- 사이드 바 화살표, 그림 -->
