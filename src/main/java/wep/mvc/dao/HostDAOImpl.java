@@ -18,7 +18,7 @@ public class HostDAOImpl implements HostDAO {
 		ResultSet rs = null;
 		HostDTO dbDTO = null;
 
-		String sql = "select * from host where hostid=? host_pw=?";
+		String sql = "select * from host where HOSTID=? and HOST_PASSWORD=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

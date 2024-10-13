@@ -16,30 +16,35 @@
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
 <link href="${path}/css/My_styles.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-	crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+$(function(){
+	$(".detailBtn").click(function(){
+		//console.log("상세보기 버튼 클릭");
+		const svcid = $(this).data("svcid");
+		//console.log(svcid);
+		window.location.href ="${path}/front?key=superfestival&methodName=detail&svcid=" +svcid;
+	});
+});
+</script>
 </head>
 
-<div id="layoutSidenav_content">
 	<main>
+	<!-- 페이지 제목 -->
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">전체 문화행사 조회</h1>
 			<ol class="breadcrumb mb-4">
 				<li class="breadcrumb-item active">전체 문화행사의 목록을 출력합니다</li>
 			</ol>
-
+	<!-- 테이블 -->
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1"></i> 문화 행사 테이블
 				</div>
 				<div class="card-body">
-
-					<!-- 테이블 -->
 					<table id="datatablesSimple">
 						<thead>
 							<tr>
@@ -104,8 +109,8 @@
 						<tbody>
 							<c:forEach items="${festivalList}" var="festival">
 								<tr>
-									<td>${festival.SVCID}</td>
-									 <td>${festival.MAXCLASSNM}</td>
+									<td><button class="detailBtn" data-svcid="${festival.SVCID}"/>${festival.SVCID}</td> <!-- 버튼 클릭 이벤트 -> 서블릿 -> 상세페이지 -->
+									<td>${festival.MAXCLASSNM}</td>
 									<td>${festival.MINCLASSNM}</td>
 									<td>${festival.SVCSTATNM}</td>
 									<td>${festival.SVCNM}</td>
@@ -136,20 +141,40 @@
 
 						</tbody>
 					</table>
-
 				</div>
 			</div>
-		</div>
-	</main>
-
-</div>
-
+	<!-- 테이블 끝 -->
+	<!-- 차트 -->
+		<%-- <div class="row">
+			<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-area me-1"></i> Area Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myAreaChart" width="100%" height="40"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myBarChart" width="100%" height="40"></canvas>
+					</div>
+				</div>
+			</div> --%>
+	<!-- 차트 끝 -->
+		</main>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 	crossorigin="anonymous"></script>
+<!-- 부트스트랩 테이블 라이브러리 -->
 <script src="${path}/js/datatables-simple-demo.js"></script>
 </body>
 </html>
