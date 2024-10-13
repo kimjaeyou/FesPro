@@ -22,17 +22,16 @@ public class SuperFestivalAjaxController implements RestController {
 		System.out.println("형우 / SuperFestivalAjaxController 생성자 Call");
 	}
 	
-	public void selectAll(HttpServletRequest req, HttpServletResponse resp)
+	public void detail(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		System.out.println("형우 / selectAll() Call");
-		
-		List<FesDTO> festivalList =  service.selectAll();
-		Gson g = new Gson();
-		String data = g.toJson(festivalList);
-		
-		PrintWriter out = resp.getWriter();
-		//out.print("형우 / selectAll 로직");
-		out.print(data);
+		System.out.println("형우 / detail() Call");
+		/*
+		 * List<FesDTO> festivalList = service.selectAll(); Gson g = new Gson(); String
+		 * data = g.toJson(festivalList);
+		 * 
+		 * PrintWriter out = resp.getWriter(); //out.print("형우 / selectAll 로직");
+		 * out.print(data);
+		 */
 	}
 	
 

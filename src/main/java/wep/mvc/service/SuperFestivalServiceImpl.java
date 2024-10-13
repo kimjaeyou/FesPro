@@ -21,8 +21,20 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 
 	@Override
 	public FesDTO select(FesDTO festivalDto) {
-		// TODO Auto-generated method stub
-		return null;
+		FesDTO result = null;
+		
+		result =dao.select(festivalDto);
+				
+		return result;
+	}
+
+	@Override
+	public int update(FesDTO festivalDto,int state) {
+		int result=0;
+		
+		result = dao.update(festivalDto, state);
+		
+		return result;
 	}
 
 }

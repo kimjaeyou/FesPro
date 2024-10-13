@@ -18,6 +18,9 @@ public class SuperFestivalController implements Controller {
 		System.out.println("형우 / SuperFestivalController 생성자 Call");
 	}
 
+	/**
+	 *  문화행사 전체조회
+	 */
 	public ModelAndView selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		System.out.println("형우 / selectAll Call");
 		
@@ -27,14 +30,67 @@ public class SuperFestivalController implements Controller {
 		return new ModelAndView("super/festival/selectAll.jsp");
 	}
 	
-	public ModelAndView allowFestival(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-		System.out.println("형우 / allowFestival Call");
+	/**
+	 * 문화행사 상세
+	 */
+	public ModelAndView detail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		System.out.println("형우 / detail Call");
 		
-		//List<FesDTO> list =  service.selectAll();
+		String svcid = req.getParameter("svcid");
 		
-		//req.setAttribute("festivalList", list);
+		FesDTO fes = new FesDTO();
+		fes.setSVCID(svcid);
+	     
+		FesDTO searchFes = service.select(fes);
+		req.setAttribute("fes", searchFes);
 		
-		return new ModelAndView("super/festival/allowFestival.jsp");
+		return new ModelAndView("super/festival/detail.jsp");
+	}
+	
+	/**
+	 * 문화행사 수정
+	 */
+	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		System.out.println("형우 / update Call");
+		
+		FesDTO fes = new FesDTO();
+	    fes.setSVCID(req.getParameter("SVCID"));
+	    fes.setMAXCLASSNM(req.getParameter("MAXCLASSNM"));
+	    fes.setMINCLASSNM(req.getParameter("MINCLASSNM"));
+	    fes.setSVCSTATNM(req.getParameter("SVCSTATNM"));
+	    fes.setSVCNM(req.getParameter("SVCNM"));
+	    fes.setPAYATNM(req.getParameter("PAYATNM"));
+	    fes.setPLACENM(req.getParameter("PLACENM"));
+	    fes.setUSETGTINFO(req.getParameter("USETGTINFO"));
+	    fes.setX(req.getParameter("X"));
+	    fes.setY(req.getParameter("Y"));
+	    fes.setSVCOPNBGNDT(req.getParameter("SVCOPNBGNDT"));
+	    fes.setSVCOPNENDDT(req.getParameter("SVCOPNENDDT"));
+	    fes.setRCPTBGNDT(req.getParameter("RCPTBGNDT"));
+	    fes.setAREANM(req.getParameter("AREANM"));
+	    fes.setIMGURL(req.getParameter("IMGURL"));
+	    fes.setDTLCONT(req.getParameter("DTLCONT"));
+	    fes.setTELNO(req.getParameter("TELNO"));
+	    fes.setV_MAX(req.getParameter("V_MAX"));
+	    fes.setV_MIN(req.getParameter("V_MIN"));
+	    fes.setREVSTDDAY(req.getParameter("REVSTDDAY"));
+	    fes.setREVSTDDAYNM(req.getParameter("REVSTDDAYNM"));
+	    fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
+	    fes.setUpdate_date(req.getParameter("Update_date"));
+	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
+	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
+	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
+		
+		int result = service.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
+		
+		if(result ==1) {
+			return new ModelAndView("front?key=superfestival&methodName=selectAll",true);
+		}
+		else {
+			//에러페이지
+			System.out.println("형우 / 행사 업데이트 실패 Controller-update");
+			return null;
+		}
 	}
 	
 	

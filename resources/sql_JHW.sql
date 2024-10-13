@@ -42,3 +42,41 @@ INSERT INTO FES VALUES (
     'https://example.com/image5.jpg', '전통 비빔밥을 즐길 수 있는 축제', '010-5555-6666', '26', '16', 
     TO_DATE('2024-09-17', 'YYYY-MM-DD'), '수요일', 1, TO_DATE('2024-08-25', 'YYYY-MM-DD'), 3000, 10000, 5
 );
+
+INSERT INTO FES VALUES (
+    'SVC006', '문화', '미술', '운영중', '서울 아트페어', '온라인결제', '서울 코엑스', '예술 애호가', '37.511274', '127.059188', 
+    TO_DATE('2024-03-01', 'YYYY-MM-DD'), TO_DATE('2024-03-05', 'YYYY-MM-DD'), TO_DATE('2024-02-01', 'YYYY-MM-DD'), '서울', 
+    'https://example.com/image6.jpg', '다양한 아트 작품을 감상할 수 있는 행사', '010-1111-2222', '15', '10', 
+    TO_DATE('2024-03-02', 'YYYY-MM-DD'), '토요일', 1, TO_DATE('2024-02-10', 'YYYY-MM-DD'), 2000, 25000, 6
+);
+
+INSERT INTO FES VALUES (
+    'SVC007', '축제', '음악', '운영중', '부산 락 페스티벌', '현장결제', '부산 해운대', '락 음악 팬', '35.158743', '129.160322', 
+    TO_DATE('2024-08-10', 'YYYY-MM-DD'), TO_DATE('2024-08-12', 'YYYY-MM-DD'), TO_DATE('2024-07-15', 'YYYY-MM-DD'), '부산', 
+    'https://example.com/image7.jpg', '다양한 락 밴드의 공연을 즐길 수 있는 축제', '010-3333-4444', '20', '12', 
+    TO_DATE('2024-08-11', 'YYYY-MM-DD'), '일요일', 1, TO_DATE('2024-07-20', 'YYYY-MM-DD'), 5000, 60000, 7
+);
+
+INSERT INTO FES VALUES (
+    'SVC008', '스포츠', '야구', '운영중', '한국시리즈', '현장결제', '고척스카이돔', '야구 팬', '37.550793', '126.885334', 
+    TO_DATE('2024-10-20', 'YYYY-MM-DD'), TO_DATE('2024-10-20', 'YYYY-MM-DD'), TO_DATE('2024-09-01', 'YYYY-MM-DD'), '서울', 
+    'https://example.com/image8.jpg', '연간 최고의 야구 대회', '010-5555-6666', '25', '18', 
+    TO_DATE('2024-10-20', 'YYYY-MM-DD'), '일요일', 1, TO_DATE('2024-09-15', 'YYYY-MM-DD'), 20000, 150000, 8
+);
+
+INSERT INTO FES VALUES (
+    'SVC009', '문화', '연극', '운영중', '햄릿', '온라인결제', '서울 예술의 전당', '연극 팬', '37.485484', '126.992303', 
+    TO_DATE('2024-01-15', 'YYYY-MM-DD'), TO_DATE('2024-01-30', 'YYYY-MM-DD'), TO_DATE('2023-12-01', 'YYYY-MM-DD'), '서울', 
+    'https://example.com/image9.jpg', '셰익스피어의 유명한 연극', '010-7777-8888', '5', '3', 
+    TO_DATE('2024-01-25', 'YYYY-MM-DD'), '금요일', 1, TO_DATE('2023-12-20', 'YYYY-MM-DD'), 150, 50000, 9
+);
+
+INSERT INTO FES VALUES (
+    'SVC010', '축제', '음식', '운영중', '김치 축제', '현장결제', '전주 한옥마을', '미식가', '35.814027', '127.150750', 
+    TO_DATE('2024-10-10', 'YYYY-MM-DD'), TO_DATE('2024-10-15', 'YYYY-MM-DD'), TO_DATE('2024-09-01', 'YYYY-MM-DD'), '전주', 
+    'https://example.com/image10.jpg', '다양한 김치를 맛볼 수 있는 축제', '010-8888-9999', '30', '20', 
+    TO_DATE('2024-10-12', 'YYYY-MM-DD'), '토요일', 1, TO_DATE('2024-09-25', 'YYYY-MM-DD'), 1000, 20000, 10
+);
+
+--수정
+UPDATE FES SET FES_STATE = '7' WHERE SVCID ='SVC001';

@@ -14,4 +14,9 @@ public interface SuperFestivalService{
 	 * 행사 조회
 	 */
 	public FesDTO select(FesDTO festivalDto);
+	
+	/**
+	 * 행사 수정
+	 */
+	public int update(FesDTO festivalDto, int state);
 }
