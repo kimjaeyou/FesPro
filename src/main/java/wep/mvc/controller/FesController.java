@@ -3,16 +3,16 @@ package wep.mvc.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
-import wep.mvc.service.FesSerevice;
-import wep.mvc.service.FesSereviceImpl;
 
 public class FesController implements Controller {
 	//private FesSerevice fesSerevice = new FesSereviceImpl();
@@ -69,6 +69,52 @@ public class FesController implements Controller {
 	//서비스등록신청(C)
 	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception{
 		
+		//서비스 아이디 그냥 uuid로 뽑을게요
+		UUID uuid = UUID.randomUUID();
+		String SVCID = uuid.toString();
+
+		String MAXCLASSNM = req.getParameter("MAXCLASSNM");
+		String MINCLASSNM = req.getParameter("MINCLASSNM");
+		String SVCSTATNM = req.getParameter("SVCSTATNM");
+		String SVCNM = req.getParameter("SVCNM");
+		String PAYATNM = req.getParameter("PAYATNM");
+		String PLACENM = req.getParameter("PLACENM");
+		String USETGTINFO = req.getParameter("USETGTINFO");
+		String X = req.getParameter("X");
+		String Y = req.getParameter("Y");
+		String SVCOPNBGNDT = req.getParameter("SVCOPNBGNDT");
+		String SVCOPNENDDT = req.getParameter("SVCOPNENDDT");
+		String RCPTBGNDT = req.getParameter("RCPTBGNDT");
+		String AREANM = req.getParameter("AREANM");
+		Part IMGURL = req.getPart("IMGURL");
+		if(IMGURL != null) {
+			String fileName = this.getFilename(IMGURL);
+		}
+		
+		
+		
 		return new ModelAndView("host/myPage1.jsp");
 	}
+	
+	/**
+	 * 전송된 파일정보에서 파일이름만 추출해 내는 과정 
+	 * */
+	private String getFilename(Part part) {
+        String headerContent = part.getHeader("content-disposition");
+        
+        //contentDisp의 결과 form-data; name="fileName"; filename="추가한 파일 이름"
+        System.out.println(headerContent);
+        
+        String[] split = headerContent.split(";");
+        for (int i = 0; i < split.length; i++) {
+            String temp = split[i];
+            if (temp.trim().startsWith("filename")) {
+            	System.out.println("temp = " + temp);
+            	System.out.println("temp.indexOf(=) = " + temp.indexOf("=") );
+            	
+                return temp.substring( temp.indexOf("=") + 2 ,  temp.length() - 1);
+            }
+        }
+        return null;
+    }
 }
