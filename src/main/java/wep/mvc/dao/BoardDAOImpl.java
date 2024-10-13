@@ -14,7 +14,7 @@ public class BoardDAOImpl implements BoardDAO {
 	private ResultSet rs;
 
 	@Override
-	public int insertByCtg(BoardDTO boardDTO) throws SQLException {
+	public int insert(BoardDTO boardDTO) throws SQLException {
 		
 		return 0;
 	}
