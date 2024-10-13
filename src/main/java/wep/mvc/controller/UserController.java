@@ -69,7 +69,7 @@ public class UserController implements Controller {
 	    
 	    HttpSession session = request.getSession();
 	    session.setAttribute("loginUser", dbDTO);
-	    return new ModelAndView("index.jsp", true); 
+	    return new ModelAndView("front?key=main&methodName=read", true); 
 	}
 
 	// 아이디 중복체크

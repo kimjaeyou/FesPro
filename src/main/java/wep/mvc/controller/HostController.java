@@ -67,7 +67,7 @@ public class HostController implements Controller {
 		    HttpSession session = request.getSession();
 		    
 		    session.setAttribute("logincom", dbDTO);
-		    return new ModelAndView("index.jsp", true); 
+		    return new ModelAndView("front?key=main&methodName=read", true);
 		}
 
 	// 아이디 중복체크
