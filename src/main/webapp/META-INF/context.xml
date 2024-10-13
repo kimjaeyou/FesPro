@@ -27,7 +27,7 @@
 		auth="Container"
 		type="javax.sql.DataSource" 
 		driverClassName="oracle.jdbc.OracleDriver"
-		url="jdbc:oracle:thin:@YEYAK_high?TNS_ADMIN=전자지갑 경로" 
+		url="jdbc:oracle:thin:@YEYAK_high?TNS_ADMIN=C:/Users/nonam/Downloads/Wallet_YEYAK" 
 		username="ADMIN"
 		password="Kosta@551255" 
 		maxTotal="20" 

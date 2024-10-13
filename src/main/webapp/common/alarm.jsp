@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,41 +41,17 @@
 </style>
 </head>
 <body>
-
-		<c:choose>
-        <c:when test="${not empty loginUser}">
 	<div id="messageContainner">
 		<img alt="Logo" src="assets/img/FesProLogo_bg.png">
 		<div id="yo1">
 			<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
 		</div>
 		<div id="yo1">
-			<a href="${path}/user/Reservation.jsp">MY페이지</a>
+			<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY페이지</a>
 		</div>
 		<div id="yo1">
 			<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
 		</div>
 	</div>
-	</c:when>
-        <c:when test="${not empty logincom}">
-	<div id="messageContainner">
-		<img alt="Logo" src="assets/img/FesProLogo_bg.png">
-		<div id="yo1">
-			<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
-		</div>
-		<div id="yo1">
-			<a href="${path}/user/Reservation.jsp">MY페이지</a>
-		</div>
-		<div id="yo1">
-			<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
-		</div>
-	</div>
-	</c:when>
-	      <c:when test="${empty loginUser}">
-	</c:when>
-	      <c:when test="${empty logincom}">
-	      
-		</c:when>
-	</c:choose>
 </body>
 </html>
