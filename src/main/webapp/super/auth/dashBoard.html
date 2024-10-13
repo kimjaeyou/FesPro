@@ -5,6 +5,22 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="../../css/My_styles.css" rel="stylesheet" />
+ <style>
+        /* 전체 페이지의 스크롤을 없앱니다 */
+        body {
+            overflow: hidden;
+        }
+
+        /* 레이아웃 내 특정 섹션에서도 스크롤을 없애고 싶을 때 */
+        #layoutSidenav_content {
+            overflow: hidden;
+        }
+
+        /* iframe 내 스크롤도 없애기 (필요 시 적용) */
+        iframe {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <div id="layoutSidenav_content">
