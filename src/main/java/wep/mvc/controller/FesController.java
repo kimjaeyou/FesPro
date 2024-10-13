@@ -66,9 +66,8 @@ public class FesController implements Controller {
 		
 		return new ModelAndView("host/myPage1.jsp");
 	}
-	
+	//서비스등록신청(C)
 	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-		
 		
 		return new ModelAndView("host/myPage1.jsp");
 	}

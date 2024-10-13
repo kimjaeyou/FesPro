@@ -139,7 +139,7 @@
 		          </ul>
 		        </li>
                 <li><a href="#" class="nav-link px-2">예약보기</a></li>
-                <li><a href="#" class="nav-link px-2">게시판</a></li>
+                <li><a href="${pageContext.request.contextPath}/board/boardMain.jsp" class="nav-link px-2">게시판</a></li>
                 <li><a href="#" class="nav-link px-2">공지사항</a></li>
             </ul>
 		<c:choose>
