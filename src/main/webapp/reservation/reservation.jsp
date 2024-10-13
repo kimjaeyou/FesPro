@@ -158,6 +158,7 @@
                     예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약 완료 <br><br>
                     <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
                     <p class="lead mb-0">기타내용</p>
+                    
                 </div>
             </div>
         </header>
@@ -243,13 +244,13 @@
                                     <!-- 신청자 정보 가져오기 -->
                                      <table>
                                         <tr>
-                                        	<th>이름</td><td name="applicantName">나가</td>
+                                        	<th>이름</td><td name="applicantName">${loginUser.user_name}</td>
                                         </tr>
                                         <tr>
-                                        	<th>전화</td><td name="applicantTel">010-0000-0000</td>
+                                        	<th>전화</td><td name="applicantTel">${loginUser.user_tel}</td>
                                         </tr>
                                         <tr>
-                                        	<th>이메일</td><td name="applicantMail">naga@spoon.com</td>
+                                        	<th>이메일</td><td name="applicantMail">${loginUser.email}</td>
                                         </tr>
 
                                      </table>

@@ -29,5 +29,11 @@ public class ReservationServiceImpl implements ReservationService {
 		return resvDTO;
 	}
 
+	@Override
+	public ReservationDTO selectBySVCID(String SVCID) throws SQLException {
+		ReservationDTO resvDTO = dao.selectBySVCID(SVCID);
+		return null;
+	}
+	
 
 }

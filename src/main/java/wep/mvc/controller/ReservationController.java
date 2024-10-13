@@ -77,4 +77,18 @@ public class ReservationController implements Controller {
 		}
 	}
 	
+	/**
+	 * 예약 데이터 SVCID로 검색
+	 */
+	public ModelAndView selectBySVCID (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		// 정보 담아올 parameter 필요 
+		String svcId = request.getParameter(null);
+		ReservationDTO resvDTO = service.selectBySVCID(svcId);
+		if (resvDTO != null) {
+			return new ModelAndView();
+		} else {
+			return new ModelAndView();
+		}
+	}
+	
 }

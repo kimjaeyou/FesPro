@@ -20,4 +20,9 @@ public interface ReservationService {
 	 * ReservationDAOImpl selectByResvSeq 메소드 호출
 	 */
 	public ReservationDTO selectByResvSeq (int resvSeq) throws SQLException;
+	
+	/**
+	 * ReservationDAOImpl selectBySVCID 메소드 호출
+	 */
+	public ReservationDTO selectBySVCID (String SVCID) throws SQLException;
 }
