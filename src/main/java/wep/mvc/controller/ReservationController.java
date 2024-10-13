@@ -70,6 +70,10 @@ public class ReservationController implements Controller {
 		int resvSeq = Integer.parseInt(request.getParameter("resvSeq"));
 		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
 		request.setAttribute("resvDTO", resvDTO);
+		
+		// 예약번호로 검색 후 SVCID를 이용해 Festival 정보 가져온다
+		
+		
 		if(resvDTO != null) {
 			return new ModelAndView("reservation/resvDetail.jsp", false);
 		} else {
