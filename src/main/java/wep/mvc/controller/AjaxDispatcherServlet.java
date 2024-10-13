@@ -30,11 +30,15 @@ public class AjaxDispatcherServlet extends HttpServlet {
 		
 		clzMap = (Map<String, Class<?>>)config.getServletContext().getAttribute("ajaxClzMap");
 		
+		System.out.println("map = "+map+"clzMap = "+"clzMap");
+		
 	}
    
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String key = request.getParameter("key"); //customer
 		String methodName = request.getParameter("methodName"); //idCheck , insert , selectAll
+		
+		System.out.println("key = "+key + "methodName = " + methodName);
 		
 		if(key ==null || key.equals("")) {
 			key="customer";

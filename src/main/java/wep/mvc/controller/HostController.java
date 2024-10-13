@@ -56,15 +56,12 @@ public class HostController implements Controller {
 		        throws ServletException, IOException, SQLException {
 
 		    String userId = request.getParameter("corporate-id");
-		    String pwd = request.getParameter("corporate-password");
 		  
+		    System.out.println(userId);
 		    //서비스 호출 
-		    HostDTO dbDTO = hs.login( new HostDTO(userId, pwd) );
+		    HostDTO dbDTO = hs.login( new HostDTO(userId) );
 		    System.out.println(dbDTO);
 		    
-		    if (dbDTO == null || !dbDTO.getHost_id().equals(userId) || !dbDTO.getHost_pw().equals(pwd)) {
-		    	// 로그인 실패했을때,,,모르겠닫
-			 }
 		    
 		    HttpSession session = request.getSession();
 		    session.setAttribute("logincom", dbDTO);
@@ -92,7 +89,7 @@ public class HostController implements Controller {
 		String userId = request.getParameter("");
 		String pwd = request.getParameter("");
 
-		UsersDTO dto = new UsersDTO(userId, pwd);
+		HostDTO dto = new HostDTO(userId, pwd);
 
 		HttpSession session = request.getSession();
 		session.setAttribute("index.jps", null);
