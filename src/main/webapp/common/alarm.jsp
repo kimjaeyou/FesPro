@@ -44,8 +44,8 @@
 <body>
 
 		<c:choose>
-        <c:when test="${not empty loginUser}">
-	<div id="messageContainner">
+      <c:when test="${not empty sessionScope.loginUser}">
+ 	<div id="messageContainner">
 		<img alt="Logo" src="assets/img/FesProLogo_bg.png">
 		<div id="yo1">
 			<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
@@ -58,8 +58,8 @@
 		</div>
 	</div>
 	</c:when>
-        <c:when test="${not empty logincom}">
-	<div id="messageContainner">
+     <c:when test="${not empty sessionScope.loginCom}">
+ 	<div id="messageContainner">
 		<img alt="Logo" src="assets/img/FesProLogo_bg.png">
 		<div id="yo1">
 			<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
@@ -72,10 +72,10 @@
 		</div>
 	</div>
 	</c:when>
-	      <c:when test="${empty loginUser}">
+     		<c:when test="${empty sessionScope.loginUser}">
 	</c:when>
-	      <c:when test="${empty logincom}">
-	      
+     <c:when test="${empty sessionScope.loginCom}">
+ 	      
 		</c:when>
 	</c:choose>
 </body>
