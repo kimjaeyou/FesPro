@@ -2,7 +2,6 @@ package wep.mvc.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -11,10 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.FesDTO;
-import wep.mvc.dto.ReservationDTO;
+import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.UsersDTO;
-import wep.mvc.service.ReservationService;
-import wep.mvc.service.ReservationServiceImpl;
 import wep.mvc.service.SuperFestivalService;
 import wep.mvc.service.SuperFestivalServiceImpl;
 
@@ -53,12 +50,20 @@ public class SuperFestivalController implements Controller {
 		
 		//USERsDTO 정보 보내기
 		List<UsersDTO> userList =  festivalService.selectUser(fes);
-		
+		//System.out.println(userList);
 		Gson g = new Gson();
 		String data =g.toJson(userList);
-		
 		req.setAttribute("userList", data);
-		//System.out.println(userList);
+		
+		//리뷰 정보 보내기
+		List<ReviewDTO> reviewList =festivalService.selectReview(fes);
+		data = g.toJson(reviewList);
+		req.setAttribute("reviewList", data);
+		req.setAttribute("reviewLength", reviewList.size());
+		
+		//리뷰 쓴 유저 정보 보내기
+		//List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
+		// view 만들기 : FES_REVIEW_USER_VIEW
 		
 		return new ModelAndView("super/festival/detail.jsp");
 	}

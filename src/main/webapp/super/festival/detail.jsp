@@ -1,6 +1,6 @@
 <%@page import="wep.mvc.dto.FesDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,17 +15,34 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- 차트 만들어논 js 파일-->
     <script type="text/javascript" src="${path}/super/festival/chart.js"></script>
+    
     <script>
-    	/* 캔버스 이름으로 찾기 */
+    	/* 캔버스엘리먼트 이름으로 찾기 */
     	const getCanvas = function(canvasName){
     		return document.getElementById(canvasName).getContext('2d');
     	};
 
-    	/* 리퀘스트로 넘어온 json 데이터 */
+    	/* 리퀘스트로 넘어온 유저 데이터 */
    		const userList = ${requestScope.userList};
    		//console.log(userList);
    		
-    	/* 차트 함수 Call */
+	  	/* 리퀘스트로 넘어온 리뷰 데이터 */
+	  	const reviewFunc= function(){
+	   	const reviewList = ${reviewList};
+	   	if(reviewList.length===0) return;
+	   	
+	   	const avg = reviewList.reduce((sum, review) => sum + review.SCORE, 0) / reviewList.length;
+	   	//console.log("평균" + avg.toFixed(2));
+	   	let data = "";
+	   	data += "<h4>";
+	   	data += "리뷰 평균 : ";
+	   	data += avg.toFixed(2);
+	   	data +="</h4>";
+	   	
+	   	 $("#reviewAvgScore").html(data);
+	  	};
+	   	 
+    	/* 함수들 Call */
     	$(function(){
     		//연령, 성별 통계
     		ageGender(getCanvas('ageGender'),userList);
@@ -35,15 +52,14 @@
     		
     		//연령별 비율
     		ageRatio(getCanvas('ageRatio'),userList);
-    		
+    	
+    		reviewFunc();
     	});
     </script>
 </head>
 
 <body>
 	<h1>문화행사 상세페이지</h1>
-	FesDto = ${fes.SVCID} <br>
-	${requestScope.reservation}
 	<form action="front?key=superfestival&methodName=update" method="post">
         <label for="SVCID">서비스 아이디:</label>
         <input type="text" id="SVCID" name="SVCID" value="${fes.SVCID}" readonly><br><br>
@@ -165,6 +181,8 @@
 			</div>
 			
 		<h1>리뷰 통계</h1>
+		<h4 id="reviewAvgScore"></h4>
+		<h4>총 리뷰 수 : ${reviewLength}</h4> 
 			<div class="col-xl-6">
 				<div class="card mb-4">
 					<div class="card-header">

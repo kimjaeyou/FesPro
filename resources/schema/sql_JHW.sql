@@ -1,3 +1,4 @@
+
 commit;
 rollback;
 
@@ -103,3 +104,10 @@ JOIN
 
 --뷰 조회
 SELECT * FROM FES_RESERV_USER_VIEW WHERE SVCID = 1;
+
+-- 리뷰 ============================================================
+INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,1,1,'좋아요1',3);
+INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,2,1,'좋아요2',2);
+INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,3,1,'좋아요3',5);
+
+SELECT * FROM REVIEW WHERE SVCID=1;

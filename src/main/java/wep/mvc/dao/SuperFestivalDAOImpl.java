@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.util.DbUtil;
 
@@ -188,6 +189,40 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 				
 				UsersDTO user =new UsersDTO(userId, userPw, age, addr, gender, email, userName, disable,tel);
 				list.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
+	}
+
+	@Override
+	public List<ReviewDTO> selectReview(FesDTO fes) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+
+		String sql = "SELECT * FROM REVIEW WHERE SVCID=?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, fes.getSVCID());
+			
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int reviewSeq = rs.getInt("REVIEW_SEQ");
+				int userSeq = rs.getInt("USER_SEQ");
+				String svcId = rs.getString("SVCID");
+				String rvContent = rs.getString("RV_CONTENT");
+				int score = rs.getInt("SCORE");
+				
+				ReviewDTO reviewDto = new ReviewDTO(reviewSeq, userSeq, svcId, rvContent, score);
+				list.add(reviewDto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
