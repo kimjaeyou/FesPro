@@ -27,7 +27,7 @@ img {
 	width: 40%;
 	height: 100%;
 }
-
+/*배경 이미지 설정 스타일 */
 #head {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
