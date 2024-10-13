@@ -55,11 +55,11 @@ public class HostController implements Controller {
 		        throws ServletException, IOException, SQLException {
 
 		    String userId = request.getParameter("corporate-id");
-		    String userPw = request.getParameter("corporate-pw");
+		    String userpw = request.getParameter("corporate-pw");
 		  
-		    System.out.println(userId);
+		    System.out.println(userId+" "+userpw);
 		    //서비스 호출 
-		    HostDTO dbDTO = hs.login( new HostDTO(userId, userPw) );
+		    HostDTO dbDTO = hs.login( new HostDTO(userId,userpw) );
 		    System.out.println(dbDTO);
 		    try {
 				if (dbDTO == null) {

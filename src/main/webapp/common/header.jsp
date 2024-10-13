@@ -42,6 +42,17 @@
 	width: 1.5rem;
 	height: 100vh;
 }
+=======
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+>>>>>>> a2e8f0debee527d94a4d56d67d7eba00d933accb
 
 .bi {
 	vertical-align: -.125em;
@@ -164,7 +175,7 @@ img {
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
                 <!-- <li><a href="#" class="nav-link px-2">문화행사</a></li> -->
-                                <li class="nav-item dropdown">
+                  <li class="nav-item dropdown">
 		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		            문화체험
 		          </a>
@@ -224,4 +235,7 @@ img {
         </header>
     </div>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

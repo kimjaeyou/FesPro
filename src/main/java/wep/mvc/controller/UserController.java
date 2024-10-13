@@ -71,8 +71,7 @@ public class UserController implements Controller {
 		mv.setViewName("front?key=main&methodName=read");
 	    mv.setRedirect(true);
 		return mv;
-
-	}
+	}	
 	
 	// 회원수정 데이터 꺼내기
 	public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse resp) throws Exception {

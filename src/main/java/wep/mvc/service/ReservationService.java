@@ -15,4 +15,9 @@ public interface ReservationService {
 	 * ReservationDAOImpl selectByUserSeq 메소드 호출
 	 */
 	public ReservationDTO selectByUserSeq (int userSeq);
+	
+	/**
+	 * ReservationDAOImpl selectByResvSeq 메소드 호출
+	 */
+	public ReservationDTO selectByResvSeq (int resvSeq) throws SQLException;
 }
