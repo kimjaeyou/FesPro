@@ -48,8 +48,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts_fes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#"  id="seletAllBtn">문화행사 조회</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">문화행사 승인</a>
+                                    <a class="nav-link" href="#"  id="selectAllBtn">문화행사 조회</a>
+                                    <a class="nav-link" href="#" id="allowBtn">문화행사 승인</a>
                                 </nav>
                             </div>
                 </nav>
@@ -62,11 +62,14 @@
         <script>
        $(function(){
            //문화행사 조회
-			  $("#seletAllBtn").click(function(){
-				  //top.center.location.href="festival/selectAll.jsp" //서블릿 -- 서블리이 a.jsp로 이동 list 데이터로 가져와서... c:forEach
+			  $("#selectAllBtn").click(function(){
 				  top.center.location.href ="${path}/front?key=superfestival&methodName=selectAll";
 			 });
+           
            //문화행사 승인
+			  $("#allowBtn").click(function(){
+				  top.center.location.href ="${path}/front?key=superfestival&methodName=allowFestival";
+			 });
            
          });
         </script>

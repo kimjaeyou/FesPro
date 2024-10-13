@@ -17,7 +17,11 @@ public class HostDTO {
 	}
 
 	//로그인
-	public HostDTO(String host_id, String host_pw) {
+	public HostDTO(String host_id) {
+		this.host_id = host_id;
+	}
+	
+	public HostDTO(String host_id ,String host_pw) {
 		this.host_id = host_id;
 		this.host_pw = host_pw;
 	}

@@ -100,7 +100,7 @@
            $(function(){
         	   $("#userSelectAll").click(function(){
        			
-       			 $("#iFrame").attr("src", "auth/userSelectAll.jsp");
+       			 $("#iFrame").attr("src", "${path}/super/auth/userSelectAll.jsp");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });
@@ -108,7 +108,7 @@
            $(function(){
         	   $("#hostSelectAll").click(function(){
        			
-       			 $("#iFrame").attr("src", "auth/hostSelectAll.jsp");
+       			 $("#iFrame").attr("src", "${path}/super/auth/hostSelectAll.jsp");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });
@@ -116,7 +116,7 @@
            $(function(){
         	   $("#accept").click(function(){
        			
-       			 $("#iFrame").attr("src", "auth/accept.jsp");
+       			 $("#iFrame").attr("src", "${path}/super/auth/accept.jsp");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });
@@ -124,7 +124,7 @@
            $(function(){
         	   $("#myPage").click(function(){
        			
-       			 $("#iFrame").attr("src", "auth/dashBoard.html");
+       			 $("#iFrame").attr("src", "${path}/super/auth/dashBoard.html");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });
