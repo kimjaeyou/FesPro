@@ -8,6 +8,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.service.FesSerevice;
@@ -42,6 +43,15 @@ public class FesController implements Controller {
 	 * */
 	public ModelAndView select(HttpServletRequest req, HttpServletResponse resp) throws Exception{
 		//List<FesDTO> fesDTOList = fesSerevice.selectAll();
+		
+		HttpSession session = req.getSession();
+		
+		if(session.getAttribute("logincom")==null) { //기업회원으로 로그인 되어있는지 확인
+			System.out.println("로그인 안했지롱"); 
+			//return new ModelAndView("User/login.jsp"); //로그인 페이지로 보낼 것
+		}
+		
+		//기업회원으로 로그인 되어있다면 해당 기업회원 세션에 해당하는 fesDTO만 꺼내서 보여줘야지.
 		ServletContext app = req.getServletContext();
 		List<FesDTO> fesDTOList= (List<FesDTO>)app.getAttribute("fesList");
 		
@@ -56,5 +66,10 @@ public class FesController implements Controller {
 		
 		return new ModelAndView("host/myPage1.jsp");
 	}
-
+	
+	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+		
+		
+		return new ModelAndView("host/myPage1.jsp");
+	}
 }

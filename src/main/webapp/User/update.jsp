@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -106,10 +107,10 @@
             		</form>
            		
            			<form id="member-delete-form" method="get" action="${pageContext.request.contextPath}/front">
-          		      	<button type="submit" class="delete-button">회원탈퇴</button>
 						<input type="hidden" name="key" value="user" /> 
-    		        	<input type="hidden" name="methodName" value="delete" />	
-					
+    		        	<input type="hidden" name="methodName" value="delete" />
+    		        	<input type="hidden" value="${loginUser.user_id}" name="id" readonly required>	
+          		    <button type="submit" class="delete-button">회원탈퇴</button>
             		</form>
 				</div>
 			</main>

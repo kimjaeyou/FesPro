@@ -8,9 +8,9 @@
 </head>
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="Reservation.html">프론트 너무 어려워요</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i
-            class="fas fa-bars"></i></button>
+    <a class="navbar-brand ps-3" href="../index.jsp">프론트 너무 어려워요</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
+    <i class="fas fa-bars"></i></button>
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         <div class="input-group">
             <input class="form-control" type="text" placeholder="검색" aria-label="Search for..." />
@@ -29,7 +29,7 @@
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
-                <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/front?key=user&methodName=logout">로그아웃</a></li>
             </ul>
         </li>
     </ul>
