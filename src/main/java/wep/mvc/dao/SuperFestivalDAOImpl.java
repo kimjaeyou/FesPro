@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.util.DbUtil;
 
 public class SuperFestivalDAOImpl implements SuperFestivalDAO {
@@ -154,5 +155,45 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		}
 
 		return result;
+	}
+
+	@Override
+	public List<UsersDTO> selectUser(FesDTO fes) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<UsersDTO> list = new ArrayList<UsersDTO>();
+
+		String sql = "SELECT * FROM FES_RESERV_USER_VIEW WHERE SVCID = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, fes.getSVCID());
+			
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String userSeq = rs.getString("USER_SEQ");
+				String userId = rs.getString("USER_ID");
+				String userPw = rs.getString("USER_PW");
+				int age =rs.getInt("AGE");
+				String addr = rs.getString("ADDR");
+				String email = rs.getString("EMAIL");
+				String userName= rs.getString("USER_NAME");
+				String tel = rs.getString("USER_TEL");
+				String gender = rs.getString("GENDER");
+				String disable = rs.getString("DISABLE");
+				int ban = rs.getInt("USER_BEN_CHECK");
+				
+				UsersDTO user =new UsersDTO(userId, userPw, age, addr, gender, email, userName, disable,tel);
+				list.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
 	}
 }

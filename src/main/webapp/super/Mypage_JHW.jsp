@@ -11,7 +11,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <!-- 부트스트랩 공용 css -->
         <link href="${path}/css/My_styles.css" rel="stylesheet" />
+        <!-- 카드 헤더쪽 아이콘들 -->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         
         <!-- jquery -->
@@ -79,6 +81,7 @@
            //차트
 			  $("#chartBtn").click(function(){
 				  //top.center.location.href ="${path}/front?key=superfestival&methodName=allowFestival";
+				  
 			 });
          });
         </script>

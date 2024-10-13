@@ -1,8 +1,7 @@
--- FES
-
---업로드, 취소
 commit;
 rollback;
+
+-- FES ============================================================
 
 --조회
 select * from FES;
@@ -79,4 +78,28 @@ INSERT INTO FES VALUES (
 );
 
 --수정
-UPDATE FES SET FES_STATE = '7' WHERE SVCID ='SVC001';
+UPDATE FES SET FES_STATE = 1 WHERE SVCID ='SVC001';
+
+
+-- 통계 ============================================================
+
+--유저 조회
+
+--뷰 삭제
+DROP VIEW FES_RESERV_USER_VIEW;
+
+--뷰 생성
+CREATE VIEW FES_RESERV_USER_VIEW AS
+SELECT
+    f.SVCID as SVCID,
+    u.*
+FROM 
+    fes f
+JOIN 
+    reservation r ON f.SVCID = r.SVCID
+JOIN 
+    USERS u ON r.user_seq = u.user_seq
+;
+
+--뷰 조회
+SELECT * FROM FES_RESERV_USER_VIEW WHERE SVCID = 1;
