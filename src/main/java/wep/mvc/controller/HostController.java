@@ -56,14 +56,16 @@ public class HostController implements Controller {
 		        throws ServletException, IOException, SQLException {
 
 		    String userId = request.getParameter("corporate-id");
+		    String userpw = request.getParameter("corporate-pw");
 		  
-		    System.out.println(userId);
+		    System.out.println(userId+" "+userpw);
 		    //서비스 호출 
-		    HostDTO dbDTO = hs.login( new HostDTO(userId) );
+		    HostDTO dbDTO = hs.login( new HostDTO(userId,userpw) );
 		    System.out.println(dbDTO);
 		    
 		    
 		    HttpSession session = request.getSession();
+		    
 		    session.setAttribute("logincom", dbDTO);
 		    return new ModelAndView("index.jsp", true); 
 		}
