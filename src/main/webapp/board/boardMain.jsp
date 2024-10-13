@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale"="1">
-<link rel="stylesheet" href="../boardCSS/bootstrap.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 <link href="../reservation/assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -59,6 +59,6 @@
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="../js/bootstrap.js"></script>
 </body>
 </html>
