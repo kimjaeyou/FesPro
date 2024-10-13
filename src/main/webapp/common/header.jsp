@@ -5,8 +5,6 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-    <script src="${path}/reservation/assets/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -19,9 +17,6 @@
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-
-    <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -123,7 +118,7 @@
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
                 <!-- <li><a href="#" class="nav-link px-2">문화행사</a></li> -->
-                                <li class="nav-item dropdown">
+                  <li class="nav-item dropdown">
 		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		            문화체험
 		          </a>
@@ -183,4 +178,7 @@
         </header>
     </div>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

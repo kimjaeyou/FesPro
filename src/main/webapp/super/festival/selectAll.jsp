@@ -145,7 +145,7 @@ $(function(){
 			</div>
 	<!-- 테이블 끝 -->
 	<!-- 차트 -->
-		<div class="row">
+		<%-- <div class="row">
 			<div class="col-xl-6">
 				<div class="card mb-4">
 					<div class="card-header">
@@ -165,8 +165,8 @@ $(function(){
 						<canvas id="myBarChart" width="100%" height="40"></canvas>
 					</div>
 				</div>
-			</div>
-		<!-- 차트 끝 -->
+			</div> --%>
+	<!-- 차트 끝 -->
 		</main>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

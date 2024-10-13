@@ -6,5 +6,9 @@ import java.util.List;
 import wep.mvc.dto.FesDTO;
 
 public interface FesDAO {
+
+	int insert(FesDTO fesDTO) throws SQLException;
 	//List<FesDTO> selectAll() throws SQLException;
+
+	List<FesDTO> select(int host_seq) throws SQLException;
 }

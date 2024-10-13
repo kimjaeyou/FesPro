@@ -4,15 +4,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.ReviewDTO;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.SuperFestivalService;
 import wep.mvc.service.SuperFestivalServiceImpl;
 
 public class SuperFestivalController implements Controller {
-	SuperFestivalService service = new SuperFestivalServiceImpl();
+	SuperFestivalService festivalService = new SuperFestivalServiceImpl();
 	
 	public SuperFestivalController() {
 		System.out.println("형우 / SuperFestivalController 생성자 Call");
@@ -24,7 +28,7 @@ public class SuperFestivalController implements Controller {
 	public ModelAndView selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		System.out.println("형우 / selectAll Call");
 		
-		List<FesDTO> list =  service.selectAll();
+		List<FesDTO> list =  festivalService.selectAll();
 		
 		req.setAttribute("festivalList", list);
 		return new ModelAndView("super/festival/selectAll.jsp");
@@ -38,11 +42,28 @@ public class SuperFestivalController implements Controller {
 		
 		String svcid = req.getParameter("svcid");
 		
+		//FesDTO 정보 보내기
 		FesDTO fes = new FesDTO();
 		fes.setSVCID(svcid);
-	     
-		FesDTO searchFes = service.select(fes);
+		FesDTO searchFes = festivalService.select(fes);
 		req.setAttribute("fes", searchFes);
+		
+		//USERsDTO 정보 보내기
+		List<UsersDTO> userList =  festivalService.selectUser(fes);
+		//System.out.println(userList);
+		Gson g = new Gson();
+		String data =g.toJson(userList);
+		req.setAttribute("userList", data);
+		
+		//리뷰 정보 보내기
+		List<ReviewDTO> reviewList =festivalService.selectReview(fes);
+		data = g.toJson(reviewList);
+		req.setAttribute("reviewList", data);
+		req.setAttribute("reviewLength", reviewList.size());
+		
+		//리뷰 쓴 유저 정보 보내기
+		//List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
+		// view 만들기 : FES_REVIEW_USER_VIEW
 		
 		return new ModelAndView("super/festival/detail.jsp");
 	}
@@ -81,7 +102,7 @@ public class SuperFestivalController implements Controller {
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
-		int result = service.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
+		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
 		
 		if(result ==1) {
 			return new ModelAndView("front?key=superfestival&methodName=selectAll",true);
