@@ -118,7 +118,7 @@
 				<div class="cost">이용요금 : ${fes.PRICE}</div>
 				<div class="how">예약방법 : 현장 결제/사전 결제</div>
 				<div class="tel">문의 : ${fes.TELNO}</div>
-				<form action="front?key=reservation&methodName=revMove">
+				<form action="front">
 					<input type="hidden" name="key" value="reservation" /> <input
 						type="hidden" name="methodName" value="revMove" /> <input
 						type="hidden" name="SVCID" value="${fes.SVCID}" />
@@ -126,6 +126,7 @@
 					<button class="btn btn-primary" id="reservation">예약하기</button>
 					<button class="btn btn-primary" id="like">좋아요</button>
 				</form>
+				
 
 			</div>
 
@@ -164,12 +165,11 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
 <script type="text/javascript">
 	document.getElementById('like').addEventListener('click', function(e) {
-		document.querySelector('input[name="key"]').value = 'main';
-		document.querySelector('input[name="methodName"]').value = 'setLike';
+		e.preventDefault();
+		
 	});
-
-	document
-			.getElementById('information')
+	
+	document.getElementById('information')
 			.addEventListener(
 					'click',
 					function(e) {
@@ -226,7 +226,7 @@
 			});
 
 	document.getElementById('review').addEventListener('click', function(e) {
-
+	
 	});
 </script>
 

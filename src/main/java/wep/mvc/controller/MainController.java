@@ -42,17 +42,6 @@ public class MainController implements Controller {
 	}
 	
 	
-	public ModelAndView setLike(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException, SQLException {
-		String sid = req.getParameter("sid");
-		String user =(String)req.getSession().getAttribute("loginUser");
-		if(user!=null)
-			mainService.setLike(sid);
-		else
-			System.out.println();
-
-		return new ModelAndView("detail.jsp");
-	}
 	
 	
 	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)

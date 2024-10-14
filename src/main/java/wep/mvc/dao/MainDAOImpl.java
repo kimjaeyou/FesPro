@@ -9,7 +9,7 @@ import wep.mvc.util.DbUtil;
 
 public class MainDAOImpl {
 
-	public int insert(ReservationDTO reservation) throws SQLException {
+	public int insert(String sid,String user) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps=null;
 		int result = 0;
@@ -19,9 +19,8 @@ public class MainDAOImpl {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, reservation.getUserSeq());
-			ps.setString(2, reservation.getSVCID());
-			ps.setInt(3, reservation.getResvCheck());
+			ps.setInt(1, Integer.parseInt(user));
+			ps.setString(2, sid);
 			
 			result = ps.executeUpdate();
 			if(result == 1) {
