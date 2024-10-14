@@ -42,19 +42,25 @@ public class ReservationController implements Controller {
 		int fee = Integer.parseInt(request.getParameter("fee"));
 		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee);
 		
+		String SVCID = request.getParameter("SVCID");
+		String SVCNM = request.getParameter("SVCNM");
+		System.out.println(SVCNM);
+		
 		HttpSession session = request.getSession();
 	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
 		System.out.println(userDTO);
+
 		
-		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), "1", date, time, peopelNum, fee, 0);
+		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 0);
 		
 		int result = service.insert(reservation);
 		//System.out.println(result);
 		
 	    
-		ReservationDTO resvData = service.selectByUserSeqAndSVCID(userDTO.getUser_seq(), "1");
+		ReservationDTO resvData = service.selectByUserSeqAndSVCID(userDTO.getUser_seq(), SVCID);
 		System.out.println("resvDate = " + resvData);
 		request.setAttribute("resvData", resvData);
+		request.setAttribute("SVCNM", SVCNM);
 		
 		
 		if(result != 0) {
@@ -116,10 +122,20 @@ public class ReservationController implements Controller {
 		}
 	}
 
+	/**
+	 * 행사 데이터 SVCID로 검색해서 
+	 */
 	public ModelAndView revMove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-	
+		String SVCNM = request.getParameter("SVCNM");
+		String SVCID = request.getParameter("SVCID");
+		request.setAttribute("SVCNM", SVCNM);
+		request.setAttribute("SVCID", SVCID);
 		return new ModelAndView("reservation/reservation.jsp", false);
 
 	}
+	
+	/**
+	 * 
+	 */
 	
 }

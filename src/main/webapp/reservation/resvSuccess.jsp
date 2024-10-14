@@ -104,7 +104,7 @@
                 </tr>
                 <tr>
                     <th>서비스명</td>
-                    <td name="svcName">\${SVCNM}</td>
+                    <td name="svcName">${SVCNM}</td>
                 </tr>
                 <tr>
                     <th>이용일자</td>

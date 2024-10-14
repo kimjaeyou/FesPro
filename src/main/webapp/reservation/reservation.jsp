@@ -185,7 +185,7 @@
                     </div>
                     예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약 완료 <br><br>
                     <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
-                    <p class="lead mb-0">기타내용</p>
+                    <p class="lead mb-0">${SVCNM}</p>
                     
                 </div>
             </div>
@@ -341,6 +341,8 @@
 			        <input type = "hidden" name = "time"/>
 			        <input type = "hidden" name = "peopleNum"/>
 			        <input type = "hidden" name = "fee"/>
+			        <input type = "hidden" name = "SVCID" value = "${SVCID}">
+			        <input type = "hidden" name = "SVCNM" value = "${SVCNM}">
                     <div class="card mb-4">
                         <div class="card-header" style="font-weight: bold; font-size: x-large;">나의 예약 정보</div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);"><h4>행사명</h4>
