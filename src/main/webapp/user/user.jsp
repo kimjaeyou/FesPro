@@ -28,7 +28,7 @@
         <label for="username">아이디</label>
         <div class="input-group">
             <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
-            <p id="id-match-message" class="info-text"></p>
+            <span id="id-match-message" class="info-text"></span>
         </div>
     </div>
 

@@ -56,4 +56,13 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		return result;
 	}
 
+	@Override
+	public List<UsersDTO> selectReviewUser(FesDTO fes) {
+		List<UsersDTO> result =null;
+		
+		result  = dao.selectReviewUser(fes);
+		
+		return result;
+	}
+
 }

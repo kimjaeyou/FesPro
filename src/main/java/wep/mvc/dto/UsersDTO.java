@@ -13,6 +13,7 @@ public class UsersDTO {
 	private String disable; // 장애여부
 	private String user_tel;
 	private int user_ben_check; // 밴
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -54,11 +55,12 @@ public class UsersDTO {
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 	}
-	public UsersDTO(String user_id, String user_name, int user_seq, String email) {
+	public UsersDTO(String user_id, String user_name, int user_seq, String email, String user_tel) {
 		this.user_id = user_id;
 		this.user_name = user_name;
-		this.email = email;
 		this.user_seq = user_seq;
+		this.email = email;
+		this.user_tel = user_tel;
 	}
 
 	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr,  String email,

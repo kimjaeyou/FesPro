@@ -20,7 +20,8 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     나의 예약내역
                 </a>
-                <a class="nav-link" href="${path}/user/update.jsp">
+                
+                <a class="nav-link" href="${path}/front?key=user&methodName=selectUser">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     회원정보변경
                 </a>

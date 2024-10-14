@@ -53,5 +53,12 @@ public class MainController implements Controller {
 
 		return new ModelAndView("detail.jsp");
 	}
+	
+	
+	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		
+		return new ModelAndView("detail.jsp");
+	}
 
 }

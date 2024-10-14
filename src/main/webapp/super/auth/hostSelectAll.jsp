@@ -1,263 +1,170 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%-- <jsp:include page="/common/header.jsp"/> --%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style>
- .a{border:solid red 5px}
- span{width:150px; color:red}
- input{border:solid gray 1px}
- table{width:100%;border-collapse: collapse;}
- th,td{border:1px gray solid; text-align:center;padding:3px}
- h2{text-align:center}
- 
- a{text-decoration: none;}
- a:hover{color: red}
- 
-</style>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+	rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+	crossorigin="anonymous"></script>
 
-
-<script type="text/javascript" >
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+	<style>
+        /* ìŠ¤í¬ë¡¤ì„ ì œê±°í•˜ëŠ” ìŠ¤íƒ€ì¼ */
+        html, body {
+            overflow: hidden; /* ìŠ¤í¬ë¡¤ì„ ìˆ¨ê¹€ */
+            height: 100%; /* 100% ë†’ì´ë¥¼ ì°¨ì§€í•˜ë„ë¡ ì„¤ì • */
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* í˜ì´ì§€ ì „ì²´ í¬ê¸°ë¥¼ ì±„ìš°ëŠ” ë ˆì´ì•„ì›ƒì„ ìœ ì§€í•˜ê¸° ìœ„í•œ ìŠ¤íƒ€ì¼ */
+        #layoutSidenav_content {
+            min-height: 100%;
+            height: auto;
+        }
+    </style>
+	<script>
 $(function(){
-	   
-	   //ÀüÃ¼°Ë»ö
-	   function selectAll(){
-		   $.ajax({
-			url :"ajax" , //¼­¹ö¿äÃ»ÁÖ¼Ò
-			type:"post", //¿äÃ»¹æ½Ä(method¹æ½Ä : get | post | put | delete )
-			dataType:"json"  , //¼­¹ö°¡ º¸³»¿Â µ¥ÀÌÅÍ(ÀÀ´ä)Å¸ÀÔ(text | html | xml | json )
-			data: {key:"customer" , methodName : "selectAll"}, //¼­¹ö¿¡°Ô º¸³¾ µ¥ÀÌÅÍÁ¤º¸(parameterÁ¤º¸)
-			success :function(result){
-				console.log(result);
-				
-				let str="";
-				$.each(result, function(index, item){
-				    str+="<tr>";
-				    str+=`<td>${(index+1)}</td>`;
-				    str+=`<td><a href='#'>${item.id}</a></td>`;
-				    str+=`<td>${item.name}</td>`;
-				    str+=`<td>${item.age}</td>`;
-				    str+=`<td>${item.tel}</td>`;
-				    str+=`<td>${item.addr}</td>`;
-				    str+=`<td><input type='button' value='»èÁ¦' name='${item.id}'></td>`;
-				    str+="</tr>";
-			  });
-				
-				$("#listTable tr:gt(0)").remove();
-				$("#listTable tr:eq(0)").after(str);//ÇüÁ¦³ëµå·Î µÚ¿¡ Ãß°¡
-				
-			} , //¼º°øÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-			error : function(err){  
-				alert(err+"¿¡·¯ ¹ß»ıÇß¾î¿ä.");
-			}  //½ÇÆØÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-		});//ajax³¡
-	   }//selectAll ÇÔ¼ö³¡
-	   /////////////////////////////////////////////////////////////
-	   
-	   /*
-	     ¾ÆÀÌµğÁßº¹Ã¼Å©
-	   */
-	   $("#id").keyup(function(){
-		   if($("#id").attr("readonly")){
-			   return;
-		   }
-		   
-		   if($(this).val() == ""){
-			   $("span").text("Áßº¹°á°ú¿©ºÎ");
-			   return;
-		   }
-		   
-		   $.ajax({
-	   			url :"ajax" , //¼­¹ö¿äÃ»ÁÖ¼Ò
-	   			type:"post", //¿äÃ»¹æ½Ä(method¹æ½Ä : get | post | put | delete )
-	   			dataType:"json"  , //¼­¹ö°¡ º¸³»¿Â µ¥ÀÌÅÍ(ÀÀ´ä)Å¸ÀÔ(text | html | xml | json )
-	   			data: {key:"customer" , methodName : "idCheck" , id : $(this).val() }, //¼­¹ö¿¡°Ô º¸³¾ µ¥ÀÌÅÍÁ¤º¸(parameterÁ¤º¸)
-	   			success :function(result){
-	   				console.log(result);
-	   				//$("span").text(result);
-	   				
-	   			   $("span").text(result.info);
-	   				
-	   			} , //¼º°øÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-	   			error : function(err){  
-	   				alert(err+"¿¡·¯ ¹ß»ıÇß¾î¿ä.");
-	   			}  //½ÇÆØÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-	   		});//ajax³¡
-	   });//keyup³¡
-	   //////////////////////////////////////////////////////////////
-	   /**
-	      °¡ÀÔÇÏ±â ¶Ç´Â ¼öÁ¤ÇÏ±â 
-	   */
-	   $("#btn").click(function(){
-		   let state=true; //°¡ÀÔ ¶Ç´Â ¼öÁ¤À» ÇÒ¶§ À¯È¿¼ºÃ¼Å©¸¦ ÇÏ°í ajax¸¦ ½ÇÇàÇØµµ µÇ´ÂÁö ¿©ºÎ¸¦ ÆÇ´Ü´Â º¯¼ö(true¸é ajaxÇÑ´Ù, falseÀÌ¸é ajax¾ÈÇÑ´Ù.) 
-		   //À¯È¿¼ºÃ¼Å©ÇÊ¿ä!(°ª Á¸ÀçÀ¯¹«)
-		   $("input[type=text]").each(function(index, item){ //itemÀº input elementÀÌ´Ù.
-			   if($(this).val()==""){
-				   alert("°ªÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
-				   $(this).focus();//Ä¿¼­³õ±â
-				   
-				   state=false;
-				   return false;//return falseÀÇ ÀÇ¹Ì´Â eachÇÔ¼ö¸¦ ºüÁ®³ª°¡¶ó.
-			   }
-		   });
-		   
-		   
-		  if(state){ //°¡ÀÔ ¶Ç´Â ¼öÁ¤ÇÏÀÚ!
-			  
-			 if($(this).val()=="¼öÁ¤ÇÏ±â"){
-				   $("[name=methodName]").val("update");
-				   
-				   //¹öÆ° ±Û¾¾ °¡ÀÔÇÏ±â º¯°æ
-				   $("#btn").val("°¡ÀÔÇÏ±â");
-				   
-				   //span º¸ÀÌ±â
-				   $("span").show();
-				   
-				   //readonly ¼Ó¼º Á¦°Å 
-				   $("#id").removeAttr("readonly");
-			  }
-			  
-		   
-		    $.ajax({
-	   			url :"ajax" , //¼­¹ö¿äÃ»ÁÖ¼Ò
-	   			type:"post", //¿äÃ»¹æ½Ä(method¹æ½Ä : get | post | put | delete )
-	   			dataType:"text"  , //¼­¹ö°¡ º¸³»¿Â µ¥ÀÌÅÍ(ÀÀ´ä)Å¸ÀÔ(text | html | xml | json )
-	   			data: $("#inForm").serialize() , //.serialize()´Â ÆûÀü¼Û!
-	   			success :function(result){
-	   				if(result==0){
-	   					alert("½ÇÆĞÇÏ¿´½À´Ï´Ù.");
-	   				}else{
-	   					//text³»¿ëÁö¿ì°í
-	   					$("input[type=text]").val("");
-	   					$("span").text("Áßº¹°á°ú¿©ºÎ");
-	   					
-	   					//È­¸é°»½Å
-	   					selectAll();
-	   					
-	   					$("[name=methodName]").val("insert");
-	   				}
-	   				
-	   			} , //¼º°øÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-	   			error : function(err){  
-	   				alert(err+"¿¡·¯ ¹ß»ıÇß¾î¿ä.");
-	   			}  //½ÇÆØÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-	   		});//ajax³¡
-		  }
-	   		
-	   });//clickÀÌº¥Æ®³¡
-	   ////////////////////////////////////////////////////////////
-	   
-	   /*¾ÆÀÌµğ¸¦ Å¬¸¯ÇßÀ»¶§ ÀÌº¥Æ® Ã³¸® */
-	   $(document).on("click","#listTable > tbody > tr > td:nth-child(2) > a" , function(){
-		   //text¹Ú½º¿¡ °ª³Ö±â 
-		   let name = $(this).parent().next();// ÀÌ¸§ÀÌÀÖ´Â <td>
-		   let age = name.next(); //ÇüÁ¦´ÙÀ½ element¸¦ Ã£´Â´Ù.
-		   let tel = age.next();
-		   let addr = tel.next();
-		   
-		   $("#id").val( $(this).text() );
-		   $("#name").val(name.text());
-		   $("#age").val(age.text());
-		   $("#tel").val(tel.text());
-		   $("#addr").val(addr.text());
-		   
-		   //¾ÆÀÌµğ¹Ú½º ºñÈ°¼ºÈ­(ÀÔ·ÂºÒ°¡´É) - atrr()ÀÌ¿ë
-		   $("#id").attr("readonly", "readonly");
-		   
-		   //spanÅÂ±× ¼û±â±â 
-		   $("span").hide();
-		   
-		   //btnÀÇ ±Û¾¾ ¼öÁ¤ÇÏ±â·Î º¯°æ
-		   $("#btn").val("¼öÁ¤ÇÏ±â");
-	   });
-	   ///////////////////////////////////////////////////////////////////////////
-	   /*
-	     »èÁ¦ÇÏ±â
-	   */
-	   $(document).on("click","[value=»èÁ¦]" , function(){
-			  // alert( $(this).attr("name") )
-			  $.ajax({
-		   			url :"ajax" , //¼­¹ö¿äÃ»ÁÖ¼Ò
-		   			type:"post", //¿äÃ»¹æ½Ä(method¹æ½Ä : get | post | put | delete )
-		   			dataType:"text"  , //¼­¹ö°¡ º¸³»¿Â µ¥ÀÌÅÍ(ÀÀ´ä)Å¸ÀÔ(text | html | xml | json )
-		   			data: {key:"customer" , methodName : "delete" , id : $(this).attr("name") }, //¼­¹ö¿¡°Ô º¸³¾ µ¥ÀÌÅÍÁ¤º¸(parameterÁ¤º¸)
-		   			success :function(result){
-		   				if(result==0){
-		   					alert("»èÁ¦µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
-		   				}else{
-		   					selectAll();//È­¸é°»½Å
-		   				}
-		   				
-		   			} , //¼º°øÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-		   			error : function(err){  
-		   				alert(err+"¿¡·¯ ¹ß»ıÇß¾î¿ä.");
-		   			}  //½ÇÆØÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö 
-		   		});//ajax³¡
-		   });
-	   
-	   
-	   //setInterval(selectAll, 1000)
-	   
-	   selectAll();
-	   
-});//ready³¡
-
+	$(".detailBtn").click(function(){
+		//console.log("ìƒì„¸ë³´ê¸° ë²„íŠ¼ í´ë¦­");
+		const host_id = $(this).data("host_id");
+		//console.log(svcid);
+		window.location.href ="${path}/front?key=superAuth&methodName=hostDetail&host_id=" +host_id;
+	});
+});
 </script>
-
-
-
 </head>
-<body>
-<h2>È¸¿øÁ¤º¸ ÀÔ·Â </h2>
 
-<form name="inForm" method="post" id="inForm">
-	<table >
-		<tr bgcolor="pink" >
-		    <th >¾ÆÀÌµğ</th>
-			<th >ÀÌ¸§</th>
-			<th  >³ªÀÌ</th>
-			<th  >ÀüÈ­¹øÈ£</th>	
-			<th  >ÁÖ¼Ò</th>
-		</tr>
-		<tr>
-		    <td style="text-align:left"><input type="text" size="8" name="id" id="id"> <span>Áßº¹°á°ú¿©ºÎ</span></td>
-			<td><input type="text" size="8" name="name" id="name"></td>
-			<td><input type="text" size="4" name="age" id="age"></td>
-			<td><input type="text" size="12" name="tel" id="tel"></td>
-			<td><input type="text" size="30" name="addr" id="addr"></td>
-		</tr>
-		<tr>
-			<td colspan="5" align="center"> 
-			    <input type="hidden" name="key" value="customer">
-			    <input type="hidden" name="methodName" value="insert">
-				<input type="button" value="°¡ÀÔÇÏ±â"  id="btn">
-			</td>
-		</tr>
-	</table>
-</form>
-<br>
-<hr color="red">
+<div id="layoutSidenav_content">
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4">ì „ì²´ ì£¼ìµœì ì¡°íšŒ</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item active">ì „ì²´ ì£¼ìµœìì˜ ëª©ë¡ì„ ì¶œë ¥í•©ë‹ˆë‹¤</li>
+			</ol>
 
-<h2> °í°´ ¸®½ºÆ® !  </h2>
-<table id="listTable" >
-	<tr bgcolor="pink">
-	   <th>¹øÈ£</th>
-	   <th>¾ÆÀÌµğ</th>
-		<th>ÀÌ¸§</th>
-		<th>³ªÀÌ</th>
-		<th>ÀüÈ­¹øÈ£</th>	
-		<th>ÁÖ¼Ò</th>
-		<th>»èÁ¦</th>
-	</tr>
-	<!-- µ¥ÀÌÅÍ Ãâ·Â -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i> ì „ì²´ ì£¼ìµœì í…Œì´ë¸”
+				</div>
+				<div class="card-body">
+
+					<!-- í…Œì´ë¸” -->
+					<table id="datatablesSimple">
+						<thead>
+							<tr>
+								<th>ì£¼ìµœì ê³ ìœ ë²ˆí˜¸</th>
+								<th>ì£¼ìµœì ì•„ì´ë””</th>
+								<th>ì£¼ìµœì ê¸°ì—…ëª…</th>
+								<th>ì£¼ìµœì ë¹„ë°€ë²ˆí˜¸</th>
+								<th>ì£¼ìµœì ì „í™”ë²ˆí˜¸</th>
+								<th>ëŒ€í‘œì ì´ë¦„</th>
+								<th style="font-weight: bold; background-color: #e0f7fa;">íšŒì›ê°€ì… ìŠ¹ì¸ì—¬ë¶€</th>
+								<th>ê°€ì…ì ì´ë¦„</th>
+								<th style="font-weight: bold; background-color: #e0f7fa;">ë°´ ì—¬ë¶€</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>ì£¼ìµœì ê³ ìœ ë²ˆí˜¸</th>
+								<th>ì£¼ìµœì ì•„ì´ë””</th>
+								<th>ì£¼ìµœì ê¸°ì—…ëª…</th>
+								<th>ì£¼ìµœì ë¹„ë°€ë²ˆí˜¸</th>
+								<th>ì£¼ìµœì ì „í™”ë²ˆí˜¸</th>
+								<th>ëŒ€í‘œì ì´ë¦„</th>
+								<th style="font-weight: bold; background-color: #e0f7fa;">íšŒì›ê°€ì… ìŠ¹ì¸ì—¬ë¶€</th>
+								<th>ê°€ì…ì ì´ë¦„</th>
+								<th style="font-weight: bold; background-color: #e0f7fa;">ë°´ ì—¬ë¶€</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							 <!-- ì„œë²„ì—ì„œ ì „ë‹¬ëœ DTO ë°ì´í„°ë¥¼ JSTLë¡œ ì¶œë ¥ -->
+                        <c:forEach var="host" items="${hostList}">
+                            <tr>
+                                <td>${host.host_seq}</td>
+                                <td><button class="detailBtn" data-host_id="${host.host_id}"/>${host.host_id}</td>
+                                <td>${host.com_name}</td>
+                                <td>${host.host_pw}</td>
+                                <td>${host.host_tel}</td>
+                                <td>${host.host_name}</td>
+                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <c:choose>
+                <c:when test="${host.host_check == 0}">
+                    ë¯¸ìŠ¹ì¸ ìƒíƒœ
+                </c:when>
+                <c:when test="${host.host_check == 1}">
+                    ìŠ¹ì¸ ìƒíƒœ
+                </c:when>
+           		 </c:choose></td>
+                                <td>${host.rep_name}</td>
+                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <c:choose>
+                <c:when test="${host.host_ben_check == 0}">
+                    ë²¤ ìƒíƒœ
+                </c:when>
+                <c:when test="${host.host_ben_check == 1}">
+                    í™œì„±í™” ìƒíƒœ
+                </c:when>
+           		 </c:choose></td>
+                            </tr>
+                        </c:forEach>
+						</tbody>
+						
+					</table>
+
+				</div>
+			</div>
+		</div>
+	<!-- í…Œì´ë¸” ë -->
+	<!-- ì°¨íŠ¸ -->
+		<div class="row">
+			<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-area me-1"></i> Area Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myAreaChart" width="100%" height="40"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myBarChart" width="100%" height="40"></canvas>
+					</div>
+				</div>
+			</div>
+		<!-- ì°¨íŠ¸ ë -->
 	
-</table>
+	</main>
 
+</div>
 
-
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+	crossorigin="anonymous"></script>
+<script src="${path}/js/datatables-simple-demo.js"></script>
 </body>
 </html>
