@@ -54,7 +54,6 @@
                 <button type="button" class="register-btn" onclick="location.href='choice.jsp';">회원가입하기</button>
             </form>
         </div>
-
        
     </div>
 	
