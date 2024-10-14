@@ -55,7 +55,11 @@
         <input type="text" id="user_tel" name="user_tel" value="${user.user_tel}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
         
         <label for="user_ben_check" style="font-weight: bold; background-color: #e0f7fa;">유저 벤 여부:</label>
-        <input type="text" id="user_ben_check" name="user_ben_check" value="${user.user_ben_check}"><br><br>
+        <!-- 드롭다운 메뉴로 유저 벤 상태를 선택할 수 있도록 구현 -->
+        <select id="user_ben_check" name="user_ben_check">
+            <option value="0" <c:if test="${user.user_ben_check == 0}"</c:if>>벤</option>
+            <option value="1" <c:if test="${user.user_ben_check == 1}"</c:if>>활성화</option>
+        </select><br><br>
         
         
         <input type="submit" value="저장">

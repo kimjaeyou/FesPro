@@ -42,14 +42,22 @@
         <label for="host_name">대표자 명:</label>
         <input type="text" id="host_name" name="host_name" value="${host.host_name}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
         
-        <label for="host_check" style="font-weight: bold; background-color: #e0f7fa;">승인여부:</label>
-        <input type="text" id="host_check" name="host_check" value="${host.host_check}" ><br><br>
+       <label for="host_check" style="font-weight: bold; background-color: #e0f7fa;">승인 여부:</label>
+        <!-- 드롭다운 메뉴로 유저 벤 상태를 선택할 수 있도록 구현 -->
+        <select id="host_check" name="host_check">
+            <option value="0" <c:if test="${host.host_check == 0}"</c:if> >미승인</option>
+            <option value="1" <c:if test="${host.host_check == 1}"</c:if>>승인</option>
+        </select><br><br>
         
         <label for="rep_name">가입자 명:</label>
         <input type="text" id="rep_name" name="rep_name" value="${host.rep_name}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
         
-        <label for="host_ben_check" style="font-weight: bold; background-color: #e0f7fa;">벤 여부:</label>
-        <input type="text" id="host_ben_check" name="host_ben_check" value="${host.host_ben_check}" ><br><br>
+        <label for="host_ben_check" style="font-weight: bold; background-color: #e0f7fa;">주최자 벤 여부:</label>
+        <!-- 드롭다운 메뉴로 유저 벤 상태를 선택할 수 있도록 구현 -->
+        <select id="host_ben_check" name="host_ben_check">
+            <option value="0" <c:if test="${host.host_ben_check == 0}"</c:if> >벤</option>
+            <option value="1" <c:if test="${host.host_ben_check == 1}"</c:if>>활성화</option>
+        </select><br><br>
         
         <input type="submit" value="저장">
     </form>

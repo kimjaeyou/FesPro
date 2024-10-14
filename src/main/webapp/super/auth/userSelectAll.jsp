@@ -111,7 +111,15 @@ $(function(){
                                 <td>${user.email}</td>
                                 <td>${user.user_tel}</td>
                                 <td>${user.disable}</td>
-                                <td>${user.user_ben_check}</td>
+                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <c:choose>
+                <c:when test="${user.user_ben_check == 0}">
+                    벤 상태
+                </c:when>
+                <c:when test="${user.user_ben_check == 1}">
+                    활성화 상태
+                </c:when>
+           		 </c:choose></td>
                             </tr>
                         </c:forEach>
 						</tbody>

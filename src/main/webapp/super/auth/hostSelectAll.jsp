@@ -102,9 +102,25 @@ $(function(){
                                 <td>${host.host_pw}</td>
                                 <td>${host.host_tel}</td>
                                 <td>${host.host_name}</td>
-                                <td style="font-weight: bold; background-color: #e0f7fa;">${host.host_check}</td>
+                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <c:choose>
+                <c:when test="${host.host_check == 0}">
+                    미승인 상태
+                </c:when>
+                <c:when test="${host.host_check == 1}">
+                    승인 상태
+                </c:when>
+           		 </c:choose></td>
                                 <td>${host.rep_name}</td>
-                                <td style="font-weight: bold; background-color: #e0f7fa;">${host.host_ben_check}</td>
+                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <c:choose>
+                <c:when test="${host.host_ben_check == 0}">
+                    벤 상태
+                </c:when>
+                <c:when test="${host.host_ben_check == 1}">
+                    활성화 상태
+                </c:when>
+           		 </c:choose></td>
                             </tr>
                         </c:forEach>
 						</tbody>
