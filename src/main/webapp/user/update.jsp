@@ -30,12 +30,12 @@
 						<p>기본정보</p>
 					</h4>
 					<hr>
-
-					<form id="member-update-form" method="get"
+					
+				
+					<form id="member-update-form" method="post"
 						action="${pageContext.request.contextPath}/front">
 						<input type="hidden" name="key" value="user" /> 
 						<input type="hidden" name="methodName" value="update" />
-
 
 						<table id="festable">
 							<thead>
@@ -65,18 +65,18 @@
 								<tr>
 									<th>나이</th>
 									<th><input type="text" name="age" class="age"
-										maxlength="3" placeholder="나이를 입력하세요" value="${requestScope.user.age}"
+										maxlength="3" placeholder="나이를 입력하세요" value="${requestScope.users.age}"
 										required> 세
 								</tr>
 								<tr>
 									<th>전화번호</th>
 									<th><input type="tel" maxlength="3" placeholder="010"
-										name="tel1" value="${requestScope.user.user_tel.split('-')[0]}"
+										name="tel1" value="${requestScope.users.user_tel.split('-')[0]}"
 										required> - <input type="tel" maxlength="4"
 										placeholder="1234" name="tel2"
-										value="${requestScope.user.user_tel.split('-')[1]}" required>-
+										value="${requestScope.users.user_tel.split('-')[1]}" required>-
 										<input type="tel" maxlength="4" placeholder="5678" name="tel3"
-										value="${requestScope.user.user_tel.split('-')[2]}" required></th>
+										value="${requestScope.users.user_tel.split('-')[2]}" required></th>
 								</tr>
 								<tr>
 									<th>이메일</th>
@@ -84,14 +84,12 @@
 										<div class="email-input-container">
 											<input type="text" id="email1" name="email1"
 												placeholder="이메일 입력"
-												value="${requestScope.user.email.split('@')[0]}" required /> @ <input
+												value="${sessionScope.loginUser.email.split('@')[0]}" required /> @ <input
 												type="text" id="email2" name="email2" placeholder="이메일 입력"
-												value="${requestScope.user.email.split('@')[1]}" required />
-
+												value="${sessionScope.loginUser.email.split('@')[1]}" required />
 										</div>
 									</th>
 								</tr>
-
 								<tr>
 									<th>주소</th>
 									<th><input type="text" class="addr" name="addr"
