@@ -15,8 +15,18 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int insert(BoardDTO boardDTO) throws SQLException {
-		
-		return 0;
+       
+		// 게시글 삽입 쿼리 작성 및 실행
+        String sql = "INSERT INTO board (sub, B_content, category_Seq, user_Seq, host_Seq) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, boardDTO.getSub());
+            pstmt.setString(2, boardDTO.getbContent());
+            pstmt.setInt(3, boardDTO.getCategorySeq());
+            pstmt.setInt(4, boardDTO.getUserSeq());
+            pstmt.setInt(5, boardDTO.getHostSeq());
+            pstmt.executeUpdate();
+        }
+    }
 	}
 
 	@Override
