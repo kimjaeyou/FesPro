@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.ReservationService;
@@ -40,7 +41,8 @@ public class ReservationController implements Controller {
 		String time = request.getParameter("time");
 		int peopelNum = Integer.parseInt(request.getParameter("peopleNum"));
 		int fee = Integer.parseInt(request.getParameter("fee"));
-		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee);
+		String cancleDate = request.getParameter("cancleDate");
+		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee + " | " + cancleDate);
 		
 		String SVCID = request.getParameter("SVCID");
 		String SVCNM = request.getParameter("SVCNM");
@@ -51,7 +53,7 @@ public class ReservationController implements Controller {
 		System.out.println(userDTO);
 
 		
-		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 0);
+		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 0, cancleDate);
 		
 		int result = service.insert(reservation);
 		//System.out.println(result);
@@ -98,9 +100,14 @@ public class ReservationController implements Controller {
 		request.setAttribute("resvDTO", resvDTO);
 		
 		// 예약번호로 검색 후 SVCID를 이용해 Festival 정보 가져온다
+		FesDTO fesDTO = service.selectBySVCIDFes(resvDTO.getSVCID());
+		request.setAttribute("fesDTO", fesDTO);
 		
+		// userSeq로 유저정보 검색해서 유저정보 가져온다
+		UsersDTO userDTO = service.selectUser(resvDTO.getUserSeq());
+		request.setAttribute("userDTO", userDTO);
 		
-		if(resvDTO != null) {
+		if(resvDTO != null && fesDTO != null) {
 			return new ModelAndView("reservation/resvDetail.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp", true);
@@ -114,7 +121,7 @@ public class ReservationController implements Controller {
 	public ModelAndView selectBySVCID (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		// 정보 담아올 parameter 필요 
 		String svcId = request.getParameter(null);
-		ReservationDTO resvDTO = service.selectBySVCID(svcId);
+		ReservationDTO resvDTO = service.selectBySVCIDRes(svcId);
 		if (resvDTO != null) {
 			return new ModelAndView();
 		} else {
@@ -123,19 +130,32 @@ public class ReservationController implements Controller {
 	}
 
 	/**
-	 * 행사 데이터 SVCID로 검색해서 
+	 * 예약 페이지로 이동시 서비스 이름과 ID 가져가기
 	 */
 	public ModelAndView revMove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		String SVCNM = request.getParameter("SVCNM");
 		String SVCID = request.getParameter("SVCID");
+		String fesDTO = request.getParameter("fes");
+		
+		FesDTO fes = service.selectFes(SVCID);
+		
 		request.setAttribute("SVCNM", SVCNM);
 		request.setAttribute("SVCID", SVCID);
+		request.setAttribute("fes", fes);
 		return new ModelAndView("reservation/reservation.jsp", false);
 
 	}
 	
 	/**
-	 * 
+	 * SVCID로 FesDTO 가져오기
 	 */
+	public ModelAndView selectFes (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String SVCID = request.getParameter("SVCID");
+		FesDTO fes = service.selectFes(SVCID);
+		
+		request.setAttribute("fes", fes);
+		
+		return new ModelAndView("reservation/reservation.jsp", false);
+	}
 	
 }

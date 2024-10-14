@@ -153,19 +153,19 @@
         <caption>서비스 정보</caption> <!-- controller에서 SVCID 이용해서 서비스 정보 담아오기 -->
         <tr>
             <th>장소</th>
-            <td>fes 정보에서 가져오기</td>
+            <td>${fesDTO.PLACENM}</td>
         </tr>
         <tr>
             <th>주소</th>
-            <td></td>
+            <td>${fesDTO.AREANM}</td>
         </tr>
         <tr>
-            <th>담당자</th>
-            <td></td>
+            <th>뺄까..</th>
+            <td>${fesDTO.REVSTDDAY}</td>
         </tr>
         <tr>
             <th>문의처</th>
-            <td></td>
+            <td>${fesDTO.TELNO}</td>
         </tr>
     </table>
     
@@ -173,11 +173,11 @@
         <caption>신청자 정보</caption> <!-- 신청자 정보를 reservation 테이블에 추가하거나 user_seq를 이용해서 신청자 정보 담아오기 -->
         <tr>
             <th>신청자 명</th>
-            <td>reservation 컨트롤러에서 검색해서 담아오기</td>
+            <td>${userDTO.user_name}</td>
         </tr>
         <tr>
             <th>연락처</th>
-            <td>reservation 컨트롤러에서 검색해서 담아오기</td>
+            <td>${userDTO.user_tel}</td>
         </tr>
     </table>
 
@@ -185,15 +185,15 @@
         <caption>결제 정보</caption>
         <tr>
             <th>결제기한</th>
-            <td></td>
+            <td>${resvDTO.svcDate}</td>
         </tr>
         <tr>
             <th>이용인원</th>
-            <td></td>
+            <td>${resvDTO.resvPeo}</td>
         </tr>
         <tr>
             <th>이용요금</th>
-            <td>fes 정보에서 가져온 요금</td>
+            <td>${fesDTO.PRICE}</td>
         </tr>
         <tr>
             <th>할인/할증</th>

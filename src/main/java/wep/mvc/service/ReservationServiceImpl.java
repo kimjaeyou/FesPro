@@ -4,7 +4,9 @@ import java.sql.SQLException;
 
 import wep.mvc.dao.ReservationDAO;
 import wep.mvc.dao.ReservationDAOImpl;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
+import wep.mvc.dto.UsersDTO;
 
 public class ReservationServiceImpl implements ReservationService {
 	ReservationDAO dao = new ReservationDAOImpl();
@@ -30,9 +32,15 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ReservationDTO selectBySVCID(String SVCID) throws SQLException {
-		ReservationDTO resvDTO = dao.selectBySVCID(SVCID);
+	public ReservationDTO selectBySVCIDRes (String SVCID) throws SQLException {
+		ReservationDTO resvDTO = dao.selectBySVCIDRes(SVCID);
 		return resvDTO;
+	}
+	
+	@Override
+	public FesDTO selectBySVCIDFes(String SVCID) throws SQLException {
+		FesDTO fesDTo = dao.selectBySVCIDFes(SVCID);
+		return fesDTo;
 	}
 
 	@Override
@@ -40,7 +48,17 @@ public class ReservationServiceImpl implements ReservationService {
 		ReservationDTO resvDTO = dao.selectByUserSeqAndSVCID(userSeq, SVCID); 
 		return resvDTO;
 	}
+
+	@Override
+	public FesDTO selectFes(String SVCID) throws SQLException {
+		FesDTO fesDTO = dao.selectFes(SVCID);
+		return fesDTO;
+	}
 	
-	
+	@Override
+	public UsersDTO selectUser(int userSeq) throws SQLException {
+		UsersDTO userDTO = dao.selectUser(userSeq);
+		return userDTO;
+	}
 
 }

@@ -2,7 +2,9 @@ package wep.mvc.dao;
 
 import java.sql.SQLException;
 
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
+import wep.mvc.dto.UsersDTO;
 
 public interface ReservationDAO {
 	
@@ -24,10 +26,25 @@ public interface ReservationDAO {
 	/**
 	 * SVCID를 이용해 예약정보 검색
 	 */
-	ReservationDTO selectBySVCID (String SVCID) throws SQLException;
+	ReservationDTO selectBySVCIDRes (String SVCID) throws SQLException;
+	
+	/**
+	 * SVCID를 이용해 예약정보 검색 (Fes 리턴)
+	 */
+	FesDTO selectBySVCIDFes (String SVCID) throws SQLException;
 	
 	/**
 	 * 유저 seq와 svcid를 이용해 예약정보 검색
 	 */
 	ReservationDTO selectByUserSeqAndSVCID (int userSeq, String SVCID) throws SQLException;
+	
+	/**
+	 * svcid로 행사정보 검색
+	 */
+	FesDTO selectFes (String SVCID) throws SQLException;
+	
+	/**
+	 * userSeq로 유저정보 검색
+	 */
+	UsersDTO selectUser (int userSeq) throws SQLException;
 }
