@@ -11,36 +11,54 @@ import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.dto.row;
+import wep.mvc.service.MainSereviceImpl;
 
 public class MainController implements Controller {
+	MainSereviceImpl mainService =new MainSereviceImpl();
 
-	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException, SQLException {
 
-		return new ModelAndView("index.jsp", true);
-	}
-
-	public ModelAndView cancle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		return new ModelAndView("index.jsp", true);
-	}
-	
 	public ModelAndView read(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		ServletContext app= req.getServletContext();
-		
-		List<FesDTO> list= (List<FesDTO>)app.getAttribute("fesList");
+		ServletContext app = req.getServletContext();
+
+		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
 		req.setAttribute("list", list);
-		
+
 		return new ModelAndView("index.jsp");
 	}
-	
+
 	public ModelAndView oneSelec(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		String sid= req.getParameter("sid");
+		String sid = req.getParameter("sid");
 		
-		return new ModelAndView("index.jsp");
+		ServletContext app = req.getServletContext();
+		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
+		
+		FesDTO fes = mainService.selecOne(sid,list);
+		if(fes!=null)
+			req.setAttribute("fes", fes);
+
+		return new ModelAndView("detail.jsp");
 	}
 	
 	
+	public ModelAndView setLike(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		String sid = req.getParameter("sid");
+		String user =(String)req.getSession().getAttribute("loginUser");
+		if(user!=null)
+			mainService.setLike(sid);
+		else
+			System.out.println();
+
+		return new ModelAndView("detail.jsp");
+	}
+	
+	
+	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		
+		return new ModelAndView("detail.jsp");
+	}
+
 }

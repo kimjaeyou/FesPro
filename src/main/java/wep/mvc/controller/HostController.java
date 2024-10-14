@@ -19,7 +19,7 @@ public class HostController implements Controller {
 	// 회원가입
 		public ModelAndView insert(HttpServletRequest request, HttpServletResponse resp)
 				throws ServletException, IOException {
-			
+
 			String id = request.getParameter("company-id");
 			String pass = request.getParameter("company-pw");
 			String tel = request.getParameter("com-phone1") + "-"
@@ -42,6 +42,7 @@ public class HostController implements Controller {
 					return mv;
 				} else {
 					// 에러페이지 = 정보를 다시 입력하세요.
+				 //   return new ModelAndView("comUser.jsp", true);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -57,22 +58,20 @@ public class HostController implements Controller {
 		    String userpw = request.getParameter("corporate-pw");
 		  
 		    System.out.println(userId+" "+userpw);
-		    //서비스 호출 
 		    HostDTO dbDTO = hs.login( new HostDTO(userId,userpw) );
 		    System.out.println(dbDTO);
 		    try {
 				if (dbDTO == null) {
 					// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-				    return new ModelAndView("login.jsp", true);
+				  //  return new ModelAndView("login.jsp", true);
 				}
 				if (dbDTO.getHost_ben_check() == 0) {
 					// 오류메세지 = 정지된 아이디 입니다.
-				    return new ModelAndView("login.jsp", true);
+				 //   return new ModelAndView("login.jsp", true);
 						}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		    
 		    
 		    HttpSession session = request.getSession();
 		    session.setAttribute("loginCom",new HostDTO( dbDTO.getHost_id(),dbDTO.getHost_name(),dbDTO.getHost_seq()));
@@ -113,9 +112,5 @@ public class HostController implements Controller {
 		mv.setViewName("front?key=main&methodName=read");
 	    mv.setRedirect(true);
 		return mv;
-
 	}
-
-
-
 }

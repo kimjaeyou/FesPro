@@ -10,6 +10,7 @@ import java.util.List;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.UsersReviewDTO;
 import wep.mvc.util.DbUtil;
 
 public class SuperFestivalDAOImpl implements SuperFestivalDAO {
@@ -223,6 +224,46 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 				
 				ReviewDTO reviewDto = new ReviewDTO(reviewSeq, userSeq, svcId, rvContent, score);
 				list.add(reviewDto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
+	}
+
+	/**
+	 * 리뷰 쓴 유저 검색
+	 */
+	@Override
+	public List<UsersDTO> selectReviewUser(FesDTO fes) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<UsersDTO> list = new ArrayList<UsersDTO>();
+
+		String sql = "SELECT * FROM FES_REVIEW_USER_VIEW";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int age = rs.getInt("AGE");
+				String gender = rs.getString("GENDER");
+				int userSeq = rs.getInt("USER_SEQ");
+				int score = rs.getInt("SCORE");
+				 
+				UsersReviewDTO user =  new UsersReviewDTO();
+				user.setUser_seq(userSeq);
+				user.setAge(age);
+				user.setGender(gender);
+				user.setReviewScore(score);
+				
+				list.add(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

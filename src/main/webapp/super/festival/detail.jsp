@@ -22,12 +22,12 @@
     		return document.getElementById(canvasName).getContext('2d');
     	};
 
-    	/* 리퀘스트로 넘어온 유저 데이터 */
+    	/* 리퀘스트 데이터 - 유저 */
    		const userList = ${requestScope.userList};
    		//console.log(userList);
    		
-	  	/* 리퀘스트로 넘어온 리뷰 데이터 */
-	  	const reviewFunc= function(){
+	  	/* 리퀘스트 데이터 - 리뷰 */
+  	const reviewFunc= function(){
 	   	const reviewList = ${reviewList};
 	   	if(reviewList.length===0) return;
 	   	
@@ -41,19 +41,28 @@
 	   	
 	   	 $("#reviewAvgScore").html(data);
 	  	};
+	  	
+	  	/* 리퀘스트 데이터 - 리뷰쓴 유저 */
+	  	const reviewUserList = ${requestScope.reviewUserList};
+	  	//console.log(reviewUserList);
 	   	 
-    	/* 함수들 Call */
     	$(function(){
+    		reviewFunc();
+    		
+    		/* 차트 Call ============*/
     		//연령, 성별 통계
     		ageGender(getCanvas('ageGender'),userList);
-    		
     		//성별 비율
     		genderRatio(getCanvas('genderRatio'),userList);
-    		
     		//연령별 비율
     		ageRatio(getCanvas('ageRatio'),userList);
-    	
-    		reviewFunc();
+    		
+    		//성별별 평균 평점
+    		genderReviewAvg(getCanvas('genderReviewAvg'),reviewUserList);
+    		
+    		//연령별 평균 평점
+    		ageReviewAvg(getCanvas('ageReviewAvg'),reviewUserList);
+    		
     	});
     </script>
 </head>
@@ -189,7 +198,7 @@
 						<i class="fas fa-chart-bar me-1"></i> 성별 별
 					</div>
 					<div class="card-body">
-						<canvas id="myBarChart" width="100%" height="40"></canvas>
+						<canvas id="genderReviewAvg" width="100%" height="400"></canvas>
 					</div>
 				</div>
 			</div>
@@ -200,7 +209,7 @@
 						<i class="fas fa-chart-bar me-1"></i> 연령대 별
 					</div>
 					<div class="card-body">
-						<canvas id="myBarChart" width="100%" height="40"></canvas>
+						<canvas id="ageReviewAvg" width="100%" height="400"></canvas>
 					</div>
 				</div>
 			</div>

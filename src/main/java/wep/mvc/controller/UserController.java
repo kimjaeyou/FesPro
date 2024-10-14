@@ -3,8 +3,6 @@ package wep.mvc.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.google.gson.JsonObject;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +40,7 @@ public class UserController implements Controller {
 			    mv.setRedirect(true);
 				return mv;
 			} else {
-				// 에러페이지 = 정보를 다시 입력하세요.
+			  //  return new ModelAndView("user.jsp", true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,34 +53,38 @@ public class UserController implements Controller {
 		String userId = request.getParameter("member-id");
 		String userPw = request.getParameter("member-password");
 		UsersDTO dbDTO = us.login(new UsersDTO(userId, userPw));
+		System.out.println(dbDTO);
 		try {
 			if (dbDTO == null) {
 				// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-			    return new ModelAndView("login.jsp", true);
+			  //  return new ModelAndView("login.jsp");
 			}
 			
 			if (dbDTO.getUser_ben_check() == 0) {
 				// 오류메세지 = 정지된 아이디 입니다.
-			    return new ModelAndView("login.jsp", true);
+			  //  return new ModelAndView("login.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		session.setAttribute("loginUser", new UsersDTO(dbDTO.getUser_id(),dbDTO.getUser_name(), dbDTO.getUser_seq(), dbDTO.getEmail()));
+		session.setAttribute("loginUser", new UsersDTO(dbDTO.getUser_id(),dbDTO.getUser_name(), dbDTO.getUser_seq(), dbDTO.getEmail(), dbDTO.getUser_tel()));
+		session.setAttribute("loginUserId", dbDTO.getUser_id());
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");
 	    mv.setRedirect(true);
 		return mv;
-	}	
+	}
 	
 	// 회원수정 데이터 꺼내기
 	public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 	    HttpSession session = request.getSession();
-	    String userId = (String) session.getAttribute("loginUserId"); // 세션에서 ID 가져오기
-	    String userName = (String) session.getAttribute("loginUserName"); // 세션에서 이름 가져오기
-	    UsersDTO dbDTO = us.selectUser(new UsersDTO(userId, userName));
-	    System.out.println(dbDTO);
+	    String user = (String)session.getAttribute("loginUserId");
+	    System.out.println("userss = "+user); // 데이터 나옴
+	    
+	    UsersDTO dbDTO = us.selectUser(user);
+	    System.out.println("dbDTO = "+dbDTO); // 이것도 나옴
+	    
 	    try {
 	        if (dbDTO == null) {
 	            // 오류 메시지 처리
@@ -90,23 +92,13 @@ public class UserController implements Controller {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    request.setAttribute("user", dbDTO);
-	    return new ModelAndView("update.jsp", true);
+	    request.setAttribute("users", dbDTO);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/update.jsp");
+	    mv.setRedirect(true);
+		return mv;
 	}
-	// 아이디 중복체크
-	public Object idCheck(HttpServletRequest request, HttpServletResponse resp)
-			throws ServletException, IOException, SQLException {
-
-		String id = request.getParameter("username");
-		boolean result = us.idCheck(id);
-		JsonObject obj = new JsonObject();
-		if (result)
-			obj.addProperty("info", "중복입니다.");
-		else
-			obj.addProperty("info", "사용가능합니다.");
-
-		return obj;
-	}
+	
 	// 로그아웃
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -121,7 +113,6 @@ public class UserController implements Controller {
 		mv.setViewName("front?key=main&methodName=read");
 	    mv.setRedirect(true);
 	    return mv;
-
 	}
 
 	// 회원탈퇴
@@ -140,7 +131,6 @@ public class UserController implements Controller {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	// 회원수정
@@ -165,16 +155,17 @@ public class UserController implements Controller {
 		try {
 			int result = us.update(dto);
 			if (result == 1) {
-				return new ModelAndView("update.jsp", true);
+				//req.set애트리뷰트("내맘대로", true);
+				return new ModelAndView("update.jsp", true); //jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert 
 			} else {
-				// 에러창
+			 //   return new ModelAndView("login.jsp", true);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
-
+	
 }
+
+
