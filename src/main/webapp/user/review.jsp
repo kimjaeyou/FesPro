@@ -1,6 +1,8 @@
+<%@page import="wep.mvc.dto.UsersDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="myPageCheck.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,9 +26,9 @@
 				<div class="container-fluid px-4">
 
 					<h2 class="mt-4 text-center">
-						<p>나의 이용후기</p>
-						<br>
+						나의 이용후기
 					</h2>
+					<br>
 					<div class="card mb-4 search-card">
 						<div class="d-flex align-items-center justify-content-between">
 							<label for="searchInput" class="me-2">서비스명:</label> <input

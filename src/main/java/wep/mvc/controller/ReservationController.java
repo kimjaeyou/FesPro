@@ -101,6 +101,7 @@ public class ReservationController implements Controller {
 		}
 	}
 	
+
 	/**
 	 * 예약 데이터 SVCID로 검색
 	 */
@@ -113,6 +114,12 @@ public class ReservationController implements Controller {
 		} else {
 			return new ModelAndView();
 		}
+	}
+
+	public ModelAndView revMove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	
+		return new ModelAndView("reservation/reservation.jsp", false);
+
 	}
 	
 }

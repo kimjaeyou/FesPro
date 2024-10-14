@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.HostDTO;
-import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.HostService;
 import wep.mvc.service.HostServiceImpl;
 
@@ -30,20 +29,20 @@ public class HostController implements Controller {
 			String repName = request.getParameter("rep-name");
 			String comName = request.getParameter("comname");
 			
-			
-			
-			System.out.println(id);
-			System.out.println(comName);
-			
 			HostDTO dto = new HostDTO(id,comName,pass,tel,hostName,0,repName,1);
+			System.out.println(dto);
 
 			int result;
 			try {
 				result = hs.insert(dto);
-				if (result == 1) {
-					return new ModelAndView("index.jsp", true);
+				if (result == 1) {//성공 메세지 = 회원가입 성공
+					ModelAndView mv = new ModelAndView();
+					mv.setViewName("front?key=main&methodName=read");
+				    mv.setRedirect(true);
+					return mv;
 				} else {
-					// 에러페이지
+					// 에러페이지 = 정보를 다시 입력하세요.
+				 //   return new ModelAndView("comUser.jsp", true);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -62,12 +61,25 @@ public class HostController implements Controller {
 		    //서비스 호출 
 		    HostDTO dbDTO = hs.login( new HostDTO(userId,userpw) );
 		    System.out.println(dbDTO);
-		    
+		    try {
+				if (dbDTO == null) {
+					// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
+				  //  return new ModelAndView("login.jsp", true);
+				}
+				if (dbDTO.getHost_ben_check() == 0) {
+					// 오류메세지 = 정지된 아이디 입니다.
+				 //   return new ModelAndView("login.jsp", true);
+						}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		    
 		    HttpSession session = request.getSession();
-		    
-		    session.setAttribute("logincom", dbDTO);
-		    return new ModelAndView("front?key=main&methodName=read", true);
+		    session.setAttribute("loginCom",new HostDTO( dbDTO.getHost_id(),dbDTO.getHost_name(),dbDTO.getHost_seq()));
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("front?key=main&methodName=read");
+		    mv.setRedirect(true);
+			return mv;
 		}
 
 	// 아이디 중복체크
@@ -92,13 +104,14 @@ public class HostController implements Controller {
 		String pwd = request.getParameter("");
 
 		HostDTO dto = new HostDTO(userId, pwd);
+		// 가능하면 로그아웃 되었다는 메세지 출력해주고 싶다
 
 		HttpSession session = request.getSession();
-		session.setAttribute("index.jps", null);
+		session.invalidate(); // 세션정보 무효화 시키기
 
-		return new ModelAndView("index.jsp", true);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("front?key=main&methodName=read");
+	    mv.setRedirect(true);
+		return mv;
 	}
-
-
-
 }

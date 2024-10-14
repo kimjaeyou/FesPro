@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="../index.jsp">프론트 너무 어려워요</a>
+    <a class="navbar-brand ps-3" href="${path}/front?key=main&methodName=read">프론트 너무 어려워요</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
     <i class="fas fa-bars"></i></button>
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -17,6 +17,7 @@
             <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
         </div>
     </form>
+
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"

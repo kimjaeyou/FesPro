@@ -13,6 +13,34 @@ public class UsersDTO {
 	private String disable; // 장애여부
 	private String user_tel;
 	private int user_ben_check; // 밴
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("UsersDTO [user_seq=");
+		builder.append(user_seq);
+		builder.append(", user_id=");
+		builder.append(user_id);
+		builder.append(", user_pw=");
+		builder.append(user_pw);
+		builder.append(", age=");
+		builder.append(age);
+		builder.append(", addr=");
+		builder.append(addr);
+		builder.append(", gender=");
+		builder.append(gender);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", user_name=");
+		builder.append(user_name);
+		builder.append(", disable=");
+		builder.append(disable);
+		builder.append(", user_tel=");
+		builder.append(user_tel);
+		builder.append(", user_ben_check=");
+		builder.append(user_ben_check);
+		builder.append("]");
+		return builder.toString();
+	}
 
 	public UsersDTO() {
 
@@ -25,6 +53,12 @@ public class UsersDTO {
 	public UsersDTO(String user_id, String user_pw) {
 		this.user_id = user_id;
 		this.user_pw = user_pw;
+	}
+	public UsersDTO(String user_id, String user_name, int user_seq, String email) {
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.email = email;
+		this.user_seq = user_seq;
 	}
 
 	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr,  String email,
