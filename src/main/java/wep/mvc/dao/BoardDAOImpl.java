@@ -46,24 +46,24 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardDTO> selectByCtg(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) throws SQLException {
-	    // 카테고리 ID로 게시글을 조회하는 쿼리
+	   
 	    String query = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
 
-	    // 결과를 담을 리스트 초기화
+	    
 	    List<BoardDTO> boardList = new ArrayList<>();
 
 	    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-	        // 카테고리 시퀀스 설정
+	       
 	        pstmt.setInt(1, boardCategoryDTO.getCategorySeq());
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
-	            // 여러 게시글 정보를 리스트에 추가
+	        
 	            while (rs.next()) {
 	                BoardDTO bDTO = new BoardDTO();
 	                bDTO.setBoardSeq(rs.getInt("board_seq"));
 	                bDTO.setCategorySeq(rs.getInt("category_seq"));
 	                bDTO.setSub(rs.getString("sub"));
-	                // 리스트에 추가
+	             
 	                boardList.add(bDTO);
 	            }
 	        }
