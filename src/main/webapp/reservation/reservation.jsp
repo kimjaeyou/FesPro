@@ -70,14 +70,42 @@
 		<script type="text/javascript">
 			// 사이드바에 선택한 값 입력
 			$(document).on("click", ".rd-day-body", function() {
-				let date = $("#result").val();
-			       console.log(date);
-				$("[data-form=date]").html(date);
+				let stringDate = $("#result").val();
+			       //console.log(stringDate);
+			    
+			    let date = new Date(stringDate);
+			    let dateFormat1 = date.getFullYear() +
+				'-' + ( (date.getMonth()+1) < 10 ? "0" + (date.getMonth()+1) : (date.getMonth()+1) )+
+				'-' + ( (date.getDate()) < 10 ? "0" + (date.getDate()) : (date.getDate()) );
+			       
+				$("[data-form=date]").html(dateFormat1);
+				
+				//date2 = new Date(stringDate);
+				console.log(date);
+				let cancleDate = new Date(date);
+				cancleDate.setDate(date.getDate()-1); // 취소기간 기준일 받아와서 넣기
+				console.log(cancleDate);
+				
+				//console.log(new Date());
+				let dateFormat2 = cancleDate.getFullYear() +
+				'-' + ( (cancleDate.getMonth()+1) < 10 ? "0" + (cancleDate.getMonth()+1) : (cancleDate.getMonth()+1) )+
+				'-' + ( (cancleDate.getDate()) < 10 ? "0" + (cancleDate.getDate()) : (cancleDate.getDate()) );
+			
+				$("[data-form=canclePeriod]").html(dateFormat2);
+				
 			})
 	
 			   $(document).on("click", ".datepicker-cell", function() {
-				let date = $("#datepicker1").val();
-				$("[data-form=date]").html(date);
+				let stringDate = $("#datepicker1").val();
+				$("[data-form=date]").html(stringDate);
+				
+				let date = new Date(stringDate);
+				let cancleDate = new Date();
+				cancleDate.setDate(date.getDate()-1);
+				
+				console.log(cancleDate);
+				let canclePeriod = date-1; // 취소기간 기준일 받아와서 넣기
+				$("[data-form=canclePeriod]").html(canclePeriod);
 			})
 	
 			$(document).on("click", ".time", function() {
@@ -131,7 +159,7 @@
 	            for (const elem of elems) {
 	                const datepicker = new Datepicker(elem, {
 	                // 'format': 'dd/mm/yyyy', // UK format
-	                'format': 'yyyy년 mm월 dd일', // UK format
+	                'format': 'yyyy-mm-dd', // UK format
 	                title: getDatePickerTitle(elem)
 	                });
 	            }
@@ -316,15 +344,15 @@
                     <div class="card mb-4">
                         <div class="card-header" style="font-weight: bold; font-size: x-large;">나의 예약 정보</div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);"><h4>행사명</h4>
-                            <p>이용일자</p><p data-form="date" name = "date">내용</p>
-                            <p>이용회차<p class = "selectTime" data-form="time" name = "time">내용</p>
-                            <p>취소기간<p data-form="canclePeriod">내용</p>
-                            <p>취소수수료<p data-form="cancleFee">내용</p>
+                            <p>이용일자</p><p data-form="date" name = "date"></p>
+                            <p>이용회차<p class = "selectTime" data-form="time" name = "time"></p>
+                            <p>취소기간<p data-form="canclePeriod" name="canclePeriod">내용</p>
+                            <p>취소수수료<p data-form="cancleFee">없음</p>
                             <p>
                             <div style="border: 1px solid white; border-radius: 5%; padding: 15px; background-color: white;">
                                 <h5>결제금액</h5><hr>
                                 <p>이용인원</p><p data-form="peopleNum" name="peopleNum">내용</p>
-                                <p>이용요금</p><p data-form="fee" name = "fee">0</p>
+                                <p>이용요금</p><p data-form="fee" name = "fee">0</p> <!-- 요금 * 인원수 -->
                                 <p>할인/할증</p><p data-form="discount">내용</p>
                             </div>
                         </div>

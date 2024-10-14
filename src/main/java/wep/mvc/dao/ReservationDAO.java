@@ -25,4 +25,9 @@ public interface ReservationDAO {
 	 * SVCID를 이용해 예약정보 검색
 	 */
 	ReservationDTO selectBySVCID (String SVCID) throws SQLException;
+	
+	/**
+	 * 유저 seq와 svcid를 이용해 예약정보 검색
+	 */
+	ReservationDTO selectByUserSeqAndSVCID (int userSeq, String SVCID) throws SQLException;
 }

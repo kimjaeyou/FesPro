@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.ReservationDTO;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.ReservationService;
 import wep.mvc.service.ReservationServiceImpl;
 
@@ -40,13 +42,23 @@ public class ReservationController implements Controller {
 		int fee = Integer.parseInt(request.getParameter("fee"));
 		System.out.println(date + " | " + time + " | " + peopelNum + " | " + fee);
 		
-		ReservationDTO reservation = new ReservationDTO(1, null, date, time, peopelNum, fee);
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+		System.out.println(userDTO);
+		
+		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), "1", date, time, peopelNum, fee, 0);
 		
 		int result = service.insert(reservation);
-		System.out.println(result);
+		//System.out.println(result);
+		
+	    
+		ReservationDTO resvData = service.selectByUserSeqAndSVCID(userDTO.getUser_seq(), "1");
+		System.out.println("resvDate = " + resvData);
+		request.setAttribute("resvData", resvData);
+		
 		
 		if(result != 0) {
-			return new ModelAndView("reservation/resvSuccess.jsp");
+			return new ModelAndView("reservation/resvSuccess.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp");
 		}
@@ -56,10 +68,18 @@ public class ReservationController implements Controller {
 	/**
 	 * 예약 내역 확인 시 유저 seq로 예약 내역을 검색해 가져온다
 	 */
-	public ModelAndView selectByUserSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ModelAndView selectByUserSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		//
+		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		ReservationDTO resvDTO = service.selectByUserSeq(userSeq);
+		request.setAttribute("resvDTO", resvDTO);
 		
-		return null;
+		// 연결할 페이지
+		if (resvDTO != null) {
+			return new ModelAndView();
+		} else {
+			return new ModelAndView();
+		}
 	}
 	
 	/**
