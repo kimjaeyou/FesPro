@@ -16,7 +16,7 @@
             
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">마이페이지</div>
-                <a class="nav-link" href="Reservation.jsp">
+                <a class="nav-link"  href="${path}/front?key=myPage&methodName=resSelectAll">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     나의 예약내역
                 </a>

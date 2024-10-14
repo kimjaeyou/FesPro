@@ -1,17 +1,18 @@
 package wep.mvc.dto;
 
 public class ReservationDTO {
+
 	private int reservSeq;
 	private int userSeq;
 	private String SVCID; 
 	private String resvDate; 
 	private String svcDate;
 	private String svcTime;
-
 	private int resvPeo;
 	private int resvPrice;
 	private int resvCheck;
 	private String cancleDate; // 취소기한
+
 	
 	public ReservationDTO () {
 		
