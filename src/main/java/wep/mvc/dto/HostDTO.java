@@ -16,6 +16,13 @@ public class HostDTO {
 
 	}
 
+	@Override
+	public String toString() {
+		return "HostDTO [host_seq=" + host_seq + ", host_id=" + host_id + ", com_name=" + com_name + ", host_pw="
+				+ host_pw + ", host_tel=" + host_tel + ", host_name=" + host_name + ", host_check=" + host_check
+				+ ", rep_name=" + rep_name + ", host_ben_check=" + host_ben_check + "]";
+	}
+
 	//로그인
 	public HostDTO(String host_id) {
 		this.host_id = host_id;
@@ -24,6 +31,11 @@ public class HostDTO {
 	public HostDTO(String host_id ,String host_pw) {
 		this.host_id = host_id;
 		this.host_pw = host_pw;
+	}
+	public HostDTO(String host_id ,String host_name, int host_seq) {
+		this.host_id = host_id;
+		this.host_name = host_name;
+		this.host_seq = host_seq;
 	}
 
 	//회원가입
@@ -42,9 +54,22 @@ public class HostDTO {
 	}
 
 	
-	public HostDTO(int host_seq, String host_id, String com_name, String host_pw, String host_tel, String host_name,
-			int host_check, String rep_name, int host_ben_check) {
+	public HostDTO(int host_seq, String host_id, String host_pw, String host_tel,  String host_name,String rep_name, 
+			int host_check, int host_ben_check, String com_name) {
 		super();
+		this.host_seq = host_seq;
+		this.host_id = host_id;
+		this.host_pw = host_pw;
+		this.host_tel = host_tel;
+		this.host_name = host_name;
+		this.rep_name = rep_name;
+		this.host_check = host_check;
+		this.host_ben_check = host_ben_check;
+		this.com_name = com_name;
+	}
+
+	public HostDTO(int host_seq,String host_id, String com_name, String host_pw, String host_tel, String host_name, int host_check,
+			String rep_name, int host_ben_check) {
 		this.host_seq = host_seq;
 		this.host_id = host_id;
 		this.com_name = com_name;
@@ -56,8 +81,11 @@ public class HostDTO {
 		this.host_ben_check = host_ben_check;
 	}
 
+	
+	
 	public HostDTO(String host_id, String com_name, String host_pw, String host_tel, String host_name, int host_check,
 			String rep_name, int host_ben_check) {
+		super();
 		this.host_id = host_id;
 		this.com_name = com_name;
 		this.host_pw = host_pw;

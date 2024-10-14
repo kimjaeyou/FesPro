@@ -1,18 +1,18 @@
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirm-password');
-const passwordMatchMessage = document.getElementById('password-match-message');
+const pw = document.getElementById('company-pw'); // 비밀번호 입력 필드
+const pwCheck = document.getElementById('confirm-password'); // 비밀번호 확인 필드
+const message = document.getElementById('password-match-message'); // 비밀번호 일치 여부 메시지
 
-confirmPassword.addEventListener('input', function() {
-    if (password.value === confirmPassword.value) {
-        passwordMatchMessage.textContent = '비밀번호가 일치합니다.';
-        passwordMatchMessage.style.color = 'green';
-    } else {
-        passwordMatchMessage.textContent = '비밀번호가 일치하지 않습니다.';
-        passwordMatchMessage.style.color = 'red';
-    }
-});
+pwCheck.addEventListener('input', function() {
+	if (pw.value === '' || pwCheck.value === '') {
+		message.textContent = '';
+		return;
+	}
 
-// 중복 체크 버튼 이벤트 (예시)
-document.getElementById('check-username').addEventListener('click', function() {
-    alert("아이디 중복 체크 기능이 필요합니다."); // 실제 기능은 서버와 연동하여 구현
+	if (pw.value === pwCheck.value) {
+		message.textContent = '비밀번호가 일치합니다.';
+		message.style.color = 'green';
+	} else {
+		message.textContent = '비밀번호가 일치하지 않습니다.';
+		message.style.color = 'red';
+	}
 });

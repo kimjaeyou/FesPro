@@ -14,9 +14,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UsersDTO login(UsersDTO usersDTO) throws SQLException {
 		UsersDTO dto = user.login(usersDTO);
-		if(dto == null) { 
-			throw new NullPointerException("정보를 다시 확인하세요");
-		} 
 		return dto;
 	}
 
@@ -48,4 +45,11 @@ public class UserServiceImpl implements UserService {
 		return user.update(usersDTO);
 	}
 
+	@Override
+	public UsersDTO selectUser(UsersDTO usersDTO)  throws SQLException{
+		
+		return user.selectUser(usersDTO);
+	}
+
+	
 }
