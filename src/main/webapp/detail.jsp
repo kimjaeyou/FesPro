@@ -4,13 +4,6 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
 <jsp:include page="/common/header.jsp" />
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
 <style>
 .body_containner .area1 {
 	width: 90%;
@@ -22,7 +15,7 @@
 
 .area1 .sub_main {
 	font: bold;
-	font-family: 'Noto Sans';
+	font-family: monospace;
 	position: relative;
 	float: none;
 	margin-bottom: 20px;
@@ -44,8 +37,8 @@
 
 .conButton {
 	position: relative;
-	width: 28%;
-	height: 90px;
+	width: 30%;
+	height: 100px;
 	background-color: #007BFF;
 	border: 1px solid #007BFF;
 	border-radius: 10px;
@@ -62,26 +55,25 @@
 
 .explain_data_small {
 	position: relative;
-	margin-left: 45px;
+	margin-left: 20px;
 	margin-top: 10px;
 	left: 10%;
 	top: 10%;
 	float: left;
+	border: 1px solid blue;
 	border-radius: 10px;
-	box-shadow: 0px 10px 15px 0px #b8b8b8;
+	box-shadow: 0px 10px 15px 0px #007BFF inset;
 }
 
 .explain_data_small div {
 	font: bold;
-	font-family: Roboto;
-	border-bottom: 1px rgba(156, 156, 156, 0.5) solid;
+	font-family: monospace;
+	border-bottom: 1px black solid;
 	font-size: 120%;
 	top: 10%;
 	margin-top: 10px;
 	text-align: left;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
+	font-weight: bolder;
 }
 
 #like {
@@ -95,17 +87,15 @@
 	left: 6%;
 	position: relative; /* relative로 변경 */
 	float: left;
-	border: 1px solid rgb(0,123,255);
+	border: 1px solid blue;
 	border-radius: 10px;
 	clear: both; /* float 해제 */
 	margin-top: 30px; /* 여백 추가 */
-	padding: 40px;
-	margin-bottom: 50px;
 }
 
 .area2 div {
 	font: bold;
-	font-family: 'Noto Sans';
+	font-family: monospace;
 }
 </style>
 </head>
