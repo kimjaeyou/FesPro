@@ -238,5 +238,5 @@ img {
     </div>
 </main>
 
-<script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>
+
 
