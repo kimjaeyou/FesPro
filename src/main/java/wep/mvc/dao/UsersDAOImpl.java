@@ -38,30 +38,25 @@ public class UsersDAOImpl implements UsersDAO {
 									 rs.getString("disable"), 
 									 rs.getString("user_tel"));
 			}
-			
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return dbDTO;
 	}
-
 	
 	// 회원수정 할때 데이터 넣기위해 DB 자료 꺼내기
 	@Override
-	public UsersDTO selectUser(UsersDTO usersDTO)  throws SQLException {
+	public UsersDTO selectUser(String usersDTO)  throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		UsersDTO dbDTO = null;
-
-		String sql = "select * from users where user_id=? and user_name=?";
+		String sql = "select * from users where user_id=?";
 		
-		rs = ps.executeQuery();
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, usersDTO.getUser_id());
-			ps.setString(2, usersDTO.getUser_name());
+			ps.setString(1, usersDTO);
 			rs = ps.executeQuery();
 			
 		if (rs.next()) {
@@ -75,16 +70,13 @@ public class UsersDAOImpl implements UsersDAO {
 								 rs.getString("user_name"), 
 								 rs.getString("disable"), 
 								 rs.getString("user_tel"));
+			
 		}
-		
 	} finally {
 		DbUtil.dbClose(con, ps, rs);
 	}
-		
 		return dbDTO;
 	}
-
-
 
 	// 회원가입
 	@Override
@@ -179,5 +171,5 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 		return result;
 	}
-
+	
 }
