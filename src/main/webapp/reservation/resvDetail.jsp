@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/common/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
