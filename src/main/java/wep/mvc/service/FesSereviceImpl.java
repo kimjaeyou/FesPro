@@ -29,4 +29,20 @@ public class FesSereviceImpl implements FesSerevice{
 		List<FesDTO> list = fesDAO.select(host_seq);
 		return list;
 	}
+
+	@Override
+	public FesDTO selectBySVCID(String sVCID) throws SQLException {
+		FesDTO fesDTO = fesDAO.selectBySVCID(sVCID);
+		if(fesDTO==null) {
+			throw new SQLException("상세보기가 없습니다");
+		}
+		return fesDTO;
+	}
+
+	@Override
+	public void update(FesDTO fesDTO) throws SQLException {
+		if(fesDAO.update(fesDTO)==0) {
+			throw new SQLException("수정 실패");
+		}
+	}
 }

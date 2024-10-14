@@ -10,9 +10,6 @@ public class BoardCtgDAOImpl implements BoardCtgDAO {
 
     private Connection conn;  // DB 연결 객체 (실제 DB 연결 로직은 별도로 구현 필요)
 
-    public BoardCtgDAOImpl(Connection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public BoardCategoryDTO selectCtg(int categorySeq) throws SQLException {

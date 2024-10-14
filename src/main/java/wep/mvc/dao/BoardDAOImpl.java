@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.BoardCategoryDTO;
@@ -15,48 +16,82 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int insert(BoardDTO boardDTO) throws SQLException {
-		
+
+		// 게시글 삽입 쿼리 작성 및 실행
+		String sql = "INSERT INTO board (sub, B_content, category_Seq, user_Seq, host_Seq) VALUES (?, ?, ?, ?, ?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, boardDTO.getSub());
+			pstmt.setString(2, boardDTO.getbContent());
+			pstmt.setInt(3, boardDTO.getCategorySeq());
+			pstmt.setInt(4, boardDTO.getUserSeq());
+			pstmt.setInt(5, boardDTO.getHostSeq());
+			pstmt.executeUpdate();
+		}
 		return 0;
 	}
 
+	
+
 	@Override
 	public int update(BoardDTO boardDTO) throws SQLException {
-	
+
 		return 0;
 	}
 
 	@Override
 	public int delete(String boardSeq, String user_pw) {
-	
+
 		return 0;
 	}
 
 	@Override
-	public List<BoardDTO> selectByCtg(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) {
-	
-		return null;
+	public List<BoardDTO> selectByCtg(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) throws SQLException {
+	   
+	    String query = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
+
+	    
+	    List<BoardDTO> boardList = new ArrayList<>();
+
+	    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+	       
+	        pstmt.setInt(1, boardCategoryDTO.getCategorySeq());
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	        
+	            while (rs.next()) {
+	                BoardDTO bDTO = new BoardDTO();
+	                bDTO.setBoardSeq(rs.getInt("board_seq"));
+	                bDTO.setCategorySeq(rs.getInt("category_seq"));
+	                bDTO.setSub(rs.getString("sub"));
+	             
+	                boardList.add(bDTO);
+	            }
+	        }
+	    }
+
+	    // 조회된 게시글 리스트 반환
+	    return boardList;
 	}
-	
+
+
 	@Override
-	public BoardDTO select (int userSeq) {
-		String SQL = "SELECT * FROM BOARD WHERE USER_SEQ = ?";
-		
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, userSeq);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				BoardDTO bDTO = new BoardDTO();
-				bDTO.setBoardSeq(rs.getInt(1));
-				bDTO.setCategorySeq(rs.getInt(2));
-				bDTO.setUserSeq(rs.getInt(3));
-				bDTO.setSub(rs.getString(4));
-				bDTO.setbContent(rs.getString(5));
-				bDTO.setHostSeq(rs.getInt(6));
-				return bDTO;
-			}			
-		} catch(Exception e) {
-			e.printStackTrace();
+	public BoardDTO select(int postUserSeq) throws SQLException {
+		String query = "SELECT * FROM board WHERE user_seq = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setInt(1, postUserSeq);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					// 게시글 정보 가져오기
+					BoardDTO boardDTO = new BoardDTO();
+					boardDTO.setBoardSeq(rs.getInt("board_seq"));
+					boardDTO.setCategorySeq(rs.getInt("category_seq"));
+					boardDTO.setUserSeq(rs.getInt("user_seq"));
+					boardDTO.setSub(rs.getString("sub"));
+					boardDTO.setbContent(rs.getString("b_content"));
+					boardDTO.setHostSeq(rs.getInt("host_seq"));
+					return boardDTO; // 게시글 정보를 반환
+				}
+			}
 		}
 		return null;
 	}

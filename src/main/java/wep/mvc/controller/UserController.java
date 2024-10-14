@@ -42,7 +42,7 @@ public class UserController implements Controller {
 			    mv.setRedirect(true);
 				return mv;
 			} else {
-				// 에러페이지 = 정보를 다시 입력하세요.
+			  //  return new ModelAndView("user.jsp", true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,12 +58,12 @@ public class UserController implements Controller {
 		try {
 			if (dbDTO == null) {
 				// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-			    return new ModelAndView("login.jsp", true);
+			  //  return new ModelAndView("login.jsp");
 			}
 			
 			if (dbDTO.getUser_ben_check() == 0) {
 				// 오류메세지 = 정지된 아이디 입니다.
-			    return new ModelAndView("login.jsp", true);
+			  //  return new ModelAndView("login.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,6 +93,7 @@ public class UserController implements Controller {
 	    request.setAttribute("user", dbDTO);
 	    return new ModelAndView("update.jsp", true);
 	}
+	
 	// 아이디 중복체크
 	public Object idCheck(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
@@ -107,6 +108,7 @@ public class UserController implements Controller {
 
 		return obj;
 	}
+	
 	// 로그아웃
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -121,7 +123,6 @@ public class UserController implements Controller {
 		mv.setViewName("front?key=main&methodName=read");
 	    mv.setRedirect(true);
 	    return mv;
-
 	}
 
 	// 회원탈퇴
@@ -165,16 +166,14 @@ public class UserController implements Controller {
 		try {
 			int result = us.update(dto);
 			if (result == 1) {
-				return new ModelAndView("update.jsp", true);
+				//req.set애트리뷰트("내맘대로", true);
+				return new ModelAndView("update.jsp", true); //jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert 
 			} else {
-				// 에러창
+			 //   return new ModelAndView("login.jsp", true);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
-
 }

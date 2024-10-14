@@ -42,6 +42,7 @@ public class HostController implements Controller {
 					return mv;
 				} else {
 					// 에러페이지 = 정보를 다시 입력하세요.
+				 //   return new ModelAndView("comUser.jsp", true);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -63,16 +64,15 @@ public class HostController implements Controller {
 		    try {
 				if (dbDTO == null) {
 					// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-				    return new ModelAndView("login.jsp", true);
+				  //  return new ModelAndView("login.jsp", true);
 				}
 				if (dbDTO.getHost_ben_check() == 0) {
 					// 오류메세지 = 정지된 아이디 입니다.
-				    return new ModelAndView("login.jsp", true);
+				 //   return new ModelAndView("login.jsp", true);
 						}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		    
 		    
 		    HttpSession session = request.getSession();
 		    session.setAttribute("loginCom",new HostDTO( dbDTO.getHost_id(),dbDTO.getHost_name(),dbDTO.getHost_seq()));
@@ -113,9 +113,5 @@ public class HostController implements Controller {
 		mv.setViewName("front?key=main&methodName=read");
 	    mv.setRedirect(true);
 		return mv;
-
 	}
-
-
-
 }

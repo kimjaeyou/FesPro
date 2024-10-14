@@ -19,8 +19,8 @@ public class FesDTO {
 		private String	IMGURL; //이미지경로
 		private String	DTLCONT; //상세내용
 		private String	TELNO; //전화번호
-		private String	V_MAX; //서비스이용 시작시간
-		private String	V_MIN; //서비스이용 종료시간
+		private String	V_MAX; //서비스이용 종료시간
+		private String	V_MIN; //서비스이용 시작시간
 		private String	REVSTDDAY; //취소기간 기준일까지
 		private String	REVSTDDAYNM; //취소기간 기준정보
 		private int Fes_state; //등록신청 정보(승인전, 승인완료, ...)
