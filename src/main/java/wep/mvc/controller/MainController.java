@@ -14,7 +14,7 @@ import wep.mvc.dto.row;
 import wep.mvc.service.MainSereviceImpl;
 
 public class MainController implements Controller {
-	MainSereviceImpl mainService =new MainSereviceImpl();
+	MainSereviceImpl mainService = new MainSereviceImpl();
 
 
 	public ModelAndView read(HttpServletRequest req, HttpServletResponse resp)

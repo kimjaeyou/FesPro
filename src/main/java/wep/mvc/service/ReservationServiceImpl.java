@@ -18,9 +18,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ReservationDTO selectByUserSeq(int userSeq) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReservationDTO selectByUserSeq(int userSeq) throws SQLException {
+		ReservationDTO resvDTO = dao.selectByUserSeq(userSeq);
+		return resvDTO;
 	}
 
 	@Override
@@ -29,5 +29,18 @@ public class ReservationServiceImpl implements ReservationService {
 		return resvDTO;
 	}
 
+	@Override
+	public ReservationDTO selectBySVCID(String SVCID) throws SQLException {
+		ReservationDTO resvDTO = dao.selectBySVCID(SVCID);
+		return resvDTO;
+	}
+
+	@Override
+	public ReservationDTO selectByUserSeqAndSVCID(int userSeq, String SVCID) throws SQLException {
+		ReservationDTO resvDTO = dao.selectByUserSeqAndSVCID(userSeq, SVCID); 
+		return resvDTO;
+	}
+	
+	
 
 }

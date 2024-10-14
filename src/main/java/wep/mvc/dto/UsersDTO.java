@@ -63,8 +63,8 @@ public class UsersDTO {
 		this.user_tel = user_tel;
 	}
 
-	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr, String gender, String email,
-			String user_name, String disable, String user_tel) {
+	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr,  String email,
+			String user_name, String user_tel, String gender, String disable) {
 		super();
 		this.user_seq = user_seq;
 		this.user_id = user_id;
