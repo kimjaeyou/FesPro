@@ -5,6 +5,7 @@ import java.util.List;
 
 import wep.mvc.dao.SuperAuthDAO;
 import wep.mvc.dao.SuperAuthDAOImpl;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
 
@@ -23,6 +24,8 @@ public interface SuperAuthService{
 	HostDTO hostSelect(HostDTO HostDto);
 
 	public int hostUpdate(HostDTO host);
+
+	public List<FesDTO> sessionLocationAll(int sessionSeq);
 
 	/*
 	 * UsersDTO selectById(String id);

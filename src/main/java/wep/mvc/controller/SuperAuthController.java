@@ -8,6 +8,8 @@ import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.SuperAuthService;
@@ -154,5 +156,21 @@ SuperAuthService service = new SuperAuthServiceImpl();
 			System.out.println("회원 업데이트 실패 Controller-update");
 			return null;
 		}
+	}
+	
+	public ModelAndView sessionLocationAll(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("Fes로케이션 컨트롤러");
+		
+		HttpSession session = request.getSession();
+		int sessionSeq = (int)session.getAttribute("user_seq");
+		
+		List<FesDTO> list = new ArrayList<FesDTO>();
+		list = service.sessionLocationAll(sessionSeq);
+		System.out.println("Fes로케이션 list = "+list);
+		
+		request.setAttribute("FesList", list);
+		return new ModelAndView("super/auth/authChart.js");
+		 
 	}
 }

@@ -49,6 +49,27 @@ $(function(){
 	});
 });
 </script>
+<script>
+$(document).ready(function() {
+    // DataTable 초기화
+    var table = $('#datatablesSimple').DataTable();
+
+    // URL에서 search 파라미터 값을 가져옴
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchValue = urlParams.get('search'); // "승인대기" 값이 넘어옴
+    
+    // searchValue 값이 있으면 검색창에 넣고 자동 필터링
+    if (searchValue) {
+        $('#searchInput').val(searchValue).trigger('input');
+        table.search(searchValue).draw();
+    }
+
+    // 검색창 입력 시 자동 필터링
+    $('#searchInput').on('input', function() {
+        table.search(this.value).draw();
+    });
+});
+</script>
 </head>
 
 <div id="layoutSidenav_content">

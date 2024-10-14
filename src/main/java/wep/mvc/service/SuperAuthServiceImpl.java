@@ -5,6 +5,7 @@ import java.util.List;
 
 import wep.mvc.dao.SuperAuthDAO;
 import wep.mvc.dao.SuperAuthDAOImpl;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
 
@@ -72,6 +73,16 @@ public class SuperAuthServiceImpl implements SuperAuthService {
 		result = dao.hostUpdate(host);
 		
 		return result;
+	}
+
+	@Override
+	public List<FesDTO> sessionLocationAll(int sessionSeq) {
+		System.out.println("Fes로케이션 서비스");
+		List<FesDTO> list = new ArrayList<FesDTO>();
+		list = dao.sessionLocationAll(sessionSeq);
+		System.out.println("Fes로케이션 서비스 list = "+list);
+		return list;
+	
 	}
 	
 	/*

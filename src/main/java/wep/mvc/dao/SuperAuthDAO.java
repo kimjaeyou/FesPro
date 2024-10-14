@@ -22,6 +22,8 @@ public interface SuperAuthDAO {
 
 	int hostUpdate(HostDTO host);
 
+	List<FesDTO> sessionLocationAll(int sessionSeq);
+
 	/*
 	 * UsersDTO selectById(String id);
 	 * 

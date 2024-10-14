@@ -219,7 +219,75 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 
 		return result;
 	}
-}
+
+	@Override
+	public List<FesDTO> sessionLocationAll(int sessionSeq) {
+		 System.out.println("세션로케이션 올 다오");
+		  Connection con = null;
+		  PreparedStatement ps = null;
+		  ResultSet rs = null;
+		  List<FesDTO> list = new ArrayList<FesDTO>();
+		  try {
+		   con = DbUtil.getConnection();
+		   ps = con.prepareStatement("SELECT \r\n"
+		   		+ "    F.SVCID,\r\n"
+		   		+ "    F.MAXCLASSNM,\r\n"
+		   		+ "    F.MINCLASSNM,\r\n"
+		   		+ "    F.SVCSTATNM,\r\n"
+		   		+ "    F.SVCNM,\r\n"
+		   		+ "    F.PAYATNM,\r\n"
+		   		+ "    F.PLACENM,\r\n"
+		   		+ "    F.USETGTINFO,\r\n"
+		   		+ "    F.X,\r\n"
+		   		+ "    F.Y,\r\n"
+		   		+ "    F.SVCOPNBGNDT,\r\n"
+		   		+ "    F.SVCOPNENDDT,\r\n"
+		   		+ "    F.RCPTBGNDT,\r\n"
+		   		+ "    F.AREANM,\r\n"
+		   		+ "    F.IMGURL,\r\n"
+		   		+ "    F.DTLCONT,\r\n"
+		   		+ "    F.TELNO,\r\n"
+		   		+ "    F.V_MAX,\r\n"
+		   		+ "    F.V_MIN,\r\n"
+		   		+ "    F.REVSTDDAY,\r\n"
+		   		+ "    F.REVSTDDAYNM,\r\n"
+		   		+ "    F.FES_STATE,\r\n"
+		   		+ "    F.UPDATE_DATE,\r\n"
+		   		+ "    F.MAXNUM,\r\n"
+		   		+ "    F.PRICE\r\n"
+		   		+ "FROM \r\n"
+		   		+ "    USERS U\r\n"
+		   		+ "JOIN \r\n"
+		   		+ "    RESERVATION R ON U.USER_SEQ = R.USER_SEQ\r\n"
+		   		+ "JOIN \r\n"
+		   		+ "    FES F ON R.SVCID = F.SVCID\r\n"
+		   		+ "WHERE \r\n"
+		   		+ "    U.USER_SEQ = ?;");
+		   ps.setInt(1, sessionSeq);
+		   rs  = ps.executeQuery();
+		   while(rs.next()){
+		    list.add(new FesDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					   rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+					   rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12),
+					   rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
+					   rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20),
+					   rs.getString(21), rs.getInt(22), rs.getString(23), rs.getInt(24),
+					   rs.getInt(25), rs.getInt(26), rs.getString(27))
+		   );}
+
+		  } catch (SQLException e) {
+		   e.printStackTrace();
+		  } finally {
+		   DbUtil.dbClose(con, ps, rs);
+		  }
+		  return list;
+		 }
+
+
+	
+	
+	}
+
 
 	 
 			/*
