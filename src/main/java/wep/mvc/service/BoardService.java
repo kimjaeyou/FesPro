@@ -17,8 +17,8 @@ public interface BoardService {
 	
 	public int delete(String boardSeq, String user_pw) throws SQLException;
 
-	
-	public List<BoardDTO> select(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) throws SQLException;
+
+	BoardDTO select(int postUserSeq, Integer userSeq, Integer hostSeq) throws SQLException;
 	
 	
 }
