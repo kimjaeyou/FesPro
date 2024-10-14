@@ -145,7 +145,7 @@
         </tr>
         <tr>
             <th>취소기한</th>
-            <td></td>
+            <td>${resvDTO.cancleDate}</td>
         </tr>
     </table>
 

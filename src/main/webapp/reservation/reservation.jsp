@@ -429,6 +429,7 @@
 			    console.log(time);
 			    console.log(peopleNum);
 			    console.log(fee);
+			    console.log(cancleDate);
 			    if (date === "") {
                     alert("이용일자를 선택해주세요");
                     return false;
@@ -451,7 +452,7 @@
                     document.resvForm.time.value = time;
                     document.resvForm.peopleNum.value = peopleNum;
                     document.resvForm.fee.value = fee;
-                    document.resvForm.fee.cancleDate = cancleDate;
+                    document.resvForm.cancleDate.value = cancleDate;
                     
                     document.resvForm.submit();
                 }
