@@ -55,7 +55,12 @@
 				</thead>
 
 			</table>
-			<a href="${path}/front?key=board&methodName=write" class="btn btn-primary pull-right">글쓰기</a>
+			
+			<form name="write" method="post" action="${path}/front?key=board&methodName=write" >
+			<%-- <input type="button" ${path}/front?key=board&methodName=write class="btn btn-primary pull-right">글쓰기 --%>
+			
+				<button>이동</button>
+			</form>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
