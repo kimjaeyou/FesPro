@@ -5,8 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="loginCheck.jsp" %>
 <!DOCTYPE html>
-<html lang="UTF-8">
-
+<html lang="utf-8" data-bs-theme="auto">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

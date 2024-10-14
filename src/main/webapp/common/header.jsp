@@ -14,6 +14,7 @@
     <link rel="canonical" href="https://get bootstrap.com/docs/5.3/examples/headers/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
+    
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -28,6 +29,7 @@
 		font-size: 3.5rem;
 	}
 }
+
 .b-example-divider {
 	width: 100%;
 	height: 3rem;
@@ -37,27 +39,27 @@
 	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
 		rgba(0, 0, 0, .15);
 }
+
 .b-example-vr {
 	flex-shrink: 0;
 	width: 1.5rem;
 	height: 100vh;
 }
-=======
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
->>>>>>> a2e8f0debee527d94a4d56d67d7eba00d933accb
+<
+style>.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
 
 .bi {
 	vertical-align: -.125em;
 	fill: currentColor;
 }
+
 .nav-scroller {
 	position: relative;
 	z-index: 2;
@@ -97,35 +99,35 @@
 }
 
 .navbar-nav {
-    display: inline-block;
+	display: inline-block;
 }
 
 .navbar-nav li {
-    display: inline;
-    margin-right: 10px;
+	display: inline;
+	margin-right: 10px;
 }
 
 .bd-mode-toggle .dropdown-menu .active .bi {
-    display: block !important;
+	display: block !important;
 }
 
 img {
-    width: 100px;
-    height: 100px;
+	width: 100px;
+	height: 100px;
 }
 
 .navbar-nav a {
-    text-decoration: none;
-    color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 .btn a {
-    text-decoration: none;
-    color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 .btn a:hover {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 #btnYun {
@@ -145,20 +147,20 @@ img {
 #btnYun:hover {
 	background-color: darkblue;
 }
-.navbar-nav {
-    background: #B3CEE5;
-    display: flex;
-    margin: 10px;
-    padding: 10px;
-    border:#A6A6A6;
-    border-radius: 15px;
-    font-size: 1.25rem;
-    text-align: center;
-    display: flex; 
-    justify-content: center; 
-    margin-right: 10px; 
-}
 
+.navbar-nav {
+	background: #B3CEE5;
+	display: flex;
+	margin: 10px;
+	padding: 10px;
+	border: #A6A6A6;
+	border-radius: 15px;
+	font-size: 1.25rem;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	margin-right: 10px;
+}
 </style>
 <!-- Custom styles for this template -->
     <!--  <link href="headers.css" rel="stylesheet">-->
