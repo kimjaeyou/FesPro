@@ -113,10 +113,17 @@
         
 </head>
 <body>
-    <h3>행사명</h3>
-    <img alt="행사 이미지" src="https://picsum.photos/1000/1000" data-img="svcImg">
+    <h3>행사명 : ${fesDTO.SVCNM}</h3>
+    <c:choose>
+    	<c:when test="${empty fes.IMGURL}">
+    		<img alt="행사 이미지" src="https://picsum.photos/1000/1000" data-img="svcImg">
+    	</c:when>
+    	<c:otherwise>
+    		<img src = "${fes.IMGURL}" data-img="fesImg">
+    	</c:otherwise>
+    </c:choose>
 	<table class = "resv_data">
-        <caption>행사명</caption>
+        <caption>${fesDTO.SVCNM}</caption>
         <tr>
             <th>예약번호</th>
             <td>${resvDTO.reservSeq}</td>

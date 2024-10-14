@@ -2,7 +2,9 @@ package wep.mvc.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,11 +12,13 @@ import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.service.MainSereviceImpl;
 import wep.mvc.service.ReservationService;
 import wep.mvc.service.ReservationServiceImpl;
 
 public class ReservationController implements Controller {
 	ReservationService service = new ReservationServiceImpl();
+	MainSereviceImpl mainService = new MainSereviceImpl();
 	
 	public ReservationController () {
 		System.out.println("ReservationController 생성됨..");
@@ -106,6 +110,14 @@ public class ReservationController implements Controller {
 		// userSeq로 유저정보 검색해서 유저정보 가져온다
 		UsersDTO userDTO = service.selectUser(resvDTO.getUserSeq());
 		request.setAttribute("userDTO", userDTO);
+		
+		// application이 가지고 있는 fes 정보 가져오기
+		ServletContext app = request.getServletContext();
+		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
+		
+		FesDTO fes = mainService.selecOne(resvDTO.getSVCID(), list);
+		if(fes!=null)
+			request.setAttribute("fes", fes);
 		
 		if(resvDTO != null && fesDTO != null) {
 			return new ModelAndView("reservation/resvDetail.jsp", false);
