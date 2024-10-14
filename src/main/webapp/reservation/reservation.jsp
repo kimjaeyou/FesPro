@@ -20,16 +20,16 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
     
         
-        <link rel="stylesheet" href="fonts/icomoon/style.css">
+        <link rel="stylesheet" href="${path}/reservation/fonts/icomoon/style.css">
     
-        <link rel="stylesheet" href="css/rome.css">
+        <link rel="stylesheet" href="${path}/reservation/css/rome.css">
         
         
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         
         <!-- Style -->
-        <link rel="stylesheet" href="css/style2.css">
+        <link rel="stylesheet" href="${path}/reservation/css/style2.css">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
         
@@ -70,42 +70,42 @@
 		<script type="text/javascript">
 			// 사이드바에 선택한 값 입력
 			$(document).on("click", ".rd-day-body", function() {
-				let stringDate = $("#result").val();
+				let stringDate1 = $("#result").val();
 			       //console.log(stringDate);
 			    
-			    let date = new Date(stringDate);
-			    let dateFormat1 = date.getFullYear() +
-				'-' + ( (date.getMonth()+1) < 10 ? "0" + (date.getMonth()+1) : (date.getMonth()+1) )+
-				'-' + ( (date.getDate()) < 10 ? "0" + (date.getDate()) : (date.getDate()) );
+			    let date1 = new Date(stringDate1);
+			    let dateFormat1 = date1.getFullYear() +
+				'-' + ( (date1.getMonth()+1) < 10 ? "0" + (date1.getMonth()+1) : (date1.getMonth()+1) )+
+				'-' + ( (date1.getDate()) < 10 ? "0" + (date1.getDate()) : (date1.getDate()) );
 			       
 				$("[data-form=date]").html(dateFormat1);
 				
 				//date2 = new Date(stringDate);
-				console.log(date);
-				let cancleDate = new Date(date);
-				cancleDate.setDate(date.getDate()-1); // 취소기간 기준일 받아와서 넣기
-				console.log(cancleDate);
+				console.log(date1);
+				let cancleDate1 = new Date(date1);
+				cancleDate1.setDate(date1.getDate()-1); // 취소기간 기준일 받아와서 넣기
+				console.log(cancleDate1);
 				
 				//console.log(new Date());
-				let dateFormat2 = cancleDate.getFullYear() +
-				'-' + ( (cancleDate.getMonth()+1) < 10 ? "0" + (cancleDate.getMonth()+1) : (cancleDate.getMonth()+1) )+
-				'-' + ( (cancleDate.getDate()) < 10 ? "0" + (cancleDate.getDate()) : (cancleDate.getDate()) );
+				let dateFormat2 = cancleDate1.getFullYear() +
+				'-' + ( (cancleDate1.getMonth()+1) < 10 ? "0" + (cancleDate1.getMonth()+1) : (cancleDate1.getMonth()+1) )+
+				'-' + ( (cancleDate1.getDate()) < 10 ? "0" + (cancleDate1.getDate()) : (cancleDate1.getDate()) );
 			
 				$("[data-form=canclePeriod]").html(dateFormat2);
 				
 			})
 	
 			   $(document).on("click", ".datepicker-cell", function() {
-				let stringDate = $("#datepicker1").val();
-				$("[data-form=date]").html(stringDate);
+				let stringDate2 = $("#datepicker1").val();
+				$("[data-form=date]").html(stringDate2);
 				
-				let date = new Date(stringDate);
-				let cancleDate = new Date();
-				cancleDate.setDate(date.getDate()-1);
+				let date2 = new Date(stringDate2);
+				let cancleDate2 = new Date(date2);
+				cancleDate2.setDate(date2.getDate()-1);
 				
-				console.log(cancleDate);
+				console.log(cancleDate2);
 				let canclePeriod = date-1; // 취소기간 기준일 받아와서 넣기
-				$("[data-form=canclePeriod]").html(canclePeriod);
+				$("[data-form=canclePeriod]").html(cancleDate2);
 			})
 	
 			$(document).on("click", ".time", function() {
@@ -375,16 +375,16 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="${path}/reservation/js/scripts.js"></script>
 
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
+        <script src="${path}/reservation/js/jquery-3.3.1.min.js"></script>
+        <script src="${path}/reservation/js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/rome.js"></script>
+        <script src="${path}/reservation/js/rome.js"></script>
     
-        <script src="js/main.js"></script>
+        <script src="${path}/reservation/js/main.js"></script>
 		
-		<script src="../js/reservation.js"></script>
+		<script src="${path}/js/reservation.js"></script>
 		
 		<script type="text/javascript">
 			document.querySelector("#chkAll").addEventListener("click", (e) => {
