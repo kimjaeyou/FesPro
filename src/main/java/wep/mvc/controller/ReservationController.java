@@ -77,4 +77,9 @@ public class ReservationController implements Controller {
 		}
 	}
 	
+	public ModelAndView revMove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	
+		return new ModelAndView("reservation/reservation.jsp", false);
+	}
+	
 }
