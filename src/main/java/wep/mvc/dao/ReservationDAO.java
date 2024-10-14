@@ -47,4 +47,5 @@ public interface ReservationDAO {
 	 * userSeq로 유저정보 검색
 	 */
 	UsersDTO selectUser (int userSeq) throws SQLException;
+
 }

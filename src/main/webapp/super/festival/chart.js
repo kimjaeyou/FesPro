@@ -131,6 +131,13 @@ function genderReviewAvg (ctx,reviewUserList){
           backgroundColor:[maleColor,femaleColor]
         }]
       },
+      options : {
+		  plugins : {
+			  legend : {
+					display : false
+				}
+		  }
+	  }
     });
 }
 
@@ -156,7 +163,14 @@ function ageReviewAvg (ctx,reviewUserList){
 					'rgba(99, 255, 132, 1)'
 				],
 			}]
-		}
+		},
+		 options : {
+		  plugins : {
+			  legend : {
+					display : false
+				}
+		  }
+	  }
 	});
 }
 

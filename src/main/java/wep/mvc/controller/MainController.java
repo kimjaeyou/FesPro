@@ -12,7 +12,7 @@ import wep.mvc.dto.FesDTO;
 import wep.mvc.service.MainSereviceImpl;
 
 public class MainController implements Controller {
-	MainSereviceImpl mainService = new MainSereviceImpl();
+	MainSereviceImpl mainService =new MainSereviceImpl();
 
 
 	public ModelAndView read(HttpServletRequest req, HttpServletResponse resp)

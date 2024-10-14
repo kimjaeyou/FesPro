@@ -16,7 +16,7 @@ public interface ReservationService {
 	/**
 	 * ReservationDAOImpl selectByUserSeq 메소드 호출
 	 */
-	public ReservationDTO selectByUserSeq (int userSeq) throws SQLException;
+	public ReservationDTO selectByUserSeq (int userSeq);
 	
 	/**
 	 * ReservationDAOImpl selectByResvSeq 메소드 호출
@@ -47,4 +47,5 @@ public interface ReservationService {
 	 * userSeq로 유저정보 가져오는 selectUser 메소드 호출
 	 */
 	public UsersDTO selectUser(int userSeq) throws SQLException;
+
 }
