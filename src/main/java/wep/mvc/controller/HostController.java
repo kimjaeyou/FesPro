@@ -19,7 +19,7 @@ public class HostController implements Controller {
 	// 회원가입
 		public ModelAndView insert(HttpServletRequest request, HttpServletResponse resp)
 				throws ServletException, IOException {
-			
+
 			String id = request.getParameter("company-id");
 			String pass = request.getParameter("company-pw");
 			String tel = request.getParameter("com-phone1") + "-"
@@ -58,7 +58,6 @@ public class HostController implements Controller {
 		    String userpw = request.getParameter("corporate-pw");
 		  
 		    System.out.println(userId+" "+userpw);
-		    //서비스 호출 
 		    HostDTO dbDTO = hs.login( new HostDTO(userId,userpw) );
 		    System.out.println(dbDTO);
 		    try {

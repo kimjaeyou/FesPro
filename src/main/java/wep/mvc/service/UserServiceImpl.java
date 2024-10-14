@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 	// 아이디 중복체크
 	@Override
 	public boolean idCheck(String id) throws SQLException {
-
-		return user.idCheck(id);
+		boolean result = user.idCheck(id);
+		return result;
 
 	}
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UsersDTO selectUser(UsersDTO usersDTO)  throws SQLException{
+	public UsersDTO selectUser(String usersDTO)  throws SQLException{
 		
 		return user.selectUser(usersDTO);
 	}
