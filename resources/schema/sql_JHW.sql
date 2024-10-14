@@ -111,3 +111,24 @@ INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,2,1,'좋아요2',2);
 INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,3,1,'좋아요3',5);
 
 SELECT * FROM REVIEW WHERE SVCID=1;
+
+-- 리뷰 쓴 유저 뷰생성
+
+-- 뷰 삭제
+DROP VIEW FES_REVIEW_USER_VIEW;
+
+CREATE VIEW FES_REVIEW_USER_VIEW AS
+SELECT
+    u.*,
+    r.SCORE
+    r
+FROM 
+    fes f
+JOIN 
+    REVIEW r ON f.SVCID = r.SVCID
+JOIN 
+    USERS u ON r.user_seq = u.user_seq
+;
+
+--뷰 조회
+SELECT * FROM FES_REVIEW_USER_VIEW;

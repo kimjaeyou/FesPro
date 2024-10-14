@@ -62,8 +62,9 @@ public class SuperFestivalController implements Controller {
 		req.setAttribute("reviewLength", reviewList.size());
 		
 		//리뷰 쓴 유저 정보 보내기
-		//List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
-		// view 만들기 : FES_REVIEW_USER_VIEW
+		List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
+		data = g.toJson(reviewUserList);
+		req.setAttribute("reviewUserList", data);
 		
 		return new ModelAndView("super/festival/detail.jsp");
 	}
