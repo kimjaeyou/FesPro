@@ -59,6 +59,7 @@ public class UserController implements Controller {
 			if (dbDTO == null) {
 				// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
 			}
+			
 			if (dbDTO.getUser_ben_check() == 0) {
 				// 오류메세지 = 정지된 아이디 입니다.
 			}
