@@ -26,12 +26,6 @@ public class ReservationDTO {
 		this.resvPrice = resvPrice;
 	}
 	
-	public ReservationDTO(int userSeq, String sVCID, String svcDate, String svcTime, int resvPeo,
-		int resvPrice, int resvCheck) {
-		this(userSeq, sVCID, svcDate, svcTime, resvPeo, resvPrice);
-		this.resvCheck = resvCheck;
-	}
-	
 	public ReservationDTO(int reservSeq, int userSeq, String sVCID, String resvDate, String svcDate, String svcTime,
 			int resvPeo, int resvPrice, int resvCheck) {
 		super();
