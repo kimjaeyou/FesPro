@@ -1,8 +1,10 @@
 <%@page import="wep.mvc.dto.UsersDTO"%>
+<%@page import="wep.mvc.dto.ReservationDTO2"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="myPageCheck.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="myPageCheck.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,28 +75,36 @@
 								<th>신청일</th>
 								<th>이용요금</th>
 								<th>예약현황</th>
-								<th>관리</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><a href="" class="no-underline1"></a></td>
-								<td><a href="" class="no-underline2"></a></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<button class="manage-button" id="showDetailsButton">상세보기</button>
-								</td>
-							</tr>
+						<c:choose>
+								<c:when test="${empty reservation}">
+									<tr>
+										<td colspan="6">
+											<p align="center">
+												<b><span style="font-size: 9pt;">예약정보가 없습니다.</span></b>
+											</p>
+										</td>
+									</tr>
+								</c:when>
+								 <c:otherwise>
+									<c:forEach items="${reservation}" var="re">
+										<tr>
+											<td><a href="" class="no-underline1">${re.Reserv_Seq}</a></td>
+											<td><a href="" class="no-underline2">${re.Svcnm}</a></td>
+											<td>${re.Resv_Date} / ${re.Svc_Time}회차</td>
+											<td>${re.Svc_Date}</td>
+											<td>${re.Resv_Price}</td>
+											<td>${re.Resv_Check}</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>
 			</main>
-
-			<!-- 푸터 -->
-
 		</div>
 	</div>
 
