@@ -58,10 +58,12 @@ public class UserController implements Controller {
 		try {
 			if (dbDTO == null) {
 				// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
+			    return new ModelAndView("login.jsp", true);
 			}
 			
 			if (dbDTO.getUser_ben_check() == 0) {
 				// 오류메세지 = 정지된 아이디 입니다.
+			    return new ModelAndView("login.jsp", true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +85,7 @@ public class UserController implements Controller {
 	    System.out.println(dbDTO);
 	    try {
 	        if (dbDTO == null) {
-	            // 오류 메시지 처리 
+	            // 오류 메시지 처리
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();

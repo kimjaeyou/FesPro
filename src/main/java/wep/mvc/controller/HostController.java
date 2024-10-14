@@ -29,7 +29,6 @@ public class HostController implements Controller {
 			String repName = request.getParameter("rep-name");
 			String comName = request.getParameter("comname");
 			
-			
 			HostDTO dto = new HostDTO(id,comName,pass,tel,hostName,0,repName,1);
 			System.out.println(dto);
 
@@ -64,9 +63,11 @@ public class HostController implements Controller {
 		    try {
 				if (dbDTO == null) {
 					// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-					}
+				    return new ModelAndView("login.jsp", true);
+				}
 				if (dbDTO.getHost_ben_check() == 0) {
 					// 오류메세지 = 정지된 아이디 입니다.
+				    return new ModelAndView("login.jsp", true);
 						}
 			} catch (Exception e) {
 				e.printStackTrace();
