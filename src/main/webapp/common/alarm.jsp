@@ -44,8 +44,11 @@
 </style>
 </head>
 <body>
-	<div id="messageContainner">
-		<img alt="Logo" src="${path}/assets/img/FesProLogo_bg.png">
+
+		<c:choose>
+      <c:when test="${not empty sessionScope.loginUser}">
+ 	<div id="messageContainner">
+		<img alt="Logo" src="assets/img/FesProLogo_bg.png">
 		<div id="yo1">
 			<a href="${path}/front?key=messageAndAlram&methodName=mMove">
 				<!--  <img id="messageImg" alt="message" src="${path}/assets/img/messageImg/message_0.png"/>-->
@@ -59,5 +62,26 @@
 			<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
 		</div>
 	</div>
+	</c:when>
+     <c:when test="${not empty sessionScope.loginCom}">
+ 	<div id="messageContainner">
+		<img alt="Logo" src="assets/img/FesProLogo_bg.png">
+		<div id="yo1">
+			<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
+		</div>
+		<div id="yo1">
+			<a href="${path}/user/Reservation.jsp">MY페이지</a>
+		</div>
+		<div id="yo1">
+			<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
+		</div>
+	</div>
+	</c:when>
+     		<c:when test="${empty sessionScope.loginUser}">
+	</c:when>
+     <c:when test="${empty sessionScope.loginCom}">
+ 	      
+		</c:when>
+	</c:choose>
 </body>
 </html>

@@ -1,0 +1,9 @@
+diff a/src/main/webapp/reservation/reservation.jsp b/src/main/webapp/reservation/reservation.jsp	(rejected hunks)
+@@ -12,6 +12,7 @@
+         <!-- Favicon-->
+         <link rel="icon" type="image/x-icon" href="${path}/assets/img/FesProLogo_bg.png" />
+         <!-- Core theme CSS (includes Bootstrap)-->
++        <link href="../css/styles.css" rel="stylesheet" />
+ 
+ 
+         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">

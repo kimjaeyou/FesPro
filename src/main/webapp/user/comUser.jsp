@@ -1,6 +1,8 @@
+<%@page import="wep.mvc.dto.UsersDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="loginCheck.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,8 +37,8 @@
                 <label for="username">아이디</label>
                 <div class="input-group">
                     <input type="text" id="company-id" name="company-id" placeholder="아이디를 입력하세요." required>
-                    <button type="button" id="check-username" class="check-btn">중복 체크</button>
-                </div>
+            		<p id="id-match-message" class="info-text"></p>
+                    </div>
             </div>
 
             <div class="form-group">

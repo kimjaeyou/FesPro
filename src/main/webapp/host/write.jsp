@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script>
 function checkValid(){
+
 	var f=window.document.writeForm;
 	
 	if(!f.MAXCLASSNM.checked){
@@ -126,6 +127,7 @@ function checkValid(){
 	}
 	
 	return true;
+
 	
 }
 </script>
@@ -182,11 +184,13 @@ function checkValid(){
         	<tr>
         		<td><p align="center"><span>서비스대상</span></p></td>
         		<td><p align="center"><span>
+
         			<label><input type="radio" name="USETGTINFO" value="유아">유아</label>
         			<label><input type="radio" name="USETGTINFO" value="초등학생">초등학생</label>
         			<label><input type="radio" name="USETGTINFO" value="중학생">중학생</label>
         			<label><input type="radio" name="USETGTINFO" value="고등학생">고등학생</label>
         			<label><input type="radio" name="USETGTINFO" value="성인">성인</label>
+
         		</span></p></td>
         	</tr>
         	<tr>
@@ -242,17 +246,13 @@ function checkValid(){
         		<td width="450" height="20"><b><span style="font-size:9pt;">
         		<input type="file" name="IMGURL" maxlength="60" size="40"></span></b></td>
     		</tr>
-        	<!-- 지도API 활용 예정: 장소명o, 장소X좌표o,장소Y좌표o, 지역명 -->
+        	<!-- 지도API 활용 예정: 장소명o, 장소X좌표,장소Y좌표, 지역명 -->
         	<tr>
         		<td><p align="center"><b><span>장소명</span></b></p></td>
         		<td width="1000"><p align="center"><span><input type="text" id="placenm" name="PLACENM" size="100" onkeyup="getPLACENMValue()"></span></p>
-        		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
+        		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services"></script>
         		<div id="map" style="width:100%;height:350px;"></div>
-        		
-     			<label>위도: <input type="text" id="latitude" name="X" readonly></label>
-				<label>경도: <input type="text" id="longitude" name="Y" readonly></label>
-     			<input type="text" name="AREANM" size="15" placeholder="XX구 입력해 주세요.">
-     			</span></p></td>
+        		</td>
         	</tr>
         	<tr>
         		<td><p align="center"><b><span>분류태그</span></b></p></td>
@@ -328,7 +328,7 @@ function displayMarker(place) {
         
         //마커를 클릭하면 x좌표, y좌표, 지역명을 가져온다
      	// 클릭한 위도, 경도 정보를 가져옵니다 
-        var latlng = marker.getPosition();
+        var latlng = mouseEvent.latLng; 
         
         // 마커 위치를 클릭한 위치로 옮깁니다
         marker.setPosition(latlng);
@@ -336,10 +336,10 @@ function displayMarker(place) {
         var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
         message += '경도는 ' + latlng.getLng() + ' 입니다';
         
-        console.log(message);
+        var resultDiv = document.getElementById('clickLatlng'); 
+        resultDiv.innerHTML = message;
         
-        document.getElementById('latitude').value = latlng.getLat();
-        document.getElementById('longitude').value = latlng.getLng();
+        console.log(message);
     });
 }
 
@@ -351,6 +351,12 @@ function getPLACENMValue(){
 }
 
 </script>
-
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js"></script>
+<script type="text/javascript">
+kakao.maps.load(function() {
+    // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+    var map = new kakao.maps.Map(node, options);
+});
+</script>
 </body>
 </html>

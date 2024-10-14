@@ -27,15 +27,64 @@ public class UsersDAOImpl implements UsersDAO {
 
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				dbDTO = new UsersDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-						rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+				dbDTO = new UsersDTO(rs.getInt("user_seq"), 
+									 rs.getString("user_id"), 
+									 rs.getString("user_pw"), 
+									 rs.getInt("age"), 
+									 rs.getString("addr"),
+									 rs.getString("gender"), 
+									 rs.getString("email"), 
+									 rs.getString("user_name"), 
+									 rs.getString("disable"), 
+									 rs.getString("user_tel"));
 			}
-
+			
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return dbDTO;
 	}
+
+	
+	// 회원수정 할때 데이터 넣기위해 DB 자료 꺼내기
+	@Override
+	public UsersDTO selectUser(UsersDTO usersDTO)  throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		UsersDTO dbDTO = null;
+
+		String sql = "select * from users where user_id=? and user_name=?";
+		
+		rs = ps.executeQuery();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, usersDTO.getUser_id());
+			ps.setString(2, usersDTO.getUser_name());
+			rs = ps.executeQuery();
+			
+		if (rs.next()) {
+			dbDTO = new UsersDTO(rs.getInt("user_seq"), 
+								 rs.getString("user_id"), 
+								 rs.getString("user_pw"), 
+								 rs.getInt("age"), 
+								 rs.getString("addr"),
+								 rs.getString("gender"), 
+								 rs.getString("email"), 
+								 rs.getString("user_name"), 
+								 rs.getString("disable"), 
+								 rs.getString("user_tel"));
+		}
+		
+	} finally {
+		DbUtil.dbClose(con, ps, rs);
+	}
+		
+		return dbDTO;
+	}
+
+
 
 	// 회원가입
 	@Override

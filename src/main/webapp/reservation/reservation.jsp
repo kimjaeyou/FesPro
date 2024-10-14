@@ -8,9 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Blog Home - Start Bootstrap Template</title>
+        <title>예약 페이지</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="${path}/assets/img/FesProLogo_bg.png" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 
@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="css/style2.css">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         <style>
             .num {text-align: right;}
@@ -41,6 +43,23 @@
             #chkAll {margin-right: 5px; zoom: 2.0;}
             .chkLabel {margin: 0;}
 
+            table {
+                width: 100%;
+                padding: 20px;
+                border-top: solid black 2px;
+                border-bottom: solid black 2px;
+                border-right: none;
+                border-left: none;
+            }
+
+            th { text-align: center; background-color: rgba(204, 204, 204, 0.2); width: 20%;}
+
+            th, td { padding: 15px; border-bottom: solid rgba(199, 199, 199, 0.7) 1px;}
+
+            .bi-caret-right-fill { margin-bottom: 3px;}
+
+            [data-form] {color:blue}
+
         </style>
 		
 		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -49,81 +68,76 @@
 		<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
 		
 		<script type="text/javascript">
-            // 사이드바에 선택한 값 입력
-			$(function () {
-				$(document).on("click", ".rd-day-body", function() {
-					let date = $("#result").val();
-                    console.log(date);
-					$("[data-form=date]").html(date);
-				})
-
-                $(document).on("click", ".datepicker-cell", function() {
-					let date = $("#datepicker1").val();
-					$("[data-form=date]").html(date);
-				})
-				
-				$(document).on("click", ".time", function() {
-					let time = $(this).text();
-					$("[data-form=time]").html(time);
-				})
-
-                $(document).on("click", "#button-search", function(){
-                    let peopleNum = $("#people-num").html();
-                    $("[data-form=peopleNum]").html(peopleNum);
-                })
-
-			}); // ready 끝
+			// 사이드바에 선택한 값 입력
+			$(document).on("click", ".rd-day-body", function() {
+				let date = $("#result").val();
+			       console.log(date);
+				$("[data-form=date]").html(date);
+			})
+	
+			   $(document).on("click", ".datepicker-cell", function() {
+				let date = $("#datepicker1").val();
+				$("[data-form=date]").html(date);
+			})
+	
+			$(document).on("click", ".time", function() {
+				let time = $(this).text();
+				$("[data-form=time]").html(time);
+			})
+	
+			   $(document).on("click", "#button-search", function(){
+			       let peopleNum = $("#people-num").html();
+			       $("[data-form=peopleNum]").html(peopleNum);
+			})
 		</script>
-
-        <script type="text/javascript">
-            onload = () => {
+		
+		<script type="text/javascript">
+			onload = () => {
 				// 인원수 제어
-                let plus = document.querySelector(".plus");
-                let minus = document.querySelector(".minus");
-                let result = document.getElementById("people-num");
-                let i = 0;
-                
-                plus.addEventListener("click", ()=>{
-                    i++;
-                    result.innerHTML = i;
-                })
-
-                minus.addEventListener("click", () => {
-                    if(i>0){
-                        i--;
-                        result.innerHTML = i;
-                    } else {
-                        i=0;
-                        result.innerHTML = i;
-                    }
-                })
-                
-                // date picker 
-                const getDatePickerTitle = elem => {
-                    // From the label or the aria-label
-                    const label = elem.nextElementSibling;
-                    let titleText = '';
-                    if (label && label.tagName === 'LABEL') {
-                    titleText = label.textContent;
-                    } else {
-                    titleText = elem.getAttribute('aria-label') || '';
-                    }
-                    return titleText;
-                }
-                
-                const elems = document.querySelectorAll('.datepicker_input');
-                for (const elem of elems) {
-                    const datepicker = new Datepicker(elem, {
-                    // 'format': 'dd/mm/yyyy', // UK format
-                    'format': 'yyyy년 mm월 dd일', // UK format
-                    title: getDatePickerTitle(elem)
-                    });
-                }
-            }
-
-        </script>
-        
-
+	            let plus = document.querySelector(".plus");
+	            let minus = document.querySelector(".minus");
+	            let result = document.getElementById("people-num");
+	            let i = 0;
+	            
+	            plus.addEventListener("click", ()=>{
+	                i++;
+	                result.innerHTML = i;
+	            })
+	
+	            minus.addEventListener("click", () => {
+	                if(i>0){
+	                    i--;
+	                    result.innerHTML = i;
+	                } else {
+	                    i=0;
+	                    result.innerHTML = i;
+	                }
+	            })
+	            
+	            // date picker 
+	            const getDatePickerTitle = elem => {
+	                // From the label or the aria-label
+	                const label = elem.nextElementSibling;
+	                let titleText = '';
+	                if (label && label.tagName === 'LABEL') {
+	                titleText = label.textContent;
+	                } else {
+	                titleText = elem.getAttribute('aria-label') || '';
+	                }
+	                return titleText;
+	            }
+	            
+	            const elems = document.querySelectorAll('.datepicker_input');
+	            for (const elem of elems) {
+	                const datepicker = new Datepicker(elem, {
+	                // 'format': 'dd/mm/yyyy', // UK format
+	                'format': 'yyyy년 mm월 dd일', // UK format
+	                title: getDatePickerTitle(elem)
+	                });
+	            }
+        } // onload 끝
+		</script>
+		
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -132,6 +146,16 @@
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
+                    <div>
+                        <i class="bi bi-1-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>                        
+                    </div>
+                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약 완료 <br><br>
                     <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
                     <p class="lead mb-0">기타내용</p>
                 </div>
@@ -153,12 +177,15 @@
                               <div class="row justify-content-center">
                                 <div class="col-md-10 text-center">
                                   <h2 class="mb-5 text-center">예약날짜 / 회차 선택</h2>
-                                  <!-- <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                                  <!-- calendar 17 -->
+                                  <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
                                   <form action="#" class="row">
                                     <div class="col-md-12">
                                       <div id="inline_cal"></div>
                                     </div>
-                                  </form> -->
+                                  </form>
+
+                                  <!-- vanilla js-date picker -->
 	                                  <div class="form-floating mb-4 d-flex">
 	                                  <input 
 	                                         type="text"
@@ -211,17 +238,18 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h2 class="card-title h4">신청자 정보</h2>
+                                    <hr>
                                     <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p> -->
                                     <!-- 신청자 정보 가져오기 -->
                                      <table>
                                         <tr>
-                                        	<td>이름</td><td name="applicantName">나가</td>
+                                        	<th>이름</td><td name="applicantName">나가</td>
                                         </tr>
                                         <tr>
-                                        	<td>전화</td><td name="applicantTel">010-0000-0000</td>
+                                        	<th>전화</td><td name="applicantTel">010-0000-0000</td>
                                         </tr>
                                         <tr>
-                                        	<td>이메일</td><td name="applicantMail">naga@spoon.com</td>
+                                        	<th>이메일</td><td name="applicantMail">naga@spoon.com</td>
                                         </tr>
 
                                      </table>
@@ -319,7 +347,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        
 
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -327,33 +354,33 @@
         <script src="js/rome.js"></script>
     
         <script src="js/main.js"></script>
+		
+		<script src="../js/reservation.js"></script>
+		
+		<script type="text/javascript">
+			document.querySelector("#chkAll").addEventListener("click", (e) => {
+			    document.querySelectorAll("[name=agreement]").forEach((item, index)=>{
+			        item.checked = e.target.checked;
+			    })
+			});
+	
+			// 등록버튼
+			function sendInsert() {
+			    let date = $("[data-form=date]").text();
+			    let time = $(".selectTime").text();
+			    let peopleNum = $("[data-form=peopleNum]").text();
+			    let fee = $("[data-form=fee]").text();
+			    console.log(date);
+			    console.log(time);
+			    console.log(peopleNum);
+			    document.resvForm.date.value = date;
+			    document.resvForm.time.value = time;
+			    document.resvForm.peopleNum.value = peopleNum;
+			    document.resvForm.fee.value = fee;
+			    document.resvForm.submit();
+			}
+			
+		</script>
 
-        <script type="text/javascript">
-        	// $("#inline_cal").on("click", function(){
-        		
-        	// })
-
-            document.querySelector("#chkAll").addEventListener("click", (e) => {
-                document.querySelectorAll("[name=agreement]").forEach((item, index)=>{
-                    item.checked = e.target.checked;
-                })
-            });
-
-            // 등록버튼
-            function sendInsert() {
-                let date = $("[data-form=date]").text();
-                let time = $(".selectTime").text();
-                let peopleNum = $("[data-form=peopleNum]").text();
-                let fee = $("[data-form=fee]").text();
-                console.log(date);
-                console.log(time);
-                console.log(peopleNum);
-                document.resvForm.date.value = date;
-                document.resvForm.time.value = time;
-                document.resvForm.peopleNum.value = peopleNum;
-                document.resvForm.fee.value = fee;
-                document.resvForm.submit();
-            }
-        </script>
     </body>
 </html>

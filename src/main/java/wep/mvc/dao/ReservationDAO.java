@@ -15,4 +15,9 @@ public interface ReservationDAO {
 	 * 유저 seq를 이용해 예약정보 검색
 	 */
 	ReservationDTO selectByUserSeq (int userSeq) throws SQLException;
+	
+	/**
+	 * 예약 seq를 이용해 예약정보 검색
+	 */
+	ReservationDTO selectByResvSeq (int resvSeq) throws SQLException;
 }

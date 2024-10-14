@@ -79,11 +79,9 @@ public class FesController implements Controller {
 		
 		return new ModelAndView("host/myPage1.jsp");
 	}
-	//서비스등록신청(C)
+	
 	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-		
-		
-		
+				
 		//서비스 아이디 그냥 uuid로 뽑을게요
 		UUID uuid = UUID.randomUUID();
 		String SVCID = uuid.toString();
@@ -148,6 +146,7 @@ public class FesController implements Controller {
 		
 		
 		return new ModelAndView("front?key=fes&methodName=select", true);
+
 	}
 	
 	/**
