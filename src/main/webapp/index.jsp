@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <jsp:include page="/common/header.jsp" />
@@ -47,9 +48,9 @@ img {
 #card_main #heart_state {
 	width: 8%;
 	height: 8%;
-	position: absolute; 
-	z-index: 1000; 
-	left : 90%;
+	position: absolute;
+	z-index: 1000;
+	left: 90%;
 }
 </style>
 </head>
@@ -164,6 +165,10 @@ img {
 	<!-- <script src="js/scripts.js"></script> -->
 
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	
 
 	<script type="text/javascript">
 	let currentPage = 1;

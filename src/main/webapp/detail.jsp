@@ -121,12 +121,12 @@
 				<form action="front">
 					<input type="hidden" name="key" value="reservation" /> <input
 						type="hidden" name="methodName" value="revMove" /> <input
-						type="hidden" name="SVCID" value="${fes.SVCID}" />
-						<input type = "hidden" name="SVCNM" value = "${fes.SVCNM}"/>
+						type="hidden" name="SVCID" value="${fes.SVCID}" /> <input
+						type="hidden" name="SVCNM" value="${fes.SVCNM}" />
 					<button class="btn btn-primary" id="reservation">예약하기</button>
 					<button class="btn btn-primary" id="like">좋아요</button>
 				</form>
-				
+
 
 			</div>
 
@@ -144,7 +144,8 @@
 					const data = `${fes.DTLCONT}`;
 					let formattedData = data.replace(/다\./g, '다.<br>');
 					/* formattedData = formattedData.replace(/(\d)\. /g, '<br>$1.'); */
-					formattedData = formattedData.replace(/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
+					formattedData = formattedData.replace(
+							/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
 
 					document.querySelector('.data_explain').innerHTML = formattedData
 							+ "<br><br>";
@@ -161,15 +162,36 @@
 <!-- <script src="js/scripts.js"></script> -->
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
 <script type="text/javascript">
-	document.getElementById('like').addEventListener('click', function(e) {
-		e.preventDefault();
-		
+	$('#like').on('click', function(e) {
+		e.preventDefault(); // 기본 동작 막기
+
+		// 필요한 데이터 가져오기
+		const sid = $('input[name="SVCID"]').val();
+
+		$.ajax({
+			url : 'ajax?key=main&methodName=setLike',
+			type : 'POST', 
+			dataType : 'json', 
+			data : {
+				sid : sid
+			}, 
+			success : function(res) {
+				
+				alert(res === 1 ? '좋아요가 등록되었습니다.' : '좋아요 등록에 실패했습니다.');
+			},
+			error : function(err) {
+				
+				console.log(err);
+			}
+		});
 	});
-	
-	document.getElementById('information')
+
+	document
+			.getElementById('information')
 			.addEventListener(
 					'click',
 					function(e) {
@@ -178,55 +200,51 @@
 						let formattedData = data.replace(/다\./g, '다.<br>');
 						/* formattedData = formattedData.replace(/(\d)\./g,
 								'<br>$1.'); */
-						formattedData = formattedData.replace(/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g,
-								'<br>$1');
+						formattedData = formattedData.replace(
+								/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
 
 						document.querySelector('.data_explain').innerHTML = formattedData
 								+ '<br><br>';
 					});
 
-	document.getElementById('maps').addEventListener(
-			'click',
-			function(e) {
-				const x = parseFloat('${fes.getX()}').toFixed(4);
-				const y = parseFloat('${fes.getY()}').toFixed(4);
-				// .data_explain 영역을 초기화
-				document.querySelector('.data_explain').innerHTML = "";
+	document.getElementById('maps').addEventListener('click', function(e) {
+		const x = parseFloat('${fes.getX()}').toFixed(4);
+		const y = parseFloat('${fes.getY()}').toFixed(4);
+		// .data_explain 영역을 초기화
+		document.querySelector('.data_explain').innerHTML = "";
 
-				// 카카오맵 API 로드 후 지도 생성
-				kakao.maps.load(function() {
-					// 지도가 들어갈 HTML 요소 생성
-					const mapContainer = document.createElement('div');
-					mapContainer.style.width = '100%'; // 너비 조정
-					mapContainer.style.height = '400px'; // 높이 조정
-					document.querySelector('.data_explain').appendChild(
-							mapContainer);
+		// 카카오맵 API 로드 후 지도 생성
+		kakao.maps.load(function() {
+			// 지도가 들어갈 HTML 요소 생성
+			const mapContainer = document.createElement('div');
+			mapContainer.style.width = '100%'; // 너비 조정
+			mapContainer.style.height = '400px'; // 높이 조정
+			document.querySelector('.data_explain').appendChild(mapContainer);
 
-					// 지도의 중심좌표 설정 (여기서는 서울 시청 좌표 사용)
-					const mapOption = {
-						center : new kakao.maps.LatLng(y, x), // 지도의 중심좌표
-						level : 3
-					// 지도의 확대 레벨
-					};
-					// 지도 생성
-					const map = new kakao.maps.Map(mapContainer, mapOption);
+			// 지도의 중심좌표 설정 (여기서는 서울 시청 좌표 사용)
+			const mapOption = {
+				center : new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+			// 지도 생성
+			const map = new kakao.maps.Map(mapContainer, mapOption);
 
-					// 마커 추가 (마커를 지도에 표시할 위치)
-					const markerPosition = new kakao.maps.LatLng(
-							y, x);
+			// 마커 추가 (마커를 지도에 표시할 위치)
+			const markerPosition = new kakao.maps.LatLng(y, x);
 
-					// 마커 생성
-					const marker = new kakao.maps.Marker({
-						position : markerPosition
-					});
-
-					// 마커를 지도 위에 표시
-					marker.setMap(map);
-				});
+			// 마커 생성
+			const marker = new kakao.maps.Marker({
+				position : markerPosition
 			});
 
+			// 마커를 지도 위에 표시
+			marker.setMap(map);
+		});
+	});
+
 	document.getElementById('review').addEventListener('click', function(e) {
-	
+
 	});
 </script>
 

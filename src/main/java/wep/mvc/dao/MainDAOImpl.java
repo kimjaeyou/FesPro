@@ -9,7 +9,7 @@ import wep.mvc.util.DbUtil;
 
 public class MainDAOImpl {
 
-	public int insert(String sid,String user) throws SQLException {
+	public int insert(String sid,int user) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps=null;
 		int result = 0;
@@ -19,7 +19,7 @@ public class MainDAOImpl {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, Integer.parseInt(user));
+			ps.setInt(1, user);
 			ps.setString(2, sid);
 			
 			result = ps.executeUpdate();

@@ -19,7 +19,7 @@ public class MainSereviceImpl {
 		return null;
 	}
 
-	public int setLike(String sid, String user) throws SQLException {
+	public int setLike(String sid, int user) throws SQLException {
 		int succ = dao.insert(sid, user);
 		if (succ != 0) {
 			return succ;
