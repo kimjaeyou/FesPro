@@ -43,6 +43,14 @@ img {
 	width: 100%;
 	height: 30%;
 }
+
+#card_main #heart_state {
+	width: 8%;
+	height: 8%;
+	position: absolute; 
+	z-index: 1000; 
+	left : 90%;
+}
 </style>
 </head>
 <body>
@@ -86,6 +94,8 @@ img {
 								<!-- Ensure the columns take equal width and display horizontally -->
 								<div class="col-md-3 mb-5 card-item" id="card_main">
 									<div class="card h-100">
+										<img id="heart_state" alt="heart"
+											src="${path}/assets/img/StateImg/heart_1.png">
 										<!-- Product image-->
 										<img id="card_img" class="card-img-top" src="${option.IMGURL}"
 											alt="..." />
@@ -101,13 +111,12 @@ img {
 										<!-- Product actions-->
 										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 											<div class="text-center">
-
 												<form action="${path}/front" method="post">
-													<input type="hidden" name="key" value="main" /> 
-													<input type="hidden" name="methodName" value="oneSelec" /> 
-													<input value="${option.SVCID}" name="sid" type="hidden">
-													<input class="btn btn-outline-dark mt-auto" 
-													type="submit" name="View options" value="더보기">
+													<input type="hidden" name="key" value="main" /> <input
+														type="hidden" name="methodName" value="oneSelec" /> <input
+														value="${option.SVCID}" name="sid" type="hidden">
+													<input class="btn btn-outline-dark mt-auto" type="submit"
+														name="View options" value="더보기">
 												</form>
 											</div>
 										</div>
