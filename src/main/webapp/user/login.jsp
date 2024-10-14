@@ -1,19 +1,12 @@
 <%@page import="wep.mvc.dto.UsersDTO"%>
 <%@page import="wep.mvc.dao.UsersDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="loginCheck.jsp" %>
 <!DOCTYPE html>
 <html lang="UTF-8">
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-<html lang="utf-8" data-bs-theme="auto">
 
->>>>>>> a2e8f0debee527d94a4d56d67d7eba00d933accb
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
