@@ -74,6 +74,11 @@ public class SuperFestivalController implements Controller {
 	 */
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		System.out.println("update Call");
+		System.out.println("형우 / update Call");
+		//System.out.println(req.getParameter("SVCID"));
+		//System.out.println(req.getParameter("festivalStateOptions"));
+		int fesState = Integer.parseInt(req.getParameter("festivalStateOptions"));
+		
 		
 		FesDTO fes = new FesDTO();
 	    fes.setSVCID(req.getParameter("SVCID"));
@@ -98,12 +103,14 @@ public class SuperFestivalController implements Controller {
 	    fes.setREVSTDDAY(req.getParameter("REVSTDDAY"));
 	    fes.setREVSTDDAYNM(req.getParameter("REVSTDDAYNM"));
 	    fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
+	    fes.setFes_state(fesState); //등록상태
 	    fes.setUpdate_date(req.getParameter("Update_date"));
 	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
 		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
+		int result = festivalService.update(fes,fesState);
 		
 		if(result ==1) {
 			return new ModelAndView("front?key=superfestival&methodName=selectAll",true);
