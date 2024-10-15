@@ -1,6 +1,7 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -150,6 +151,16 @@ public class ReservationController implements Controller {
 	 * 예약 페이지로 이동시 서비스 이름과 ID 가져가기
 	 */
 	public ModelAndView revMove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+	    String path = request.getContextPath();
+	    
+	    if(userDTO == null) {
+	    	request.setAttribute("errMsg", "로그인 후 이용해주세요");
+			return new ModelAndView("reservation/fail.jsp");
+	    }
+		
 		String SVCNM = request.getParameter("SVCNM");
 		String SVCID = request.getParameter("SVCID");
 		String fesDTO = request.getParameter("fes");
@@ -180,11 +191,34 @@ public class ReservationController implements Controller {
 	 */
 	public ModelAndView payment (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		String SVCID = request.getParameter("SVCID");
-		//WALLET wallet = service.payment();
+		String SVCNM = request.getParameter("SVCNM");
+		int fee = Integer.parseInt(request.getParameter("fee"));
+		int resvSeq = Integer.parseInt(request.getParameter("resvSeq"));
+		
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+		System.out.println(userDTO);
+		
+		WALLET wallet = service.payment(userDTO.getUser_seq(), fee);
+		
+		System.out.println("결제 후 남은 금액 : " + wallet.getMONEY());
+		
+		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
+		request.setAttribute("resvData", resvDTO);
+		request.setAttribute("SVCNM", SVCNM);
 		
 		//request.setAttribute("fes", fes);
 		
-		return new ModelAndView("reservation/reservation.jsp", false);
+		if (wallet != null) {
+			return new ModelAndView("reservation/reservPayComplete.jsp", false);
+		} else {
+			return new ModelAndView("reservation/fail.jsp");
+		}
+		
 	}
+	
+	/**
+	 * 확인증
+	 */
 	
 }

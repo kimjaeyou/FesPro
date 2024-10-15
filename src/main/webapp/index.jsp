@@ -52,6 +52,7 @@ img {
 	left : 90%;
 }
 </style>
+
 </head>
 <body>
 	<jsp:include page="/common/alarm.jsp" />

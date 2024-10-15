@@ -65,14 +65,6 @@
                 document.goForm.resvSeq.value = seq;
                 document.goForm.submit();
             }
-            
-            function payment () {
-				let fee = ${resvData.resvPrice};
-				console.log(fee);
-				document.goForm.key.value = "reservation";
-				document.goForm.methodName.value = "payment";
-				document.goForm.submit();
-			}
 
         </script>
 
@@ -88,16 +80,15 @@
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
-                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
-                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
-                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
-                        <i class="bi bi-3-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-3-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
                     </div>
                     예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약 결제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
                     완료 <br><br>
                     <h1 class="fw-bolder">예약 신청이 정상적으로 처리되었습니다.</h1>
-                    <h3 class="fw-bolder">결제를 진행해주세요.</h3>
 
                 </div>
             </div>
@@ -160,11 +151,8 @@
             <form name="goForm" method = "post" action = "${path}/front">
 	        	<input type = "hidden" name = "key"/>
 	        	<input type = "hidden" name = "methodName"/>
-	        	<input type = "hidden" name = "resvSeq" value = "${resvData.reservSeq}"/>
-	        	<input type = "hidden" name = "fee" value = "${resvData.resvPrice}"/>
-	        	<input type = "hidden" name = "SVCNM" value = "${SVCNM}"/>
+	        	<input type = "hidden" name = "resvSeq"/>
 	        	<button class="btn btn-outline-primary" id="goMain" style="width: 10%;" type="button">메인페이지 바로가기</button> &nbsp;&nbsp;&nbsp;&nbsp;
-	            <button class="btn btn-primary" id="pay" style="width: 10%;" type="button" onClick = "payment()">결제하기</button>
 	            <button class="btn btn-primary" id="goDetail" style="width: 10%;" type="button" onClick = "sendSelect()">예약 상세 보기</button>
             </form>
         </div>

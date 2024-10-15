@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 
 public interface ReservationDAO {
 	
@@ -47,5 +48,10 @@ public interface ReservationDAO {
 	 * userSeq로 유저정보 검색
 	 */
 	UsersDTO selectUser (int userSeq) throws SQLException;
+	
+	/**
+	 * 결제금액만큼 wallet에서 차감
+	 */
+	WALLET payment(int userSeq, int fee) throws SQLException;
 
 }

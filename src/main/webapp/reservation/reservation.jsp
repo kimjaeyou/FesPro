@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/common/header.jsp"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -192,6 +193,8 @@
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
+                <c:choose>
+                	<c:when test="${fes.PRICE eq 0}">
                     <div>
                         <i class="bi bi-1-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
@@ -202,6 +205,24 @@
                         <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>                        
                     </div>
                     예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약 완료 <br><br>
+                    </c:when>
+                    <c:when test="${fes.PRICE ne 0}">
+                    <div>
+                        <i class="bi bi-1-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-3-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>
+                    </div>
+                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약 결제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
+                    완료 <br><br>
+                    </c:when>
+                  </c:choose>
+                    
                     <h1 class="fw-bolder">${SVCNM}</h1>
                     <p class="lead mb-0"></p>
                     

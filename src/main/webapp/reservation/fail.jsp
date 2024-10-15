@@ -5,8 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	alert("${requestScope.errMsg}");
+	location.href="${path}/user/login.jsp";
+</script>
 </head>
 <body>
-	예약 등록 실패
+	${errMsg}
 </body>
 </html>

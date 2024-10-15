@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 
 public interface ReservationService {
 	
@@ -47,5 +48,10 @@ public interface ReservationService {
 	 * userSeq로 유저정보 가져오는 selectUser 메소드 호출
 	 */
 	public UsersDTO selectUser(int userSeq) throws SQLException;
+	
+	/**
+	 * 행사 결제 - 지갑 차감하는 메소드 호출
+	 */
+	public WALLET payment(int userSeq, int fee) throws SQLException;
 
 }
