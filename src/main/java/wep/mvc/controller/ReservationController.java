@@ -56,13 +56,23 @@ public class ReservationController implements Controller {
 	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
 		System.out.println(userDTO);
 
+		
 		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 0, cancleDate);
 		
 		int result = service.insert(reservation);
-		System.out.println(result);
+		//System.out.println(result);
 		
-		if(result != 0) {
-			return new ModelAndView("reservation/resvSuccess.jsp");
+	    
+		ReservationDTO resvData = service.selectByUserSeqAndSVCID(userDTO.getUser_seq(), SVCID);
+		System.out.println("resvDate = " + resvData);
+		request.setAttribute("resvData", resvData);
+		request.setAttribute("SVCNM", SVCNM);
+		
+		
+		if(result != 0 && fee == 0) {
+			return new ModelAndView("reservation/resvSuccess.jsp", false);
+		} else if (result != 0 && fee != 0) {
+			return new ModelAndView("reservation/resvSuccessPay.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp");
 		}
@@ -72,10 +82,18 @@ public class ReservationController implements Controller {
 	/**
 	 * 예약 내역 확인 시 유저 seq로 예약 내역을 검색해 가져온다
 	 */
-	public ModelAndView selectByUserSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ModelAndView selectByUserSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		//
+		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		ReservationDTO resvDTO = service.selectByUserSeq(userSeq);
+		request.setAttribute("resvDTO", resvDTO);
 		
-		return null;
+		// 연결할 페이지
+		if (resvDTO != null) {
+			return new ModelAndView();
+		} else {
+			return new ModelAndView();
+		}
 	}
 	
 	/**
@@ -104,7 +122,6 @@ public class ReservationController implements Controller {
 			request.setAttribute("fes", fes);
 		
 		if(resvDTO != null && fesDTO != null) {
-
 			return new ModelAndView("reservation/resvDetail.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp", true);
@@ -154,5 +171,9 @@ public class ReservationController implements Controller {
 		
 		return new ModelAndView("reservation/reservation.jsp", false);
 	}
+	
+	/**
+	 * 결제하기 누르면 지갑에서 차감
+	 */
 	
 }
