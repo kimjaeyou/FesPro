@@ -98,9 +98,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> selectByCtg(BoardDTO board) throws SQLException {
-		
-		List<BoardDTO> list = boardDAO.selectByCtg(null, null);
+	public List<BoardDTO> selectByCtg() throws SQLException {
+		System.out.println("서비스 구현에 도착했다");
+		List<BoardDTO> list = boardDAO.selectByCtg();
+		System.out.println("서비스 구현 list 가져오는지 확인하는 출력문 : " + list);
 		
 		return list;
 	}

@@ -7,123 +7,160 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import wep.mvc.dto.BoardCategoryDTO;
 import wep.mvc.dto.BoardDTO;
+import wep.mvc.util.DbUtil;
 
 public class BoardDAOImpl implements BoardDAO {
-	private Connection conn;
-	private ResultSet rs;
-	
-	
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	int result = 0;
+
 	/**
 	 * 게시글 등록
-	 * */
+	 */
 	@Override
 	public int insert(BoardDTO boardDTO) throws SQLException {
 
-		
-		String sql = "INSERT INTO board (BOARD_SEQ, CATEGORY_SEQ, USER_SEQ, SUB, B_CONTENT, HOST_SEQ) VALUES (?, ?, ?, ?, ?,?)";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, boardDTO.getBoardSeq());
-			pstmt.setInt(2, boardDTO.getCategorySeq());
-			pstmt.setInt(3, boardDTO.getUserSeq());
-			pstmt.setString(4, boardDTO.getSub());
-			pstmt.setString(5, boardDTO.getbContent());
-			pstmt.setInt(6, boardDTO.getHostSeq());
-			pstmt.executeUpdate();
+		String sql = "INSERT INTO ADMIN . BOARD (BOARD_SEQ, CATEGORY_SEQ, USER_SEQ, SUB, B_CONTENT, HOST_SEQ) VALUES (board_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, boardDTO.getCategorySeq());
+			ps.setInt(2, boardDTO.getUserSeq());
+			ps.setString(3, boardDTO.getSub());
+			ps.setString(4, boardDTO.getbContent());
+			ps.setInt(5, boardDTO.getHostSeq());
+
+			result = ps.executeUpdate();
+			con.commit();
+		} finally {
+			DbUtil.dbClose(con, ps);
 		}
-		return 0;
+		return result;
 	}
 
-	
 	/**
 	 * 게시글 수정
-	 * */
+	 */
 	@Override
 	public int update(BoardDTO boardDTO) throws SQLException {
-		String sql = "UPDATE INTO BOARD (SUB, B_CONTENT) VALUES (?,?)";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, boardDTO.getSub());
-			pstmt.setString(2, boardDTO.getbContent());
-			pstmt.executeUpdate();
+
+		String sql = "UPDATE board SET SUB = ?, B_CONTENT = ? WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
+
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			con.commit();
+			ps.setString(1, boardDTO.getSub());
+			ps.setString(2, boardDTO.getbContent());
+			ps.setInt(3, boardDTO.getBoardSeq());
+			ps.setInt(3, boardDTO.getUserSeq());
+			ps.setInt(4, boardDTO.getHostSeq());
+
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
 		}
-		return 0;
+		return result;
 	}
 
 	/**
 	 * 게시글 삭제
-	 * */
+	 */
 	@Override
 	public int delete(int boardSeq, int userSeq, int hostSeq) throws SQLException {
-		
-		String sql = "DELETE FROM board WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	            
-	            
-	            pstmt.setInt(1, boardSeq);
-	            pstmt.setInt(2, userSeq);
-	            pstmt.setInt(3, hostSeq);
-	            pstmt.executeUpdate();
-	            
-		}        
 
-		return 0;
+		String sql = "DELETE FROM ADMIN . BOARD WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
+
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+
+			result = ps.executeUpdate();
+			con.commit();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
-		
+
 	/**
-	 * 카테고리 별 모든 게시글 불러오기
-	 * */
+	 * 모든 게시글 불러오기
+	 */
 	@Override
-	public List<BoardDTO> selectByCtg(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) throws SQLException {
-	   
-	    String sql = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
+	public List<BoardDTO> selectByCtg() throws SQLException {
 
-	    
-	    List<BoardDTO> boardList = new ArrayList<>();
+		List<BoardDTO> list = new ArrayList<>();
 
-	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	       
-	        pstmt.setInt(1, boardCategoryDTO.getCategorySeq());
+		String sql = "SELECT BOARD_SEQ, SUB, CATEGORY_SEQ FROM ADMIN.BOARD";
 
-	        try (ResultSet rs = pstmt.executeQuery()) {
-	        
-	            while (rs.next()) {
-	                BoardDTO bDTO = new BoardDTO();
-	                bDTO.setBoardSeq(rs.getInt("board_seq"));
-	                bDTO.setCategorySeq(rs.getInt("category_seq"));
-	                bDTO.setSub(rs.getString("sub"));
-	             
-	                boardList.add(bDTO);
-	            }
-	        }
-	    }
+		try {
+			con = DbUtil.getConnection();
 
-	    // 조회된 게시글 리스트 반환
-	    return boardList;
+			if (con == null) {
+				System.out.println("데이터베이스 연결 실패");
+				return list;
+			} else {
+				System.out.println("데이터베이스 연결 성공");
+			}
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			System.out.println("실행된 SQL 쿼리: " + sql);
+
+			System.out.println("SQL 쿼리 실행 중...");
+			rs = ps.executeQuery();
+			System.out.println("SQL 쿼리 실행 완료");
+			con.commit();
+			boolean hasData = rs.next();
+			if (!hasData) {
+				System.out.println("ResultSet에 데이터가 없습니다.");
+			} else {
+				do {
+					// 컬럼 이름을 대문자로 수정
+					BoardDTO board = new BoardDTO(rs.getInt("BOARD_SEQ"), rs.getString("SUB"),
+							rs.getInt("CATEGORY_SEQ"));
+					list.add(board);
+
+					System.out.println("BoardSeq: " + rs.getInt("BOARD_SEQ"));
+				} while (rs.next());
+			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+
+		return list;
 	}
 
 	/**
 	 * 상세보기
-	 * */
+	 */
 	@Override
-	public BoardDTO select(int postUserSeq) throws SQLException {
-		String query = "SELECT * FROM board WHERE user_seq = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, postUserSeq);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					// 게시글 정보 가져오기
-					BoardDTO boardDTO = new BoardDTO();
-					boardDTO.setBoardSeq(rs.getInt("board_seq"));
-					boardDTO.setCategorySeq(rs.getInt("category_seq"));
-					boardDTO.setUserSeq(rs.getInt("user_seq"));
-					boardDTO.setSub(rs.getString("sub"));
-					boardDTO.setbContent(rs.getString("b_content"));
-					boardDTO.setHostSeq(rs.getInt("host_seq"));
-					return boardDTO; // 게시글 정보를 반환
-				}
+	public BoardDTO select(int userSeq) throws SQLException {
+
+		BoardDTO board = null;
+
+		String sql = "SELECT * FROM board WHERE user_seq = ?";
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userSeq);
+
+			rs = ps.executeQuery();
+			con.commit();
+			if (rs.next()) {
+				board = new BoardDTO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+						rs.getInt(6));
+				return board; // 게시글 정보를 반환
 			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
 		}
-		return null;
+		return board;
 	}
 }

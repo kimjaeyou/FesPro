@@ -3,12 +3,12 @@ package wep.mvc.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import wep.mvc.dto.BoardCategoryDTO;
 import wep.mvc.dto.BoardDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
@@ -17,132 +17,146 @@ import wep.mvc.service.BoardServiceImpl;
 
 public class BoardController implements Controller {
 
-	
-	
 	private BoardService boardService = new BoardServiceImpl();
-
-	
-	
 
 	public BoardController() {
 		System.out.println("BoardController 생성자 호출됨 ");
-		
+
 	}
 
-	public ModelAndView read(HttpServletRequest request, HttpServletResponse response)
-		    throws ServletException, IOException, SQLException {
+	/**
+	 * 공지
+	 * */
+	public ModelAndView readNoti(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException, SQLException {
 		
 		
-		String categorySeq = request.getParameter("ctgSeq");
-		String sub = request.getParameter("SUB");
-		String boardSeq = request.getParameter("boardSeq");
-		
-		BoardDTO board = new BoardDTO(Integer.parseInt(boardSeq), Integer.parseInt(categorySeq), sub);
-		
-		List<BoardDTO> list = boardService.selectByCtg(board);
-		System.out.println("list = " + list);
-		request.setAttribute("list", list);
-		return new ModelAndView("/board/boardMain.jsp");
+	    List<BoardDTO> selectAll = boardService.selectByCtg();
+	    request.setAttribute("noti", filterPostsByCategory(selectAll, 0));  
+	    return new ModelAndView("/board/boardMain.jsp");
 	}
+
+	/**
+	 * QA
+	 * */
+	public ModelAndView readQA(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException, SQLException {
+		
+		
+	    List<BoardDTO> selectAll = boardService.selectByCtg();
+	    request.setAttribute("QA", filterPostsByCategory(selectAll, 1)); 
+	    return new ModelAndView("/board/boardQA.jsp");
+	}
+
+	/**
+	 * 자게
+	 * */
+	public ModelAndView readFree(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException, SQLException {
+		
+		
+	    List<BoardDTO> selectAll = boardService.selectByCtg();
+	    request.setAttribute("Free", filterPostsByCategory(selectAll, 2)); 
+	    return new ModelAndView("/board/boardFree.jsp");
+	}
+
+	/**
+	 * 카테고리필터
+	 * */
+	private List<BoardDTO> filterPostsByCategory(List<BoardDTO> posts, int categorySeq) {
+	    return posts.stream()
+	            .filter(post -> post.getCategorySeq() == categorySeq)
+	            .collect(Collectors.toList());
+	}
+
+
+	
 
 	public ModelAndView write(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		
-		   System.out.println("write 호출");
 
-		   HttpSession session = request.getSession();
-		    UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
-		    HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
-		    
-		    System.out.println("SUDTO = " + SessionUsersDTO);
-		    System.out.println("SHDTO = " + SessionHostDTO);
-			
-			int hostSeq = SessionHostDTO.getHost_seq();
-			int userSeq = SessionUsersDTO.getUser_seq();
+		System.out.println("write 호출");
 
-		    System.out.println("userSeq: " + userSeq + " , hostSeq: " + hostSeq);
+		HttpSession session = request.getSession();
+		UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
 
-		  
-		    if (userSeq == 0 && hostSeq == 0) {
-		        return new ModelAndView("front?key=user&methodName=login", true);
-		    }
+		System.out.println("SUDTO = " + SessionUsersDTO);
+		System.out.println("SHDTO = " + SessionHostDTO);
 
-		    
-		    return new ModelAndView("board/boardWrite.jsp"); 
+		int hostSeq = SessionHostDTO.getHost_seq();
+		int userSeq = SessionUsersDTO.getUser_seq();
+
+		System.out.println("userSeq: " + userSeq + " , hostSeq: " + hostSeq);
+
+		if (userSeq == 0 && hostSeq == 0) {
+			return new ModelAndView("front?key=user&methodName=login", true);
 		}
-		
+
+		return new ModelAndView("board/boardWrite.jsp");
+	}
 
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-		
+			throws ServletException, IOException, SQLException {
+
 		System.out.println("상세보기 메소드 불러왔다");
-		
-        HttpSession session = request.getSession();
-        UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
-	    HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
-	    
-	    int hostSeq = SessionHostDTO.getHost_seq();
+
+		HttpSession session = request.getSession();
+		UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
+
+		int hostSeq = SessionHostDTO.getHost_seq();
 		int userSeq = SessionUsersDTO.getUser_seq();
-		
-		
-        System.out.println(hostSeq);
-        System.out.println(userSeq);
-        
-        
-        int postUserSeq = Integer.parseInt(request.getParameter("loginUser"));
 
-        
+		System.out.println(hostSeq);
+		System.out.println(userSeq);
+
+		int postUserSeq = Integer.parseInt(request.getParameter("loginUser"));
+
 		// 서비스 레이어에서 게시글 조회 및 권한 검증 처리
-        BoardDTO boardDTO = boardService.select(postUserSeq, userSeq, hostSeq);
-        System.out.println(boardDTO);
-        // 게시글이 존재하지 않거나, 권한이 없는 경우 처리
-        if (boardDTO == null) {
-            return new ModelAndView("board/error.jsp");
-        }
-        
-        request.setAttribute("list", boardDTO);
+		BoardDTO boardDTO = boardService.select(postUserSeq, userSeq, hostSeq);
+		System.out.println(boardDTO);
+		// 게시글이 존재하지 않거나, 권한이 없는 경우 처리
+		if (boardDTO == null) {
+			return new ModelAndView("board/error.jsp");
+		}
 
-        // 게시글을 보여줄 뷰로 이동
-        return new ModelAndView("board/MainView.jsp");
-    }
+		request.setAttribute("list", boardDTO);
+
+		// 게시글을 보여줄 뷰로 이동
+		return new ModelAndView("board/MainView.jsp");
+	}
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		
+
 		HttpSession session = request.getSession();
-		
-		
-		 UsersDTO sessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
-         HostDTO sessionHostDTO = (HostDTO) session.getAttribute("loginCom");
 
-        
-         Integer userSeq = sessionUsersDTO != null ? sessionUsersDTO.getUser_seq() : null;
-         Integer hostSeq = sessionHostDTO != null ? sessionHostDTO.getHost_seq() : null;
+		UsersDTO sessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
+		HostDTO sessionHostDTO = (HostDTO) session.getAttribute("loginCom");
 
-     
-         String boardSeqParam = request.getParameter("boardSeq");
-         int boardSeq = 0;
-         if (boardSeqParam != null && !boardSeqParam.isEmpty()) {
-             boardSeq = Integer.parseInt(boardSeqParam);
-         }
+		Integer userSeq = sessionUsersDTO != null ? sessionUsersDTO.getUser_seq() : null;
+		Integer hostSeq = sessionHostDTO != null ? sessionHostDTO.getHost_seq() : null;
 
-       
-         if (userSeq == null && hostSeq == null) {
-             throw new SecurityException("사용자 또는 호스트 정보가 없습니다. 삭제 권한이 없습니다.");
-         }
+		String boardSeqParam = request.getParameter("boardSeq");
+		int boardSeq = 0;
+		if (boardSeqParam != null && !boardSeqParam.isEmpty()) {
+			boardSeq = Integer.parseInt(boardSeqParam);
+		}
 
-         // 서비스에 삭제 요청
-         boardService.delete(boardSeq, userSeq, hostSeq);
+		if (userSeq == null && hostSeq == null) {
+			throw new SecurityException("사용자 또는 호스트 정보가 없습니다. 삭제 권한이 없습니다.");
+		}
 
-        
-         return new ModelAndView("front?key=board&methodName=read", true);
-		
+		// 서비스에 삭제 요청
+		boardService.delete(boardSeq, userSeq, hostSeq);
+
+		return new ModelAndView("front?key=board&methodName=read", true);
+
 	}
 
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		
-		
 
 		return new ModelAndView("index.jsp", true);
 	}
@@ -152,12 +166,12 @@ public class BoardController implements Controller {
 
 		return new ModelAndView("index.jsp", true);
 	}
-	
+
 	public ModelAndView error(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException{
-		
+			throws ServletException, IOException {
+
 		System.out.println("에러메소드로 와버렸다.");
 		return new ModelAndView("error.jsp, true");
 	}
-	
+
 }

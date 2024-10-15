@@ -24,7 +24,7 @@ public class BoardDTO {
 	
 	
 	
-	public BoardDTO(int boardSeq, int categorySeq, String sub) {
+	public BoardDTO(int boardSeq, String sub, int categorySeq) {
 		super();
 		this.boardSeq = boardSeq;
 		this.categorySeq = categorySeq;
