@@ -115,7 +115,7 @@
            $(function(){
         	   $("#myPage").click(function(){
        			
-       			 $("#iFrame").attr("src", "${path}/super/auth/dashBoard.html");
+       			 $("#iFrame").attr("src", "${path}/super/dashBoard.jsp");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });

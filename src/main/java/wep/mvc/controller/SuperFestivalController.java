@@ -109,7 +109,6 @@ public class SuperFestivalController implements Controller {
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
-		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
 		int result = festivalService.update(fes,fesState);
 		
 		if(result ==1) {

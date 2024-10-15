@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -103,7 +103,7 @@ $(function(){
                         <c:forEach var="user" items="${userList}">
                             <tr>
                                 <td>${user.user_seq}</td>
-                                <td><button class="detailBtn" data-user_id="${user.user_id}"/>${user.user_id}</td>
+                               <td><button class="detailBtn" data-user_id="${user.user_id}" onclick="console.log('버튼클릭')">${user.user_id}</button></td>
                                 <td>${user.user_pw}</td>
                                 <td>${user.user_name}</td>
                                 <td>${user.age}</td>
@@ -131,29 +131,7 @@ $(function(){
 			</div>
 		</div>
 	<!-- 테이블 끝 -->
-	<!-- 차트 -->
-		<div class="row">
-			<div class="col-xl-6">
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-chart-area me-1"></i> Area Chart Example
-					</div>
-					<div class="card-body">
-						<canvas id="myAreaChart" width="100%" height="40"></canvas>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-6">
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
-					</div>
-					<div class="card-body">
-						<canvas id="myBarChart" width="100%" height="40"></canvas>
-					</div>
-				</div>
-			</div>
-		<!-- 차트 끝 -->
+	
 	
 	</main>
 

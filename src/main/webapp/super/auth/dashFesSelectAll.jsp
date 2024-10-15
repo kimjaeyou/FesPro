@@ -26,7 +26,7 @@ $(function(){
 		//console.log("상세보기 버튼 클릭");
 		const svcid = $(this).data("svcid");
 		//console.log(svcid);
-		window.location.href ="${path}/front?key=superfestival&methodName=detail&svcid=" +svcid;
+		window.location.href ="${path}/front?key=superfestival&methodName=dashFesDetail&svcid=" +svcid;
 	});
 });
 </script>

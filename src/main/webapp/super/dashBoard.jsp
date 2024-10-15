@@ -1,22 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="../../css/My_styles.css" rel="stylesheet" />
  <style>
-        /* ÀüÃ¼ ÆäÀÌÁöÀÇ ½ºÅ©·ÑÀ» ¾ø¾Û´Ï´Ù */
+        /* ì „ì²´ íŽ˜ì´ì§€ì˜ ìŠ¤í¬ë¡¤ì„ ì—†ì•±ë‹ˆë‹¤ */
         body {
             overflow: hidden;
         }
 
-        /* ·¹ÀÌ¾Æ¿ô ³» Æ¯Á¤ ¼½¼Ç¿¡¼­µµ ½ºÅ©·ÑÀ» ¾ø¾Ö°í ½ÍÀ» ¶§ */
+        /* ë ˆì´ì•„ì›ƒ ë‚´ íŠ¹ì • ì„¹ì…˜ì—ì„œë„ ìŠ¤í¬ë¡¤ì„ ì—†ì• ê³  ì‹¶ì„ ë•Œ */
         #layoutSidenav_content {
             overflow: hidden;
         }
 
-        /* iframe ³» ½ºÅ©·Ñµµ ¾ø¾Ö±â (ÇÊ¿ä ½Ã Àû¿ë) */
+        /* iframe ë‚´ ìŠ¤í¬ë¡¤ë„ ì—†ì• ê¸° (í•„ìš” ì‹œ ì ìš©) */
         iframe {
             overflow: hidden;
         }
@@ -33,36 +35,36 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Çà»çµî·Ï ¹Ì½ÂÀÎ°Ç: </div>
+                                    <div class="card-body">í–‰ì‚¬ë“±ë¡ ë¯¸ìŠ¹ì¸ê±´: </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                       <a href="../../front?key=superfestival&methodName=dashFesSelectAll" class="small text-white stretched-link">¸ñ·Ï°¡±â</a>
+                                       <a href="${path}/front?key=superfestival&methodName=dashFesSelectAll" class="small text-white stretched-link">ëª©ë¡ê°€ê¸°</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Çà»ç¼öÁ¤ ¹Ì½ÂÀÎ°Ç: </div>
+                                    <div class="card-body">í–‰ì‚¬ìˆ˜ì • ë¯¸ìŠ¹ì¸ê±´: </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">¸ñ·Ï°¡±â</a>
+                                        <a class="small text-white stretched-link" href="#">ëª©ë¡ê°€ê¸°</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">ÁÖÃÖÀÚ È¸¿ø°¡ÀÔ ¹Ì½ÂÀÎ°Ç: </div>
+                                    <div class="card-body">ì£¼ìµœìž íšŒì›ê°€ìž… ë¯¸ìŠ¹ì¸ê±´: </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">¸ñ·Ï°¡±â</a>
+                                        <a class="small text-white stretched-link" href="#">ëª©ë¡ê°€ê¸°</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Çà»çÃë¼Ò ¹Ì½ÂÀÎ°Ç:</div>
+                                    <div class="card-body">í–‰ì‚¬ì·¨ì†Œ ë¯¸ìŠ¹ì¸ê±´:</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">¸ñ·Ï°¡±â</a>
+                                        <a class="small text-white stretched-link" href="#">ëª©ë¡ê°€ê¸°</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
