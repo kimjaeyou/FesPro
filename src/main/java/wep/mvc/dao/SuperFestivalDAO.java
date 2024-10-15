@@ -15,8 +15,9 @@ public interface SuperFestivalDAO {
 	
 	/**
 	 * 검색 
+	 * @param isWaitFes 대기테이블에서 조회하는지 여부
 	 */
-	public FesDTO select(FesDTO fes);
+	public FesDTO select(FesDTO fes, boolean isWaitFes);
 	
 	/**
 	 * 유저 검색
@@ -39,4 +40,9 @@ public interface SuperFestivalDAO {
 	public List<UsersDTO> selectReviewUser(FesDTO fes);
 
 	public List<FesDTO> dashFesSelectAll();
+
+	/**
+	 * 관리자용 모든행사 조회
+	 */
+	public List<FesDTO> selectAllSuper();
 }

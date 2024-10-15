@@ -14,8 +14,13 @@ public interface SuperFestivalService{
 	
 	/**
 	 * 행사 조회
+	 * @param isWaitFes 대기테이블에서 조회여부 
 	 */
-	public FesDTO select(FesDTO festivalDto);
+	public FesDTO select(FesDTO festivalDto,boolean isWaitFes);
+	
+	/**
+	 * 행사조회
+	 */
 	
 	/**
 	 * 	행사에 등록한 유저 조회
@@ -39,5 +44,9 @@ public interface SuperFestivalService{
 
 	public List<FesDTO> dashFesSelectAll();
 
+	/**
+	 * 관리자용 모든행사 조회
+	 */
+	public List<FesDTO> selectAllSuper();
 	
 }

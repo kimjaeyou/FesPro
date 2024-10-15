@@ -6,6 +6,7 @@ rollback;
 
 --조회
 select * from FES;
+select * from FES WHERE FES_STATE = '1' or FES_STATE ='3'; --승인완료 + 비활성화
 
 --추가(더미)
 INSERT INTO FES VALUES (
@@ -132,3 +133,20 @@ JOIN
 
 --뷰 조회
 SELECT * FROM FES_REVIEW_USER_VIEW;
+
+-- Wait_FES ============================================================
+
+--조회
+select * from WAIT_FES;
+
+-- FES + Wait_FES ============================================================
+SELECT Null as WAIT_FES_SEQ, f.*
+FROM fes f
+WHERE FES_STATE = '1' or FES_STATE = '3'
+
+UNION All
+
+SELECT  w.* 
+FROM WAIT_FES w;
+
+

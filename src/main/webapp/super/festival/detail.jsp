@@ -45,7 +45,7 @@
 					   	data += "<h4>";
 					   	data += "리뷰 평균 : ";
 					   	data += avg.toFixed(2);
-					   	data +="</h4>";
+					   	data +=" 점</h4>";
 					   	
 					   	 $("#reviewAvgScore").html(data);
 	  			};			
@@ -77,8 +77,8 @@
     		//console.log("등록상태 : " + fesState);
     		if (fesState === 0) {
 		    $("#radio_1").prop("checked", true); //승인대기
-		} else if (fesState === 2) { //수정대기
-		    $("#radio_2").prop("checked", true);
+		} else if (fesState === 2) { 
+		    $("#radio_2").prop("checked", true); //수정대기
 		} else if (fesState === 1) {
 		    $("#radio_3").prop("checked", true); //승인완료
 		} else if (fesState === 3) {
@@ -404,7 +404,7 @@
 			</div>
 <!-- 캐러셀 끝 -->
 		<!-- <h1>리뷰 통계</h1> -->
+		<h4>리뷰 개수 : ${reviewLength}</h4>
 		<h4 id="reviewAvgScore"></h4>
-		<h4>총 리뷰 수 : ${reviewLength}</h4> 
 </body>
 </html>
