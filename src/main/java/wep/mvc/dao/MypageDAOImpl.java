@@ -37,7 +37,7 @@ public class MypageDAOImpl implements MypageDAO {
 		ResultSet rs=null;
 		List<ReservationDTO2> list = new ArrayList<ReservationDTO2>();
 		String sql= "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check FROM fes, reservation"
-			    +" WHERE fes.svcid= reservation.svcid and user_seq = ?;";
+			    +" WHERE fes.svcid= reservation.svcid and user_seq = ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

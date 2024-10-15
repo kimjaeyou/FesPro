@@ -161,6 +161,12 @@ img {
 	justify-content: center;
 	margin-right: 10px;
 }
+
+.active {
+	font-size: 1rem;
+	margin-left: 13px;
+}
+
 </style>
 <!-- Custom styles for this template -->
     <!--  <link href="headers.css" rel="stylesheet">-->
@@ -200,7 +206,6 @@ img {
     <c:when test="${not empty sessionScope.loginUser}">
         <ul class="nav navbar-nav navbar-right">
             <li class="active">[${sessionScope.loginUser.user_name} / ${sessionScope.loginUser.user_id} ]님 로그인 중 입니다.</li>
-            ${sessionScope.loginUser.user_name}
             <form id="member-update-form" method="get" action="${pageContext.request.contextPath}/front">
                 <input type="hidden" name="key" value="user" /> 
                 <input type="hidden" name="methodName" value="logout" />

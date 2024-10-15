@@ -182,6 +182,17 @@
 	                title: getDatePickerTitle(elem)
 	                });
 	            }
+	            
+	            // 17 cal
+	            let dateFormat = "yyyy-mm-dd"
+	            $("#inline_cal").datepicker({
+					minDate: "2024-10-01",
+					maxDate: "2024-10-30",
+					startDate: '-10d',
+					endDate: '+10d',
+					dateFormat: dateFormat
+				})
+	            
         } // onload 끝
 		</script>
 		

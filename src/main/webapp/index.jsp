@@ -76,6 +76,11 @@ img {
 	position: relative;
 	float: none;
 }
+
+.container {
+	padding : 2px;
+}
+
 </style>
 
 </head>
