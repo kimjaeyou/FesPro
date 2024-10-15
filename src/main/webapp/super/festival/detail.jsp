@@ -24,7 +24,6 @@
 		    color: #000; /* 텍스트 색상 */
 		}
     </style>
-    
     <script>
     	/* 캔버스엘리먼트 이름으로 찾기 */
     	const getCanvas = function(canvasName){
@@ -37,19 +36,19 @@
    		
 	  	/* 리퀘스트 데이터 - 리뷰 */
   	const reviewFunc= function(){
-	   	const reviewList = ${reviewList};
-	   	if(reviewList.length===0) return;
-	   	
-	   	const avg = reviewList.reduce((sum, review) => sum + review.SCORE, 0) / reviewList.length;
-	   	//console.log("평균" + avg.toFixed(2));
-	   	let data = "";
-	   	data += "<h4>";
-	   	data += "리뷰 평균 : ";
-	   	data += avg.toFixed(2);
-	   	data +="</h4>";
-	   	
-	   	 $("#reviewAvgScore").html(data);
-	  	};
+					   	const reviewList = ${reviewList};
+					   	if(reviewList.length===0) return;
+					   	
+					   	const avg = reviewList.reduce((sum, review) => sum + review.SCORE, 0) / reviewList.length;
+					   	//console.log("평균" + avg.toFixed(2));
+					   	let data = "";
+					   	data += "<h4>";
+					   	data += "리뷰 평균 : ";
+					   	data += avg.toFixed(2);
+					   	data +="</h4>";
+					   	
+					   	 $("#reviewAvgScore").html(data);
+	  			};			
 	  	
 	  	/* 리퀘스트 데이터 - 리뷰쓴 유저 */
 	  	const reviewUserList = ${requestScope.reviewUserList};
@@ -85,7 +84,6 @@
 		} else if (fesState === 3) {
 		    $("#radio_4").prop("checked", true); //비활성화
 		}
-    		
     	});
     </script>
 </head>
@@ -98,13 +96,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="SVCID" name="SVCID" readonly>${fes.SVCID}</textarea>
+                <textarea class="form-control" id="SVCID" name="SVCID" style="height: 100px;" readonly>${fes.SVCID}</textarea>
                 <label for="SVCID">서비스 아이디</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="MAXCLASSNM" name="MAXCLASSNM" readonly>${fes.MAXCLASSNM}</textarea>
+                <textarea class="form-control" id="MAXCLASSNM" name="MAXCLASSNM"  style="height: 100px;" readonly>${fes.MAXCLASSNM }</textarea>
                 <label for="MAXCLASSNM">대분류명</label>
             </div>
         </div>
@@ -114,13 +112,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="MINCLASSNM" name="MINCLASSNM" readonly>${fes.MINCLASSNM}</textarea>
+                <textarea class="form-control" id="MINCLASSNM" name="MINCLASSNM" style="height: 100px;" readonly>${fes.MINCLASSNM}</textarea>
                 <label for="MINCLASSNM">소분류명</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="SVCSTATNM" name="SVCSTATNM" readonly>${fes.SVCSTATNM}</textarea>
+                <textarea class="form-control" id="SVCSTATNM" name="SVCSTATNM" style="height: 100px;" readonly>${fes.SVCSTATNM}</textarea>
                 <label for="SVCSTATNM">서비스 상태</label>
             </div>
         </div>
@@ -130,13 +128,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="SVCNM" name="SVCNM" readonly>${fes.SVCNM}</textarea>
+                <textarea class="form-control" id="SVCNM" name="SVCNM" style="height: 100px;" readonly>${fes.SVCNM}</textarea>
                 <label for="SVCNM">서비스명</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="PAYATNM" name="PAYATNM" readonly>${fes.PAYATNM}</textarea>
+                <textarea class="form-control" id="PAYATNM" name="PAYATNM" style="height: 100px;" readonly>${fes.PAYATNM}</textarea>
                 <label for="PAYATNM">결제 방법</label>
             </div>
         </div>
@@ -146,13 +144,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="PLACENM" name="PLACENM" readonly>${fes.PLACENM}</textarea>
+                <textarea class="form-control" id="PLACENM" name="PLACENM" style="height: 100px;" readonly>${fes.PLACENM}</textarea>
                 <label for="PLACENM">장소명</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="USETGTINFO" name="USETGTINFO" readonly>${fes.USETGTINFO}</textarea>
+                <textarea class="form-control" id="USETGTINFO" name="USETGTINFO" style="height: 100px;" readonly>${fes.USETGTINFO}</textarea>
                 <label for="USETGTINFO">서비스 대상</label>
             </div>
         </div>
@@ -162,13 +160,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="X" name="X" readonly>${fes.getX()}</textarea>
+                <textarea class="form-control" id="X" name="X"  style="height: 100px;" readonly>${fes.getX()}</textarea>
                 <label for="X">장소 X 좌표</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="Y" name="Y" readonly>${fes.getY()}</textarea>
+                <textarea class="form-control" id="Y" name="Y" style="height: 100px;" readonly>${fes.getY()}</textarea>
                 <label for="Y">장소 Y 좌표</label>
             </div>
         </div>
@@ -178,13 +176,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="SVCOPNBGNDT" name="SVCOPNBGNDT" readonly>${fes.SVCOPNBGNDT}</textarea>
+                <textarea class="form-control" id="SVCOPNBGNDT" name="SVCOPNBGNDT" style="height: 100px;" readonly>${fes.SVCOPNBGNDT}</textarea>
                 <label for="SVCOPNBGNDT">서비스 개시 시작일시</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="SVCOPNENDDT" name="SVCOPNENDDT" readonly>${fes.SVCOPNENDDT}</textarea>
+                <textarea class="form-control" id="SVCOPNENDDT" name="SVCOPNENDDT" style="height: 100px;" readonly>${fes.SVCOPNENDDT}</textarea>
                 <label for="SVCOPNENDDT">서비스 개시 종료일시</label>
             </div>
         </div>
@@ -194,13 +192,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="RCPTBGNDT" name="RCPTBGNDT" readonly>${fes.RCPTBGNDT}</textarea>
+                <textarea class="form-control" id="RCPTBGNDT" name="RCPTBGNDT" style="height: 100px;" readonly>${fes.RCPTBGNDT}</textarea>
                 <label for="RCPTBGNDT">접수 시작일시</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="AREANM" name="AREANM" readonly>${fes.AREANM}</textarea>
+                <textarea class="form-control" id="AREANM" name="AREANM" style="height: 100px;" readonly>${fes.AREANM}</textarea>
                 <label for="AREANM">지역명</label>
             </div>
         </div>
@@ -210,13 +208,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="IMGURL" name="IMGURL" readonly>${fes.IMGURL}</textarea>
+                <textarea class="form-control" id="IMGURL" name="IMGURL" style="height: 100px;" readonly>${fes.IMGURL}</textarea>
                 <label for="IMGURL">이미지 경로</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="DTLCONT" name="DTLCONT" readonly>${fes.getDTLCONT()}</textarea>
+                <textarea class="form-control" id="DTLCONT" name="DTLCONT" style="height: 100px;" readonly>${fes.getDTLCONT()}</textarea>
                 <label for="DTLCONT">상세 내용</label>
             </div>
         </div>
@@ -226,13 +224,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="TELNO" name="TELNO" readonly>${fes.getTELNO()}</textarea>
+                <textarea class="form-control" id="TELNO" name="TELNO" style="height: 100px;" readonly>${fes.getTELNO()}</textarea>
                 <label for="TELNO">전화번호</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="V_MAX" name="V_MAX" readonly>${fes.getV_MAX()}</textarea>
+                <textarea class="form-control" id="V_MAX" name="V_MAX" style="height: 100px;" readonly>${fes.getV_MAX()}</textarea>
                 <label for="V_MAX">서비스 이용 시작시간</label>
             </div>
         </div>
@@ -242,13 +240,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="V_MIN" name="V_MIN" readonly>${fes.getV_MIN()}</textarea>
+                <textarea class="form-control" id="V_MIN" name="V_MIN" style="height: 100px;" readonly>${fes.getV_MIN()}</textarea>
                 <label for="V_MIN">서비스 이용 종료시간</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="REVSTDDAY" name="REVSTDDAY" readonly>${fes.REVSTDDAY}</textarea>
+                <textarea class="form-control" id="REVSTDDAY" name="REVSTDDAY" style="height: 100px;" readonly>${fes.REVSTDDAY}</textarea>
                 <label for="REVSTDDAY">취소 기간 기준일</label>
             </div>
         </div>
@@ -258,7 +256,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="REVSTDDAYNM" name="REVSTDDAYNM" readonly>${fes.getREVSTDDAYNM()}</textarea>
+                <textarea class="form-control" id="REVSTDDAYNM" name="REVSTDDAYNM" style="height: 100px;" readonly>${fes.getREVSTDDAYNM()}</textarea>
                 <label for="REVSTDDAYNM">취소 기간 기준 정보</label>
             </div>
         </div>
@@ -270,7 +268,7 @@
         </div> --%>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="host_seq" name="host_seq" readonly>${fes.getHost_seq()}</textarea>
+                <textarea class="form-control" id="host_seq" name="host_seq" style="height: 100px;" readonly>${fes.getHost_seq()}</textarea>
                 <label for="host_seq">주최자 Sequence</label>
             </div>
         </div>
@@ -280,13 +278,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="Update_date" name="Update_date" readonly>${fes.getUpdate_date()}</textarea>
+                <textarea class="form-control" id="Update_date" name="Update_date" style="height: 100px;" readonly>${fes.getUpdate_date()}</textarea>
                 <label for="Update_date">등록/수정 일시</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <textarea class="form-control" id="MAXNUM" name="MAXNUM" readonly>${fes.MAXNUM}</textarea>
+                <textarea class="form-control" id="MAXNUM" name="MAXNUM" style="height: 100px;" readonly>${fes.MAXNUM}</textarea>
                 <label for="MAXNUM">최대 인원수</label>
             </div>
         </div>
@@ -296,7 +294,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-floating">
-					<textarea class="form-control" id="PRICE" name="PRICE" readonly>${fes.PRICE}</textarea>
+					<textarea class="form-control" id="PRICE" name="PRICE" style="height: 100px;" readonly>${fes.PRICE}</textarea>
 					<label for="PRICE">가격</label>
 				</div>
 			</div>
@@ -405,7 +403,7 @@
 			  </button>
 			</div>
 <!-- 캐러셀 끝 -->
-		<h1>리뷰 통계</h1>
+		<!-- <h1>리뷰 통계</h1> -->
 		<h4 id="reviewAvgScore"></h4>
 		<h4>총 리뷰 수 : ${reviewLength}</h4> 
 </body>
