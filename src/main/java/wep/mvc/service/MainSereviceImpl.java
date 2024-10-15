@@ -1,6 +1,7 @@
 package wep.mvc.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dao.MainDAOImpl;
@@ -26,6 +27,24 @@ public class MainSereviceImpl {
 		} else {
 			throw new SQLException();
 		}
+	}
+
+	public List<FesDTO> selecLike(int user_seq, List<FesDTO> fesList) throws SQLException {
+		List<String> list = dao.selecLike(user_seq);
+		List<FesDTO> fesLike = new ArrayList<>();
+
+		if (list == null) {
+			throw new SQLException();
+		} else {
+			for (String svcid : list) {
+				for (FesDTO fes : fesList) {
+					if (fes.getSVCID().equals(svcid)) {
+						fesLike.add(fes);
+					}
+				} // inner for end
+			} // outer for end
+		} // else end
+		return fesLike;
 	}
 
 }

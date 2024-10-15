@@ -2,7 +2,10 @@ package wep.mvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.util.DbUtil;
@@ -31,5 +34,30 @@ public class MainDAOImpl {
 			DbUtil.dbClose(con, ps);
 		}
 		return result;
+	}
+
+	public List<String> selecLike(int user_seq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<String> dto = new ArrayList<>();
+		
+		// select * from reservation where user_seq = ? 
+		String sql = "select SVCID from user_like where user_seq = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user_seq);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				dto.add(rs.getString(1));
+			}
+		
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dto;
 	}
 }

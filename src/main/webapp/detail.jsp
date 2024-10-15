@@ -155,7 +155,7 @@
 					let formattedData = data.replace(/다\./g, '다.<br>');
 					/* formattedData = formattedData.replace(/(\d)\. /g, '<br>$1.'); */
 					formattedData = formattedData.replace(
-							/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
+							/(\★|\※|\▣|\■|\▶|\□|\○|\❐|\ㅇ)/g, '<br>$1');
 
 					document.querySelector('.data_explain').innerHTML = formattedData
 							+ "<br><br>";
@@ -211,7 +211,7 @@
 						/* formattedData = formattedData.replace(/(\d)\./g,
 								'<br>$1.'); */
 						formattedData = formattedData.replace(
-								/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
+								/(\★|\※|\▣|\■|\▶|\□|\○|\❐|\ㅇ)/g, '<br>$1');
 
 						document.querySelector('.data_explain').innerHTML = formattedData
 								+ '<br><br>';
