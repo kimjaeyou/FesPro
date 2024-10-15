@@ -27,10 +27,17 @@ public class SuperFestivalController implements Controller {
 	 */
 	public ModelAndView selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		System.out.println("형우 / selectAll Call");
+		//System.out.println("!!" +(String)req.getParameter("search"));
 		
 		List<FesDTO> list =  festivalService.selectAll();
 		
 		req.setAttribute("festivalList", list);
+
+		/*
+		 * //검색하고자할때 신호를 보냄 if(req.getParameter("search") !=null) {
+		 * req.setAttribute("search", (String)req.getParameter("search")); }
+		 */
+		
 		return new ModelAndView("super/festival/selectAll.jsp");
 	}
 	
@@ -102,13 +109,14 @@ public class SuperFestivalController implements Controller {
 	    fes.setV_MIN(req.getParameter("V_MIN"));
 	    fes.setREVSTDDAY(req.getParameter("REVSTDDAY"));
 	    fes.setREVSTDDAYNM(req.getParameter("REVSTDDAYNM"));
-	    fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
+	    //fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
 	    fes.setFes_state(fesState); //등록상태
 	    fes.setUpdate_date(req.getParameter("Update_date"));
 	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
+		//int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
 		int result = festivalService.update(fes,fesState);
 		
 		if(result ==1) {
