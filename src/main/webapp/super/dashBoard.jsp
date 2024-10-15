@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link href="../../css/My_styles.css" rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
  <style>
         /* 전체 페이지의 스크롤을 없앱니다 */
         body {
@@ -46,7 +46,7 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">행사수정 미승인건: </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">목록가기</a>
+                                        <a class="small text-white stretched-link" href="${path}/front?key=superfestival&methodName=dashFesUpSelectAll">목록가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

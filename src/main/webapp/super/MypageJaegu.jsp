@@ -83,7 +83,7 @@
                  
                 </nav>
             </div>
-            <iframe src="auth/dashBoard.html" width="100%" height="1000px" style="border:none;" id="iFrame" name="center"></iframe>
+            <iframe src="dashBoard.jsp" width="100%" height="1000px" style="border:none;" id="iFrame" name="center"></iframe>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/My_scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

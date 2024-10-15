@@ -207,7 +207,7 @@ public class SuperFestivalController implements Controller {
 		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
 		
 		if(result ==1) {
-			return new ModelAndView("front?key=superfestival&methodName=dashFesSelectAll",true);
+			return new ModelAndView("front?key=superAuth&methodName=dashFesSelectAll",true);
 		}
 		else {
 			//에러페이지
