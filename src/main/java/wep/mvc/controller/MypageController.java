@@ -9,6 +9,7 @@ import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.USER_LIKE;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.MypageService;
 import wep.mvc.service.MypageServiceImpl;
 
@@ -19,8 +20,8 @@ public class MypageController implements Controller {
 	// 예약내역 전체검색
 	public ModelAndView resSelectAll(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
-		ReservationDTO2 dto = (ReservationDTO2) session.getAttribute("loginUser");
-		int seq = dto.getUserSeq();
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
 		System.out.println("seq = " + seq); // 데이터 나옴
 
 		List<ReservationDTO2> list = ms.resSelectAll(seq);

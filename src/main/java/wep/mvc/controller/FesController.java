@@ -12,18 +12,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import wep.mvc.dto.FES_TAG;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.service.FesSerevice;
 import wep.mvc.service.FesSereviceImpl;
+import wep.mvc.service.Fes_tagSerevice;
+import wep.mvc.service.Fes_tagSereviceImpl;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 10)
 public class FesController implements Controller {
 	private FesSerevice fesSerevice = new FesSereviceImpl();
+	private Fes_tagSerevice fes_tagSerevice = new Fes_tagSereviceImpl();
+	//등록 신청(C)
 
-	// private Fes_tagSerevice fes_tagSerevice = new Fes_tagSereviceImpl();
-	// 등록 신청(C)
 	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
 
@@ -74,12 +77,16 @@ public class FesController implements Controller {
 		// req.setAttribute("fesDTOList", fesDTOList);
 
 		System.out.println("여기");
-
+		
 		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
-
+		
 		int host_seq = SessionHostDTO.getHost_seq();
 
 		List<FesDTO> fesDTOList = fesSerevice.select(host_seq);
+		
+		
+		
+		
 		req.setAttribute("fesDTOList", fesDTOList);
 
 		return new ModelAndView("host/myPage1.jsp");
@@ -144,7 +151,8 @@ public class FesController implements Controller {
 		String[] fes_tags = req.getParameterValues("tag_content");
 		for (String fes_tag : fes_tags) {
 			String tag_content = fes_tag;
-			// fes_tagSerevice.insert();
+			fes_tagSerevice.insert(SVCID, tag_content);		
+
 		}
 
 		return new ModelAndView("front?key=fes&methodName=select", true);
@@ -177,7 +185,12 @@ public class FesController implements Controller {
 	public ModelAndView selectBySVCID(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String SVCID = req.getParameter("SVCID");
 		FesDTO fesDTO = fesSerevice.selectBySVCID(SVCID);
+		if(fesDTO==null) {
+			throw new SQLException("상세보기가 없습니다");
+		}
+		List<String> fes_tag = fes_tagSerevice.selectBySVCID(SVCID);
 		req.setAttribute("fesDTO", fesDTO);
+		req.setAttribute("fes_tag", fes_tag);
 		return new ModelAndView("host/read.jsp");
 	}
 
@@ -186,8 +199,14 @@ public class FesController implements Controller {
 		String SVCID = request.getParameter("SVCID");
 		System.out.println("여기서의 svcid: " + SVCID);
 		FesDTO fesdto = fesSerevice.selectBySVCID(SVCID);
+		if(fesdto==null) {
+			throw new SQLException("상세보기가 없습니다");
+		}
+		List<String> fes_tag = fes_tagSerevice.selectBySVCID(SVCID);
+		
 		request.setAttribute("fesDTO", fesdto);
-
+		request.setAttribute("fes_tag", fes_tag);
+		
 		return new ModelAndView("host/update.jsp");
 	}
 
@@ -252,6 +271,9 @@ public class FesController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=fes&methodName=selectBySVCID&SVCID=" + SVCID);
 		mv.setRedirect(true);
+		
+		
+		
 		return mv;
 	}
 
