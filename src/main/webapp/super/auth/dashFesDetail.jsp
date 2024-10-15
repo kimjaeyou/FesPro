@@ -19,20 +19,6 @@
 		    background-color: #f0f0f0; /* 연한 회색 */
 		    color: #000; /* 텍스트 색상 */
 		}
-		
-		/* 스크롤을 제거하는 스타일 */
-        html, body {
-            overflow: hidden; /* 스크롤을 숨김 */
-            height: 100%; /* 100% 높이를 차지하도록 설정 */
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* 페이지 전체 크기를 채우는 레이아웃을 유지하기 위한 스타일 */
-        #layoutSidenav_content {
-            min-height: 100%;
-            height: auto;
-        }
     </style>
     
     <script>

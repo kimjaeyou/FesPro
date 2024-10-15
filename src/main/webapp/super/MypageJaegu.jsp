@@ -14,7 +14,22 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/My_styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-     
+      <style>
+        /* 전체 페이지의 스크롤을 없앱니다 */
+        body {
+            overflow: hidden;
+        }
+
+        /* 레이아웃 내 특정 섹션에서도 스크롤을 없애고 싶을 때 */
+        #layoutSidenav_content {
+            overflow: hidden;
+        }
+
+        /* iframe 내 스크롤도 없애기 (필요 시 적용) */
+        iframe {
+            overflow: hidden;
+        }
+    </style>
     </head>
     <!-- <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -83,7 +98,7 @@
                  
                 </nav>
             </div>
-            <iframe src="dashBoard.jsp" width="100%" height="1000px" style="border:none;" id="iFrame" name="center"></iframe>
+           <iframe src="dashBoard.jsp" name="center" id="iFrame" style="width:100%;  height:75vh;"></iframe></iframe>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/My_scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
