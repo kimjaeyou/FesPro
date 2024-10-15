@@ -9,8 +9,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.FesDTO;
-import wep.mvc.dto.ListPublicReservationCulture;
-import wep.mvc.dto.row;
 import wep.mvc.service.MainSereviceImpl;
 
 public class MainController implements Controller {
@@ -51,6 +49,13 @@ public class MainController implements Controller {
 		else
 			System.out.println();
 
+		return new ModelAndView("detail.jsp");
+	}
+	
+	
+	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		
 		return new ModelAndView("detail.jsp");
 	}
 

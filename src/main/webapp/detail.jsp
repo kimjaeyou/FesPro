@@ -1,8 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="UTF-8">
 <jsp:include page="/common/header.jsp" />
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
 <style>
 .body_containner .area1 {
 	width: 90%;
@@ -14,7 +20,7 @@
 
 .area1 .sub_main {
 	font: bold;
-	font-family: monospace;
+	font-family: 'Noto Sans';
 	position: relative;
 	float: none;
 	margin-bottom: 20px;
@@ -24,7 +30,7 @@
 .area1 .img_main #img {
 	position: relative;
 	width: 45%;
-	height: 90%;
+	height: 450px;
 	left: 10%;
 	float: left;
 }
@@ -36,14 +42,15 @@
 
 .conButton {
 	position: relative;
-	width: 30%;
-	height: 100px;
+	width: 28%;
+	height: 90px;
 	background-color: #007BFF;
 	border: 1px solid #007BFF;
 	border-radius: 10px;
 	font-size: 200%;
 	color: white;
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .area1 button {
@@ -53,25 +60,27 @@
 
 .explain_data_small {
 	position: relative;
-	margin-left: 20px;
+	margin-left: 45px;
 	margin-top: 10px;
 	left: 10%;
 	top: 10%;
 	float: left;
-	border: 1px solid blue;
 	border-radius: 10px;
-	box-shadow: 0px 10px 15px 0px #007BFF inset;
+	box-shadow: 0px 10px 15px 0px #b8b8b8;
 }
 
 .explain_data_small div {
 	font: bold;
-	font-family: monospace;
-	border-bottom: 1px black solid;
+	font-family: Roboto;
+	border-bottom: 1px rgba(156, 156, 156, 0.5) solid;
 	font-size: 120%;
 	top: 10%;
 	margin-top: 10px;
 	text-align: left;
 	font-weight: bolder;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #like {
@@ -82,19 +91,20 @@
 
 .area2 {
 	width: 80%;
-	height: 100%;
-	left: 5%;
+	left: 6%;
 	position: relative; /* relative로 변경 */
 	float: left;
-	border: 1px solid blue;
+	border: 1px solid rgb(0,123,255);
 	border-radius: 10px;
 	clear: both; /* float 해제 */
 	margin-top: 30px; /* 여백 추가 */
+	padding: 40px;
+	margin-bottom: 50px;
 }
 
 .area2 div {
 	font: bold;
-	font-family: monospace;
+	font-family: 'Noto Sans';
 }
 </style>
 </head>
@@ -121,6 +131,8 @@
 					<input type="hidden" name="key" value="reservation" /> <input
 						type="hidden" name="methodName" value="revMove" /> <input
 						type="hidden" name="SVCID" value="${fes.SVCID}" />
+						<input type = "hidden" name="SVCNM" value = "${fes.SVCNM}"/>
+						<input type = "hidden" name="fes" value = "${fes}"/>
 					<button class="btn btn-primary" id="reservation">예약하기</button>
 					<button class="btn btn-primary" id="like">좋아요</button>
 				</form>
@@ -131,19 +143,20 @@
 
 		<div class="area2">
 			<div class="areaControl">
-				<button class="conButton">이용 안내</button>
-				<button class="conButton">지도</button>
-				<button class="conButton">리뷰</button>
+				<button class="conButton" id="information">이용 안내</button>
+				<button class="conButton" id="maps">지도</button>
+				<button class="conButton" id="review">리뷰</button>
 			</div>
 			<hr>
 			<div class="data_explain">
 				<script type="text/javascript">
 					const data = `${fes.DTLCONT}`;
 					let formattedData = data.replace(/다\./g, '다.<br>');
-					formattedData = formattedData.replace(/(\d)\./g, '<br>$1.');
-					formattedData = formattedData.replace(/(\★|\※)/g, '<br>$1');
+					/* formattedData = formattedData.replace(/(\d)\. /g, '<br>$1.'); */
+					formattedData = formattedData.replace(/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
 
-					document.querySelector('.data_explain').innerHTML = formattedData;
+					document.querySelector('.data_explain').innerHTML = formattedData
+							+ "<br><br>";
 				</script>
 
 			</div>
@@ -157,12 +170,77 @@
 <!-- <script src="js/scripts.js"></script> -->
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
 <script type="text/javascript">
 	document.getElementById('like').addEventListener('click', function(e) {
 		document.querySelector('input[name="key"]').value = 'main';
 		document.querySelector('input[name="methodName"]').value = 'setLike';
 	});
+
+	document
+			.getElementById('information')
+			.addEventListener(
+					'click',
+					function(e) {
+						document.querySelector('.data_explain').innerHTML = "";
+						const data = `${fes.DTLCONT}`;
+						let formattedData = data.replace(/다\./g, '다.<br>');
+						/* formattedData = formattedData.replace(/(\d)\./g,
+								'<br>$1.'); */
+						formattedData = formattedData.replace(/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g,
+								'<br>$1');
+
+						document.querySelector('.data_explain').innerHTML = formattedData
+								+ '<br><br>';
+					});
+
+	document.getElementById('maps').addEventListener(
+			'click',
+			function(e) {
+				const x = parseFloat('${fes.getX()}').toFixed(4);
+				const y = parseFloat('${fes.getY()}').toFixed(4);
+				// .data_explain 영역을 초기화
+				document.querySelector('.data_explain').innerHTML = "";
+
+				// 카카오맵 API 로드 후 지도 생성
+				kakao.maps.load(function() {
+					// 지도가 들어갈 HTML 요소 생성
+					const mapContainer = document.createElement('div');
+					mapContainer.style.width = '100%'; // 너비 조정
+					mapContainer.style.height = '400px'; // 높이 조정
+					document.querySelector('.data_explain').appendChild(
+							mapContainer);
+
+					// 지도의 중심좌표 설정 (여기서는 서울 시청 좌표 사용)
+					const mapOption = {
+						center : new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+						level : 3
+					// 지도의 확대 레벨
+					};
+					// 지도 생성
+					const map = new kakao.maps.Map(mapContainer, mapOption);
+
+					// 마커 추가 (마커를 지도에 표시할 위치)
+					const markerPosition = new kakao.maps.LatLng(
+							y, x);
+
+					// 마커 생성
+					const marker = new kakao.maps.Marker({
+						position : markerPosition
+					});
+
+					// 마커를 지도 위에 표시
+					marker.setMap(map);
+				});
+			});
+
+	document.getElementById('review').addEventListener('click', function(e) {
+
+	});
 </script>
+
+
+
 
 </html>

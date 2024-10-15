@@ -1,11 +1,11 @@
 package wep.mvc.dto;
 
 public class ReviewDTO {
-	private int REVIEW_SEQ;
-	private int USER_SEQ;
-	private String SVCID;
-	private String RV_CONTENT;
-	private int SCORE;
+	private int REVIEW_SEQ; // 리뷰 시퀀스
+	private int USER_SEQ; // 유저 시퀀스
+	private String SVCID; //서비스 아이디
+	private String RV_CONTENT; //리뷰내용
+	private int SCORE; //별점
 	
 	public ReviewDTO() {}
 

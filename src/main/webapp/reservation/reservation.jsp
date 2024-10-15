@@ -20,16 +20,16 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
     
         
-        <link rel="stylesheet" href="fonts/icomoon/style.css">
+        <link rel="stylesheet" href="${path}/reservation/fonts/icomoon/style.css">
     
-        <link rel="stylesheet" href="css/rome.css">
+        <link rel="stylesheet" href="${path}/reservation/css/rome.css">
         
         
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         
         <!-- Style -->
-        <link rel="stylesheet" href="css/style2.css">
+        <link rel="stylesheet" href="${path}/reservation/css/style2.css">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
         
@@ -70,14 +70,45 @@
 		<script type="text/javascript">
 			// 사이드바에 선택한 값 입력
 			$(document).on("click", ".rd-day-body", function() {
-				let date = $("#result").val();
-			       console.log(date);
-				$("[data-form=date]").html(date);
+				let stringDate1 = $("#result").val();
+			       //console.log(stringDate);
+			    
+			    let date1 = new Date(stringDate1);
+			    let dateFormat1 = date1.getFullYear() +
+				'-' + ( (date1.getMonth()+1) < 10 ? "0" + (date1.getMonth()+1) : (date1.getMonth()+1) )+
+				'-' + ( (date1.getDate()) < 10 ? "0" + (date1.getDate()) : (date1.getDate()) );
+			       
+				$("[data-form=date]").html(dateFormat1);
+				
+				//date2 = new Date(stringDate);
+				console.log(date1);
+				let cancleDate1 = new Date(date1);
+				cancleDate1.setDate(date1.getDate()-1); // 취소기간 기준일 받아와서 넣기
+				console.log(cancleDate1);
+				
+				//console.log(new Date());
+				let dateFormat2 = cancleDate1.getFullYear() +
+				'-' + ( (cancleDate1.getMonth()+1) < 10 ? "0" + (cancleDate1.getMonth()+1) : (cancleDate1.getMonth()+1) )+
+				'-' + ( (cancleDate1.getDate()) < 10 ? "0" + (cancleDate1.getDate()) : (cancleDate1.getDate()) );
+			
+				$("[data-form=canclePeriod]").html(dateFormat2);
+				
 			})
 	
 			   $(document).on("click", ".datepicker-cell", function() {
-				let date = $("#datepicker1").val();
-				$("[data-form=date]").html(date);
+				let stringDate2 = $("#datepicker1").val();
+				$("[data-form=date]").html(stringDate2);
+				
+				let date2 = new Date(stringDate2);
+				let cancleDate2 = new Date(date2);
+				cancleDate2.setDate(date2.getDate()-1);
+				
+				console.log(cancleDate2);
+				let dateFormat3 = cancleDate2.getFullYear() +
+				'-' + ( (cancleDate2.getMonth()+1) < 10 ? "0" + (cancleDate2.getMonth()+1) : (cancleDate2.getMonth()+1) )+
+				'-' + ( (cancleDate2.getDate()) < 10 ? "0" + (cancleDate2.getDate()) : (cancleDate2.getDate()) );
+				//let canclePeriod = date-1; // 취소기간 기준일 받아와서 넣기
+				$("[data-form=canclePeriod]").html(dateFormat3);
 			})
 	
 			$(document).on("click", ".time", function() {
@@ -88,7 +119,22 @@
 			   $(document).on("click", "#button-search", function(){
 			       let peopleNum = $("#people-num").html();
 			       $("[data-form=peopleNum]").html(peopleNum);
+			       let price = 0;
+			       price = ${fes.PRICE};
+			       console.log(price);
+			       $("[data-form=fee]").text(price*peopleNum);
 			})
+			
+			// 인원수에 따른 금액 계산
+/* 			$(document).on("click", "#button-search", function(){
+				let price = ${fes.PRICE};
+				let num = $("#people-num").text();
+				console.log(price);
+				console.log(num);
+				
+				$("[data-form=fee]").text = price*num;
+			}); */
+			
 		</script>
 		
 		<script type="text/javascript">
@@ -131,7 +177,7 @@
 	            for (const elem of elems) {
 	                const datepicker = new Datepicker(elem, {
 	                // 'format': 'dd/mm/yyyy', // UK format
-	                'format': 'yyyy년 mm월 dd일', // UK format
+	                'format': 'yyyy-mm-dd', // UK format
 	                title: getDatePickerTitle(elem)
 	                });
 	            }
@@ -156,8 +202,9 @@
                         <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>                        
                     </div>
                     예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약 완료 <br><br>
-                    <h1 class="fw-bolder">문화행사 체험 예약 페이지</h1>
-                    <p class="lead mb-0">기타내용</p>
+                    <h1 class="fw-bolder">${SVCNM}</h1>
+                    <p class="lead mb-0"></p>
+                    
                 </div>
             </div>
         </header>
@@ -243,13 +290,13 @@
                                     <!-- 신청자 정보 가져오기 -->
                                      <table>
                                         <tr>
-                                        	<th>이름</td><td name="applicantName">나가</td>
+                                        	<th>이름</td><td name="applicantName">${loginUser.user_name}</td>
                                         </tr>
                                         <tr>
-                                        	<th>전화</td><td name="applicantTel">010-0000-0000</td>
+                                        	<th>전화</td><td name="applicantTel">${loginUser.user_tel}</td>
                                         </tr>
                                         <tr>
-                                        	<th>이메일</td><td name="applicantMail">naga@spoon.com</td>
+                                        	<th>이메일</td><td name="applicantMail">${loginUser.email}</td>
                                         </tr>
 
                                      </table>
@@ -272,7 +319,7 @@
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <div class="chk"><input type="checkbox" id="chk1" name = "agreement"><label for="chk" class="chkLabel">동의합니다</label></div>
+                                    <div class="chk"><input type="checkbox" id="chk1" name = "agreement"><label for="chk1" class="chkLabel">동의합니다</label></div>
                                 </div>
                             </div>
                             <!-- Blog post-->
@@ -286,7 +333,7 @@
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <div class="chk"><input type="checkbox" id="chk2" name="agreement"><label for="chk" class="chkLabel">동의합니다</label></div>
+                                    <div class="chk"><input type="checkbox" id="chk2" name="agreement"><label for="chk2" class="chkLabel">동의합니다</label></div>
                                     <!-- <a class="btn btn-primary" href="#!" style="width: 100%;">예약하기</a> -->
                                 </div>
                             </div>
@@ -312,18 +359,22 @@
 			        <input type = "hidden" name = "time"/>
 			        <input type = "hidden" name = "peopleNum"/>
 			        <input type = "hidden" name = "fee"/>
+			        <input type = "hidden" name = "cancleDate"/>
+			        <input type = "hidden" name = "SVCID" value = "${SVCID}">
+			        <input type = "hidden" name = "SVCNM" value = "${SVCNM}">
                     <div class="card mb-4">
                         <div class="card-header" style="font-weight: bold; font-size: x-large;">나의 예약 정보</div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);"><h4>행사명</h4>
-                            <p>이용일자</p><p data-form="date" name = "date">내용</p>
-                            <p>이용회차<p class = "selectTime" data-form="time" name = "time">내용</p>
-                            <p>취소기간<p data-form="canclePeriod">내용</p>
-                            <p>취소수수료<p data-form="cancleFee">내용</p>
+                        <p>${SVCNM}</p>
+                            <p>이용일자</p><p data-form="date" name = "date"></p>
+                            <p>이용회차<p class = "selectTime" data-form="time" name = "time"></p>
+                            <p>취소기간<p data-form="canclePeriod" name="canclePeriod"></p>
+                            <p>취소수수료<p data-form="cancleFee">없음</p>
                             <p>
                             <div style="border: 1px solid white; border-radius: 5%; padding: 15px; background-color: white;">
                                 <h5>결제금액</h5><hr>
-                                <p>이용인원</p><p data-form="peopleNum" name="peopleNum">내용</p>
-                                <p>이용요금</p><p data-form="fee" name = "fee">0</p>
+                                <p>이용인원</p><p data-form="peopleNum" name="peopleNum"></p>
+                                <p>이용요금</p><p data-form="fee" name = "fee">0</p> <!-- 요금 * 인원수 -->
                                 <p>할인/할증</p><p data-form="discount">내용</p>
                             </div>
                         </div>
@@ -346,16 +397,16 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="${path}/reservation/js/scripts.js"></script>
 
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
+        <script src="${path}/reservation/js/jquery-3.3.1.min.js"></script>
+        <script src="${path}/reservation/js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/rome.js"></script>
+        <script src="${path}/reservation/js/rome.js"></script>
     
-        <script src="js/main.js"></script>
+        <script src="${path}/reservation/js/main.js"></script>
 		
-		<script src="../js/reservation.js"></script>
+		<script src="${path}/js/reservation.js"></script>
 		
 		<script type="text/javascript">
 			document.querySelector("#chkAll").addEventListener("click", (e) => {
@@ -365,19 +416,46 @@
 			});
 	
 			// 등록버튼
+			// 유효성 검사 : 날짜 회차 인원
 			function sendInsert() {
-			    let date = $("[data-form=date]").text();
-			    let time = $(".selectTime").text();
+			    let date = $("[data-form=date]").text().trim();
+			    let time = $(".selectTime").text().trim();
 			    let peopleNum = $("[data-form=peopleNum]").text();
 			    let fee = $("[data-form=fee]").text();
+			    let cancleDate = $("[data-form=canclePeriod]").text();
+                let agreement1 = $("#chk1").is(":checked");
+                let agreement2 = $("#chk2").is(":checked");
 			    console.log(date);
 			    console.log(time);
 			    console.log(peopleNum);
-			    document.resvForm.date.value = date;
-			    document.resvForm.time.value = time;
-			    document.resvForm.peopleNum.value = peopleNum;
-			    document.resvForm.fee.value = fee;
-			    document.resvForm.submit();
+			    console.log(fee);
+			    console.log(cancleDate);
+			    if (date === "") {
+                    alert("이용일자를 선택해주세요");
+                    return false;
+                } else if (time === ""){
+                    alert("회차를 선택해주세요");
+                    return false;
+                } else if (peopleNum === "") {
+                    alert("이용인원을 입력해주세요");
+                    return false;
+                } else if ($("#chk1").is(":checked") !== true) {
+                    alert("개인정보 수집 동의가 필요합니다");
+                    return false;
+                } else if (!agreement2) {
+                    alert("개인정보 제 3자 제공 동의가 필요합니다");
+                    return false;
+                }
+
+                else {
+                    document.resvForm.date.value = date;
+                    document.resvForm.time.value = time;
+                    document.resvForm.peopleNum.value = peopleNum;
+                    document.resvForm.fee.value = fee;
+                    document.resvForm.cancleDate.value = cancleDate;
+                    
+                    document.resvForm.submit();
+                }
 			}
 			
 		</script>

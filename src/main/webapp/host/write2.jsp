@@ -8,6 +8,119 @@
 <title>Insert title here</title>
 <script>
 function checkValid(){
+	var f=window.document.writeForm;
+	
+	if(!f.MAXCLASSNM.checked){
+		alert("대분류명을 체크해 주세요");
+		return false;
+	}
+	
+	if(f.MINCLASSNM.value == ""){
+		alert("소분류명을 체크해 주세요");
+		return false;
+	}
+	
+	if(f.SVCSTATNM.value == ""){
+		alert("서비스상태를 체크해 주세요");
+		return false;
+	}
+	
+	if(f.SVCNM.value == ""){
+		alert("서비스명을 입력해 주세요");
+		return false;
+	}
+	
+	if(f.PAYATNM.value == ""){
+		alert("결제방법을 체크해 주세요");
+		return false;
+	}
+	
+	if(f.USETGTINFO.value == ""){
+		alert("서비스대상을 체크해 주세요");
+		return false;
+	}
+
+	if(f.SVCOPNBGNDT.value == ""){
+		alert("서비스개시시작일시를 입력해 주세요");
+		return false;
+	}
+	
+	if(f.SVCOPNENDDT.value == ""){
+		alert("서비스개시종료일시를 입력해 주세요");
+		return false;
+	}
+
+	if(f.RCPTBGNDT.value == ""){
+		alert("접수시작일시를 입력해 주세요");
+		return false;
+	}
+	
+	if(f.RCPTENDDT.value == ""){
+		alert("접수종료일시를 입력해 주세요");
+		return false;
+	}
+	
+	if(f.DTLCONT.value == ""){
+		alert("상세내용을 입력해 주세요");
+		return false;
+	}
+
+	if(f.TELNO.value == ""){
+		alert("전화번호를 입력해 주세요");
+		return false;
+	}
+
+	if(f.V_MIN.value == ""){
+		alert("서비스이용시작시간을 입력해 주세요");
+		return false;
+	}
+	
+	if(f.V_MAX.value == ""){
+		alert("서비스이용종료시간을 입력해 주세요");
+		return false;
+	}
+	
+	if(f.REVSTDDAYNM.value == ""){
+		alert("취소기간기준정보를 선택해 주세요");
+		return false;
+	}
+	
+	if(f.REVSTDDAY.value == ""){
+		alert("취소기간 기준일까지를 입력해 주세요");
+		return false;
+	}
+	
+	if(f.PRICE.value == ""){
+		alert("가격을 입력해 주세요");
+		return false;
+	}
+
+	if(f.IMGURL.value == ""){
+		alert("서비스 포스터 또는 이미지를 첨부해 주세요");
+		return false;
+	}
+
+	if(f.PLACENM.value == ""){
+		alert("장소명을 입력해 주세요");
+		return false;
+	}
+
+	if(f.X.value == ""){
+		alert("지도에서 장소를 선택해 주세요");
+		return false;
+	}
+
+	if(f.Y.value == ""){
+		alert("지도에서 장소를 선택해 주세요");
+		return false;
+	}
+
+	if(f.AREANM.value == ""){
+		alert("지역명(XX구)을 입력해주세요");
+		return false;
+	}
+	
+	return true;
 	
 }
 </script>
@@ -64,11 +177,11 @@ function checkValid(){
         	<tr>
         		<td><p align="center"><span>서비스대상</span></p></td>
         		<td><p align="center"><span>
-        			<label><input type="radio" name="PAYATNM" value="kindergarten">유아</label>
-        			<label><input type="radio" name="PAYATNM" value="element">초등학생</label>
-        			<label><input type="radio" name="PAYATNM" value="middle">중학생</label>
-        			<label><input type="radio" name="PAYATNM" value="high">고등학생</label>
-        			<label><input type="radio" name="PAYATNM" value="adult">성인</label>
+        			<label><input type="radio" name="USETGTINFO" value="kindergarten">유아</label>
+        			<label><input type="radio" name="USETGTINFO" value="element">초등학생</label>
+        			<label><input type="radio" name="USETGTINFO" value="middle">중학생</label>
+        			<label><input type="radio" name="USETGTINFO" value="high">고등학생</label>
+        			<label><input type="radio" name="USETGTINFO" value="adult">성인</label>
         		</span></p></td>
         	</tr>
         	<tr>
@@ -124,14 +237,17 @@ function checkValid(){
         		<td width="450" height="20"><b><span style="font-size:9pt;">
         		<input type="file" name="IMGURL" maxlength="60" size="40"></span></b></td>
     		</tr>
-        	<!-- 지도API 활용 예정: 장소명o, 장소X좌표,장소Y좌표, 지역명 -->
+        	<!-- 지도API 활용 예정: 장소명o, 장소X좌표o,장소Y좌표o, 지역명 -->
         	<tr>
         		<td><p align="center"><b><span>장소명</span></b></p></td>
         		<td width="1000"><p align="center"><span><input type="text" id="placenm" name="PLACENM" size="100" onkeyup="getPLACENMValue()"></span></p>
-        		
-        		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services"></script>
+        		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
         		<div id="map" style="width:100%;height:350px;"></div>
-        		</td>
+        		
+     			<label>위도: <input type="text" id="latitude" name="X" readonly></label>
+				<label>경도: <input type="text" id="longitude" name="Y" readonly></label>
+     			<input type="text" name="AREANM" size="15" placeholder="XX구 입력해 주세요.">
+     			</span></p></td>
         	</tr>
         	<tr>
         		<td width="450" height="20" colspan="2" align="center"><b><span style="font-size:9pt;"><input type=submit value=글쓰기> 
@@ -139,7 +255,9 @@ function checkValid(){
     		</tr>
     	</tbody>
 	</table>
+</form>
 <script>
+
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -189,13 +307,28 @@ function displayMarker(place) {
     });
 
     // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, 'click', function() {
+    kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
         infowindow.open(map, marker);
         
         //마커를 클릭하면 x좌표, y좌표, 지역명을 가져온다
+     	// 클릭한 위도, 경도 정보를 가져옵니다 
+        var latlng = marker.getPosition();
         
+        // 마커 위치를 클릭한 위치로 옮깁니다
+        marker.setPosition(latlng);
+        
+        var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+        message += '경도는 ' + latlng.getLng() + ' 입니다';
+        
+        var resultDiv = document.getElementById('clickLatlng'); 
+        resultDiv.innerHTML = message;
+        
+        console.log(message);
+        
+        document.getElementById('latitude').value = latlng.getLat();
+        document.getElementById('longitude').value = latlng.getLng();
     });
 }
 
@@ -205,6 +338,8 @@ function getPLACENMValue(){
 	//console.log(inputPLACENMValue);
 	return inputPLACENMValue;
 }
+
 </script>
+
 </body>
 </html>

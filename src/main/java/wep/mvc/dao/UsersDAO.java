@@ -22,6 +22,6 @@ public interface UsersDAO {
 	int update(UsersDTO usersDTO) throws SQLException;
 
 	// 회원정보 가져오기
-	UsersDTO selectUser(UsersDTO usersDTO) throws SQLException;
+	UsersDTO selectUser(String usersDTO) throws SQLException;
 
 }
