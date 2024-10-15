@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../common/header.jsp"></jsp:include>
 
-<title>게시판</title>
+<title>공지사항 게시판</title>
 </head>
 <body>
 	<div class="container">
@@ -50,7 +50,8 @@
 
 				</tbody>
 			</table>
-			<a href="../index.jsp" class="btn btn-primary">목록</a>
+			<h3>${list}</h3>
+			<a href="${path}/front?key=board&methodName=read" class="btn btn-primary">목록</a>
 		</div>
 	</div>
 

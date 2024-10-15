@@ -2,9 +2,9 @@ package wep.mvc.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-import org.eclipse.jdt.internal.compiler.ast.RequiresStatement;
-
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,12 +28,14 @@ public class BoardController implements Controller {
 		System.out.println("BoardController 생성자 호출됨 ");
 		
 	}
-	
-	
+
 	public ModelAndView read(HttpServletRequest request, HttpServletResponse response)
 		    throws ServletException, IOException, SQLException {
-		System.out.println("이동");
-		return new ModelAndView("boardMain.jsp");
+		
+		
+		ServletContext a = request.getServletContext();
+		System.out.println(a);
+		return new ModelAndView("/board/boardMain.jsp");
 	}
 
 	public ModelAndView write(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +44,6 @@ public class BoardController implements Controller {
 		   System.out.println("write 호출");
 
 		   HttpSession session = request.getSession();
-		    
-
 		    UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
 		    HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
 		    
@@ -61,7 +61,7 @@ public class BoardController implements Controller {
 		    }
 
 		    
-		    return new ModelAndView("boardWrite.jsp"); 
+		    return new ModelAndView("front?key=board&methodName=write"); 
 		}
 		
 
@@ -71,26 +71,32 @@ public class BoardController implements Controller {
 		System.out.println("상세보기 메소드 불러왔다");
 		
         HttpSession session = request.getSession();
-       
         UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
 	    HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
 	    
 	    int hostSeq = SessionHostDTO.getHost_seq();
 		int userSeq = SessionUsersDTO.getUser_seq();
+		
+		
+        System.out.println(hostSeq);
+        System.out.println(userSeq);
+        
         
         int postUserSeq = Integer.parseInt(request.getParameter("loginUser"));
 
         
 		// 서비스 레이어에서 게시글 조회 및 권한 검증 처리
         BoardDTO boardDTO = boardService.select(postUserSeq, userSeq, hostSeq);
-
+        System.out.println(boardDTO);
         // 게시글이 존재하지 않거나, 권한이 없는 경우 처리
         if (boardDTO == null) {
-            return new ModelAndView("error.jsp");
+            return new ModelAndView("board/error.jsp");
         }
+        
+        request.setAttribute("list", boardDTO);
 
         // 게시글을 보여줄 뷰로 이동
-        return new ModelAndView("boardView.jsp");
+        return new ModelAndView("board/MainView.jsp");
     }
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response)
