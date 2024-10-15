@@ -5,9 +5,15 @@
 <html lang="UTF-8">
 <jsp:include page="/common/header.jsp" />
 
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 
 <style>
 .body_containner .area1 {
@@ -94,7 +100,7 @@
 	left: 6%;
 	position: relative; /* relative로 변경 */
 	float: left;
-	border: 1px solid rgb(0,123,255);
+	border: 1px solid rgb(0, 123, 255);
 	border-radius: 10px;
 	clear: both; /* float 해제 */
 	margin-top: 30px; /* 여백 추가 */
@@ -130,9 +136,9 @@
 				<form action="front">
 					<input type="hidden" name="key" value="reservation" /> <input
 						type="hidden" name="methodName" value="revMove" /> <input
-						type="hidden" name="SVCID" value="${fes.SVCID}" />
-						<input type = "hidden" name="SVCNM" value = "${fes.SVCNM}"/>
-						<input type = "hidden" name="fes" value = "${fes}"/>
+						type="hidden" name="SVCID" value="${fes.SVCID}" /> <input
+						type="hidden" name="SVCNM" value="${fes.SVCNM}" /> <input
+						type="hidden" name="fes" value="${fes}" />
 					<button class="btn btn-primary" id="reservation">예약하기</button>
 					<button class="btn btn-primary" id="like">좋아요</button>
 				</form>
@@ -172,7 +178,8 @@
 <!-- <script src="js/scripts.js"></script> -->
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
 <script type="text/javascript">
@@ -184,27 +191,23 @@
 
 		$.ajax({
 			url : 'ajax?key=main&methodName=setLike',
-			type : 'POST', 
-			dataType : 'json', 
+			type : 'POST',
+			dataType : 'json',
 			data : {
 				sid : sid
-			}, 
+			},
 			success : function(res) {
-				
+
 				alert(res === 1 ? '좋아요가 등록되었습니다.' : '좋아요 등록에 실패했습니다.');
 			},
 			error : function(err) {
-				
+
 				console.log(err);
 			}
 		});
 	});
 
-	document
-			.getElementById('information')
-			.addEventListener(
-					'click',
-					function(e) {
+	document.getElementById('information').addEventListener('click',function(e) {
 						document.querySelector('.data_explain').innerHTML = "";
 						const data = `${fes.DTLCONT}`;
 						let formattedData = data.replace(/다\./g, '다.<br>');
@@ -254,7 +257,29 @@
 	});
 
 	document.getElementById('review').addEventListener('click', function(e) {
-
+		document.querySelector('.data_explain').innerHTML = "";
+		const sid = $('input[name="SVCID"]').val();
+		
+		$.ajax({
+			url : 'ajax?key=main&methodName=selecReview',
+			type : 'POST',
+			dataType : 'json',
+			data : {
+				sid : sid
+			},
+			success : function(res) {
+			 	let str="";
+			 	$.each(res,function(index,item){
+					str+=item;
+				});
+			 	document.querySelector('.data_explain').innerHTML +=str;
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		});
+		
+		
 	});
 </script>
 

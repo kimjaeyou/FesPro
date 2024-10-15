@@ -29,6 +29,17 @@ public class MainAjaxController implements RestController {
 	}
 	
 	
+	public void selecReview(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		Gson gson = new Gson();
+		String sid=request.getParameter("sid");
+		UsersDTO user =(UsersDTO)request.getSession().getAttribute("loginUser"); 
+		int res=mainService.setLike(sid, user.getUser_seq());
+		String json = gson.toJson(res);
+		
+		PrintWriter out = response.getWriter();
+		out.print(json);
+	}
+	
 
 	
 
