@@ -1,68 +1,178 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="wep.mvc.dto.FesDTO"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+	crossorigin="anonymous"></script>
+
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+<!-- ë¶€íŠ¸ìŠ¤íŠ¸ë© ì»´í¬ë„ŒíŠ¸ -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 <style>
-        /* ½ºÅ©·ÑÀ» Á¦°ÅÇÏ´Â ½ºÅ¸ÀÏ */
+textarea[readonly] {
+	background-color: #f0f0f0; /* ì—°í•œ íšŒìƒ‰ */
+	color: #000; /* í…ìŠ¤íŠ¸ ìƒ‰ìƒ */
+}
+
+ /* ìŠ¤í¬ë¡¤ì„ ì œê±°í•˜ëŠ” ìŠ¤íƒ€ì¼ */
         html, body {
-            overflow: hidden; /* ½ºÅ©·ÑÀ» ¼û±è */
-            height: 100%; /* 100% ³ôÀÌ¸¦ Â÷ÁöÇÏµµ·Ï ¼³Á¤ */
+            overflow: hidden; /* ìŠ¤í¬ë¡¤ì„ ìˆ¨ê¹€ */
+            height: 100%; /* 100% ë†’ì´ë¥¼ ì°¨ì§€í•˜ë„ë¡ ì„¤ì • */
             margin: 0;
             padding: 0;
         }
         
-        /* ÆäÀÌÁö ÀüÃ¼ Å©±â¸¦ Ã¤¿ì´Â ·¹ÀÌ¾Æ¿ôÀ» À¯ÁöÇÏ±â À§ÇÑ ½ºÅ¸ÀÏ */
+        /* í˜ì´ì§€ ì „ì²´ í¬ê¸°ë¥¼ ì±„ìš°ëŠ” ë ˆì´ì•„ì›ƒì„ ìœ ì§€í•˜ê¸° ìœ„í•œ ìŠ¤íƒ€ì¼ */
         #layoutSidenav_content {
             min-height: 100%;
             height: auto;
         }
-    </style>
+</style>
+
+<script>
+	$(function(){
+		/* ë“±ë¡ìƒíƒœ ë¼ë””ì˜¤ */
+		const user_ben_check = ${user.user_ben_check};
+		//console.log("ë“±ë¡ìƒíƒœ : " + fesState);
+		if (user_ben_check === 0) {
+	    $("#radio_1").prop("checked", true); //ìŠ¹ì¸ëŒ€ê¸°
+	} else{ //ìˆ˜ì •ëŒ€ê¸°
+	    $("#radio_2").prop("checked", true);
+	} 
+		
+	});
+</script>
 </head>
+
 <body>
-<h1>È¸¿ø »ó¼¼ÆäÀÌÁö</h1>
-	<form action="front?key=superAuth&methodName=update" method="post">
-        <label for="user_seq">È¸¿ø ¹øÈ£:</label>
-        <input type="text" id="user_seq" name="user_seq" value="${user.user_seq}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="user_id">È¸¿ø ¾ÆÀÌµğ:</label>
-        <input type="text" id="user_id" name="user_id" value="${user.user_id}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="user_pw">ºñ¹Ğ¹øÈ£:</label>
-        <input type="text" id="user_pw" name="user_pw" value="${user.user_pw}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="age">³ªÀÌ:</label>
-        <input type="text" id="age" name="age" value="${user.age}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="addr">ÁÖ¼Ò:</label>
-        <input type="text" id="addr" name="addr" value="${user.addr}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="gender">¼ºº°:</label>
-        <input type="text" id="gender" name="gender" value="${user.gender}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="email">ÀÌ¸ŞÀÏ:</label>
-        <input type="text" id="email" name="email" value="${user.email}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="user_name">ÀÌ¸§:</label>
-        <input type="text" id="user_name" name="user_name" value="${user.user_name}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="disable">Àå¾Ö ¿©ºÎ:</label>
-        <input type="text" id="disable" name="disable" value="${user.disable}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="user_tel">ÀüÈ­¹øÈ£:</label>
-        <input type="text" id="user_tel" name="user_tel" value="${user.user_tel}" readonly style="color: gray; background-color: #f0f0f0;"><br><br>
-        
-        <label for="user_ben_check" style="font-weight: bold; background-color: #e0f7fa;">À¯Àú º¥ ¿©ºÎ:</label>
-        <!-- µå·Ó´Ù¿î ¸Ş´º·Î À¯Àú º¥ »óÅÂ¸¦ ¼±ÅÃÇÒ ¼ö ÀÖµµ·Ï ±¸Çö -->
-        <select id="user_ben_check" name="user_ben_check">
-            <option value="0" <c:if test="${user.user_ben_check == 0}"</c:if>>º¥</option>
-            <option value="1" <c:if test="${user.user_ben_check == 1}"</c:if>>È°¼ºÈ­</option>
-        </select><br><br>
-        
-        
-        <input type="submit" value="ÀúÀå">
-    </form>
+	<h1>ë¬¸í™”í–‰ì‚¬ ìƒì„¸í˜ì´ì§€</h1>
+
+	<!-- í¼ -->
+	<form action="front?key=superAuth&methodName=update" method="post"><!-- 
+		<input type="hidden" id="benC" nam="user_ben_check"
+			value=${user.user_ben_check}> -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="user_seq" name="user_seq"
+						readonly>${user.user_seq}</textarea>
+					<label for="user_seq">íšŒì› ë²ˆí˜¸</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="user_id" name="user_id" readonly>${user.user_id}</textarea>
+					<label for="user_id">íšŒì› ì•„ì´ë””</label>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="user_pw" name="user_pw" readonly>${user.user_pw}</textarea>
+					<label for="user_pw">íšŒì› ë¹„ë°€ë²ˆí˜¸</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="age" name="age" readonly>${user.age}</textarea>
+					<label for="age">íšŒì› ë‚˜ì´</label>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="addr" name="addr" readonly>${user.addr}</textarea>
+					<label for="addr">íšŒì› ì£¼ì†Œ</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="gender" name="gender" readonly>${user.gender}</textarea>
+					<label for="gender">íšŒì› ì„±ë³„</label>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="email" name="email" readonly>${user.email}</textarea>
+					<label for="email">ì´ë©”ì¼</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="user_name" name="user_name"
+						readonly>${user.user_name}</textarea>
+					<label for="user_name">íšŒì› ì´ë¦„</label>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="disable" name="disable" readonly>${user.disable}</textarea>
+					<label for="disable">ì¥ì•  ì—¬ë¶€</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-floating">
+					<textarea class="form-control" id="user_tel" name="user_tel"
+						readonly>${user.user_tel}</textarea>
+					<label for="user_tel">íšŒì› ì „í™”ë²ˆí˜¸</label>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="col-md-6">
+			í™œë™ ìƒíƒœ <br>
+			<!-- ë“±ë¡ìƒíƒœ ë¼ë””ì˜¤ -->
+			<div class="form-check form-check-inline">
+				<input class="form-state-radio" type="radio" name="authStateOptions"
+					id="radio_1" value="0"> <label class="form-check-label"
+					for="inlineRadio1">ë²¤ ìƒíƒœ</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-state-radio" type="radio" name="authStateOptions"
+					id="radio_2" value="1"> <label class="form-check-label"
+					for="inlineRadio2">í™œì„±í™” ìƒíƒœ</label>
+			</div>
+
+		</div>
+		<!-- ë²„íŠ¼ -->
+		<div class="d-grid gap-2">
+			<button class="btn btn-primary" type="submit">ì €ì¥</button>
+			<button class="btn btn-outline-danger" type="button"
+				onclick="history.back()">ë’¤ë¡œê°€ê¸°</button>
+		</div>
+	</form>
+	<!-- í¼ ë -->
+
 </body>
 </html>

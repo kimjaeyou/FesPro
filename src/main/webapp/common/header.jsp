@@ -193,8 +193,8 @@ img {
 		          </ul>
 		        </li>
                 <li><a href="#" class="nav-link px-2">예약보기</a></li>
-                <li><a href="${path}/board/boardMain.jsp" class="nav-link px-2">게시판</a></li>
-                <li><a href="#" class="nav-link px-2">공지사항</a></li>
+                <li><a href="${path}/front?key=board&methodName=select" class="nav-link px-2">게시판</a></li>
+                <li><a href="${path}/front?key=board&methodName=read" class="nav-link px-2">공지사항</a></li>
             </ul>
 	<c:choose>
     <c:when test="${not empty sessionScope.loginUser}">

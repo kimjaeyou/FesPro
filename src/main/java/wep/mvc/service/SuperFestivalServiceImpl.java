@@ -65,4 +65,15 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		return result;
 	}
 
+	@Override
+	public List<FesDTO> dashFesSelectAll() {
+		
+		List<FesDTO> result=null;
+		
+		result = dao.dashFesSelectAll();
+		
+		return result;
+	}
 }
+
+

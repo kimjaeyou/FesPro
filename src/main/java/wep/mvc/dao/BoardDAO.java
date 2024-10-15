@@ -22,7 +22,7 @@ public interface BoardDAO {
 		
 		/** 자신의 게시글 삭제*/
 	
-	int delete (String boardSeq , String user_pw) throws SQLException;
+	int delete (int boardSeq, int userSeq, int hostSeq) throws SQLException;
 	
 		
 		/** 카테고리별 전체 목록 조회 */

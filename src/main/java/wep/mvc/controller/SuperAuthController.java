@@ -16,7 +16,7 @@ import wep.mvc.service.SuperAuthService;
 import wep.mvc.service.SuperAuthServiceImpl;
 
 public class SuperAuthController implements Controller {
-
+	
 SuperAuthService service = new SuperAuthServiceImpl();
 	
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response)
@@ -36,11 +36,13 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		System.out.println("셀렉트올 컨트롤러");
 		
 		String userid = request.getParameter("user_id");
+		System.out.println(userid);
 		
 		UsersDTO user = new UsersDTO();
 		user.setUser_id(userid);
 	     
 		UsersDTO searchUser = service.select(user);
+		
 		request.setAttribute("user", searchUser);
 		
 		return new ModelAndView("super/auth/detail.jsp");
@@ -59,8 +61,8 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		String user_name = req.getParameter("user_name");
 		String disable = req.getParameter("disable");
 		String user_tel = req.getParameter("user_tel");
-		String user_ben_check = req.getParameter("user_ben_check");
-		
+		String user_ben_check = req.getParameter("authStateOptions");
+	
 		
 		
 		UsersDTO user = new UsersDTO();
@@ -111,13 +113,14 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		System.out.println("셀렉트올 컨트롤러");
 		
 		String hostid = request.getParameter("host_id");
+		System.out.println("hostid = "+hostid);
 		
 		HostDTO Host = new HostDTO();
 		Host.setHost_id(hostid);
 	     
 		HostDTO searchHost = service.hostSelect(Host);
 		request.setAttribute("host", searchHost);
-		
+		System.out.println(searchHost);
 		return new ModelAndView("super/auth/hostDetail.jsp");
 		 
 	}
@@ -130,9 +133,9 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		String host_pw = req.getParameter("host_pw");
 		String host_tel = req.getParameter("host_tel");
 		String host_name = req.getParameter("host_name");
-		String host_check = req.getParameter("host_check");
+		String host_check = req.getParameter("hostLoginStateOptions");
 		String rep_name = req.getParameter("rep_name");
-		String host_ben_check = req.getParameter("host_ben_check");
+		String host_ben_check = req.getParameter("hostStateOptions");
 		
 		HostDTO host = new HostDTO();
 		host.setHost_seq(Integer.parseInt(host_seq));
