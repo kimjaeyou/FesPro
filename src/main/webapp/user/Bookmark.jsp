@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="myPageCheck.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,9 +34,11 @@
 								type="button">검색</button>
 						</div>
 					</div>
+
 					<h5>
 						<i class="fas fa-table me-1"></i> 목록 <span id="rowCount"></span>
 					</h5>
+
 					<table id="festable" class="large-table">
 						<thead>
 							<tr>
@@ -46,36 +47,28 @@
 								<th>접수기간 / 이용기간</th>
 								<th>이용요금</th>
 								<th>접수상태</th>
+								<th>신청방법</th>
+								<th>예약방법</th>
 								<th>취소</th>
 							</tr>
 						</thead>
 						<tbody>
-						 <c:choose>
-    						<c:when test="${empty requestScope.like}">
-	   						<tr>
-					        <td colspan="5">
-            				<p align="center"><b><span style="font-size:9pt;">즐겨찾기 목록이 없습니다.</span></b></p>
-        					</td>
-    						</tr>
-    						</c:when>
-							 <c:otherwise>
-							<c:forEach items="${like}" var="like">
-							<!--  <tr>
+							<tr>
 								<td><a href=""></a></td>
-								<td>${like.서비스명}</td>
-								<td>${like.장소}</td>
-								<td>${like.접수기간} / ${like.이용기간}</td>
-								<td>${like.요금}</td>
-								<td>${like.접수상태}</td>
+								<td></a></td>
+								<td></a></td>
+								<td></a></td>
+								<td></a></td>
+								<td></a></td>
+								<td></a></td>
 								<td><button>취소</button></td>
-							</tr>-->
-							</c:forEach>
-							</c:otherwise>
-						</c:choose>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 			</main>
+			<!-- 메인 페이지 끝 -->
+
 		</div>
 	</div>
 	<script
