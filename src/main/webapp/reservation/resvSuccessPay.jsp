@@ -80,11 +80,13 @@
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
-                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
-                        <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
                         <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-3-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>
                     </div>
-                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
+                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약 결제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
                     완료 <br><br>
                     <h1 class="fw-bolder">예약 신청이 정상적으로 처리되었습니다.</h1>
 

@@ -1,15 +1,18 @@
 package wep.mvc.dto;
 
 public class ReservationDTO {
-	private int reservSeq; // 예약번호
-	private int userSeq; // 유저시퀀
-	private String SVCID; // 서비스 아이디
-	private String resvDate;// 예약한 날짜
-	private String svcDate; // 실제 행사일자
-	private String svcTime; // 회차
-	private int resvPeo; // 예약한 사람수
-	private int resvPrice; // 이용요금
-	private int resvCheck; // 예약상태
+
+	private int reservSeq;
+	private int userSeq;
+	private String SVCID; 
+	private String resvDate; 
+	private String svcDate;
+	private String svcTime;
+	private int resvPeo;
+	private int resvPrice;
+	private int resvCheck;
+	private String cancleDate; // 취소기한
+
 	
 	public ReservationDTO () {
 		
@@ -26,6 +29,18 @@ public class ReservationDTO {
 		this.resvPrice = resvPrice;
 	}
 	
+	public ReservationDTO(int userSeq, String sVCID, String svcDate, String svcTime, int resvPeo,
+		int resvPrice, int resvCheck) {
+		this(userSeq, sVCID, svcDate, svcTime, resvPeo, resvPrice);
+		this.resvCheck = resvCheck;
+	}
+	
+	public ReservationDTO(int userSeq, String sVCID, String svcDate, String svcTime, int resvPeo,
+			int resvPrice, int resvCheck, String cancleDate) {
+		this(userSeq, sVCID, svcDate, svcTime, resvPeo, resvPrice, resvCheck);
+		this.cancleDate = cancleDate;
+	}
+	
 	public ReservationDTO(int reservSeq, int userSeq, String sVCID, String resvDate, String svcDate, String svcTime,
 			int resvPeo, int resvPrice, int resvCheck) {
 		super();
@@ -38,6 +53,12 @@ public class ReservationDTO {
 		this.resvPeo = resvPeo;
 		this.resvPrice = resvPrice;
 		this.resvCheck = resvCheck;
+	}
+	
+	public ReservationDTO(int reservSeq, int userSeq, String sVCID, String resvDate, String svcDate, String svcTime, 
+			int resvPeo, int resvPrice, int resvCheck, String cancleDate) {
+		this(reservSeq, userSeq, sVCID, resvDate, svcDate, svcTime, resvPeo, resvPrice, resvCheck);
+		this.cancleDate = cancleDate;
 	}
 
 	public int getReservSeq() {
@@ -111,6 +132,15 @@ public class ReservationDTO {
 	public void setResvCheck(int resvCheck) {
 		this.resvCheck = resvCheck;
 	}
+
+	public String getCancleDate() {
+		return cancleDate;
+	}
+
+	public void setCancleDate(String cancleDate) {
+		this.cancleDate = cancleDate;
+	}
+	
 	
 	
 }

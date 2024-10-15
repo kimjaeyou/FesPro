@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,8 @@ import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.dto.RESULT;
 import wep.mvc.dto.row;
+import wep.mvc.service.FesSerevice;
+import wep.mvc.service.FesSereviceImpl;
 
 @WebListener
 public class HandleMappingListner implements ServletContextListener {
@@ -130,59 +133,59 @@ public class HandleMappingListner implements ServletContextListener {
 	                        
 	                        str1=rowObject.optString("AREANM", "");
 	                        if(str1.equals("종로구")) {
-	                        	rowItem.sethost_seq(1);
+	                        	rowItem.sethost_seq(50);
 	                        }else if(str1.equals("중구")) {
-	                        	rowItem.sethost_seq(2);
+	                        	rowItem.sethost_seq(51);
 	                        }else if(str1.equals("성동구")) {
-	                        	rowItem.sethost_seq(3);
+	                        	rowItem.sethost_seq(52);
 	                        }else if(str1.equals("마포구")) {
-	                        	rowItem.sethost_seq(4);
+	                        	rowItem.sethost_seq(53);
 	                        }else if(str1.equals("영등포구")) {
-	                        	rowItem.sethost_seq(5);
+	                        	rowItem.sethost_seq(54);
 	                        }else if(str1.equals("과천시")) {
-	                        	rowItem.sethost_seq(6);
+	                        	rowItem.sethost_seq(55);
 	                        }else if(str1.equals("동작구")) {
-	                        	rowItem.sethost_seq(7);
+	                        	rowItem.sethost_seq(56);
 	                        }else if(str1.equals("성북구")) {
-	                        	rowItem.sethost_seq(8);
+	                        	rowItem.sethost_seq(57);
 	                        }else if(str1.equals("용산구")) {
-	                        	rowItem.sethost_seq(9);
+	                        	rowItem.sethost_seq(58);
 	                        }else if(str1.equals("")) {
-	                        	rowItem.sethost_seq(10);
+	                        	rowItem.sethost_seq(59);
 	                        }else if(str1.equals("강북구")) {
-	                        	rowItem.sethost_seq(11);
+	                        	rowItem.sethost_seq(60);
 	                        }else if(str1.equals("강동구")) {
-	                        	rowItem.sethost_seq(12);
+	                        	rowItem.sethost_seq(61);
 	                        }else if(str1.equals("동대문구")) {
-	                        	rowItem.sethost_seq(13);
+	                        	rowItem.sethost_seq(62);
 	                        }else if(str1.equals("양천구")) {
-	                        	rowItem.sethost_seq(14);
+	                        	rowItem.sethost_seq(63);
 	                        }else if(str1.equals("관악구")) {
-	                        	rowItem.sethost_seq(15);
+	                        	rowItem.sethost_seq(64);
 	                        }else if(str1.equals("중랑구")) {
-	                        	rowItem.sethost_seq(16);
+	                        	rowItem.sethost_seq(65);
 	                        }else if(str1.equals("금천구")) {
-	                        	rowItem.sethost_seq(17);
+	                        	rowItem.sethost_seq(66);
 	                        }else if(str1.equals("강서구")) {
-	                        	rowItem.sethost_seq(18);
+	                        	rowItem.sethost_seq(67);
 	                        }else if(str1.equals("노원구")) {
-	                        	rowItem.sethost_seq(19);
+	                        	rowItem.sethost_seq(68);
 	                        }else if(str1.equals("도봉구")) {
-	                        	rowItem.sethost_seq(20);
+	                        	rowItem.sethost_seq(69);
 	                        }else if(str1.equals("은평구")) {
-	                        	rowItem.sethost_seq(21);
+	                        	rowItem.sethost_seq(70);
 	                        }else if(str1.equals("서대문구")) {
-	                        	rowItem.sethost_seq(22);
+	                        	rowItem.sethost_seq(71);
 	                        }else if(str1.equals("광진구")) {
-	                        	rowItem.sethost_seq(23);
+	                        	rowItem.sethost_seq(72);
 	                        }else if(str1.equals("구로구")) {
-	                        	rowItem.sethost_seq(24);
+	                        	rowItem.sethost_seq(73);
 	                        }else if(str1.equals("강남구")) {
-	                        	rowItem.sethost_seq(25);
+	                        	rowItem.sethost_seq(74);
 	                        }else if(str1.equals("송파구")) {
-	                        	rowItem.sethost_seq(26);
+	                        	rowItem.sethost_seq(75);
 	                        }else {
-	                        	rowItem.sethost_seq(27);
+	                        	rowItem.sethost_seq(76);
 	                        }
 
 	                        rowItem.setUSETGTINFO(rowObject.optString("USETGTINFO", ""));
@@ -231,7 +234,7 @@ public class HandleMappingListner implements ServletContextListener {
 									  row1.getX(), row1.getY(), row1.getSVCOPNBGNDT(), row1.getSVCOPNENDDT(),
 									  row1.getRCPTBGNDT(), row1.getAREANM(), row1.getIMGURL(), row1.getDTLCONT(),
 									  row1.getTELNO(), row1.getV_MAX(), row1.getV_MIN(), row1.getREVSTDDAY(),
-									  row1.getREVSTDDAYNM(), 0, "111", 0, 0, 0, row1.getRCPTENDDT()));
+									  row1.getREVSTDDAYNM(), 1, "2024-10-15 00:00:00", 20, 0, row1.gethost_seq(), row1.getRCPTENDDT()));
 			
 		}
 		
@@ -239,4 +242,28 @@ public class HandleMappingListner implements ServletContextListener {
 		app.setAttribute("fesList", fesDTOList);
 	}//Test2 End
 	
-}
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		FesSerevice fesSerevice = new FesSereviceImpl();
+		ServletContext app = sce.getServletContext();
+		List<FesDTO> fesDTO = (List<FesDTO>) app.getAttribute("fesList");
+		try {
+			for(FesDTO fesdto: fesDTO) {
+				//System.out.println("fesdto.host_Seq: "+fesdto.getHost_seq());
+				if(fesSerevice.selectBySVCID(fesdto.getSVCID())!=null) {
+					continue;
+				}else {
+					fesSerevice.insert(fesdto);
+				}
+			} 
+			
+		}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+
