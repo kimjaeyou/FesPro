@@ -62,9 +62,8 @@ public class SuperFestivalController implements Controller {
 		req.setAttribute("reviewLength", reviewList.size());
 		
 		//리뷰 쓴 유저 정보 보내기
-		List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
-		data = g.toJson(reviewUserList);
-		req.setAttribute("reviewUserList", data);
+		//List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
+		// view 만들기 : FES_REVIEW_USER_VIEW
 		
 		return new ModelAndView("super/festival/detail.jsp");
 	}
@@ -74,10 +73,6 @@ public class SuperFestivalController implements Controller {
 	 */
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		System.out.println("형우 / update Call");
-		//System.out.println(req.getParameter("SVCID"));
-		//System.out.println(req.getParameter("festivalStateOptions"));
-		int fesState = Integer.parseInt(req.getParameter("festivalStateOptions"));
-		
 		
 		FesDTO fes = new FesDTO();
 	    fes.setSVCID(req.getParameter("SVCID"));
@@ -101,13 +96,13 @@ public class SuperFestivalController implements Controller {
 	    fes.setV_MIN(req.getParameter("V_MIN"));
 	    fes.setREVSTDDAY(req.getParameter("REVSTDDAY"));
 	    fes.setREVSTDDAYNM(req.getParameter("REVSTDDAYNM"));
-	    fes.setFes_state(fesState); //등록상태
+	    fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
 	    fes.setUpdate_date(req.getParameter("Update_date"));
 	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
-		int result = festivalService.update(fes,fesState);
+		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
 		
 		if(result ==1) {
 			return new ModelAndView("front?key=superfestival&methodName=selectAll",true);

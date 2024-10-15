@@ -18,15 +18,6 @@
         
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <style>
-        /* 스크롤을 제거하는 스타일 */
-        html, body {
-            overflow: hidden; 
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
- 	  	</style>
     </head>
     
         <div id="layoutSidenav">
@@ -76,7 +67,7 @@
                 </nav>
             </div>
             <!-- iframe -->
-            <iframe src="" name="center" style="width:100%;  height:100vh;"></iframe>
+            <iframe src="" name="center" style="width:100%;  height:100vh; border:1px solid red;"></iframe>
         </div>
         
        

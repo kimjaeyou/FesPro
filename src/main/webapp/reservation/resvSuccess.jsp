@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <jsp:include page="/common/header.jsp" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!DOCTYPE html>
     <html>
 
@@ -95,51 +94,28 @@
             <table>
                 <tr>
                     <th>예약번호</td>
-                    <td name="resvNo" data-form="resvSeq">
-						<c:if test="${not empty resvData}">
-							${resvData.reservSeq}
-						</c:if>
-					</td>
+                    <td name="resvNo" data-form="resvSeq">5</td>
                     <!-- \${reservSeq} -->
                 </tr>
                 <tr>
                     <th>서비스명</td>
-                    <td name="svcName">${SVCNM}</td>
+                    <td name="svcName">\${SVCNM}</td>
                 </tr>
                 <tr>
                     <th>이용일자</td>
-                    <td name="svcDate">
-						<c:if test="${not empty resvData}">
-								${resvData.svcDate}
-						</c:if>
-					</td>
+                    <td name="svcDate">\${svcDate}</td>
                 </tr>
                 <tr>
                     <th>이용인원</td>
-                    <td name="resvPeo">
-						<c:if test="${not empty resvData}">
-						${resvData.resvPeo}
-					</c:if>
-					</td>
+                    <td name="resvPeo">\${resvPeo}</td>
                 </tr>
                 <tr>
                     <th>이용요금</td>
-                    <td name="resvPrice">
-                    <td name="resvPeo">
-					<c:if test="${not empty resvData}">
-						${resvData.resvPrice}
-					</c:if>
-					</td>
+                    <td name="resvPrice">\${resvPrice}</td>
                 </tr>
                 <tr>
                     <th>예약상태</td>
-                    <td name="resvCheck">
-                    <c:choose>
-                    	<c:when test="${resvData.resvCheck eq 0}">예약확인중</c:when>
-                    	<c:otherwise>예약완료</c:otherwise>
-                    	
-                    </c:choose>
-                    </td>
+                    <td name="resvCheck">\${resvCheck}</td>
                 </tr>
 
             </table>

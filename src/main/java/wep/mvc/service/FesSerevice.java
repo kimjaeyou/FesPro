@@ -11,10 +11,6 @@ public interface FesSerevice{
 
 	List<FesDTO> select(int host_seq) throws SQLException;
 
-	FesDTO selectBySVCID(String sVCID) throws SQLException;
-
-	void update(FesDTO fesDTO) throws SQLException;
-
 	//List<FesDTO> selectAll() throws SQLException;
 
 	

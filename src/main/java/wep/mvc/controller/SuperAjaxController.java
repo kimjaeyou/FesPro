@@ -1,6 +1,6 @@
 package wep.mvc.controller;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 

@@ -8,126 +8,6 @@
 <title>Insert title here</title>
 <script>
 function checkValid(){
-
-	var f=window.document.writeForm;
-	
-	if(!f.MAXCLASSNM.checked){
-		alert("대분류명을 체크해 주세요");
-		return false;
-	}
-	
-	if(f.MINCLASSNM.value == ""){
-		alert("소분류명을 체크해 주세요");
-		return false;
-	}
-	
-	if(f.SVCSTATNM.value == ""){
-		alert("서비스상태를 체크해 주세요");
-		return false;
-	}
-	
-	if(f.SVCNM.value == ""){
-		alert("서비스명을 입력해 주세요");
-		return false;
-	}
-	
-	if(f.PAYATNM.value == ""){
-		alert("결제방법을 체크해 주세요");
-		return false;
-	}
-	
-	if(f.USETGTINFO.value == ""){
-		alert("서비스대상을 체크해 주세요");
-		return false;
-	}
-
-	if(f.SVCOPNBGNDT.value == ""){
-		alert("서비스개시시작일시를 입력해 주세요");
-		return false;
-	}
-	
-	if(f.SVCOPNENDDT.value == ""){
-		alert("서비스개시종료일시를 입력해 주세요");
-		return false;
-	}
-
-	if(f.RCPTBGNDT.value == ""){
-		alert("접수시작일시를 입력해 주세요");
-		return false;
-	}
-	
-	if(f.RCPTENDDT.value == ""){
-		alert("접수종료일시를 입력해 주세요");
-		return false;
-	}
-	
-	if(f.DTLCONT.value == ""){
-		alert("상세내용을 입력해 주세요");
-		return false;
-	}
-
-	if(f.TELNO.value == ""){
-		alert("전화번호를 입력해 주세요");
-		return false;
-	}
-
-	if(f.V_MIN.value == ""){
-		alert("서비스이용시작시간을 입력해 주세요");
-		return false;
-	}
-	
-	if(f.V_MAX.value == ""){
-		alert("서비스이용종료시간을 입력해 주세요");
-		return false;
-	}
-	
-	if(f.REVSTDDAYNM.value == ""){
-		alert("취소기간기준정보를 선택해 주세요");
-		return false;
-	}
-	
-	if(f.REVSTDDAY.value == ""){
-		alert("취소기간 기준일까지를 입력해 주세요");
-		return false;
-	}
-	
-	if(f.PRICE.value == ""){
-		alert("가격을 입력해 주세요");
-		return false;
-	}
-
-	if(f.IMGURL.value == ""){
-		alert("서비스 포스터 또는 이미지를 첨부해 주세요");
-		return false;
-	}
-
-	if(f.PLACENM.value == ""){
-		alert("장소명을 입력해 주세요");
-		return false;
-	}
-
-	if(f.X.value == ""){
-		alert("지도에서 장소를 선택해 주세요");
-		return false;
-	}
-
-	if(f.Y.value == ""){
-		alert("지도에서 장소를 선택해 주세요");
-		return false;
-	}
-
-	if(f.AREANM.value == ""){
-		alert("지역명(XX구)을 입력해주세요");
-		return false;
-	}
-	
-	if(f.tag_content==""){
-		alert("태그를 골라주세요");
-		return false;
-	}
-	
-	return true;
-
 	
 }
 </script>
@@ -145,29 +25,29 @@ function checkValid(){
     	<tbody>
         	<tr>
         		<td><p align="center"><span>대분류명</span></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" checked name="MAXCLASSNM" value="문화체험">문화체험</label></span></p></td>
+        		<td><p align="center"><span><label><input type="checkbox" checked name="MAXCLASSNM" value="culture">문화체험</label></span></p></td>
         	</tr>
         	<tr>
         		<td><p align="center"><span>소분류명</span></p></td>
         		<td><p align="center"><span>
-        			<label><input type="radio" name="MINCLASSNM" value="교육체험">교육체험</label>
-        			<label><input type="radio" name="MINCLASSNM" value="농장체험">농장체험</label>
-        			<label><input type="radio" name="MINCLASSNM" value="문화행사">문화행사</label>
-        			<label><input type="radio" name="MINCLASSNM" value="전시/관람">전시/관람</label>
-        			<label><input type="radio" name="MINCLASSNM" value="단체봉사">단체봉사</label>
-        			<label><input type="radio" name="MINCLASSNM" value="공원탐방">공원탐방</label>
-        			<label><input type="radio" name="MINCLASSNM" value="서울형키즈카페">서울형키즈카페</label>
-        			<label><input type="radio" name="MINCLASSNM" value="산림여가">산림여가</label>
+        			<label><input type="radio" name="MINCLASSNM" value="education">교육체험</label>
+        			<label><input type="radio" name="MINCLASSNM" value="farm">농장체험</label>
+        			<label><input type="radio" name="MINCLASSNM" value="cultureFes">문화행사</label>
+        			<label><input type="radio" name="MINCLASSNM" value="exhibition">전시/관람</label>
+        			<label><input type="radio" name="MINCLASSNM" value="valunteer">단체봉사</label>
+        			<label><input type="radio" name="MINCLASSNM" value="park">공원탐방</label>
+        			<label><input type="radio" name="MINCLASSNM" value="kids">서울형키즈카페</label>
+        			<label><input type="radio" name="MINCLASSNM" value="forest">산림여가</label>
         		</span></p></td>
         	</tr>
         	<tr>
         		<td><p align="center"><span>서비스상태</span></p></td>
         		<td><p align="center"><span>
-        			<label><input type="radio" name="SVCSTATNM" value="안내중">안내중</label>
-        			<label><input type="radio" name="SVCSTATNM" value="접수중">접수중</label>
-        			<label><input type="radio" name="SVCSTATNM" value="접수종료">접수종료</label>
-        			<label><input type="radio" name="SVCSTATNM" value="예약마감">예약마감</label>
-        			<label><input type="radio" name="SVCSTATNM" value="예약일시중지">예약일시중지</label>
+        			<label><input type="radio" name="SVCSTATNM" value="info">안내중</label>
+        			<label><input type="radio" name="SVCSTATNM" value="process">접수중</label>
+        			<label><input type="radio" name="SVCSTATNM" value="processEnd">접수종료</label>
+        			<label><input type="radio" name="SVCSTATNM" value="reservationEnd">예약마감</label>
+        			<label><input type="radio" name="SVCSTATNM" value="reservationStop">예약일시중지</label>
         		</span></p></td>
         	</tr>
         	<tr>
@@ -177,20 +57,18 @@ function checkValid(){
         	<tr>
         		<td><p align="center"><span>결제방법</span></p></td>
         		<td><p align="center"><span>
-        			<label><input type="radio" name="PAYATNM" value="무료">무료</label>
-        			<label><input type="radio" name="PAYATNM" value="유료">유료</label>
+        			<label><input type="radio" name="PAYATNM" value="free">무료</label>
+        			<label><input type="radio" name="PAYATNM" value="notFree">유료</label>
         		</span></p></td>
         	</tr>
         	<tr>
         		<td><p align="center"><span>서비스대상</span></p></td>
         		<td><p align="center"><span>
-
-        			<label><input type="radio" name="USETGTINFO" value="유아">유아</label>
-        			<label><input type="radio" name="USETGTINFO" value="초등학생">초등학생</label>
-        			<label><input type="radio" name="USETGTINFO" value="중학생">중학생</label>
-        			<label><input type="radio" name="USETGTINFO" value="고등학생">고등학생</label>
-        			<label><input type="radio" name="USETGTINFO" value="성인">성인</label>
-
+        			<label><input type="radio" name="PAYATNM" value="kindergarten">유아</label>
+        			<label><input type="radio" name="PAYATNM" value="element">초등학생</label>
+        			<label><input type="radio" name="PAYATNM" value="middle">중학생</label>
+        			<label><input type="radio" name="PAYATNM" value="high">고등학생</label>
+        			<label><input type="radio" name="PAYATNM" value="adult">성인</label>
         		</span></p></td>
         	</tr>
         	<tr>
@@ -228,9 +106,9 @@ function checkValid(){
         	<tr>
         		<td><p align="center"><span>취소기간기준정보</span></p></td>
         		<td><p align="center"><span>
-        			<label><input type="radio" name="REVSTDDAYNM" value="접수종료일">접수종료일</label>
-        			<label><input type="radio" name="REVSTDDAYNM" value="이용일">이용일</label>
-        			<label><input type="radio" name="REVSTDDAYNM" value="이용기간시작일">이용기간시작일</label>
+        			<label><input type="radio" name="REVSTDDAYNM" value="processEndDay">접수종료일</label>
+        			<label><input type="radio" name="REVSTDDAYNM" value="useDay">이용일</label>
+        			<label><input type="radio" name="REVSTDDAYNM" value="useStartDay">이용기간시작일</label>
         		</span></p></td>
         	</tr>
         	<tr>
@@ -255,21 +133,12 @@ function checkValid(){
         		</td>
         	</tr>
         	<tr>
-        		<td><p align="center"><b><span>분류태그</span></b></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" name="tag_content" value="가족">가족</label></span></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" name="tag_content" value="효도">효도</label></span></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" name="tag_content" value="연인">연인</label></span></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" name="tag_content" value="학습">학습</label></span></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" name="tag_content" value="건강">건강</label></span></p></td>
-        		<td><p align="center"><span><label><input type="checkbox" name="tag_content" value="키즈">키즈</label></span></p></td>
-        	</tr>
-        	<tr>
         		<td width="450" height="20" colspan="2" align="center"><b><span style="font-size:9pt;"><input type=submit value=글쓰기> 
         		<input type=reset value=다시쓰기></span></b></td>
     		</tr>
     	</tbody>
 	</table>
-</form>
+
 <script>
 
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다

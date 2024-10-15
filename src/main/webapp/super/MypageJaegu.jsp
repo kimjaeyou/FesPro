@@ -14,7 +14,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/My_styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-     
+      
     </head>
     <!-- <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -62,6 +62,7 @@
                                 	<!-- 회원과 주최자 분류해서 조회(-재구)   -->
                                     <a class="nav-link" href="#" id="userSelectAll">전체 회원 조회</a>
                                     <a class="nav-link" href="#" id="hostSelectAll">전체 주최자 조회</a>
+                                    <a class="nav-link" href="#" id="accept">주최자 승인</a>
                                 </nav>
                             </div>
                             <!-- ============================================================================= -->
@@ -99,7 +100,7 @@
            $(function(){
         	   $("#userSelectAll").click(function(){
        			
-       			 $("#iFrame").attr("src", "${path}/front?key=superAuth&methodName=selectAll");
+       			 $("#iFrame").attr("src", "${path}/super/auth/userSelectAll.jsp");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });
@@ -107,7 +108,15 @@
            $(function(){
         	   $("#hostSelectAll").click(function(){
        			
-       			 $("#iFrame").attr("src", "${path}/front?key=superAuth&methodName=hostSelectAll");
+       			 $("#iFrame").attr("src", "${path}/super/auth/hostSelectAll.jsp");
+       			//top.center.location.href="auth/selectAll.html"
+       		});
+           });
+          
+           $(function(){
+        	   $("#accept").click(function(){
+       			
+       			 $("#iFrame").attr("src", "${path}/super/auth/accept.jsp");
        			//top.center.location.href="auth/selectAll.html"
        		});
            });

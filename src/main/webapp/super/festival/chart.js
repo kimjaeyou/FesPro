@@ -24,23 +24,6 @@ function getAgeCountList(userList){
 	return ageCountList;
 };
 
-//연령별 리뷰점수의 합 리스트
-function getAgeReviewAvgList(reviewUserList){
-	const reviewScoreList = new Array(ageList.length).fill(0);
-	
-	reviewUserList.filter((user,index)=>{
-		if(user.age < 20) reviewScoreList[0]+= user.reviewScore;
-		else if(user.age < 30) reviewScoreList[1]+=user.reviewScore;
-		else if(user.age < 40) reviewScoreList[2]+=user.reviewScore;
-		else if(user.age < 50) reviewScoreList[3]+=user.reviewScore;
-		else if(user.age<60) reviewScoreList[4]+=user.reviewScore;
-		else if(user.age<70) reviewScoreList[5]+=user.reviewScore;
-		else reviewScoreList[6]+=user.reviewScore;
-	});
-	
-	return reviewScoreList;
-};
-
 // 연령, 성별 별 차트
 function ageGender(ctx,userList) {
 	//console.log(userList);
@@ -113,13 +96,8 @@ function ageRatio (ctx,userList){
 }
 
 //성별별 평균 평점
-function genderReviewAvg (ctx,reviewUserList){
-	//한 성별의 평균을 모두 더하고 한 성별의 숫자만큼 나누기
-	const femaleList = reviewUserList.filter((user)=>user.gender ==="여성");
-	const maleList = reviewUserList.filter((user)=>user.gender ==="남성");
+function genderReviewAvg (ctx,reviewList){
 	
-	const femaleScoreAvg = femaleList.reduce((sum, female) => sum + female.reviewScore, 0) / femaleList.length;
-	const maleScoreAvg = maleList.reduce((sum, male) => sum + male.reviewScore, 0) / maleList.length;
 	
     new Chart(ctx, {
       type: 'bar',
@@ -127,50 +105,11 @@ function genderReviewAvg (ctx,reviewUserList){
         labels: ['남성','여성'],
         datasets: [{
           label: '평균 평점',
-          data: [maleScoreAvg,femaleScoreAvg],
+          data: [],
           backgroundColor:[maleColor,femaleColor]
         }]
       },
-      options : {
-		  plugins : {
-			  legend : {
-					display : false
-				}
-		  }
-	  }
     });
 }
 
 //연령별 평균 평점
-function ageReviewAvg (ctx,reviewUserList){
-	//나이대별 점수의합 필요
-	//getAgeCountList(reviewUserList)  0,1,0,0,0,1 -> 인원수
-	
-	new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: ageList,
-			datasets: [{
-				label: '평균 평점',
-				data: getAgeReviewAvgList(reviewUserList),
-				backgroundColor: [
-					'rgba(255, 99, 132, 1)', 
-					'rgba(54, 162, 235, 1)', 
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)',
-					'rgba(99, 255, 132, 1)'
-				],
-			}]
-		},
-		 options : {
-		  plugins : {
-			  legend : {
-					display : false
-				}
-		  }
-	  }
-	});
-}
-

@@ -32,10 +32,5 @@ public interface SuperFestivalService{
 	 */
 	public int update(FesDTO festivalDto, int state);
 
-	/**
-	 * 행사 리뷰쓴 유저조회
-	 */
-	public List<UsersDTO> selectReviewUser(FesDTO fes);
-
 	
 }
