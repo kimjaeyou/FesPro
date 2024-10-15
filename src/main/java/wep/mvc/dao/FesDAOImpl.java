@@ -97,7 +97,7 @@ public class FesDAOImpl implements FesDAO{
 		ResultSet rs = null;
 		List<FesDTO> list = new ArrayList<FesDTO>();
 		
-		String sql = "select * from FES where HOST_SEQ=?";
+		String sql = "select * from FES where HOST_SEQ=? order by Update_date";
 		
 		try {
 			con=DbUtil.getConnection();
