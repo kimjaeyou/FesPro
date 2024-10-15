@@ -136,6 +136,11 @@ function sendDelete(){
 			<td><p align="center"><span><b>${fesDTO.host_seq}</b></span></p></td>
 		</tr>
 		<tr>
+			<td><p align="center"><span>태그 정보</span></p></td>
+			<td><p align="center"><span><b>${fes_tag}</b></span></p></td>
+		</tr>
+		
+		<tr>
 			
         	<td width="450" height="20" colspan="2" align="center">
         		<input type=hidden name="SVCID" value="${fesDTO.SVCID}">

@@ -12,11 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import wep.mvc.dto.FES_TAG;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.service.FesSerevice;
 import wep.mvc.service.FesSereviceImpl;
+import wep.mvc.service.Fes_tagSerevice;
+import wep.mvc.service.Fes_tagSereviceImpl;
 
 @MultipartConfig(
 		fileSizeThreshold = 1024*1024,
@@ -25,7 +28,7 @@ import wep.mvc.service.FesSereviceImpl;
 )
 public class FesController implements Controller {
 	private FesSerevice fesSerevice = new FesSereviceImpl();
-	//private Fes_tagSerevice fes_tagSerevice = new Fes_tagSereviceImpl();
+	private Fes_tagSerevice fes_tagSerevice = new Fes_tagSereviceImpl();
 	//등록 신청(C)
 	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
@@ -55,7 +58,7 @@ public class FesController implements Controller {
 		
 		HttpSession session = req.getSession();
 		
-		if(session.getAttribute("logincom")==null) { //기업회원으로 로그인 되어있는지 확인
+		if(session.getAttribute("loginCom")==null) { //기업회원으로 로그인 되어있는지 확인
 			System.out.println("로그인 안했지롱"); 
 			return new ModelAndView("User/login.jsp"); //로그인 페이지로 보낼 것
 		}
@@ -70,11 +73,15 @@ public class FesController implements Controller {
 		
 		System.out.println("여기");
 		
-		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
 		
 		int host_seq = SessionHostDTO.getHost_seq();
 		
 		List<FesDTO> fesDTOList = fesSerevice.select(host_seq);
+		
+		
+		
+		
 		req.setAttribute("fesDTOList", fesDTOList);
 		
 		return new ModelAndView("host/myPage1.jsp");
@@ -112,7 +119,7 @@ public class FesController implements Controller {
 		int PRICE = Integer.parseInt(req.getParameter("PRICE"));
 		
 		HttpSession session = req.getSession();
-		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
 		
 		int host_seq = SessionHostDTO.getHost_seq();
 		
@@ -139,7 +146,7 @@ public class FesController implements Controller {
 		String[] fes_tags = req.getParameterValues("tag_content");
 		for(String fes_tag:fes_tags) {
 			String tag_content = fes_tag;
-			//fes_tagSerevice.insert();		
+			fes_tagSerevice.insert(SVCID, tag_content);		
 		}
 		
 		
@@ -175,7 +182,12 @@ public class FesController implements Controller {
 	public ModelAndView selectBySVCID(HttpServletRequest req, HttpServletResponse resp) throws Exception{
 		String SVCID = req.getParameter("SVCID");
 		FesDTO fesDTO = fesSerevice.selectBySVCID(SVCID);
+		if(fesDTO==null) {
+			throw new SQLException("상세보기가 없습니다");
+		}
+		List<String> fes_tag = fes_tagSerevice.selectBySVCID(SVCID);
 		req.setAttribute("fesDTO", fesDTO);
+		req.setAttribute("fes_tag", fes_tag);
 		return new ModelAndView("host/read.jsp");
 	}
 	
@@ -185,7 +197,13 @@ public class FesController implements Controller {
 		String SVCID  = request.getParameter("SVCID");
 		System.out.println("여기서의 svcid: "+SVCID);
 		FesDTO fesdto = fesSerevice.selectBySVCID(SVCID);
+		if(fesdto==null) {
+			throw new SQLException("상세보기가 없습니다");
+		}
+		List<String> fes_tag = fes_tagSerevice.selectBySVCID(SVCID);
+		
 		request.setAttribute("fesDTO", fesdto);
+		request.setAttribute("fes_tag", fes_tag);
 		
 		return new ModelAndView("host/update.jsp");
 	}
@@ -222,7 +240,7 @@ public class FesController implements Controller {
 		int PRICE = Integer.parseInt(req.getParameter("PRICE"));
 		
 		HttpSession session = req.getSession();
-		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
 		
 		int host_seq = SessionHostDTO.getHost_seq();
 		
@@ -249,9 +267,16 @@ public class FesController implements Controller {
 		
 		System.out.println("여기까지는 오는가");
 		
+		
+		
+		
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=fes&methodName=selectBySVCID&SVCID="+SVCID);
 		mv.setRedirect(true);
+		
+		
+		
 		return mv;
 	}
 	

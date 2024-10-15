@@ -33,9 +33,7 @@ public class FesSereviceImpl implements FesSerevice{
 	@Override
 	public FesDTO selectBySVCID(String sVCID) throws SQLException {
 		FesDTO fesDTO = fesDAO.selectBySVCID(sVCID);
-		if(fesDTO==null) {
-			throw new SQLException("상세보기가 없습니다");
-		}
+		
 		return fesDTO;
 	}
 
