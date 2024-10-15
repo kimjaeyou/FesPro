@@ -21,7 +21,7 @@ public class BoardDAOImpl implements BoardDAO {
 	 */
 	@Override
 	public int insert(BoardDTO boardDTO) throws SQLException {
-
+		System.out.println("=====>  DAOImpl insert ");
 		String sql = "INSERT INTO ADMIN . BOARD (BOARD_SEQ, CATEGORY_SEQ, USER_SEQ, SUB, B_CONTENT, HOST_SEQ) VALUES (board_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 		try {
 			con = DbUtil.getConnection();
@@ -46,7 +46,7 @@ public class BoardDAOImpl implements BoardDAO {
 	 */
 	@Override
 	public int update(BoardDTO boardDTO) throws SQLException {
-
+		System.out.println("=====>  DAOImpl update ");
 		String sql = "UPDATE board SET SUB = ?, B_CONTENT = ? WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
 
 		try {
@@ -73,7 +73,7 @@ public class BoardDAOImpl implements BoardDAO {
 	 */
 	@Override
 	public int delete(int boardSeq, int userSeq, int hostSeq) throws SQLException {
-
+		System.out.println("=====>  DAOImpl delete ");
 		String sql = "DELETE FROM ADMIN . BOARD WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
 
 		try {
@@ -102,32 +102,18 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DbUtil.getConnection();
 
-			if (con == null) {
-				System.out.println("데이터베이스 연결 실패");
-				return list;
-			} else {
-				System.out.println("데이터베이스 연결 성공");
-			}
 			con.setAutoCommit(false);
+			
 			ps = con.prepareStatement(sql);
-			System.out.println("실행된 SQL 쿼리: " + sql);
-
-			System.out.println("SQL 쿼리 실행 중...");
 			rs = ps.executeQuery();
-			System.out.println("SQL 쿼리 실행 완료");
+			
 			con.commit();
+			
 			boolean hasData = rs.next();
-			if (!hasData) {
-				System.out.println("ResultSet에 데이터가 없습니다.");
-			} else {
-				do {
-					// 컬럼 이름을 대문자로 수정
+			if (rs.next()) {
 					BoardDTO board = new BoardDTO(rs.getInt("BOARD_SEQ"), rs.getInt("CATEGORY_SEQ"),
 							rs.getString("SUB"), rs.getInt("USER_SEQ"), rs.getInt("HOST_SEQ"));
 					list.add(board);
-
-					System.out.println("BoardSeq: " + rs.getInt("BOARD_SEQ"));
-				} while (rs.next());
 			}
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
@@ -141,7 +127,7 @@ public class BoardDAOImpl implements BoardDAO {
 	 */
 	@Override
 	public BoardDTO select(int userSeq) throws SQLException {
-
+		System.out.println("=====>  DAOImpl select ");
 		BoardDTO board = null;
 
 		String sql = "SELECT * FROM board WHERE user_seq = ?";

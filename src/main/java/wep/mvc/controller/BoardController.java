@@ -32,9 +32,9 @@ public class BoardController implements Controller {
 		
 		
 	    List<BoardDTO> selectAll = boardService.selectByCtg();
-	    System.out.println("selectAll - QA = " + selectAll);
+	    System.out.println("selectAll - noti = " + selectAll);
 	    request.setAttribute("noti", filterCtg(selectAll, 0));  
-	    System.out.println("filterCtg(selectAll, 0) = " + filterCtg(selectAll, 0));
+	    System.out.println("filterCtg noti (selectAll, 0) = " + filterCtg(selectAll, 0));
 	    return new ModelAndView("/board/boardMain.jsp");
 	}
 
@@ -49,7 +49,10 @@ public class BoardController implements Controller {
 	    
 	    System.out.println("selectAll - QA = " + selectAll);
 
-	    request.setAttribute("QA", filterCtg(selectAll, 1)); 
+	    request.setAttribute("QA", filterCtg(selectAll, 1));
+	    
+	    System.out.println("filterCtg noti (selectAll, 1) = " + filterCtg(selectAll, 1));
+	    
 	    return new ModelAndView("/board/boardQA.jsp");
 	}
 
@@ -65,6 +68,9 @@ public class BoardController implements Controller {
 	    System.out.println("selectAll - 자게 = " + selectAll);
 	    
 	    request.setAttribute("Free", filterCtg(selectAll, 2)); 
+	    
+	    System.out.println("filterCtg noti (selectAll, 2) = " + filterCtg(selectAll, 2));
+	    
 	    return new ModelAndView("/board/boardFree.jsp");
 	}
 
@@ -96,7 +102,7 @@ public class BoardController implements Controller {
 		System.out.println("userSeq: " + userSeq + " , hostSeq: " + hostSeq);
 
 		if (userSeq == 0 && hostSeq == 0) {
-			return new ModelAndView("../user/login.jsp", true);
+			return new ModelAndView("user/login.jsp", true);
 		}
 
 		return new ModelAndView("board/boardWrite.jsp");
@@ -173,11 +179,5 @@ public class BoardController implements Controller {
 		return new ModelAndView("index.jsp", true);
 	}
 
-	public ModelAndView error(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		System.out.println("에러메소드로 와버렸다.");
-		return new ModelAndView("error.jsp, true");
-	}
 
 }

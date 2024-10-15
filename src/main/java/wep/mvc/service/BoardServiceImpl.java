@@ -17,7 +17,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int delete(int boardSeq, int userSeq, int hostSeq) throws SQLException {
-
+		System.out.println("service delete ===>");
 		int delete = boardDAO.delete(boardSeq, userSeq, hostSeq);
 
 		if (delete == 0) {
@@ -29,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardDTO select(int postUserSeq, Integer userSeq, Integer hostSeq) throws SQLException {
-
+		System.out.println("service select 세부 ===>");
 		BoardDTO bDTO = boardDAO.select(postUserSeq);
 
 		if (bDTO == null) {
@@ -62,14 +62,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int update(BoardDTO boardDTO) throws SQLException {
-		// TODO Auto-generated method stub
+		System.out.println("service update ===>");		
 		return 0;
 	}
 
 	@Override
 	public int write(Integer userSeq, Integer hostSeq, String title, String content, String categoryParam)
 			throws SQLException {
-
+		System.out.println("service write ===>");
 		int categorySeq = Integer.parseInt(categoryParam);
 		BoardCategoryDTO categoryDTO = boardCategoryDAO.selectCtg(categorySeq);
 
@@ -99,7 +99,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDTO> selectByCtg() throws SQLException {
-		System.out.println("서비스 구현에 도착했다");
+		System.out.println("service selectByCtg ===>\n");
 		List<BoardDTO> list = boardDAO.selectByCtg();
 		System.out.println("서비스 구현 list 가져오는지 확인하는 출력문 : " + list);
 		
