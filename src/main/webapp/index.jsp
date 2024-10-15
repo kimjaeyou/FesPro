@@ -154,6 +154,9 @@ img {
 	<section class="testimonials text-center bg-light">
 		<div class="container">
 			<h1>공지사항</h1>
+			<c:forEach items="${NameSearch}" var="option" varStatus="status">
+				<input type="hidden" value="${option}" class="name">
+			</c:forEach>
 		</div>
 	</section>
 
@@ -168,9 +171,24 @@ img {
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-	
+
 
 	<script type="text/javascript">
+	$('#search').keyup(function(){
+		value = document.getElementById("search").value.toUpperCase();
+        item = document.getElementsByClassName("item");
+
+        for(i=0;i<item.length;i++){
+          name = item[i].getElementsByClassName("name");
+          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+            item[i].style.display = "flex";
+          }else{
+            item[i].style.display = "none";
+          }
+        }
+	})
+	
+	
 	let currentPage = 1;
 	const itemsPerPage = 3;
 	const items = document.querySelectorAll('.card-item');
