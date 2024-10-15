@@ -1,4 +1,5 @@
 <%@page import="wep.mvc.dto.UsersDTO"%>
+<%@page import="wep.mvc.dto.FesDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,8 +13,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>즐겨찾기 목록</title>
-<link href="../css/My_styles.css" rel="stylesheet" />
-<link href="../css/Bookmark.css" rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
+<link href="${path}/css/Bookmark.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -36,17 +37,20 @@
 						</div>
 					</div>
 					<h5>
-						<i class="fas fa-table me-1"></i> 목록 <span id="rowCount"></span>
+						<i class="fas fa-table me-1"></i> <span id="rowCount">목록</span>
 					</h5>
 					<table id="festable" class="large-table">
 						<thead>
 							<tr>
+								<th>서비스번호</th>
 								<th>서비스명</th>
 								<th>장소명</th>
-								<th>접수기간 / 이용기간</th>
+								<th>접수기간</th>
+								<th>이용기간</th>
+								<th>신청기간</th>
 								<th>이용요금</th>
 								<th>접수상태</th>
-								<th>취소</th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -59,16 +63,18 @@
     						</tr>
     						</c:when>
 							 <c:otherwise>
-							<c:forEach items="${like}" var="like">
-							<!--  <tr>
-								<td><a href=""></a></td>
-								<td>${like.서비스명}</td>
-								<td>${like.장소}</td>
-								<td>${like.접수기간} / ${like.이용기간}</td>
-								<td>${like.요금}</td>
-								<td>${like.접수상태}</td>
-								<td><button>취소</button></td>
-							</tr>-->
+							<c:forEach items="${like}" var="likes">
+							< <tr>
+								<td><a href="">${likes.SVCID}</a></td>
+								<td>${likes.SVCNM}</td>
+								<td>${likes.PLACENM}</td>
+								<td>${likes.RCPTBGNDT} ~ ${likes.RCPTENDDT}</td>
+								<td>${likes.SVCOPNBGNDT} ~ ${likes.SVCOPNENDDT}</td>
+								<td>${likes.v_MAX} ~ ${likes.v_MIN}</td>
+								<td>${likes.PRICE}원</td>
+								<td>${likes.SVCSTATNM}</td>
+								<td><button>삭제</button></td>
+							</tr>
 							</c:forEach>
 							</c:otherwise>
 						</c:choose>

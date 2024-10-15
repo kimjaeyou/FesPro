@@ -5,9 +5,11 @@ import java.util.List;
 
 import wep.mvc.dao.MypageDAO;
 import wep.mvc.dao.MypageDAOImpl;
+import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
+import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
 
 public class MypageServiceImpl implements MypageService {
@@ -26,16 +28,17 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public void resDelete(ReservationDTO dto) throws SQLException {
+	public int resDelete(int reserv_Seq) throws SQLException {
+		return md.resDelete(reserv_Seq);
 	}
 
 	@Override
-	public List<ReviewDTO> reviewSelectAll(int seq) throws SQLException {
+	public List<ReviewDTO2> reviewSelectAll(int seq) throws SQLException {
 		return md.reviewSelectAll(seq);
 	}
 
 	@Override
-	public List<ReviewDTO> reviewSelect(ReviewDTO dto) throws SQLException {
+	public List<ReviewDTO2> reviewSelect(ReviewDTO dto) throws SQLException {
 		return md.reviewSelect(dto);
 	}
 
@@ -44,12 +47,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<USER_LIKE> likeSelectAll(int seq) throws SQLException {
+	public List<FesDTO> likeSelectAll(int seq) throws SQLException {
 		return md.likeSelectAll(seq);
 	}
 
 	@Override
-	public List<USER_LIKE> likeSelect(USER_LIKE dto) throws SQLException {
+	public List<FesDTO> likeSelect(USER_LIKE dto) throws SQLException {
 		return md.likeSelect(dto);
 	}
 

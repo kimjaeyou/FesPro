@@ -11,8 +11,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>회원정보변경</title>
-<link href="../css/update.css" rel="stylesheet" />
-<link href="../css/My_styles.css" rel="stylesheet" />
+<link href="${path}/css/update.css" rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -93,7 +93,7 @@
 								<tr>
 									<th>주소</th>
 									<th><input type="text" class="addr" name="addr"
-										placeholder="주소를 입력하세요" value="${requestScope.user.addr}" required></th>
+										placeholder="주소를 입력하세요" value="${requestScope.users.addr}" required></th>
 								</tr>
 								<tr>
 									<th>성별</th>
@@ -126,7 +126,7 @@
 						<button type="submit" class="update-button">수정하기</button>
 					</form>
 
-					<form id="member-delete-form" method="get"
+					<form id="member-delete-form" method="post"
 						action="${pageContext.request.contextPath}/front">
 						<input type="hidden" name="key" value="user" /> <input
 							type="hidden" name="methodName" value="delete" /> <input
