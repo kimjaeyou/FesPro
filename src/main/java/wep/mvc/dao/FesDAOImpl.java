@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.WAIT_FES;
 import wep.mvc.util.DbUtil;
 
 public class FesDAOImpl implements FesDAO{
@@ -40,8 +41,8 @@ public class FesDAOImpl implements FesDAO{
 			ps.setString(15, fesDTO.getIMGURL());
 			ps.setString(16, fesDTO.getDTLCONT());
 			ps.setString(17, fesDTO.getTELNO());
-			ps.setString(18, fesDTO.getV_MIN());
-			ps.setString(19, fesDTO.getV_MAX());
+			ps.setString(18, fesDTO.getV_MAX());
+			ps.setString(19, fesDTO.getV_MIN());
 			ps.setString(20, fesDTO.getREVSTDDAY());
 			ps.setString(21, fesDTO.getREVSTDDAYNM());
 			ps.setInt(22, fesDTO.getFes_state());
@@ -154,49 +155,45 @@ public class FesDAOImpl implements FesDAO{
 	}
 
 	@Override
-	public int update(FesDTO fesDTO) throws SQLException{
+	public int update(WAIT_FES waitFes) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
 		
-		String sql="update FES set MAXCLASSNM=?,MINCLASSNM=?,SVCSTATNM=?,SVCNM=?,PAYATNM=?,"
-				+ "PLACENM=?,USETGTINFO=?,X=?,Y=?,SVCOPNBGNDT=?,SVCOPNENDDT=?,RCPTBGNDT=?,"
-				+ "AREANM=?,IMGURL=?,DTLCONT=?,TELNO=?,V_MIN=?,V_MAX=?,REVSTDDAY=?"
-				+ ",REVSTDDAYNM=?,Fes_state=?,MAXNUM=?,PRICE=?,Host_seq=?,RCPTENDDT=?,"
-				+ "Update_date=sysdate where SVCID=?";
+		String sql = "insert into WAIT_FES values(WAIT_FES_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
+			ps.setString(1, waitFes.getSVCID());
+			ps.setString(2, waitFes.getMAXCLASSNM());
+			ps.setString(3, waitFes.getMINCLASSNM());
+			ps.setString(4, waitFes.getSVCSTATNM());
+			ps.setString(5, waitFes.getSVCNM());
+			ps.setString(6, waitFes.getPAYATNM());
+			ps.setString(7, waitFes.getPLACENM());
+			ps.setString(8, waitFes.getUSETGTINFO());
+			ps.setString(9, waitFes.getX());
+			ps.setString(10, waitFes.getY());
+			ps.setString(11, waitFes.getSVCOPNBGNDT());
+			ps.setString(12, waitFes.getSVCOPNENDDT());
+			ps.setString(13, waitFes.getRCPTBGNDT());
+			ps.setString(14, waitFes.getAREANM());
+			ps.setString(15, waitFes.getIMGURL());
+			ps.setString(16, waitFes.getDTLCONT());
+			ps.setString(17, waitFes.getTELNO());
+			ps.setString(18, waitFes.getV_MAX());
+			ps.setString(19, waitFes.getV_MIN());
+			ps.setString(19, waitFes.getREVSTDDAY());
+			ps.setString(20, waitFes.getREVSTDDAYNM());
+			ps.setInt(21, waitFes.getFes_state());
+			ps.setInt(22, waitFes.getMAXNUM());
+			ps.setInt(23, waitFes.getPRICE());
+			ps.setInt(24, waitFes.getHost_seq());
+			ps.setString(25, waitFes.getRCPTENDDT());
 			
-			ps.setString(1, fesDTO.getMAXCLASSNM());
-			ps.setString(2, fesDTO.getMINCLASSNM());
-			ps.setString(3, fesDTO.getSVCSTATNM());
-			ps.setString(4, fesDTO.getSVCNM());
-			ps.setString(5, fesDTO.getPAYATNM());
-			ps.setString(6, fesDTO.getPLACENM());
-			ps.setString(7, fesDTO.getUSETGTINFO());
-			ps.setString(8, fesDTO.getX());
-			ps.setString(9, fesDTO.getY());
-			ps.setString(10, fesDTO.getSVCOPNBGNDT());
-			ps.setString(11, fesDTO.getSVCOPNENDDT());
-			ps.setString(12, fesDTO.getRCPTBGNDT());
-			ps.setString(13, fesDTO.getAREANM());
-			ps.setString(14, fesDTO.getIMGURL());
-			ps.setString(15, fesDTO.getDTLCONT());
-			ps.setString(16, fesDTO.getTELNO());
-			ps.setString(17, fesDTO.getV_MIN());
-			ps.setString(18, fesDTO.getV_MAX());
-			ps.setString(19, fesDTO.getREVSTDDAY());
-			ps.setString(20, fesDTO.getREVSTDDAYNM());
-			ps.setInt(21, fesDTO.getFes_state());
-			ps.setInt(22, fesDTO.getMAXNUM());
-			ps.setInt(23, fesDTO.getPRICE());
-			ps.setInt(24, fesDTO.getHost_seq());
-			ps.setString(25, fesDTO.getRCPTENDDT());
-			
-			ps.setString(26, fesDTO.getSVCID());
+			ps.setString(26, waitFes.getSVCID());
 			
 			result = ps.executeUpdate();
 		}finally {

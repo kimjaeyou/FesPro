@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.WAIT_FES;
 
 public interface FesDAO {
 
@@ -14,5 +15,5 @@ public interface FesDAO {
 
 	FesDTO selectBySVCID(String sVCID) throws SQLException;
 
-	int update(FesDTO fesDTO) throws SQLException;
+	int update(WAIT_FES waitFes) throws SQLException;
 }
