@@ -1,4 +1,3 @@
-/*
 package wep.mvc.filter;
 
 import java.io.IOException;
@@ -16,19 +15,22 @@ import jakarta.servlet.http.HttpSession;
 public class SessionCheckFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException { // 이거 이런식으로 코드 짜면 안됨 그럼 둘다 적용됨, 저녁에 다시 수정하자. 일단 이런 구조는 맞음
+			throws IOException, ServletException { 
 
 		String key = request.getParameter("key");
-		if (key == null || key.equals("user")) {
+		
+		if (key == null || key.equals("")) {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession session = req.getSession();
 
 			if (session.getAttribute("loginUser") == null) {
-				req.setAttribute("errorMsg", "로그인하고 이용해주세요.^^");
+				req.setAttribute("errorMsg", "로그인후 이용해주세요.");
 				req.getRequestDispatcher("error/error.jsp").forward(request, response);
 				return;
 			}
-		} 
+		}
+		
+		String key1 = request.getParameter("key");		
 		if (key == null || key.equals("host")) {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession session = req.getSession();
@@ -40,6 +42,6 @@ public class SessionCheckFilter implements Filter {
 			}
 		}
 		chain.doFilter(request, response);
-	}
+		
+	}		
 }
-*/

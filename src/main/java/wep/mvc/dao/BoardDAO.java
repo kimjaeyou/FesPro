@@ -12,7 +12,7 @@ public interface BoardDAO {
 
 		/** 카테고리별 게시글 작성 */
 	
-	int insert (BoardDTO boardDTO) throws SQLException;
+	int insertByCtg (BoardDTO boardDTO) throws SQLException;
 	
 
 		/** 자신의 게시글 수정 */
