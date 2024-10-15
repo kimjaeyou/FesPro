@@ -22,7 +22,8 @@
 
 
 	<!-- DBCP -->
-	<Resource 
+
+<Resource 
 		name="jdbc/myoracle" 
 		auth="Container"
 		type="javax.sql.DataSource" 
@@ -33,5 +34,6 @@
 		maxTotal="20" 
 		maxIdle="10" 
 		maxWaitMillis="-1" />
+
 </Context>
 
