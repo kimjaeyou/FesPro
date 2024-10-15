@@ -61,7 +61,7 @@ public class ReservationController implements Controller {
 		System.out.println(userDTO);
 
 		
-		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 0, cancleDate);
+		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 1, cancleDate);
 		
 		int result = service.insert(reservation);
 		//System.out.println(result);
@@ -158,7 +158,7 @@ public class ReservationController implements Controller {
 	    
 	    if(userDTO == null) {
 	    	request.setAttribute("errMsg", "로그인 후 이용해주세요");
-			return new ModelAndView("reservation/fail.jsp");
+			return new ModelAndView("reservation/needsLogin.jsp");
 	    }
 		
 		String SVCNM = request.getParameter("SVCNM");
@@ -220,5 +220,39 @@ public class ReservationController implements Controller {
 	/**
 	 * 확인증
 	 */
+	
+	
+	/**
+	 * 마이 페이지 - 예약 상세
+	 */
+	public ModelAndView viewDetail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		int resvSeq = Integer.parseInt(request.getParameter("reserv_Seq"));
+		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
+		request.setAttribute("resvDTO", resvDTO);
+		
+		// 예약번호로 검색 후 SVCID를 이용해 Festival 정보 가져온다
+		FesDTO fesDTO = service.selectBySVCIDFes(resvDTO.getSVCID());
+		request.setAttribute("fesDTO", fesDTO);
+		
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+	    request.setAttribute("userDTO", userDTO);
+		
+		// application이 가지고 있는 fes 정보 가져오기
+		ServletContext app = request.getServletContext();
+		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
+		
+		FesDTO fes = mainService.selecOne(resvDTO.getSVCID(), list);
+		if(fes!=null)
+			request.setAttribute("fes", fes);
+		
+		if(resvDTO != null && fesDTO != null) {
+			return new ModelAndView("user/resvDetail.jsp", false);
+		} else {
+			request.setAttribute("errMsg", "예약 내역 가져오기 실패");
+			return new ModelAndView("reservation/fail.jsp", true);
+		}
+	}
+	
 	
 }
