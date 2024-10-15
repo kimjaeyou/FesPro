@@ -38,4 +38,5 @@ public interface BoardService {
 	List<BoardDTO> selectByCtg () throws SQLException;
 	
 	
+	
 }

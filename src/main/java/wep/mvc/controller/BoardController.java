@@ -32,7 +32,9 @@ public class BoardController implements Controller {
 		
 		
 	    List<BoardDTO> selectAll = boardService.selectByCtg();
-	    request.setAttribute("noti", filterPostsByCategory(selectAll, 0));  
+	    System.out.println("selectAll - QA = " + selectAll);
+	    request.setAttribute("noti", filterCtg(selectAll, 0));  
+	    System.out.println("filterCtg(selectAll, 0) = " + filterCtg(selectAll, 0));
 	    return new ModelAndView("/board/boardMain.jsp");
 	}
 
@@ -44,7 +46,10 @@ public class BoardController implements Controller {
 		
 		
 	    List<BoardDTO> selectAll = boardService.selectByCtg();
-	    request.setAttribute("QA", filterPostsByCategory(selectAll, 1)); 
+	    
+	    System.out.println("selectAll - QA = " + selectAll);
+
+	    request.setAttribute("QA", filterCtg(selectAll, 1)); 
 	    return new ModelAndView("/board/boardQA.jsp");
 	}
 
@@ -56,21 +61,22 @@ public class BoardController implements Controller {
 		
 		
 	    List<BoardDTO> selectAll = boardService.selectByCtg();
-	    request.setAttribute("Free", filterPostsByCategory(selectAll, 2)); 
+
+	    System.out.println("selectAll - 자게 = " + selectAll);
+	    
+	    request.setAttribute("Free", filterCtg(selectAll, 2)); 
 	    return new ModelAndView("/board/boardFree.jsp");
 	}
 
 	/**
-	 * 카테고리필터
+	 * 카테고리필터 -gpt님 도움받음
 	 * */
-	private List<BoardDTO> filterPostsByCategory(List<BoardDTO> posts, int categorySeq) {
+	private List<BoardDTO> filterCtg(List<BoardDTO> posts, int categorySeq) {
 	    return posts.stream()
 	            .filter(post -> post.getCategorySeq() == categorySeq)
 	            .collect(Collectors.toList());
 	}
 
-
-	
 
 	public ModelAndView write(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
@@ -90,7 +96,7 @@ public class BoardController implements Controller {
 		System.out.println("userSeq: " + userSeq + " , hostSeq: " + hostSeq);
 
 		if (userSeq == 0 && hostSeq == 0) {
-			return new ModelAndView("front?key=user&methodName=login", true);
+			return new ModelAndView("../user/login.jsp", true);
 		}
 
 		return new ModelAndView("board/boardWrite.jsp");

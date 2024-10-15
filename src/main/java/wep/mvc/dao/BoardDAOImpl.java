@@ -97,7 +97,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 		List<BoardDTO> list = new ArrayList<>();
 
-		String sql = "SELECT BOARD_SEQ, SUB, CATEGORY_SEQ FROM ADMIN.BOARD";
+		String sql = "SELECT BOARD_SEQ, CATEGORY_SEQ, SUB, USER_SEQ, HOST_SEQ FROM ADMIN.BOARD";
 
 		try {
 			con = DbUtil.getConnection();
@@ -122,8 +122,8 @@ public class BoardDAOImpl implements BoardDAO {
 			} else {
 				do {
 					// 컬럼 이름을 대문자로 수정
-					BoardDTO board = new BoardDTO(rs.getInt("BOARD_SEQ"), rs.getString("SUB"),
-							rs.getInt("CATEGORY_SEQ"));
+					BoardDTO board = new BoardDTO(rs.getInt("BOARD_SEQ"), rs.getInt("CATEGORY_SEQ"),
+							rs.getString("SUB"), rs.getInt("USER_SEQ"), rs.getInt("HOST_SEQ"));
 					list.add(board);
 
 					System.out.println("BoardSeq: " + rs.getInt("BOARD_SEQ"));

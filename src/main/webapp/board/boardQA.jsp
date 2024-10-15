@@ -9,10 +9,10 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale"="1">
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${path}/css/bootstrap.css">
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-<link href="../reservation/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="${path}/reservation/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <title>QA 게시판</title>
@@ -53,7 +53,25 @@
 						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
 					</tr>
 				</thead>
+				<tbody>
 
+					<c:forEach var="post" items="${QA}">
+						
+						<tr>
+							<td>${post.boardSeq}</td>
+							<td><a href="${path}/front?key=board&methodName=select">${post.sub}</td>
+							<td><c:choose>
+									<c:when test="${not empty post.userSeq}">
+                                    ${post.userSeq}
+                                </c:when>
+									<c:when test="${not empty post.hostSeq}">
+                                    ${post.hostSeq}
+                                </c:when>
+								</c:choose></td>
+
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 			
 			
