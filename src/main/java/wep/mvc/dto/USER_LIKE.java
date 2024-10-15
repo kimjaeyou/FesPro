@@ -1,9 +1,9 @@
 package wep.mvc.dto;
 
 public class USER_LIKE {
-	private int LIKE_SEQ;
-	private String SVCID;
-	private int USER_SEQ;
+	private int LIKE_SEQ; // 즐겨찾기 시퀀스
+	private String SVCID; // 서비스 아이디
+	private int USER_SEQ; // 유저 시퀀스
 	
 	public USER_LIKE() {}
 	public USER_LIKE(int lIKE_SEQ, String sVCID, int uSER_SEQ) {

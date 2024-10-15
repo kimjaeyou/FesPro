@@ -6,6 +6,7 @@ import java.util.List;
 import wep.mvc.dao.MypageDAO;
 import wep.mvc.dao.MypageDAOImpl;
 import wep.mvc.dto.ReservationDTO;
+import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.USER_LIKE;
 
@@ -14,60 +15,46 @@ public class MypageServiceImpl implements MypageService {
 
 	// 예약내역 전체검색
 	@Override
-	public List<ReservationDTO> resSelectAll(int seq) throws SQLException {
+	public List<ReservationDTO2> resSelectAll(int seq) throws SQLException {
 		return md.resSelectAll(seq);
 	}
 
 	// 예약내역 부분검색
 	@Override
-	public List<ReservationDTO> resSelect(int seq) throws SQLException {
-		return md.resSelect(seq);
+	public List<ReservationDTO2> resSelect(ReservationDTO dto) throws SQLException {
+		return md.resSelect(dto);
 	}
 
-	// 예약내역 삭제
 	@Override
-	public void resDelete() throws SQLException {
+	public void resDelete(ReservationDTO dto) throws SQLException {
 	}
-	
-	// 리뷰 전체검색
-	@Override
-	public ReviewDTO reviewSelectAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	// 리뷰 부분검색
-	@Override
-	public ReviewDTO reviewSelect() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	// 리뷰 삭제
-	@Override
-	public void reviewDelete() throws SQLException {
-		// TODO Auto-generated method stub
 
-	}
-	
-	// 즐겨찾기 전체검색
 	@Override
-	public USER_LIKE likeSelectAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReviewDTO> reviewSelectAll(int seq) throws SQLException {
+		return md.reviewSelectAll(seq);
 	}
-	
-	// 즐겨찾기 부분검색
-	@Override
-	public USER_LIKE likeSelect() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	// 즐겨찾기 삭제
-	@Override
-	public void likeDelete() throws SQLException {
-		// TODO Auto-generated method stub
 
+	@Override
+	public List<ReviewDTO> reviewSelect(ReviewDTO dto) throws SQLException {
+		return md.reviewSelect(dto);
 	}
+
+	@Override
+	public void reviewDelete(ReviewDTO dto) throws SQLException {
+	}
+
+	@Override
+	public List<USER_LIKE> likeSelectAll(int seq) throws SQLException {
+		return md.likeSelectAll(seq);
+	}
+
+	@Override
+	public List<USER_LIKE> likeSelect(USER_LIKE dto) throws SQLException {
+		return md.likeSelect(dto);
+	}
+
+	@Override
+	public void likeDelete(USER_LIKE dto) throws SQLException {
+	}
+
 }
