@@ -19,6 +19,7 @@ import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WAIT_FES;
 import wep.mvc.service.FesSerevice;
 import wep.mvc.service.FesSereviceImpl;
 import wep.mvc.service.Fes_tagSerevice;
@@ -218,6 +219,8 @@ public class FesController implements Controller {
 
 	// U - 수정폼 제출
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		WAIT_FES waitFes = new WAIT_FES();
+		
 		System.out.println("1111111111111");
 		String SVCID = req.getParameter("SVCID");
 		System.out.println("2222 SVCID: " + SVCID);
@@ -252,11 +255,36 @@ public class FesController implements Controller {
 		int host_seq = SessionHostDTO.getHost_seq();
 
 		String RCPTENDDT = req.getParameter("RCPTENDDT");
-
-		FesDTO fesDTO = new FesDTO(SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM, SVCNM, PAYATNM, PLACENM, USETGTINFO, X, Y,
-				SVCOPNBGNDT, SVCOPNENDDT, RCPTBGNDT, AREANM, "", DTLCONT, TELNO, V_MAX, V_MIN, REVSTDDAY, REVSTDDAYNM,
-				Fes_state, Update_date, MAXNUM, PRICE, host_seq, RCPTENDDT);
-
+		
+		waitFes.setWAIT_FES_SEQ(0);
+		waitFes.setSVCID(SVCID);
+		waitFes.setMAXCLASSNM(MAXCLASSNM);
+		waitFes.setMINCLASSNM(MINCLASSNM);
+		waitFes.setSVCSTATNM(SVCSTATNM);
+		waitFes.setSVCNM(SVCNM);
+		waitFes.setPAYATNM(PAYATNM);
+		waitFes.setPLACENM(PLACENM);
+		waitFes.setUSETGTINFO(USETGTINFO);
+		waitFes.setX(X);
+		waitFes.setY(Y);
+		waitFes.setSVCOPNBGNDT(SVCOPNBGNDT);
+		waitFes.setSVCOPNENDDT(SVCOPNENDDT);
+		waitFes.setRCPTBGNDT(RCPTBGNDT);
+		waitFes.setAREANM(AREANM);
+		//IMGURL
+		waitFes.setDTLCONT(DTLCONT);
+		waitFes.setTELNO(TELNO);
+		waitFes.setV_MAX(V_MAX);
+		waitFes.setV_MIN(V_MIN);
+		waitFes.setREVSTDDAY(REVSTDDAY);
+		waitFes.setREVSTDDAYNM(REVSTDDAYNM);
+		waitFes.setFes_state(Fes_state);
+		waitFes.setUpdate_date(Update_date);
+		waitFes.setMAXNUM(MAXNUM);
+		waitFes.setPRICE(PRICE);
+		waitFes.setHost_seq(host_seq);
+		waitFes.setRCPTENDDT(RCPTENDDT);
+		
 		if (IMGURL != null) {
 			String fileName = this.getFilename(IMGURL);
 			System.out.println("fileName = " + fileName);
@@ -264,13 +292,13 @@ public class FesController implements Controller {
 
 			if (fileName != null && !fileName.equals("")) {
 				IMGURL.write(saveDir + "/" + fileName);// 서버폴더에 파일 저장=업로드
-				fesDTO.setIMGURL(fileName);
+				waitFes.setIMGURL(fileName);
 			}
 		}
 
 		System.out.println("뽀삐?");
 
-		fesSerevice.update(fesDTO);
+		fesSerevice.update(waitFes);
 
 		System.out.println("여기까지는 오는가");
 
@@ -291,7 +319,7 @@ public class FesController implements Controller {
 
 		fesDTO.setFes_state(3);
 
-		fesSerevice.update(fesDTO);
+		//fesSerevice.update(fesDTO);
 
 		return new ModelAndView("front?key=fes&methodName=select", true);
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import wep.mvc.dao.FesDAO;
 import wep.mvc.dao.FesDAOImpl;
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.WAIT_FES;
 
 public class FesSereviceImpl implements FesSerevice{
 	private FesDAO fesDAO = new FesDAOImpl();
@@ -38,8 +39,8 @@ public class FesSereviceImpl implements FesSerevice{
 	}
 
 	@Override
-	public void update(FesDTO fesDTO) throws SQLException {
-		if(fesDAO.update(fesDTO)==0) {
+	public void update(WAIT_FES waitFes) throws SQLException {
+		if(fesDAO.update(waitFes)==0) {
 			throw new SQLException("수정 실패");
 		}
 	}
