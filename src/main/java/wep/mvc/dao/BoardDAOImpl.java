@@ -39,20 +39,32 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int delete(String boardSeq, String user_pw) {
+	public int delete(int boardSeq, int userSeq, int hostSeq) throws SQLException {
+		
+		String sql = "DELETE FROM board WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	            
+	            
+	            pstmt.setInt(1, boardSeq);
+	            pstmt.setInt(2, userSeq);
+	            pstmt.setInt(3, hostSeq);
+	            pstmt.executeUpdate();
+	            
+		}        
 
 		return 0;
 	}
+		
 
 	@Override
 	public List<BoardDTO> selectByCtg(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) throws SQLException {
 	   
-	    String query = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
+	    String sql = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
 
 	    
 	    List<BoardDTO> boardList = new ArrayList<>();
 
-	    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	       
 	        pstmt.setInt(1, boardCategoryDTO.getCategorySeq());
 
