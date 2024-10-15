@@ -13,46 +13,75 @@ import wep.mvc.dto.BoardDTO;
 public class BoardDAOImpl implements BoardDAO {
 	private Connection conn;
 	private ResultSet rs;
-
+	
+	
+	/**
+	 * 게시글 등록
+	 * */
 	@Override
 	public int insert(BoardDTO boardDTO) throws SQLException {
 
-		// 게시글 삽입 쿼리 작성 및 실행
-		String sql = "INSERT INTO board (sub, B_content, category_Seq, user_Seq, host_Seq) VALUES (?, ?, ?, ?, ?)";
+		
+		String sql = "INSERT INTO board (BOARD_SEQ, CATEGORY_SEQ, USER_SEQ, SUB, B_CONTENT, HOST_SEQ) VALUES (?, ?, ?, ?, ?,?)";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, boardDTO.getSub());
-			pstmt.setString(2, boardDTO.getbContent());
-			pstmt.setInt(3, boardDTO.getCategorySeq());
-			pstmt.setInt(4, boardDTO.getUserSeq());
-			pstmt.setInt(5, boardDTO.getHostSeq());
+			pstmt.setInt(1, boardDTO.getBoardSeq());
+			pstmt.setInt(2, boardDTO.getCategorySeq());
+			pstmt.setInt(3, boardDTO.getUserSeq());
+			pstmt.setString(4, boardDTO.getSub());
+			pstmt.setString(5, boardDTO.getbContent());
+			pstmt.setInt(6, boardDTO.getHostSeq());
 			pstmt.executeUpdate();
 		}
 		return 0;
 	}
 
 	
-
+	/**
+	 * 게시글 수정
+	 * */
 	@Override
 	public int update(BoardDTO boardDTO) throws SQLException {
-
+		String sql = "UPDATE INTO BOARD (SUB, B_CONTENT) VALUES (?,?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, boardDTO.getSub());
+			pstmt.setString(2, boardDTO.getbContent());
+			pstmt.executeUpdate();
+		}
 		return 0;
 	}
 
+	/**
+	 * 게시글 삭제
+	 * */
 	@Override
-	public int delete(String boardSeq, String user_pw) {
+	public int delete(int boardSeq, int userSeq, int hostSeq) throws SQLException {
+		
+		String sql = "DELETE FROM board WHERE board_seq = ? AND (user_seq = ? OR host_seq = ?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	            
+	            
+	            pstmt.setInt(1, boardSeq);
+	            pstmt.setInt(2, userSeq);
+	            pstmt.setInt(3, hostSeq);
+	            pstmt.executeUpdate();
+	            
+		}        
 
 		return 0;
 	}
-
+		
+	/**
+	 * 카테고리 별 모든 게시글 불러오기
+	 * */
 	@Override
 	public List<BoardDTO> selectByCtg(BoardDTO boardDTO, BoardCategoryDTO boardCategoryDTO) throws SQLException {
 	   
-	    String query = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
+	    String sql = "SELECT board_seq, sub, category_seq FROM board WHERE category_seq = ?";
 
 	    
 	    List<BoardDTO> boardList = new ArrayList<>();
 
-	    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	       
 	        pstmt.setInt(1, boardCategoryDTO.getCategorySeq());
 
@@ -73,7 +102,9 @@ public class BoardDAOImpl implements BoardDAO {
 	    return boardList;
 	}
 
-
+	/**
+	 * 상세보기
+	 * */
 	@Override
 	public BoardDTO select(int postUserSeq) throws SQLException {
 		String query = "SELECT * FROM board WHERE user_seq = ?";

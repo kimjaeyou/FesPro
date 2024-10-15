@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <jsp:include page="/common/header.jsp" />
@@ -47,9 +48,33 @@ img {
 #card_main #heart_state {
 	width: 8%;
 	height: 8%;
-	position: absolute; 
-	z-index: 1000; 
-	left : 90%;
+	position: absolute;
+	z-index: 1000;
+	left: 90%;
+}
+
+.searchRES {
+	position: absolute;
+	width: 95%;
+	border: 1px solid gray;
+	background-color: white;
+	display: none;
+	z-index: 10000;
+}
+
+.searchRES div {
+	display: none;
+	color: black;
+	font: 20px;
+}
+
+#serach {
+	color: black;
+}
+
+#likeArea {
+	position: relative;
+	float: none;
 }
 </style>
 
@@ -64,14 +89,23 @@ img {
 					<div class="text-center text-white">
 						<!-- Page heading-->
 						<h1 class="mb-5">서울컬투</h1>
-						<form class="form-subscribe" id="contactForm" action="#">
+						<form class="form-subscribe" id="contactForm" action="front">
 							<div class="row">
-								<div class="col">
+								<div class="col" id="searchSelec">
 									<input class="form-control form-control-lg" id="search"
 										type="text" placeholder="검색" />
+									<div id="item" class="searchRES">
+										<input type="hidden" name="key" value="main" /> <input
+											type="hidden" name="methodName" value="oneSelec" /> <input
+											id="selecSVCID" type="hidden" name="sid" value=" " />
+										<c:forEach items="${list}" var="option" varStatus="status">
+											<div id="selectSearch" class="item"
+												data-item="${option.SVCID}">${option.SVCNM}</div>
+										</c:forEach>
+									</div>
 								</div>
 								<div class="col-auto">
-									<button class="btn btn-primary btn-lg" id="submitButton">Submit</button>
+									<button class="btn btn-primary btn-lg" id="submitButton">검색</button>
 								</div>
 								<div></div>
 							</div>
@@ -86,6 +120,7 @@ img {
 		<div class="container">
 			<div class="container px-4 px-lg-5 mt-5">
 				<h1>행사 목록</h1>
+				<br>
 				<c:if test="${not empty list}">
 					<div id="cardContent" class="container position-relative">
 						<!-- Cards container for pagination -->
@@ -95,8 +130,6 @@ img {
 								<!-- Ensure the columns take equal width and display horizontally -->
 								<div class="col-md-3 mb-5 card-item" id="card_main">
 									<div class="card h-100">
-										<img id="heart_state" alt="heart"
-											src="${path}/assets/img/StateImg/heart_1.png">
 										<!-- Product image-->
 										<img id="card_img" class="card-img-top" src="${option.IMGURL}"
 											alt="..." />
@@ -141,11 +174,12 @@ img {
 		</div>
 	</section>
 	<!-- Image Showcases-->
-	<section class="showcase">
+	<section class="features-icons bg-light text-center">
 		<div class="container">
-			<h1>추천</h1>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+			<div class="container px-4 px-lg-5 mt-5">
+				<h1>행사 목록</h1>
+				<br>
+			</div>
 		</div>
 	</section>
 
@@ -165,8 +199,44 @@ img {
 	<!-- <script src="js/scripts.js"></script> -->
 
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
 
 	<script type="text/javascript">
+	let value, name, item, i;
+	
+	$('#search').keyup(function(){
+		value = document.getElementById("search").value;
+        item = document.getElementsByClassName("item");
+        document.getElementById("item").style.display="block";
+        for(i=0;i<item.length;i++){
+				item[i].style.display = "none";
+        }
+
+        for(i=0;i<item.length;i++){
+			if(item[i].innerText.indexOf(value)!=-1 && value !== ""){
+				
+				item[i].style.display = "block";
+			}
+          
+        }
+	})
+	
+	$('#search').blur(function(){
+		document.getElementById("item").style.display="none";
+	});
+	
+	$(document).on('mouseover', '.item', function() {
+		document.getElementById('selecSVCID').value = $(this).attr('data-item');
+ 		document.getElementById("search").value = $(this).text();
+	});
+
+	
+	
+	
+	
 	let currentPage = 1;
 	const itemsPerPage = 3;
 	const items = document.querySelectorAll('.card-item');
@@ -199,7 +269,8 @@ img {
 	        showPage(currentPage);
 	    }
 	}
-
+	
+	
 	</script>
 </body>
 </html>

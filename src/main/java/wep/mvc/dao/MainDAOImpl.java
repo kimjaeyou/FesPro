@@ -2,14 +2,17 @@ package wep.mvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.util.DbUtil;
 
 public class MainDAOImpl {
 
-	public int insert(ReservationDTO reservation) throws SQLException {
+	public int insert(String sid,int user) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps=null;
 		int result = 0;
@@ -19,9 +22,8 @@ public class MainDAOImpl {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, reservation.getUserSeq());
-			ps.setString(2, reservation.getSVCID());
-			ps.setInt(3, reservation.getResvCheck());
+			ps.setInt(1, user);
+			ps.setString(2, sid);
 			
 			result = ps.executeUpdate();
 			if(result == 1) {
@@ -32,5 +34,30 @@ public class MainDAOImpl {
 			DbUtil.dbClose(con, ps);
 		}
 		return result;
+	}
+
+	public List<String> selecLike(int user_seq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<String> dto = new ArrayList<>();
+		
+		// select * from reservation where user_seq = ? 
+		String sql = "select SVCID from user_like where user_seq = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user_seq);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				dto.add(rs.getString(1));
+			}
+		
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dto;
 	}
 }
