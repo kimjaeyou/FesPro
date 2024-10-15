@@ -116,13 +116,13 @@
 				$("[data-form=time]").html(time);
 			})
 	
-			   $(document).on("click", "#button-search", function(){
-			       let peopleNum = $("#people-num").html();
-			       $("[data-form=peopleNum]").html(peopleNum);
-			       let price = 0;
-			       price = ${fes.PRICE};
-			       console.log(price);
-			       $("[data-form=fee]").text(price*peopleNum);
+		   $(document).on("click", "#button-search", function(){
+		       let peopleNum = $("#people-num").html();
+		       $("[data-form=peopleNum]").html(peopleNum);
+		       let price = 0;
+		       price = ${fes.PRICE};
+		       console.log(price);
+		       $("[data-form=fee]").text(price*peopleNum+"원");
 			})
 			
 			// 인원수에 따른 금액 계산
@@ -374,7 +374,7 @@
                             <div style="border: 1px solid white; border-radius: 5%; padding: 15px; background-color: white;">
                                 <h5>결제금액</h5><hr>
                                 <p>이용인원</p><p data-form="peopleNum" name="peopleNum"></p>
-                                <p>이용요금</p><p data-form="fee" name = "fee">0</p> <!-- 요금 * 인원수 -->
+                                <p>이용요금</p><p data-form="fee" name = "fee">0원</p> <!-- 요금 * 인원수 -->
                                 <p>할인/할증</p><p data-form="discount">내용</p>
                             </div>
                         </div>
@@ -421,7 +421,11 @@
 			    let date = $("[data-form=date]").text().trim();
 			    let time = $(".selectTime").text().trim();
 			    let peopleNum = $("[data-form=peopleNum]").text();
-			    let fee = $("[data-form=fee]").text();
+			    let feeString = $("[data-form=fee]").text();
+			    
+                let regex = /[^0-9]/g;
+                let fee = feeString.replace(regex, "");
+			    
 			    let cancleDate = $("[data-form=canclePeriod]").text();
                 let agreement1 = $("#chk1").is(":checked");
                 let agreement2 = $("#chk2").is(":checked");
@@ -451,7 +455,7 @@
                     document.resvForm.date.value = date;
                     document.resvForm.time.value = time;
                     document.resvForm.peopleNum.value = peopleNum;
-                    document.resvForm.fee.value = fee;
+                    document.resvForm.fee.value = fee.trim();
                     document.resvForm.cancleDate.value = cancleDate;
                     
                     document.resvForm.submit();

@@ -65,6 +65,13 @@
                 document.goForm.resvSeq.value = seq;
                 document.goForm.submit();
             }
+            
+            function payment () {
+				let fee = $("[name=resvFee]").text();
+				console.log(fee);
+				document.goForm.key.value = "reservation";
+				
+			}
 
         </script>
 
@@ -125,11 +132,10 @@
 					</td>
                 </tr>
                 <tr>
-                    <th>이용요금</td>
+                    <th>이용요금</th>
                     <td name="resvPrice">
-                    <td name="resvPeo">
 					<c:if test="${not empty resvData}">
-						${resvData.resvPrice}
+						${resvData.resvPrice}원
 					</c:if>
 					</td>
                 </tr>
@@ -153,7 +159,9 @@
 	        	<input type = "hidden" name = "key"/>
 	        	<input type = "hidden" name = "methodName"/>
 	        	<input type = "hidden" name = "resvSeq"/>
+	        	<input type = "hidden" name = "fee"/>
 	        	<button class="btn btn-outline-primary" id="goMain" style="width: 10%;" type="button">메인페이지 바로가기</button> &nbsp;&nbsp;&nbsp;&nbsp;
+	            <button class="btn btn-primary" id="pay" style="width: 10%;" type="button" onClick = "payment()">결제하기</button>
 	            <button class="btn btn-primary" id="goDetail" style="width: 10%;" type="button" onClick = "sendSelect()">예약 상세 보기</button>
             </form>
         </div>

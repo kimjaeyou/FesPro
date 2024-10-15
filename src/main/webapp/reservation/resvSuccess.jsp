@@ -123,11 +123,10 @@
 					</td>
                 </tr>
                 <tr>
-                    <th>이용요금</td>
+                    <th>이용요금</th>
                     <td name="resvPrice">
-                    <td name="resvPeo">
 					<c:if test="${not empty resvData}">
-						${resvData.resvPrice}
+						${resvData.resvPrice}원
 					</c:if>
 					</td>
                 </tr>

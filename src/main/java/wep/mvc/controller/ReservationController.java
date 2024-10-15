@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.tomcat.util.log.UserDataHelper.Mode;
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 import wep.mvc.service.MainSereviceImpl;
 import wep.mvc.service.ReservationService;
 import wep.mvc.service.ReservationServiceImpl;
@@ -175,5 +178,13 @@ public class ReservationController implements Controller {
 	/**
 	 * 결제하기 누르면 지갑에서 차감
 	 */
+	public ModelAndView payment (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String SVCID = request.getParameter("SVCID");
+		//WALLET wallet = service.payment();
+		
+		//request.setAttribute("fes", fes);
+		
+		return new ModelAndView("reservation/reservation.jsp", false);
+	}
 	
 }
