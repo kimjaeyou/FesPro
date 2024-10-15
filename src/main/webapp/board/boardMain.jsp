@@ -36,9 +36,9 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">공지사항 게시판</a></li>
-				<li class="active"><a href="#">QA 게시판</a></li>
-				<li class="active"><a href="#">자유 게시판</a></li>
+				<li class="active"><a href="${path}/front">공지사항 게시판</a></li>
+				<li class="active"><a href="${path}/front">QA 게시판</a></li>
+				<li class="active"><a href="${path}/front">자유 게시판</a></li>
 			</ul>	
 		</div>
 	</nav>
@@ -55,7 +55,10 @@
 				</thead>
 
 			</table>
+			
+			
 			<a href="${path}/front?key=board&methodName=write" class="btn btn-primary pull-right">글쓰기</a>
+			
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

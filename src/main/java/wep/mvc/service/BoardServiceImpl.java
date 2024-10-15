@@ -15,8 +15,15 @@ public class BoardServiceImpl implements BoardService {
 	private BoardCtgDAO boardCategoryDAO = new BoardCtgDAOImpl();
 	
 @Override
-public int delete(String boardSeq, String user_pw) throws SQLException {
-	// TODO Auto-generated method stub
+public int delete(int boardSeq, int userSeq, int hostSeq) throws SQLException {
+
+	int delete = boardDAO.delete(boardSeq, userSeq, hostSeq);
+	
+	if(delete == 0) {
+		return 0;
+	}
+
+	
 	return 0;
 }
 

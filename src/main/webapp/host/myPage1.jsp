@@ -43,18 +43,18 @@
                 </li>
             </ul>
         </nav> -->
-
+<body>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-white" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">주최자</div>
-                            <a class="nav-link" href="myPage1.jsp">
+                            <a class="nav-link" href="${path}/front?key=fes&methodName=select">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 나의 서비스 내역
                             </a>
-                            <a class="nav-link" href="myPage2.jsp">
+                            <a class="nav-link" href="${path}/front?key=fes&methodName=myPage2">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 회원 정보 변경
                             </a>
@@ -118,7 +118,7 @@
                         	//세션에서 id 가져오는 일 합니다.
                         %>
                         <div class="container">
-                        	<div clas="row">
+                        	<div class="row">
                         		<!-- 등록하러 가기 -->
                         		<button><a href="${path}/host/write.jsp">서비스 등록하러 가기</a></button>
                         		<hr>
@@ -159,11 +159,20 @@
                         								<p align="center"><span>${FesDTO.getUpdate_date()}</span></p>
                         							</td>
                         							<td>
-                        								<p align="center"><span>${FesDTO.getFes_state()}</span></p>
+                        								<p align="center"><span>
+                        								<c:set var="fesState" value="${FesDTO.getFes_state()}" />
+                        								<c:choose>
+                        								<c:when test="${fesState eq 0}">승인대기</c:when>
+                        								<c:when test="${fesState eq 1}">승인완료</c:when>
+                        								<c:when test="${fesState eq 2}">수정신청 승인대기</c:when>
+                        								<c:when test="${fesState eq 3}">비활성화(삭제)</c:when>
+                        								
+                        								</c:choose>
+                        								</span></p>
                         							</td>
                         							
                         							<td>
-                        								<p align="center"><span><a href="#">서비스 통계보기</a></span></p>
+                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=detail&SVCID=${FesDTO.SVCID}">서비스 통계보기</a></span></p>
                         							</td>
                         						</tr>
 

@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.gson.Gson;
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -12,19 +14,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import wep.mvc.dto.FES_TAG;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.ListPublicReservationCulture;
+import wep.mvc.dto.ReviewDTO;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.FesSerevice;
 import wep.mvc.service.FesSereviceImpl;
 import wep.mvc.service.Fes_tagSerevice;
 import wep.mvc.service.Fes_tagSereviceImpl;
+import wep.mvc.service.SuperFestivalService;
+import wep.mvc.service.SuperFestivalServiceImpl;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 10)
 public class FesController implements Controller {
 	private FesSerevice fesSerevice = new FesSereviceImpl();
 	private Fes_tagSerevice fes_tagSerevice = new Fes_tagSereviceImpl();
+	SuperFestivalService festivalService = new SuperFestivalServiceImpl();
 	//등록 신청(C)
 
 	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
@@ -45,7 +51,7 @@ public class FesController implements Controller {
 	/////////////////////////////////////////////////////////////////////////////////// //행사
 	/////////////////////////////////////////////////////////////////////////////////// 리스트
 	/////////////////////////////////////////////////////////////////////////////////// 띄우는
-	/////////////////////////////////////////////////////////////////////////////////// 기능
+	////////잠시 테스트 중이니다.///////////////////////////////////////////// 기능
 	public ModelAndView read(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
 		ServletContext app = req.getServletContext();
@@ -288,5 +294,45 @@ public class FesController implements Controller {
 		fesSerevice.update(fesDTO);
 
 		return new ModelAndView("front?key=fes&methodName=select", true);
+	}
+	
+	//통계보기
+	public ModelAndView detail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		System.out.println("진이 / detail Call");
+		
+		String svcid = req.getParameter("SVCID");
+		
+		//FesDTO 정보 보내기
+		FesDTO fes = new FesDTO();
+		fes.setSVCID(svcid);
+		FesDTO searchFes = festivalService.select(fes);
+		req.setAttribute("fes", searchFes);
+		
+		//USERsDTO 정보 보내기
+		List<UsersDTO> userList =  festivalService.selectUser(fes);
+		//System.out.println(userList);
+		Gson g = new Gson();
+		String data =g.toJson(userList);
+		req.setAttribute("userList", data);
+		
+		//리뷰 정보 보내기
+		List<ReviewDTO> reviewList =festivalService.selectReview(fes);
+		data = g.toJson(reviewList);
+		req.setAttribute("reviewList", data);
+		req.setAttribute("reviewLength", reviewList.size());
+		System.out.println("리뷰리스트:"+reviewList);
+		
+		//리뷰 쓴 유저 정보 보내기
+		List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
+		data = g.toJson(reviewUserList);
+		req.setAttribute("reviewUserList", data);
+		
+		return new ModelAndView("host/myPage3.jsp");
+	}
+	
+	//회원정보 업데이트
+	public ModelAndView myPage2(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		return new ModelAndView("host/myPage2.jsp");
 	}
 }

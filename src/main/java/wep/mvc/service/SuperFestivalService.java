@@ -37,5 +37,7 @@ public interface SuperFestivalService{
 	 */
 	public List<UsersDTO> selectReviewUser(FesDTO fes);
 
+	public List<FesDTO> dashFesSelectAll();
+
 	
 }
