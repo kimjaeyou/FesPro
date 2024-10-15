@@ -5,7 +5,6 @@ import java.util.List;
 
 import wep.mvc.dao.Fes_tagDAO;
 import wep.mvc.dao.Fes_tagDAOImpl;
-import wep.mvc.dto.FES_TAG;
 
 public class Fes_tagSereviceImpl implements Fes_tagSerevice {
 	private Fes_tagDAO fes_tagDAO = new Fes_tagDAOImpl();

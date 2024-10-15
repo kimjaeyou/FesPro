@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import wep.mvc.dto.FES_TAG;
 import wep.mvc.util.DbUtil;
 
 public class Fes_tagDAOImpl implements Fes_tagDAO {

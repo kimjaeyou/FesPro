@@ -2,7 +2,6 @@ package wep.mvc.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -33,8 +32,9 @@ public class BoardController implements Controller {
 		    throws ServletException, IOException, SQLException {
 		
 		
-		ServletContext a = request.getServletContext();
-		System.out.println(a);
+		ServletContext list = request.getServletContext();
+		System.out.println("list = " + list);
+		request.setAttribute("list", list);
 		return new ModelAndView("/board/boardMain.jsp");
 	}
 
@@ -47,8 +47,8 @@ public class BoardController implements Controller {
 		    UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
 		    HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
 		    
-		    System.out.println(SessionUsersDTO);
-		    System.out.println(SessionHostDTO);
+		    System.out.println("SUDTO = " + SessionUsersDTO);
+		    System.out.println("SHDTO = " + SessionHostDTO);
 			
 			int hostSeq = SessionHostDTO.getHost_seq();
 			int userSeq = SessionUsersDTO.getUser_seq();
@@ -61,7 +61,7 @@ public class BoardController implements Controller {
 		    }
 
 		    
-		    return new ModelAndView("front?key=board&methodName=write"); 
+		    return new ModelAndView(""); 
 		}
 		
 
@@ -144,6 +144,13 @@ public class BoardController implements Controller {
 			throws ServletException, IOException {
 
 		return new ModelAndView("index.jsp", true);
+	}
+	
+	public ModelAndView error(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		
+		System.out.println("에러메소드로 와버렸다.");
+		return new ModelAndView("error.jsp, true");
 	}
 	
 }

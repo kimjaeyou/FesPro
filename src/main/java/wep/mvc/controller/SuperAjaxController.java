@@ -1,10 +1,6 @@
 package wep.mvc.controller;
 
-import java.io.IOException; 
-import java.io.PrintWriter;
-import java.util.List;
-
-import com.google.gson.Gson;
+import java.io.IOException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

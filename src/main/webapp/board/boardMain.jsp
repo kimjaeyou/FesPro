@@ -56,7 +56,7 @@
 
 			</table>
 			
-			
+			<h3>${list}</h3>
 			<a href="${path}/front?key=board&methodName=write" class="btn btn-primary pull-right">글쓰기</a>
 			
 		</div>
