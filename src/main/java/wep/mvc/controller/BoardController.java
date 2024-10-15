@@ -2,12 +2,13 @@ package wep.mvc.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import wep.mvc.dto.BoardCategoryDTO;
 import wep.mvc.dto.BoardDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
@@ -32,7 +33,13 @@ public class BoardController implements Controller {
 		    throws ServletException, IOException, SQLException {
 		
 		
-		ServletContext list = request.getServletContext();
+		String categorySeq = request.getParameter("ctgSeq");
+		String sub = request.getParameter("SUB");
+		String boardSeq = request.getParameter("boardSeq");
+		
+		BoardDTO board = new BoardDTO(Integer.parseInt(boardSeq), Integer.parseInt(categorySeq), sub);
+		
+		List<BoardDTO> list = boardService.selectByCtg(board);
 		System.out.println("list = " + list);
 		request.setAttribute("list", list);
 		return new ModelAndView("/board/boardMain.jsp");
@@ -61,7 +68,7 @@ public class BoardController implements Controller {
 		    }
 
 		    
-		    return new ModelAndView(""); 
+		    return new ModelAndView("board/boardWrite.jsp"); 
 		}
 		
 
