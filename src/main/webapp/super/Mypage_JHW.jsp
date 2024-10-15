@@ -18,13 +18,13 @@
         
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <style>
-        /* 스크롤을 제거하는 스타일 */
+        <!-- /* 스크롤을 제거하는 스타일 */ -->
+       <style>
         html, body {
             overflow: hidden; 
             height: 100%;
-            margin: 0;
-            padding: 0;
+           // margin: 0;
+            //padding: 0;
         }
  	  	</style>
     </head>
@@ -68,20 +68,27 @@
                                 차트
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts_chart" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                          <!--   <div class="collapse" id="collapseLayouts_chart" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="#"  id="selectAllBtn">성별별 차트</a>
                                 </nav>
-                            </div>
+                            </div> -->
+                            <!-- <a id="aaa">승인대기중인 문화행사 보기</a> -->
                 </nav>
             </div>
             <!-- iframe -->
-            <iframe src="" name="center" style="width:100%;  height:100vh;"></iframe>
+            <iframe src="" name="center" style="width:100%;  height:75vh;"></iframe>
         </div>
         
        
         <script>
        $(function(){
+         /*   $("#aaa").click(function(){
+        	   console.log("승인대기중인 행사 버튼");
+        	   top.center.location.href ="${path}/front?key=superfestival&methodName=selectAll;
+        	   //top.center.location.href ="${path}/front?key=superfestival&methodName=selectAll&search=searchWaiting";
+           }); */
+           
            //문화행사 조회
 			  $("#selectAllBtn").click(function(){
 				  top.center.location.href ="${path}/front?key=superfestival&methodName=selectAll";

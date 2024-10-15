@@ -43,6 +43,7 @@ $(function(){
 	$(".detailBtn").click(function(){
 		//console.log("상세보기 버튼 클릭");
 		const host_id = $(this).data("host_id");
+		console.log(host_id);
 		//console.log(svcid);
 		window.location.href ="${path}/front?key=superAuth&methodName=hostDetail&host_id=" +host_id;
 	});
@@ -97,12 +98,12 @@ $(function(){
                         <c:forEach var="host" items="${hostList}">
                             <tr>
                                 <td>${host.host_seq}</td>
-                                <td><button class="detailBtn" data-host_id="${host.host_id}"/>${host.host_id}</td>
+                                <td><button class="detailBtn" data-host_id="${host.host_id}" onclick="console.log('버튼클릭')">${host.host_id}</button></td>
                                 <td>${host.com_name}</td>
                                 <td>${host.host_pw}</td>
                                 <td>${host.host_tel}</td>
                                 <td>${host.host_name}</td>
-                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <td style="font-weight: bold; background-color: #e0f7fa;">  
                 <c:choose>
                 <c:when test="${host.host_check == 0}">
                     미승인 상태
@@ -131,29 +132,7 @@ $(function(){
 			</div>
 		</div>
 	<!-- 테이블 끝 -->
-	<!-- 차트 -->
-		<div class="row">
-			<div class="col-xl-6">
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-chart-area me-1"></i> Area Chart Example
-					</div>
-					<div class="card-body">
-						<canvas id="myAreaChart" width="100%" height="40"></canvas>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-6">
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
-					</div>
-					<div class="card-body">
-						<canvas id="myBarChart" width="100%" height="40"></canvas>
-					</div>
-				</div>
-			</div>
-		<!-- 차트 끝 -->
+	
 	
 	</main>
 

@@ -37,4 +37,6 @@ public interface SuperFestivalDAO {
 	 * 리뷰쓴 유저 검색
 	 */
 	public List<UsersDTO> selectReviewUser(FesDTO fes);
+
+	public List<FesDTO> dashFesSelectAll();
 }
