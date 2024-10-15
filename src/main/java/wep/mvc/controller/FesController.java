@@ -21,75 +21,80 @@ import wep.mvc.service.FesSereviceImpl;
 import wep.mvc.service.Fes_tagSerevice;
 import wep.mvc.service.Fes_tagSereviceImpl;
 
-@MultipartConfig(
-		fileSizeThreshold = 1024*1024,
-		maxFileSize = 1024*1024*5,
-		maxRequestSize = 1024*1024*10
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 10)
 public class FesController implements Controller {
 	private FesSerevice fesSerevice = new FesSereviceImpl();
 	private Fes_tagSerevice fes_tagSerevice = new Fes_tagSereviceImpl();
 	//등록 신청(C)
+
 	public ModelAndView send(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
 
 		return new ModelAndView("index.jsp", true);
 	}
-	//등록 신청을 취소/게시글 삭제(D)
+
+	// 등록 신청을 취소/게시글 삭제(D)
 	public ModelAndView cancle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		return new ModelAndView("index.jsp", true);
 	}
-	///////////////////////////////////////////////////////////////////////////////////여기는 건들지 않는다...! //행사 리스트 띄우는 기능
+
+	/////////////////////////////////////////////////////////////////////////////////// 여기는
+	/////////////////////////////////////////////////////////////////////////////////// 건들지
+	/////////////////////////////////////////////////////////////////////////////////// 않는다...!
+	/////////////////////////////////////////////////////////////////////////////////// //행사
+	/////////////////////////////////////////////////////////////////////////////////// 리스트
+	/////////////////////////////////////////////////////////////////////////////////// 띄우는
+	/////////////////////////////////////////////////////////////////////////////////// 기능
 	public ModelAndView read(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		ServletContext app= req.getServletContext();
-		ListPublicReservationCulture list= (ListPublicReservationCulture)app.getAttribute("fesList");
+		ServletContext app = req.getServletContext();
+		ListPublicReservationCulture list = (ListPublicReservationCulture) app.getAttribute("fesList");
 		req.setAttribute("list", list);
 		return new ModelAndView("fes/list.jsp");
 	}
 	///////////////////////////////////////////////////////////////////////////////////
-	
+
 	/**
 	 * 전체검색
-	 * */
-	public ModelAndView select(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-		//List<FesDTO> fesDTOList = fesSerevice.selectAll();
-		
+	 */
+	public ModelAndView select(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		// List<FesDTO> fesDTOList = fesSerevice.selectAll();
+
 		HttpSession session = req.getSession();
-		
-		if(session.getAttribute("loginCom")==null) { //기업회원으로 로그인 되어있는지 확인
-			System.out.println("로그인 안했지롱"); 
-			return new ModelAndView("User/login.jsp"); //로그인 페이지로 보낼 것
+
+		if (session.getAttribute("loginCom") == null) { // 기업회원으로 로그인 되어있는지 확인
+			System.out.println("로그인 안했지롱");
+			return new ModelAndView("User/login.jsp"); // 로그인 페이지로 보낼 것
 		}
-		
-		//기업회원으로 로그인 되어있다면 해당 기업회원 세션에 해당하는 fesDTO만 DB에서 꺼내서 보여줘야지.
-		//ServletContext app = req.getServletContext();
-		//List<FesDTO> fesDTOList= (List<FesDTO>)app.getAttribute("fesList");
-		
-		//req.setAttribute("fesDTOList", fesDTOList);
-		
-		//req.setAttribute("fesDTOList", fesDTOList);
-		
+
+		// 기업회원으로 로그인 되어있다면 해당 기업회원 세션에 해당하는 fesDTO만 DB에서 꺼내서 보여줘야지.
+		// ServletContext app = req.getServletContext();
+		// List<FesDTO> fesDTOList= (List<FesDTO>)app.getAttribute("fesList");
+
+		// req.setAttribute("fesDTOList", fesDTOList);
+
+		// req.setAttribute("fesDTOList", fesDTOList);
+
 		System.out.println("여기");
 		
 		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
 		
 		int host_seq = SessionHostDTO.getHost_seq();
-		
+
 		List<FesDTO> fesDTOList = fesSerevice.select(host_seq);
 		
 		
 		
 		
 		req.setAttribute("fesDTOList", fesDTOList);
-		
+
 		return new ModelAndView("host/myPage1.jsp");
 	}
-	
-	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-				
-		//서비스 아이디 그냥 uuid로 뽑을게요
+
+	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+		// 서비스 아이디 그냥 uuid로 뽑을게요
 		UUID uuid = UUID.randomUUID();
 		String SVCID = uuid.toString();
 
@@ -113,73 +118,71 @@ public class FesController implements Controller {
 		String V_MIN = req.getParameter("V_MIN");
 		String REVSTDDAY = req.getParameter("REVSTDDAY");
 		String REVSTDDAYNM = req.getParameter("REVSTDDAYNM");
-		int Fes_state = 0; //승인전
-		String Update_date = ""; //sysdate
+		int Fes_state = 0; // 승인전
+		String Update_date = ""; // sysdate
 		int MAXNUM = 20;
 		int PRICE = Integer.parseInt(req.getParameter("PRICE"));
-		
+
 		HttpSession session = req.getSession();
 		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
-		
+
 		int host_seq = SessionHostDTO.getHost_seq();
-		
- 		String RCPTENDDT = req.getParameter("RCPTENDDT") + " 00:00:00";
- 		
- 		FesDTO fesDTO = new FesDTO(SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM, SVCNM, PAYATNM, PLACENM, USETGTINFO, X, Y,
- 								   SVCOPNBGNDT, SVCOPNENDDT, RCPTBGNDT, AREANM, "", DTLCONT, TELNO, V_MAX, V_MIN,
- 								   REVSTDDAY, REVSTDDAYNM, Fes_state, Update_date, MAXNUM, PRICE, host_seq, RCPTENDDT);
-		
-		if(IMGURL != null) {
+
+		String RCPTENDDT = req.getParameter("RCPTENDDT") + " 00:00:00";
+
+		FesDTO fesDTO = new FesDTO(SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM, SVCNM, PAYATNM, PLACENM, USETGTINFO, X, Y,
+				SVCOPNBGNDT, SVCOPNENDDT, RCPTBGNDT, AREANM, "", DTLCONT, TELNO, V_MAX, V_MIN, REVSTDDAY, REVSTDDAYNM,
+				Fes_state, Update_date, MAXNUM, PRICE, host_seq, RCPTENDDT);
+
+		if (IMGURL != null) {
 			String fileName = this.getFilename(IMGURL);
 			System.out.println("fileName = " + fileName);
 			String saveDir = req.getServletContext().getRealPath("/save");
-			
-			if(fileName!=null && !fileName.equals("")) {
-				 IMGURL.write( saveDir + "/"+ fileName);//서버폴더에 파일 저장=업로드
-		         fesDTO.setIMGURL(fileName);
+
+			if (fileName != null && !fileName.equals("")) {
+				IMGURL.write(saveDir + "/" + fileName);// 서버폴더에 파일 저장=업로드
+				fesDTO.setIMGURL(fileName);
 			}
 		}
-		System.out.println("날짜가 문젠가? 접수종료일시: "+RCPTENDDT);
-		System.out.println("시간이 문젠가? V_MAX: "+V_MAX);
+		System.out.println("날짜가 문젠가? 접수종료일시: " + RCPTENDDT);
+		System.out.println("시간이 문젠가? V_MAX: " + V_MAX);
 		fesSerevice.insert(fesDTO);
-		
+
 		String[] fes_tags = req.getParameterValues("tag_content");
-		for(String fes_tag:fes_tags) {
+		for (String fes_tag : fes_tags) {
 			String tag_content = fes_tag;
 			fes_tagSerevice.insert(SVCID, tag_content);		
+
 		}
-		
-		
-		
-		
+
 		return new ModelAndView("front?key=fes&methodName=select", true);
 
 	}
-	
+
 	/**
-	 * 전송된 파일정보에서 파일이름만 추출해 내는 과정 
-	 * */
+	 * 전송된 파일정보에서 파일이름만 추출해 내는 과정
+	 */
 	private String getFilename(Part part) {
-        String headerContent = part.getHeader("content-disposition");
-        
-        //contentDisp의 결과 form-data; name="fileName"; filename="추가한 파일 이름"
-        System.out.println(headerContent);
-        
-        String[] split = headerContent.split(";");
-        for (int i = 0; i < split.length; i++) {
-            String temp = split[i];
-            if (temp.trim().startsWith("filename")) {
-            	System.out.println("temp = " + temp);
-            	System.out.println("temp.indexOf(=) = " + temp.indexOf("=") );
-            	
-                return temp.substring( temp.indexOf("=") + 2 ,  temp.length() - 1);
-            }
-        }
-        return null;
-    }
-	
-	//서비스등록신청보기(R)
-	public ModelAndView selectBySVCID(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+		String headerContent = part.getHeader("content-disposition");
+
+		// contentDisp의 결과 form-data; name="fileName"; filename="추가한 파일 이름"
+		System.out.println(headerContent);
+
+		String[] split = headerContent.split(";");
+		for (int i = 0; i < split.length; i++) {
+			String temp = split[i];
+			if (temp.trim().startsWith("filename")) {
+				System.out.println("temp = " + temp);
+				System.out.println("temp.indexOf(=) = " + temp.indexOf("="));
+
+				return temp.substring(temp.indexOf("=") + 2, temp.length() - 1);
+			}
+		}
+		return null;
+	}
+
+	// 서비스등록신청보기(R)
+	public ModelAndView selectBySVCID(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String SVCID = req.getParameter("SVCID");
 		FesDTO fesDTO = fesSerevice.selectBySVCID(SVCID);
 		if(fesDTO==null) {
@@ -190,12 +193,11 @@ public class FesController implements Controller {
 		req.setAttribute("fes_tag", fes_tag);
 		return new ModelAndView("host/read.jsp");
 	}
-	
-	//U - 수정폼 열기
-	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		String SVCID  = request.getParameter("SVCID");
-		System.out.println("여기서의 svcid: "+SVCID);
+
+	// U - 수정폼 열기
+	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String SVCID = request.getParameter("SVCID");
+		System.out.println("여기서의 svcid: " + SVCID);
 		FesDTO fesdto = fesSerevice.selectBySVCID(SVCID);
 		if(fesdto==null) {
 			throw new SQLException("상세보기가 없습니다");
@@ -207,13 +209,12 @@ public class FesController implements Controller {
 		
 		return new ModelAndView("host/update.jsp");
 	}
-	
-	//U - 수정폼 제출
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
+
+	// U - 수정폼 제출
+	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		System.out.println("1111111111111");
 		String SVCID = req.getParameter("SVCID");
-		System.out.println("2222 SVCID: "+SVCID);
+		System.out.println("2222 SVCID: " + SVCID);
 		String MAXCLASSNM = req.getParameter("MAXCLASSNM");
 		String MINCLASSNM = req.getParameter("MINCLASSNM");
 		String SVCSTATNM = req.getParameter("SVCSTATNM");
@@ -234,63 +235,58 @@ public class FesController implements Controller {
 		String V_MIN = req.getParameter("V_MIN");
 		String REVSTDDAY = req.getParameter("REVSTDDAY");
 		String REVSTDDAYNM = req.getParameter("REVSTDDAYNM");
-		int Fes_state = 2; //수정신청중
-		String Update_date = ""; //sysdate
+		int Fes_state = 2; // 수정신청중
+		String Update_date = ""; // sysdate
 		int MAXNUM = 20;
 		int PRICE = Integer.parseInt(req.getParameter("PRICE"));
-		
+
 		HttpSession session = req.getSession();
 		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
-		
+
 		int host_seq = SessionHostDTO.getHost_seq();
-		
- 		String RCPTENDDT = req.getParameter("RCPTENDDT");
- 		
- 		FesDTO fesDTO = new FesDTO(SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM, SVCNM, PAYATNM, PLACENM, USETGTINFO, X, Y,
- 								   SVCOPNBGNDT, SVCOPNENDDT, RCPTBGNDT, AREANM, "", DTLCONT, TELNO, V_MAX, V_MIN,
- 								   REVSTDDAY, REVSTDDAYNM, Fes_state, Update_date, MAXNUM, PRICE, host_seq, RCPTENDDT);
-		
-		if(IMGURL != null) {
+
+		String RCPTENDDT = req.getParameter("RCPTENDDT");
+
+		FesDTO fesDTO = new FesDTO(SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM, SVCNM, PAYATNM, PLACENM, USETGTINFO, X, Y,
+				SVCOPNBGNDT, SVCOPNENDDT, RCPTBGNDT, AREANM, "", DTLCONT, TELNO, V_MAX, V_MIN, REVSTDDAY, REVSTDDAYNM,
+				Fes_state, Update_date, MAXNUM, PRICE, host_seq, RCPTENDDT);
+
+		if (IMGURL != null) {
 			String fileName = this.getFilename(IMGURL);
 			System.out.println("fileName = " + fileName);
 			String saveDir = req.getServletContext().getRealPath("/save");
-			
-			if(fileName!=null && !fileName.equals("")) {
-				 IMGURL.write( saveDir + "/"+ fileName);//서버폴더에 파일 저장=업로드
-		         fesDTO.setIMGURL(fileName);
+
+			if (fileName != null && !fileName.equals("")) {
+				IMGURL.write(saveDir + "/" + fileName);// 서버폴더에 파일 저장=업로드
+				fesDTO.setIMGURL(fileName);
 			}
 		}
-		
+
 		System.out.println("뽀삐?");
-		
+
 		fesSerevice.update(fesDTO);
-		
+
 		System.out.println("여기까지는 오는가");
-		
-		
-		
-		
-		
+
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("front?key=fes&methodName=selectBySVCID&SVCID="+SVCID);
+		mv.setViewName("front?key=fes&methodName=selectBySVCID&SVCID=" + SVCID);
 		mv.setRedirect(true);
 		
 		
 		
 		return mv;
 	}
-	
-	//D-삭제신청
-	public ModelAndView delete(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
-	
-		String SVCID  = req.getParameter("SVCID");
+
+	// D-삭제신청
+	public ModelAndView delete(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+		String SVCID = req.getParameter("SVCID");
 		FesDTO fesDTO = fesSerevice.selectBySVCID(SVCID);
-		
+
 		fesDTO.setFes_state(3);
-		
+
 		fesSerevice.update(fesDTO);
-		
+
 		return new ModelAndView("front?key=fes&methodName=select", true);
 	}
 }

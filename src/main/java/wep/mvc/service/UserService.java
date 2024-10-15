@@ -22,6 +22,6 @@ public interface UserService {
 	int update(UsersDTO usersDTO) throws SQLException;
 
 	// 회원데이터 가져오기 - 수정할때 필요
-	UsersDTO selectUser(UsersDTO usersDTO) throws SQLException;
+	UsersDTO selectUser(String user) throws SQLException;
 
 }

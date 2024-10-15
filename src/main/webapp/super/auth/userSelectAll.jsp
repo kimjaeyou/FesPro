@@ -23,6 +23,53 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
+	
+	 <style>
+        /* 스크롤을 제거하는 스타일 */
+        html, body {
+            overflow: hidden; /* 스크롤을 숨김 */
+            height: 100%; /* 100% 높이를 차지하도록 설정 */
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* 페이지 전체 크기를 채우는 레이아웃을 유지하기 위한 스타일 */
+        #layoutSidenav_content {
+            min-height: 100%;
+            height: auto;
+        }
+    </style>
+	<script>
+$(function(){
+	$(".detailBtn").click(function(){
+		//console.log("상세보기 버튼 클릭");
+		const user_id = $(this).data("user_id");
+		//console.log(svcid);
+		window.location.href ="${path}/front?key=superAuth&methodName=detail&user_id=" +user_id;
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+    // DataTable 초기화
+    var table = $('#datatablesSimple').DataTable();
+
+    // URL에서 search 파라미터 값을 가져옴
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchValue = urlParams.get('search'); // "승인대기" 값이 넘어옴
+    
+    // searchValue 값이 있으면 검색창에 넣고 자동 필터링
+    if (searchValue) {
+        $('#searchInput').val(searchValue).trigger('input');
+        table.search(searchValue).draw();
+    }
+
+    // 검색창 입력 시 자동 필터링
+    $('#searchInput').on('input', function() {
+        table.search(this.value).draw();
+    });
+});
+</script>
 </head>
 
 <div id="layoutSidenav_content">
@@ -56,9 +103,6 @@
 								<th>밴 여부</th>
 							</tr>
 						</thead>
-						<tbody id="tbody">
-							<!-- 서버에서 전달된 DTO 데이터를 JSTL로 출력 -->
-						</tbody>
 						<tfoot>
 							<tr>
 								<th>유저 순번</th>
@@ -74,55 +118,63 @@
 								<th>밴 여부</th>
 							</tr>
 						</tfoot>
+						<tbody>
+							 <!-- 서버에서 전달된 DTO 데이터를 JSTL로 출력 -->
+                        <c:forEach var="user" items="${userList}">
+                            <tr>
+                                <td>${user.user_seq}</td>
+                                <td><button class="detailBtn" data-user_id="${user.user_id}"/>${user.user_id}</td>
+                                <td>${user.user_pw}</td>
+                                <td>${user.user_name}</td>
+                                <td>${user.age}</td>
+                                <td>${user.addr}</td>
+                                <td>${user.gender}</td>
+                                <td>${user.email}</td>
+                                <td>${user.user_tel}</td>
+                                <td>${user.disable}</td>
+                                <td style="font-weight: bold; background-color: #e0f7fa;">  
+                <c:choose>
+                <c:when test="${user.user_ben_check == 0}">
+                    벤 상태
+                </c:when>
+                <c:when test="${user.user_ben_check == 1}">
+                    활성화 상태
+                </c:when>
+           		 </c:choose></td>
+                            </tr>
+                        </c:forEach>
+						</tbody>
 						
 					</table>
 
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				// 페이지가 로딩되면 유저 데이터를 가져오는 함수 호출
-				loadUsers();
-			});
-		</script>
-
-		<script>
-			function loadUsers() {
-				$.ajax({
-					url : "${path}/ajax", // 데이터를 가져올 URL
-					type : "get",
-					data : {
-						key : "superAuth",
-						methodName : "selectAll"
-					},
-					dataType : "json",
-					success : function(result) {
-						alert(result);
-						var usersTable = $("#tbody");
-						usersTable.empty(); // 테이블 초기화
-
-						// 서버에서 받아온 데이터를 테이블에 추가
-						$.each(result, function(index, user) {
-							usersTable.append("<tr>" + "<td>" + user.user_seq
-									+ "</td>" + "<td>" + user.user_id + "</td>"
-									+ "<td>" + user.user_pw + "</td>" + "<td>"
-									+ user.user_name + "</td>" + "<td>"
-									+ user.age + "</td>" + "<td>" + user.addr
-									+ "</td>" + "<td>" + user.gender + "</td>"
-									+ "<td>" + user.email + "</td>" + "<td>"
-									+ user.user_tel + "</td>" + "<td>"
-									+ user.disable + "</td>" + "<td>"
-									+ user.user_ben_check + "</td>" + "</tr>");
-						});
-					},
-					error : function(xhr, status, error) {
-						console.error("데이터를 불러오는 중 오류 발생: " + error);
-					}
-				});
-			}
-		</script>
-
+	<!-- 테이블 끝 -->
+	<!-- 차트 -->
+		<div class="row">
+			<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-area me-1"></i> Area Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myAreaChart" width="100%" height="40"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myBarChart" width="100%" height="40"></canvas>
+					</div>
+				</div>
+			</div>
+		<!-- 차트 끝 -->
+	
 	</main>
 
 </div>

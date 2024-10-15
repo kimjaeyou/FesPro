@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="myPageCheck.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -49,23 +50,37 @@
 								<th>번호</th>
 								<th>점수</th>
 								<th>서비스명</th>
+								<th>내용</th>
 								<th>작성일자</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
+						 <c:choose>
+    						<c:when test="${empty requestScope.like}">
+	   						<tr>
+					        <td colspan="5">
+            				<p align="center"><b><span style="font-size:9pt;">작성한 댓글이 없습니다.</span></b></p>
+        					</td>
+    						</tr>
+    						</c:when>
+    						
+    						<c:otherwise>
+							<c:forEach items="${review}" var="review">
 							<tr>
-								<td></td>
-								<td></td>
-								<td><a href=""></a></td>
-								<td></td>
+								<td>${review.REVIEW_SEQ}</td>
+								<td>${review.SCORE}</td>
+								<td>${review.서비스명}</td>
+								<td>${review.RV_CONTENT}</td>
+								<td>${review.작성일자}</td>
 								<td><button>삭제</button></td>
 							</tr>
+							</c:forEach>
+							</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 			</main>
-			<!-- 메인 페이지 끝 -->
-			<!-- 푸터 -->
 
 		</div>
 	</div>
