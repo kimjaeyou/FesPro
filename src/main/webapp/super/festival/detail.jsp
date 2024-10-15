@@ -73,7 +73,7 @@
     		
     		
     		/* 등록상태 라디오 */
-    		const fesState = ${fes.getFes_state()};
+    	 	const fesState = ${fes.getFes_state()};
     		//console.log("등록상태 : " + fesState);
     		if (fesState === 0) {
 		    $("#radio_1").prop("checked", true); //승인대기
@@ -83,7 +83,7 @@
 		    $("#radio_3").prop("checked", true); //승인완료
 		} else if (fesState === 3) {
 		    $("#radio_4").prop("checked", true); //비활성화
-		}
+		} 
     	});
     </script>
 </head>
