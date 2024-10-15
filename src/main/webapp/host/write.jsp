@@ -121,9 +121,9 @@ function checkValid(){
 		return false;
 	}
 	
-	if(f.tag_content==""){
-		alert("태그를 골라주세요");
-		return false;
+	if(!document.querySelector('input[name="tag_content"]:checked')){
+	    alert("태그를 골라주세요");
+	    return false;
 	}
 	
 	return true;
@@ -250,9 +250,13 @@ function checkValid(){
         	<tr>
         		<td><p align="center"><b><span>장소명</span></b></p></td>
         		<td width="1000"><p align="center"><span><input type="text" id="placenm" name="PLACENM" size="100" onkeyup="getPLACENMValue()"></span></p>
-        		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services"></script>
+        		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
         		<div id="map" style="width:100%;height:350px;"></div>
-        		</td>
+        		
+     			<label>위도: <input type="text" id="latitude" name="X" readonly></label>
+				<label>경도: <input type="text" id="longitude" name="Y" readonly></label>
+     			<input type="text" name="AREANM" size="15" placeholder="XX구 입력해 주세요.">
+     			</span></p></td>
         	</tr>
         	<tr>
         		<td><p align="center"><b><span>분류태그</span></b></p></td>
@@ -270,6 +274,7 @@ function checkValid(){
     	</tbody>
 	</table>
 </form>
+<!-- 여기부터가 수정본 -->
 <script>
 
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
@@ -328,7 +333,7 @@ function displayMarker(place) {
         
         //마커를 클릭하면 x좌표, y좌표, 지역명을 가져온다
      	// 클릭한 위도, 경도 정보를 가져옵니다 
-        var latlng = mouseEvent.latLng; 
+        var latlng = marker.getPosition();
         
         // 마커 위치를 클릭한 위치로 옮깁니다
         marker.setPosition(latlng);
@@ -336,10 +341,10 @@ function displayMarker(place) {
         var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
         message += '경도는 ' + latlng.getLng() + ' 입니다';
         
-        var resultDiv = document.getElementById('clickLatlng'); 
-        resultDiv.innerHTML = message;
-        
         console.log(message);
+        
+        document.getElementById('latitude').value = latlng.getLat();
+        document.getElementById('longitude').value = latlng.getLng();
     });
 }
 
@@ -351,12 +356,6 @@ function getPLACENMValue(){
 }
 
 </script>
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js"></script>
-<script type="text/javascript">
-kakao.maps.load(function() {
-    // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
-    var map = new kakao.maps.Map(node, options);
-});
-</script>
+<!-- 여기까지가 수정본 -->
 </body>
 </html>

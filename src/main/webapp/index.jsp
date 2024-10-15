@@ -52,6 +52,10 @@ img {
 	z-index: 1000;
 	left: 90%;
 }
+
+#searchRES {
+	
+}
 </style>
 </head>
 <body>
@@ -69,6 +73,7 @@ img {
 								<div class="col">
 									<input class="form-control form-control-lg" id="search"
 										type="text" placeholder="검색" />
+									<div id="item" class="searchRES"></div>
 								</div>
 								<div class="col-auto">
 									<button class="btn btn-primary btn-lg" id="submitButton">Submit</button>

@@ -121,8 +121,9 @@
 				<form action="front">
 					<input type="hidden" name="key" value="reservation" /> <input
 						type="hidden" name="methodName" value="revMove" /> <input
-						type="hidden" name="SVCID" value="${fes.SVCID}" /> <input
-						type="hidden" name="SVCNM" value="${fes.SVCNM}" />
+						type="hidden" name="SVCID" value="${fes.SVCID}" />
+						<input type = "hidden" name="SVCNM" value = "${fes.SVCNM}"/>
+						<input type = "hidden" name="fes" value = "${fes}"/>
 					<button class="btn btn-primary" id="reservation">예약하기</button>
 					<button class="btn btn-primary" id="like">좋아요</button>
 				</form>

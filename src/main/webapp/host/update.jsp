@@ -121,6 +121,11 @@ function checkValid(){
 		return false;
 	}
 	
+	if(!document.querySelector('input[name="tag_content"]:checked')){
+	    alert("태그를 골라주세요");
+	    return false;
+	}
+	
 	return true;
 	
 }

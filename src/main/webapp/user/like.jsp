@@ -56,7 +56,7 @@
 							<tr>
 								<td></td>
 								<td></td>
-								<td><a href=""></a></td>
+								<td></td>
 								<td></td>
 								<td><button>삭제</button></td>
 							</tr>
