@@ -66,10 +66,8 @@ public class MypageController implements Controller {
 
 	// 예약내역 삭제
 	public ModelAndView resDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
-		System.out.println(request.getParameter("reserv_Seq"));
 		String reserv_Seq = request.getParameter("reserv_Seq");
 		int result = ms.resDelete(Integer.parseInt(reserv_Seq));
-		System.out.println(result);
 		try {
 			if (result == 0) {
 				// 삭제 되었다는 메세지 출력하고 싶당 ㅎ
@@ -78,7 +76,7 @@ public class MypageController implements Controller {
 			e.printStackTrace();
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/Reservation.jsp");
+		mv.setViewName("front?key=mypage&methodName=resSelectAll");
 		return mv;
 		}
 
@@ -131,12 +129,18 @@ public class MypageController implements Controller {
 
 	// 리뷰 삭제
 	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
-		HttpSession session = request.getSession();
-		ReviewDTO dto = (ReviewDTO) session.getAttribute("loginUser");
-
-		ms.reviewDelete(dto);
-		
-		return new ModelAndView("user/review.jsp", true);
+		String Seq = request.getParameter("review_SEQ");
+		int result = ms.reviewDelete(Integer.parseInt(Seq));
+		try {
+			if (result == 0) {
+				// 삭제 되었다는 메세지 출력하고 싶당 ㅎ
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("front?key=mypage&methodName=reviewSelectAll");
+		return mv;
 		}
 
 	// 즐겨찾기 전체검색
@@ -185,12 +189,18 @@ public class MypageController implements Controller {
 	}
 	// 즐겨찾기 삭제
 	public ModelAndView likeDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
-		HttpSession session = request.getSession();
-		USER_LIKE dto = (USER_LIKE) session.getAttribute("loginUser");
-
-		ms.likeSelect(dto);
-		
-		return new ModelAndView("", true);
+		String seq = request.getParameter("SVCID");
+		int result = ms.likeDelete(seq);
+		try {
+			if (result == 0) {
+				// 삭제 되었다는 메세지 출력하고 싶당 ㅎ
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("front?key=mypage&methodName=likeSelectAll");
+		return mv;
 		}
 
 }

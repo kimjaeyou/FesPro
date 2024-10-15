@@ -28,7 +28,7 @@ public interface MypageService {
 	List<ReviewDTO2> reviewSelect(ReviewDTO dto) throws SQLException;
 
 	// 리뷰 삭제
-	void reviewDelete(ReviewDTO dto) throws SQLException;
+	int reviewDelete(int seq) throws SQLException;
 
 	// 즐겨찾기 전체검색
 	List<FesDTO> likeSelectAll(int seq) throws SQLException;
@@ -37,6 +37,6 @@ public interface MypageService {
 	List<FesDTO> likeSelect(USER_LIKE dto) throws SQLException;
 
 	// 즐겨찾기 삭제
-	void likeDelete(USER_LIKE dto) throws SQLException;
+	int likeDelete(String seq) throws SQLException;
 
 }

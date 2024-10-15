@@ -35,7 +35,7 @@ public class MypageDAOImpl implements MypageDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		List<ReservationDTO2> list = new ArrayList<ReservationDTO2>();
-		String sql= "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check FROM fes, reservation WHERE fes.svcid= reservation.svcid and user_seq = ? and reserv_check = 1 order by reserv_seq";
+		String sql= "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check FROM fes, reservation WHERE fes.svcid= reservation.svcid and user_seq = ? and reserv_check = 1 order by reserv_seq asc";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -174,7 +174,22 @@ public class MypageDAOImpl implements MypageDAO {
 	
 	// 리뷰 삭제
 	@Override
-	public void reviewDelete(ReviewDTO dto) throws SQLException {
+	public int reviewDelete(int seq) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result= 0 ;
+		String sql= "delete from review where review_seq = ?";;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, seq);
+			result = ps.executeUpdate();
+
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 	
 	// 즐겨찾기 전체검색
@@ -184,7 +199,7 @@ public class MypageDAOImpl implements MypageDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		List<FesDTO> list = new ArrayList<FesDTO>();
-		String sql= "SELECT u.svcid , svcnm, placenm, RCPTBGNDT, RCPTENDDT, SVCOPNBGNDT, SVCOPNENDDT, V_MAX, V_MIN, price, SVCSTATNM  FROM fes f , user_like u WHERE f.svcid = u.svcid and u.user_seq = ?";
+		String sql= "SELECT  u.svcid , svcnm, placenm, RCPTBGNDT, RCPTENDDT, SVCOPNBGNDT, SVCOPNENDDT, V_MAX, V_MIN, price, SVCSTATNM  FROM fes f , user_like u WHERE f.svcid = u.svcid and u.user_seq = ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -251,6 +266,21 @@ public class MypageDAOImpl implements MypageDAO {
 	
 	// 즐겨찾기 삭제
 	@Override
-	public void likeDelete(USER_LIKE dto) throws SQLException {
+	public int likeDelete(String seq) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result= 0 ;
+		String sql= "delete from user_like where svcid=?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, seq);
+			result = ps.executeUpdate();
+
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 }

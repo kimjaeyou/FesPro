@@ -43,7 +43,8 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public void reviewDelete(ReviewDTO dto) throws SQLException {
+	public int reviewDelete(int seq) throws SQLException {
+		return md.reviewDelete(seq);
 	}
 
 	@Override
@@ -57,7 +58,8 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public void likeDelete(USER_LIKE dto) throws SQLException {
+	public int likeDelete(String seq) throws SQLException {
+		return md.likeDelete(seq);
 	}
 
 }

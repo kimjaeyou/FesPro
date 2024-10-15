@@ -18,9 +18,8 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
-<body class="sb-nav-fixed">
-	<jsp:include page="../common/myHeader.jsp" />
-	<div id="layoutSidenav">
+<body>
+	<jsp:include page="../common/header.jsp" />
 		<jsp:include page="../common/mySide.jsp" />
 		<div id="layoutSidenav_content">
 			<main>
@@ -64,7 +63,7 @@
     						</c:when>
 							 <c:otherwise>
 							<c:forEach items="${like}" var="likes">
-							< <tr>
+							<tr>
 								<td><a href="">${likes.SVCID}</a></td>
 								<td>${likes.SVCNM}</td>
 								<td>${likes.PLACENM}</td>
@@ -73,8 +72,15 @@
 								<td>${likes.v_MAX} ~ ${likes.v_MIN}</td>
 								<td>${likes.PRICE}원</td>
 								<td>${likes.SVCSTATNM}</td>
-								<td><button>삭제</button></td>
-							</tr>
+								<td>
+									<form id="delete-form" method="post" action="${path}/front?key=mypage&methodName=likeSelectAll">
+										<input type="hidden" name="key" value="mypage"> 
+										<input type="hidden" name="methodName" value="reviewDelete">
+										<input type="hidden" name="SVCID" value="${likes.SVCID}">
+										<button type="submit" class="delete-button">삭제</button>
+									</form>
+								<td>
+								</tr>
 							</c:forEach>
 							</c:otherwise>
 						</c:choose>
@@ -83,7 +89,6 @@
 				</div>
 			</main>
 		</div>
-	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>

@@ -18,12 +18,10 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
-<body class="sb-nav-fixed">
-	<jsp:include page="../common/myHeader.jsp" />
-	<div id="layoutSidenav">
+<body>
+	<jsp:include page="../common/header.jsp" />
 		<jsp:include page="../common/mySide.jsp" />
 		<div id="layoutSidenav_content">
-			<!-- 메인 페이지-->
 			<main>
 				<div class="container-fluid px-4">
 
@@ -74,7 +72,14 @@
 								<td>${view.svcnm}</td>
 								<td>${view.rv_Content}</td>
 								<td>${view.sysdate}</td>
-								<td><button>지우기</button></td>
+								<td>
+								<form id="delete-form" method="post" action="${path}/front">
+										<input type="hidden" name="key" value="mypage"> 
+										<input type="hidden" name="methodName" value="reviewDelete">
+										<input type="hidden" name="review_SEQ" value="${view.review_SEQ}">
+										<button type="submit" class="delete-button">삭제</button>
+									</form>
+								</td>
 							</tr>
 							</c:forEach>
 							</c:otherwise>

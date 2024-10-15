@@ -16,10 +16,8 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
-<body class="sb-nav-fixed">
-
-	<jsp:include page="../common/myHeader.jsp" />
-	<div id="layoutSidenav">
+<body>
+	<jsp:include page="../common/header.jsp" />
 		<jsp:include page="../common/mySide.jsp" />
 		<div id="layoutSidenav_content">
 			<main>

@@ -8,11 +8,13 @@
 	<title>Insert title here</title>
 	<link href="${path}/css/My_styles.css" rel="stylesheet" />
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-	
+
 	<!-- jquery -->
      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+     
 	 <!-- 차트js  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <!-- 차트 만들어논 js 파일-->
     <script type="text/javascript" src="${path}/super/festival/chart.js"></script>
     
