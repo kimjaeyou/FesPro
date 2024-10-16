@@ -11,7 +11,6 @@ public class BoardDTO {
 	
 	
 	public BoardDTO() {}
-	
 	public BoardDTO(int boardSeq, int categorySeq, int userSeq, String sub, String bContent, int hostSeq) {
 		super();
 		this.boardSeq = boardSeq;
@@ -24,41 +23,6 @@ public class BoardDTO {
 	
 	
 	
-<<<<<<< HEAD
-	public BoardDTO(int categorySeq, int userSeq, String sub, String bContent, int hostSeq) {
-		super();
-		this.categorySeq = categorySeq;
-		this.userSeq = userSeq;
-		this.sub = sub;
-		this.bContent = bContent;
-		this.hostSeq = hostSeq;
-	}
-
-	public BoardDTO(int boardSeq, int categorySeq, String sub, int userSeq, int hostSeq) {
-		super();
-		this.boardSeq = boardSeq;
-		this.categorySeq = categorySeq;
-		this.userSeq = userSeq;
-		this.sub = sub;
-		this.hostSeq = hostSeq;
-	}
-
-	public BoardDTO(int boardSeq, String sub, int categorySeq) {
-		super();
-		this.boardSeq = boardSeq;
-		this.categorySeq = categorySeq;
-		this.sub = sub;
-	}
-	
-	
-	public BoardDTO(int userSeq, int hostSeq) {
-		super();
-		this.userSeq = userSeq;
-		this.hostSeq = hostSeq;
-	}
-	
-=======
->>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 	public int getBoardSeq() {
 		return boardSeq;
 	}
@@ -105,13 +69,6 @@ public class BoardDTO {
 	
 	public void setHostSeq(int hostSeq) {
 		this.hostSeq = hostSeq;
-	}
-
-	
-	@Override
-	public String toString() {
-		return "BoardDTO [boardSeq=" + boardSeq + ", categorySeq=" + categorySeq + ", userSeq=" + userSeq + ", sub="
-				+ sub + ", bContent=" + bContent + ", hostSeq=" + hostSeq + "]";
 	}
 	
 	
