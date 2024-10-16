@@ -92,6 +92,24 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		
 		return result;
 	}
+
+	@Override
+	public int update(FesDTO fesDto) {
+		int result = 0;
+		
+		result = dao.update(fesDto);
+	
+		return result;
+	}
+
+	@Override
+	public int deleteFes(FesDTO fes) {
+		int result = 0;
+		
+		result = dao.deleteFes(fes);
+	
+		return result;
+	}
 }
 
 

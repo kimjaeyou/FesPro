@@ -30,6 +30,11 @@ public interface SuperFestivalDAO {
 	public int update(FesDTO festivalDto, int state);
 
 	/**
+	 * 수정
+	 */
+	public int update(FesDTO festivalDto);
+	
+	/**
 	 * 리뷰 검색 
 	 */
 	public List<ReviewDTO> selectReview(FesDTO fes);
@@ -50,4 +55,11 @@ public interface SuperFestivalDAO {
 	 * 관리자가 waitfes에서 삭제
 	 */
 	public int delete(FesDTO fes);
+
+	/**
+	 * 관리자가 fes에서 삭제
+	 */
+	public int deleteFes(FesDTO fes);
+
+	
 }

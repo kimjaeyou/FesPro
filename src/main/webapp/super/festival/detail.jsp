@@ -71,7 +71,6 @@
     		//연령별 평균 평점
     		ageReviewAvg(getCanvas('ageReviewAvg'),reviewUserList);
     		
-    		
     		/* 등록상태 라디오 */
     	 	const fesState = ${fes.getFes_state()}; //초기 등록상태
     		//console.log("등록상태 : " + fesState);
@@ -84,6 +83,9 @@
 		} else if (fesState === 3) {
 		    $("#radio_4").prop("checked", true); //비활성화
 		} 
+    		
+    		const aa = "${fes.getRCPTENDDT()}";
+    		console.log(aa);
     	});
     </script>
 </head>
@@ -197,11 +199,12 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-floating">
-                <textarea class="form-control" id="AREANM" name="AREANM" style="height: 100px;" readonly>${fes.AREANM}</textarea>
-                <label for="AREANM">지역명</label>
-            </div>
-        </div>
+	            <div class="form-floating">
+	                <textarea class="form-control" id="RCPTENDDT" name="RCPTENDDT" style="height: 100px;" readonly>${fes.getRCPTENDDT()}</textarea>
+	                <label for="RCPTENDDT">접수 종료 일시</label>
+	            </div>
+	        </div>
+        
     </div>
     <br>
 
@@ -260,12 +263,7 @@
                 <label for="REVSTDDAYNM">취소 기간 기준 정보</label>
             </div>
         </div>
-        <%-- <div class="col-md-6">
-            <div class="form-floating">
-                <textarea class="form-control" id="Fes_state" name="Fes_state">${fes.getFes_state()}</textarea>
-                <label for="Fes_state">등록 상태</label>
-            </div>
-        </div> --%>
+
         <div class="col-md-6">
             <div class="form-floating">
                 <textarea class="form-control" id="host_seq" name="host_seq" style="height: 100px;" readonly>${fes.getHost_seq()}</textarea>
@@ -282,6 +280,7 @@
                 <label for="Update_date">등록/수정 일시</label>
             </div>
         </div>
+        
         <div class="col-md-6">
             <div class="form-floating">
                 <textarea class="form-control" id="MAXNUM" name="MAXNUM" style="height: 100px;" readonly>${fes.MAXNUM}</textarea>
@@ -298,17 +297,24 @@
 					<label for="PRICE">가격</label>
 				</div>
 			</div>
-			
 			<div class="col-md-6">
-			등록 상태
-			<br>
+            <div class="form-floating">
+                <textarea class="form-control" id="AREANM" name="AREANM" style="height: 100px;" readonly>${fes.AREANM}</textarea>
+                <label for="AREANM">지역명</label>
+            </div>
+        </div>
+			</div>
+			
+		<div class="text-center">
+		<br>
+			등록 상태<br>
 			<!-- 등록상태 라디오 -->
 				<div class="form-check form-check-inline">
-					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_1" value="0">
+					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_1" value="0" onclick="alert('관리자는 대기 상태로 보낼 수 없습니다'); return false;">
 					<label class="form-check-label" for="inlineRadio1">승인 대기</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_2" value="2">
+					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_2" value="2" onclick="alert('관리자는 대기 상태로 보낼 수 없습니다'); return false;">
 					<label class="form-check-label" for="inlineRadio2">수정 대기</label>
 				</div>
 				<div class="form-check form-check-inline">

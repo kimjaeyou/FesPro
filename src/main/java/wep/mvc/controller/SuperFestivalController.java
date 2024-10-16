@@ -97,7 +97,7 @@ public class SuperFestivalController implements Controller {
 		System.out.println("바꾸려는 스테이트 " + fesState);
 		
 		
-		FesDTO fes = new FesDTO();
+		FesDTO fes = new FesDTO(); //폼에 행사데이터
 	    fes.setSVCID(req.getParameter("SVCID"));
 	    fes.setMAXCLASSNM(req.getParameter("MAXCLASSNM"));
 	    fes.setMINCLASSNM(req.getParameter("MINCLASSNM"));
@@ -124,30 +124,41 @@ public class SuperFestivalController implements Controller {
 	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
+	    fes.setRCPTENDDT(req.getParameter("RCPTENDDT"));
 		
 	    int result=0;
 	    
 	    //등록대기에서 승인완료
 	    if(originState ==0 && fesState ==1) {
 	    	//fes에 insert
-	    	fesService.insert(fes);
+	    	fesService.insertListener(fes);
 	    	//waitfes에 delete
 	    	result = festivalService.delete(fes);
 	    }
 	    //수정대기에서 승인완료
 	    else if(originState ==2 && fesState ==1) {
 	    	// fes에 update
-	    	fesService.update(fes);
+	    	festivalService.update(fes);
 	    	//waitfes에서 delete
 	    	result = festivalService.delete(fes);
 	    }
-	    //완료상태에서 대기상태로
-	    else if(originState ==1 && (fesState ==0 || fesState==1)){
-	    	//fes에서 update
-	    	fesService.update(fes);
-	    	//waitfes에서 insert
-	    	//result = festivalService.insert(fes);
+	    /*
+	    //완료상태에서 등록대기
+	    else if(originState ==1 && fesState ==0){
+	    	//fes에서 update(상태만 업데이트)가 아니라 삭제를해야함 -> 왜냐 삭제를 안하면 등록대기에서 완료로 갈때 insert를 못해줌 무결성제약조건
+	    	//festivalService.update(fes,0);
+	    	result = festivalService.deleteFes(fes);
+	    	//waitfes에서 insert;
+	    	 fesService.insert(fes);
 	    }
+	    //완료에서 수정대기
+	    else if (originState ==1 && fesState==2) {
+	    	//fes에서 update(상태만 업데이트)
+	    	result = festivalService.update(fes,2);
+	    	//waitfes에서 insert;
+	    	 fesService.insert(fes);
+	    }
+	    */
 	    //나머지들은 그냥 FES에서 업데이트
 	    else {
 	    	festivalService.update(fes, fesState);
@@ -180,7 +191,7 @@ public class SuperFestivalController implements Controller {
 	 * 대시보드에서 행사 미승인건에 대한 상세보기
 	 */
 	public ModelAndView dashFesDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-		System.out.println("detail Call");
+		//System.out.println("detail Call");
 		
 		String svcid = req.getParameter("svcid");
 		
