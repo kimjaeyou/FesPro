@@ -6,6 +6,7 @@ import java.util.List;
 
 import wep.mvc.dao.MainDAOImpl;
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.ReviewDTO;
 
 public class MainSereviceImpl {
 	MainDAOImpl dao = new MainDAOImpl();
@@ -47,4 +48,8 @@ public class MainSereviceImpl {
 		return fesLike;
 	}
 
+	public List<ReviewDTO> selecReview(String sid) throws SQLException {
+		List<ReviewDTO> list = dao.selecReview(sid);
+		return list;
+	}
 }

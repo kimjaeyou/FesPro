@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <head>
-    <script src="${path}/reservation/assets/js/color-modes.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    <title>Headers · Bootstrap v5.3</title>
-    <link rel="canonical" href="https://get bootstrap.com/docs/5.3/examples/headers/">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
-    
+<script src="${path}/reservation/assets/js/color-modes.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.122.0">
+<title>Headers · Bootstrap v5.3</title>
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/5.3/examples/headers/">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+<link href="${path}/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -44,20 +47,6 @@
 	flex-shrink: 0;
 	width: 1.5rem;
 	height: 100vh;
-}
-
-<
-style>.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-.bi {
-	vertical-align: -.125em;
-	fill: currentColor;
 }
 
 .nav-scroller {
@@ -94,10 +83,6 @@ style>.bd-placeholder-img {
 	--bs-btn-active-border-color: #5a23c8;
 }
 
-.bd-mode-toggle {
-	z-index: 1500;
-}
-
 .navbar-nav {
 	display: inline-block;
 }
@@ -105,10 +90,6 @@ style>.bd-placeholder-img {
 .navbar-nav li {
 	display: inline;
 	margin-right: 10px;
-}
-
-.bd-mode-toggle .dropdown-menu .active .bi {
-	display: block !important;
 }
 
 img {
@@ -130,36 +111,44 @@ img {
 	text-decoration: none;
 }
 
-#btnYun {
-	background-color: #0250C4;
-	color: white;
-	border: 2px solid #A6A6A6;
-	padding: 10px 20px;
-	text-decoration: none;
+.login-info {
 	display: inline-block;
-	font-size: 14px;
-	font-weight: bold;
-	margin: 4px 2px;
-	cursor: pointer;
-	border-radius: 5px;
-}
-
-#btnYun:hover {
-	background-color: darkblue;
-}
-
-.navbar-nav {
-	background: #B3CEE5;
-	display: flex;
-	margin: 10px;
-	padding: 10px;
-	border: #A6A6A6;
-	border-radius: 15px;
-	font-size: 1.25rem;
+	margin-right: 10px;
+	font-size: 19px;
+	color: #333;
 	text-align: center;
+	margin-bottom: 15px;
+}
+
+.btn-danger {
+	padding: 8px 15px;
+	font-size: 14px;
+}
+
+.logout-btn:hover {
+	background-color: #c82333;
+}
+
+.header-container {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+}
+
+.login-section {
+	border: 2px solid blue;
+	padding: 15px;
+	border-radius: 15px;
+	box-shadow : 0 4px 10px rgba( 0, 0,	0, 0.2);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-buttons {
 	display: flex;
 	justify-content: center;
-	margin-right: 10px;
+	width: 100%;
 }
 
 .active {
@@ -168,8 +157,6 @@ img {
 }
 
 </style>
-<!-- Custom styles for this template -->
-    <!--  <link href="headers.css" rel="stylesheet">-->
 </head>
 <main>
     <div class="container">
@@ -244,5 +231,4 @@ img {
     </div>
 </main>
 
-
-
+<script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

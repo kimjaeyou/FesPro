@@ -59,12 +59,3 @@ public class AjaxDispatcherServlet extends HttpServlet {
 	}//service 메소드 끝 
 
 }
-
-
-
-
-
-
-
-
-

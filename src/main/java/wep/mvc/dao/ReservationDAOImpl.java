@@ -52,7 +52,6 @@ public class ReservationDAOImpl implements ReservationDAO {
 		ResultSet rs = null;
 		ReservationDTO dto = new ReservationDTO();
 		
-		// select * from reservation where user_seq = ? 
 		String sql = "select * from reservation where user_seq = ?";
 		
 		try {

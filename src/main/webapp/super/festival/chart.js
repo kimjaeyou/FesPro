@@ -173,4 +173,3 @@ function ageReviewAvg (ctx,reviewUserList){
 	  }
 	});
 }
-

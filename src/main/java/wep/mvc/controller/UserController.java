@@ -95,7 +95,6 @@ public class UserController implements Controller {
 	    request.setAttribute("users", dbDTO);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/update.jsp");
-	    mv.setRedirect(true);
 		return mv;
 	}
 	
