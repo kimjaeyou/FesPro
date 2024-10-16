@@ -386,6 +386,7 @@ public class FesController implements Controller {
 		
 		return new ModelAndView("host/myPage2.jsp");
 	}
+
 	
 	//회원 탈퇴신청
 	public ModelAndView myHostDelete(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -418,4 +419,5 @@ public class FesController implements Controller {
 		
 		return new ModelAndView("host/pwUpdate.jsp");//return 변경하는 폼으로 이동
 	}
+
 }

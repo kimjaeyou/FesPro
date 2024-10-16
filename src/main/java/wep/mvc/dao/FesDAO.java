@@ -28,9 +28,11 @@ public interface FesDAO {
 
 	int updateFes(String sVCID, int i) throws SQLException;
 
+
 	HostDTO myPage2(int host_seq) throws SQLException;
 
 	int myHostDelete(int host_seq) throws SQLException;
 
 	
 }
+

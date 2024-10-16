@@ -75,5 +75,3 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		return result;
 	}
 }
-
-

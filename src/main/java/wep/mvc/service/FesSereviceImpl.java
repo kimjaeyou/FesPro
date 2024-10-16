@@ -9,22 +9,21 @@ import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.WAIT_FES;
 
-public class FesSereviceImpl implements FesSerevice{
+public class FesSereviceImpl implements FesSerevice {
 	private FesDAO fesDAO = new FesDAOImpl();
-	
+
 	@Override
 	public void insert(FesDTO fesDTO) throws SQLException {
 		int result = fesDAO.insert(fesDTO);
-		if(result==0) throw new SQLException("등록되지 않았습니다");
+		if (result == 0)
+			throw new SQLException("등록되지 않았습니다");
 	}
 	/*
-	private FesDAO fesDAO = new FesDAOImpl();
-	@Override
-	public List<FesDTO> selectAll() throws SQLException {
-		List<FesDTO> fesDTOList = fesDAO.selectAll();
-		return fesDTOList;
-	}
-	*/
+	 * private FesDAO fesDAO = new FesDAOImpl();
+	 * 
+	 * @Override public List<FesDTO> selectAll() throws SQLException { List<FesDTO>
+	 * fesDTOList = fesDAO.selectAll(); return fesDTOList; }
+	 */
 
 	@Override
 	public List<FesDTO> select(int host_seq) throws SQLException {
@@ -35,13 +34,13 @@ public class FesSereviceImpl implements FesSerevice{
 	@Override
 	public FesDTO selectBySVCID(String sVCID) throws SQLException {
 		FesDTO fesDTO = fesDAO.selectBySVCID(sVCID);
-		
+
 		return fesDTO;
 	}
 
 	@Override
 	public void update(WAIT_FES waitFes) throws SQLException {
-		if(fesDAO.update(waitFes)==0) {
+		if (fesDAO.update(waitFes) == 0) {
 			throw new SQLException("수정 신청하기 실패");
 		}
 	}
@@ -49,7 +48,8 @@ public class FesSereviceImpl implements FesSerevice{
 	@Override
 	public void insertListener(FesDTO fesdto) throws SQLException {
 		int result = fesDAO.insertListener(fesdto);
-		if(result==0) throw new SQLException("등록되지 않았습니다");		
+		if (result == 0)
+			throw new SQLException("등록되지 않았습니다");
 	}
 
 	@Override
@@ -61,25 +61,26 @@ public class FesSereviceImpl implements FesSerevice{
 	@Override
 	public WAIT_FES fesWaitselectBySVCID(String sVCID) throws SQLException {
 		WAIT_FES waitFes = fesDAO.fesWaitselectBySVCID(sVCID);
-		
+
 		return waitFes;
 	}
 
 	@Override
 	public void updateFes(String SVCID) throws SQLException {
-		if(fesDAO.updateFes(SVCID)==0) {
+		if (fesDAO.updateFes(SVCID) == 0) {
 			throw new SQLException("삭제하기 실패");
 		}
-		
+
 	}
 
 	@Override
 	public void updateFes(String sVCID, int i) throws SQLException {
-		if(fesDAO.updateFes(sVCID, i)==0) {
+		if (fesDAO.updateFes(sVCID, i) == 0) {
 			throw new SQLException("수정 신청하기 실패");
 		}
-		
+
 	}
+
 
 	@Override
 	public HostDTO myPage2(int host_seq) throws SQLException {
@@ -96,3 +97,4 @@ public class FesSereviceImpl implements FesSerevice{
 
 	
 }
+
