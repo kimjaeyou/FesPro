@@ -324,40 +324,27 @@
 		});
 	});
 
-	document
-			.getElementById('review')
-			.addEventListener(
-					'click',
-					function(e) {
+	document.getElementById('review').addEventListener('click',function(e) {
 						let score = 0;
 						let cnt = 0;
 						document.querySelector('.data_explain').innerHTML = "";
 						const sid = $('input[name="SVCID"]').val();
-						$
-								.ajax({
+						$.ajax({
 									url : 'ajax?key=main&methodName=selecReview',
 									type : 'get',
 									dataType : 'json',
-									data : {
-										sid : sid
-									},
+									data : {sid : sid},
 									success : function(res) {
-										if (!res) {
+										if (res) {
 											let str = '<div id=reviewsContainer><div id=reviews>';
-											$
-													.each(
-															res,
-															function(index,
-																	item) {
+											$.each(res,function(index,item) {
 																score += item.SCORE;
 																cnt = index;
 																str += "<div class=rv_con>"
 																		+ item.RV_CONTENT
 																		+ "<span>"
-																		+ "★"
-																				.repeat(item.SCORE)
-																		+ "☆"
-																				.repeat(5 - item.SCORE)
+																		+ "★".repeat(item.SCORE)
+																		+ "☆".repeat(5 - item.SCORE)
 																		+ "</span></div>";
 															});
 											str += "</div></div>";
@@ -372,10 +359,8 @@
 													+ '%; ">'
 													+ '</div><span style="margin-left:19%;">MAX</span></div>'
 											$('.data_explain').html(str);
-										} else {
-											$('.data_explain')
-													.html(
-															"<div style='align-content: center; text-align:center;'><h1>NO DATA<br><sapn style='font-size:20px;'>아직 리뷰 참여한 사람이 없어요</span></h1></div>");
+										}else{
+											$('.data_explain').html("<div style='align-content: center; text-align:center;'><h1>NO DATA<br><sapn style='font-size:20px;'>아직 리뷰 참여한 사람이 없어요</span></h1></div>");
 										}
 									},
 									error : function(err) {
