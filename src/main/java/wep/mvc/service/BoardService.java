@@ -11,8 +11,7 @@ public interface BoardService {
 	/**
 	 * 글쓰기
 	 * */
-	public int write(Integer userSeq, Integer hostSeq, String title, String content, String categoryParam)
-            throws SQLException;
+	public int write(BoardDTO boardDTO) throws SQLException;
 
 	/**
 	 * 수정

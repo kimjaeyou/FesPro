@@ -24,6 +24,15 @@ public class BoardDTO {
 	
 	
 	
+	public BoardDTO(int categorySeq, int userSeq, String sub, String bContent, int hostSeq) {
+		super();
+		this.categorySeq = categorySeq;
+		this.userSeq = userSeq;
+		this.sub = sub;
+		this.bContent = bContent;
+		this.hostSeq = hostSeq;
+	}
+
 	public BoardDTO(int boardSeq, int categorySeq, String sub, int userSeq, int hostSeq) {
 		super();
 		this.boardSeq = boardSeq;

@@ -109,8 +109,7 @@ public class BoardDAOImpl implements BoardDAO {
 			
 			con.commit();
 			
-			boolean hasData = rs.next();
-			if (rs.next()) {
+			while (rs.next()) {
 					BoardDTO board = new BoardDTO(rs.getInt("BOARD_SEQ"), rs.getInt("CATEGORY_SEQ"),
 							rs.getString("SUB"), rs.getInt("USER_SEQ"), rs.getInt("HOST_SEQ"));
 					list.add(board);
