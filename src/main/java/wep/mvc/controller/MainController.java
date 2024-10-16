@@ -33,8 +33,7 @@ public class MainController implements Controller {
 		if (user != null) {
 			int user_seq = user.getUser_seq();
 			List<FesDTO> likeList = mainService.selecLike(user_seq, list);
-			System.out.println("!!!!!!!!");
-			req.setAttribute("listLike", list);
+			req.setAttribute("listLike", likeList);
 		}
 
 		return new ModelAndView("index.jsp");
@@ -56,7 +55,7 @@ public class MainController implements Controller {
 
 	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-
+		
 		return new ModelAndView("detail.jsp");
 	}
 

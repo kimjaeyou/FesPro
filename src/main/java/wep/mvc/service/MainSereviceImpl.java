@@ -40,7 +40,6 @@ public class MainSereviceImpl {
 			for (String svcid : list) {
 				for (FesDTO fes : fesList) {
 					if (fes.getSVCID().equals(svcid)) {
-						System.out.println(svcid);
 						fesLike.add(fes);
 					}
 				} // inner for end
