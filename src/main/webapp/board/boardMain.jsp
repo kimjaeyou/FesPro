@@ -79,8 +79,7 @@ a, a:hover {
 				</tbody>
 			</table>
 
-			<a href="${path}/front?key=board&methodName=write"
-				class="btn btn-primary pull-right">글쓰기</a>
+			<a href="${path}/front?key=board&methodName=write" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
 

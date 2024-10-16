@@ -74,7 +74,6 @@ public class BoardServiceImpl implements BoardService {
 	        throw new IllegalArgumentException("사용자는 카테고리 0에 글을 쓸 수 없습니다.");
 	    }
 
-	    // 호스트가 카테고리 1에 글을 쓰려고 할 때 예외 처리
 	    if (boardDTO.getHostSeq() != 0 && boardDTO.getCategorySeq() == 1) {
 	        throw new IllegalArgumentException("호스트는 카테고리 1에 글을 쓸 수 없습니다.");
 	    }

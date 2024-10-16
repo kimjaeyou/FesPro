@@ -70,13 +70,17 @@ public class BoardController implements Controller {
 		return posts.stream().filter(post -> post.getCategorySeq() == categorySeq).collect(Collectors.toList());
 	}
 
-	
+	/**
+	 * 글쓰기
+	 * */
 	public ModelAndView write(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException, SQLException {
 
 	    System.out.println("write 호출");
 
-	    int categorySeq = Integer.parseInt(request.getParameter("categorySeq"));
+	    String categorySeqStr = request.getParameter("categorySeq");
+	    int categorySeq = (categorySeqStr == null || categorySeqStr.isEmpty()) ? 0 : Integer.parseInt(categorySeqStr);
+	    
 	    String sub = request.getParameter("SUB");  
 	    String bContent = request.getParameter("B_CONTENT");  
 	    
@@ -98,14 +102,16 @@ public class BoardController implements Controller {
 	        return new ModelAndView("/user/login.jsp", true);
 	    }
 
-	    BoardDTO boardDTO = new BoardDTO(categorySeq, userSeq, bContent, sub, hostSeq);
+	    BoardDTO boardDTO = new BoardDTO(categorySeq, userSeq != null ? userSeq : 0, bContent, sub, hostSeq != null ? hostSeq : 0);
 
 	    boardService.write(boardDTO);
 
 	    return new ModelAndView("/board/boardNoti.jsp",true);
 	}
 
-
+	/**
+	 * 상세보기
+	 * */
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 
@@ -121,20 +127,27 @@ public class BoardController implements Controller {
 
 		Integer postUserSeq = Integer.parseInt(request.getParameter("loginUser"));
 
-		// 서비스 레이어에서 게시글 조회 및 권한 검증 처리
+
 		BoardDTO boardDTO = boardService.select(postUserSeq, userSeq, hostSeq);
 		System.out.println(boardDTO);
-		// 게시글이 존재하지 않거나, 권한이 없는 경우 처리
-		if (boardDTO == null) {
-			return new ModelAndView("board/error.jsp");
-		}
 
-		request.setAttribute("list", boardDTO);
+		try {
 
-		// 게시글을 보여줄 뷰로 이동
-		return new ModelAndView("board/MainView.jsp");
+			boardService.write(boardDTO);
+	        return new ModelAndView("/board/boardNoti.jsp", true);  
+	    } catch (IllegalArgumentException e) {
+
+	    	request.setAttribute("errorMessage", e.getMessage());
+	        return new ModelAndView("/board/error.jsp");
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new ModelAndView("/board/error.jsp");  
+	    }
 	}
-
+	/**
+	 * Del
+	 * */
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 
@@ -162,7 +175,9 @@ public class BoardController implements Controller {
 		return new ModelAndView("front?key=board&methodName=read", true);
 
 	}
-
+	/**
+	 * 수정
+	 * */
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 

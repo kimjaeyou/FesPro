@@ -30,7 +30,9 @@
 	</nav>
 	<div class="container">
 		<div class="row">
+			
 			<form method="post" action="${path}/front?key=board&methodName=write">
+			<input type="hidden" name="categorySeq" value="0">
     <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
         <thead>
             <tr>
