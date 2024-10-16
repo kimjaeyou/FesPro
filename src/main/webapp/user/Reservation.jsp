@@ -71,7 +71,8 @@
 				<th>신청일</th>
 				<th>이용요금</th>
 				<th>예약현황</th>
-				<th>삭제</th>
+				<th>리뷰작성</th>
+				<th>예약취소</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -97,6 +98,14 @@
 							<td>${re.svc_Date}</td>
 							<td>${re.resv_Price}원</td>
 							<td>${re.resv_Check}</td>
+							<td>
+								<form id="delete-form" method="post" action="${path}/front">
+									<input type="hidden" name="key" value=""> 
+									<input type="hidden" name="methodName" value=""> 
+									<input type="hidden" name="reserv_Seq" value="">
+									<button type="submit" class="delete-button">작성</button>
+								</form>
+							</td>
 							<td>
 								<form id="delete-form" method="post" action="${path}/front">
 									<input type="hidden" name="key" value="mypage"> <input

@@ -19,7 +19,7 @@ public class SessionCheckFilter implements Filter {
 
 		String key = request.getParameter("key");
 		
-		if (key == null || key.equals("")) {
+		if (key == null || key.equals("user")) {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession session = req.getSession();
 
@@ -29,8 +29,7 @@ public class SessionCheckFilter implements Filter {
 				return;
 			}
 		}
-		
-		String key1 = request.getParameter("key");		
+				
 		if (key == null || key.equals("host")) {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession session = req.getSession();
@@ -42,6 +41,5 @@ public class SessionCheckFilter implements Filter {
 			}
 		}
 		chain.doFilter(request, response);
-		
 	}		
 }

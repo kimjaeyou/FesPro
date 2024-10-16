@@ -46,8 +46,7 @@
 <body>
 
 	<c:choose>
-		<c:when
-			test="${not empty sessionScope.loginUser && empty sessionScope.loginCom}">
+		<c:when	test="${not empty sessionScope.loginUser}">
 			<div id="messageContainner">
 				<img alt="Logo" src="assets/img/FesProLogo_bg.png">
 				<div id="yo1">
@@ -63,15 +62,15 @@
 				</div>
 			</div>
 		</c:when>
-		<c:when
-			test="${not empty sessionScope.loginCom && empty sessionScope.loginUser}">
+		
+		<c:when test="${not empty sessionScope.loginCom}">
 			<div id="messageContainner">
 				<img alt="Logo" src="assets/img/FesProLogo_bg.png">
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
 				</div>
 				<div id="yo1">
-					<a href="${path}/front?key=mypage&methodName=resSelectAll">MY페이지</a> <!-- 마이페이지 이슈 여기로밖에 안들어가진다. -->
+					<a href="${path}/front?key=fes&methodName=selectAll">MY페이지</a> <!-- 마이페이지 이슈 여기로밖에 안들어가진다. -->
 				</div>
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
