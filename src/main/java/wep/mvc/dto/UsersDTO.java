@@ -47,6 +47,10 @@ public class UsersDTO {
 
 	}
 
+	public UsersDTO(int user_seq) {
+		this.user_seq = user_seq;
+	}
+	
 	public UsersDTO(String user_id) {
 		this.user_id = user_id;
 	}

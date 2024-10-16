@@ -44,7 +44,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		}
 		return result;
 	}
-
+   
 	@Override
 	public ReservationDTO selectByUserSeq(int userSeq) throws SQLException {
 		Connection con = null;
@@ -186,7 +186,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		ReservationDTO dto = new ReservationDTO();
 		
 		// select * from reservation where user_seq = ? and SVCID = ? 
-		String sql = "select * from reservation where user_seq = ? and SVCID = ?";
+		String sql = "select * from reservation where user_seq = ? and SVCID = ? order by reserv_seq";
 		
 		try {
 			con = DbUtil.getConnection();

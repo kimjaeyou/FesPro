@@ -42,10 +42,10 @@ $("#username").keyup(function() {
 		dataType: "json", //서버가 보내온 데이터(응답)타입(text | html | xml | json )
 		data: { key: "user", methodName: "idCheck", id: $("#username").val() }, //서버에게 보낼 데이터정보(parameter정보)
 		success: function(result) {
-			if(result) {
-			$("span").text(result).css('color', 'green');
+			if (result) {
+				$("span").text(result).css('color', 'green');
 			} else {
-			$("span").text(result).css('color', 'red');
+				$("span").text(result).css('color', 'red');
 			}
 		},
 		error: function(err) {

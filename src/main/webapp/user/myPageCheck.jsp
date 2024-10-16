@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-// 로그인 아닌 상태에서 마이페이지 가는거 막기
+// 비회원이 마이페이지 가는거 막기
     UsersDTO loginUser = (UsersDTO) session.getAttribute("loginUser");
     HostDTO hostUser = (HostDTO) session.getAttribute("loginCom");
 

@@ -346,7 +346,7 @@ public class FesController implements Controller {
 		//FesDTO 정보 보내기
 		FesDTO fes = new FesDTO();
 		fes.setSVCID(svcid);
-		FesDTO searchFes = festivalService.select(fes);
+		FesDTO searchFes = festivalService.select(fes,false);
 		req.setAttribute("fes", searchFes);
 		
 		//USERsDTO 정보 보내기
