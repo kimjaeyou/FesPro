@@ -47,13 +47,9 @@ public class MainSereviceImpl {
 		} // else end
 		return fesLike;
 	}
-	
-	
-	
+
 	public List<ReviewDTO> selecReview(String sid) throws SQLException {
 		List<ReviewDTO> list = dao.selecReview(sid);
 		return list;
 	}
-	
-	
 }

@@ -56,7 +56,6 @@
 					</a>
 				</div>
 				<div id="yo1">
-
 					<a href="${path}/front?key=mypage&methodName=resSelectAll">MY페이지</a>
 				</div>
 				<div id="yo1">
@@ -64,7 +63,6 @@
 				</div>
 			</div>
 		</c:when>
-
 		<c:when
 			test="${not empty sessionScope.loginCom && empty sessionScope.loginUser}">
 			<div id="messageContainner">
@@ -73,7 +71,7 @@
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
 				</div>
 				<div id="yo1">
-					<a href="${path}/front?key=mypage&methodName=resSelectAll">MY페이지</a>
+					<a href="${path}/front?key=fes&methodName=select">MY페이지</a>
 				</div>
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
@@ -83,7 +81,6 @@
 		<c:when
 			test="${empty sessionScope.loginUser && empty sessionScope.loginCom}">
 		</c:when>
-
 	</c:choose>
 </body>
 </html>

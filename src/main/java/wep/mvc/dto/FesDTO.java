@@ -104,7 +104,22 @@ public class FesDTO {
 			this.host_seq = host_seq;
 			RCPTENDDT = rCPTENDDT;
 		}
-
+		// 윤성이가 추가한 생성자
+		public FesDTO(String SVCID, String SVCNM, String PLACENM, String RCPTBGNDT, String RCPTENDDT, String SVCOPNBGNDT,
+				String SVCOPNENDDT, String V_MAX, String V_MIN, int PRICE, String SVCSTATNM) {
+			super();
+			this.SVCID = SVCID;
+			this.SVCNM = SVCNM;
+			this.PLACENM = PLACENM;
+			this.RCPTBGNDT = RCPTBGNDT;
+			this.RCPTENDDT = RCPTENDDT;
+			this.SVCOPNBGNDT = SVCOPNBGNDT;
+			this.SVCOPNENDDT = SVCOPNENDDT;
+			this.V_MAX = V_MAX;
+			this.V_MIN = V_MIN;
+			this.PRICE = PRICE;
+			this.SVCSTATNM = SVCSTATNM;
+		}
 		public String getSVCID() {
 			return SVCID;
 		}

@@ -312,7 +312,6 @@ public class ReservationDAOImpl implements ReservationDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, userSeq);
-
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
