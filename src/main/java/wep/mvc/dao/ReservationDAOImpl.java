@@ -305,6 +305,8 @@ public class ReservationDAOImpl implements ReservationDAO {
 		ResultSet rs = null;
 		WALLET wallet = null;
 		
+		int money = 0;
+		
 		// select * from wallet where user_seq = ?;
 		String sql = "select * from wallet where user_seq = ?";
 		
@@ -318,18 +320,64 @@ public class ReservationDAOImpl implements ReservationDAO {
 			while(rs.next()) {
 				int wallet_seq = rs.getInt("WALLET_SEQ");
 				int user_seq = rs.getInt("USER_SEQ");
-				int money = rs.getInt("MONEY");
+				money = rs.getInt("MONEY");
 				int point = rs.getInt("W_POINT");
 				
 				money = money - fee;
 
 				wallet = new WALLET(wallet_seq, user_seq, money, point);
 			}
+			
+			int result = walletUpdate(money, userSeq, con); 
 		
 		}finally {
-			DbUtil.dbClose(con, ps, rs);
+			DbUtil.dbClose(null, ps, rs);
 		}
 		return wallet;
+	}
+	
+	public int walletUpdate(int money, int userSeq, Connection con) throws SQLException {
+		PreparedStatement ps = null;
+		WALLET wallet = null;
+		int result = 0;
+		
+		// UPDATE WALLET SET MOENY=? WHERE USER_SEQ = ?;
+		String sql = "UPDATE WALLET SET MONEY=? WHERE USER_SEQ = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, money);
+			ps.setInt(2, userSeq);
+
+			result = ps.executeUpdate();
+		
+		}finally {
+			DbUtil.dbClose(null, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public int changeReservation(int resvSeq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		// UPDATE RESERVATION SET RESERV_CHECK=? WHERE RESERV_SEQ = ?;
+		String sql = "UPDATE RESERVATION SET RESERV_CHECK=? WHERE RESERV_SEQ = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, 2);
+			ps.setInt(2, resvSeq);
+
+			result = ps.executeUpdate();
+		
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
 }

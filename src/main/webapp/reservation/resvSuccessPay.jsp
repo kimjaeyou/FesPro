@@ -145,7 +145,7 @@
                     <th>예약상태</td>
                     <td name="resvCheck">
                     <c:choose>
-                    	<c:when test="${resvData.resvCheck eq 0}">결제대기중</c:when>
+                    	<c:when test="${resvData.resvCheck eq 2}">결제대기중</c:when>
                     	<c:otherwise>예약완료</c:otherwise>
                     	
                     </c:choose>

@@ -53,5 +53,10 @@ public interface ReservationService {
 	 * 행사 결제 - 지갑 차감하는 메소드 호출
 	 */
 	public WALLET payment(int userSeq, int fee) throws SQLException;
-
+	
+	/**
+	 * 예약 상태 결제대기 - 예약완료로 변경
+	 */
+	public int changeReservation (int resvSeq) throws SQLException;
+	
 }

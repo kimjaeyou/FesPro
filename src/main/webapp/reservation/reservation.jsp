@@ -61,12 +61,34 @@
 
             [data-form] {color:blue}
 
+            #datepicker_input {
+                text-align: center;
+                align-items: center;
+                margin-bottom: 500px;
+            }
+            
+            .content {
+            	margin-bottom: 200px;
+            }
+            
+            #datepicker1 {
+            	display: block;
+            	
+            }
+            
+           
+
         </style>
 		
 		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		
 		<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+		
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+ 		<link rel="stylesheet" href="/resources/demos/style.css">
+  		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  		<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
 		
 		<script type="text/javascript">
 			// 사이드바에 선택한 값 입력
@@ -175,25 +197,58 @@
 	            }
 	            
 	            const elems = document.querySelectorAll('.datepicker_input');
+	            let edDateStr = new Date("${fes.SVCOPNENDDT}");
+	            let stDateStr = new Date("${fes.SVCOPNBGNDT}");
+	            //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	            
+	            //String edDate = format.format(edDateStr);
+	            //String stDate = format.format(stDateStr);
+	            
+	            console.log(edDateStr);
+	            console.log(stDateStr);
+	            
 	            for (const elem of elems) {
 	                const datepicker = new Datepicker(elem, {
 	                // 'format': 'dd/mm/yyyy', // UK format
 	                'format': 'yyyy-mm-dd', // UK format
+	                //maxDate: "2024-10-25",
+	                maxDate: edDateStr,
+				    minDate: stDateStr,
 	                title: getDatePickerTitle(elem)
 	                });
 	            }
-	            
+	           	
 	            // 17 cal
+/* 	            const datep = $("#inline_cal");
 	            let dateFormat = "yyyy-mm-dd"
-	            $("#inline_cal").datepicker({
-					minDate: "2024-10-01",
-					maxDate: "2024-10-30",
-					startDate: '-10d',
-					endDate: '+10d',
-					dateFormat: dateFormat
-				})
 	            
+	            for (const date of datep) {
+	                const datepicker1 = new Datepicker1(elem, {
+	                // 'format': 'dd/mm/yyyy', // UK format
+	                'format': 'yyyy-mm-dd', // UK format
+	                maxDate: new Date(2024, 9, 25),
+				    minDate: new Date(2024, 9, 1),
+	                title: getDatePickerTitle(date)
+	                });
+	            } */
+ 	            /* $("#result").datepicker({
+					
+					maxDate: new Date(2024, 9, 25),
+				    minDate: new Date(2024, 9, 1),
+					dateFormat: dateFormat
+				}) */
+				
+				$(function() {
+					$('#datepicker').datepicker({
+		                format: 'yyyy-mm-dd'
+		            });
+				})
+				
         } // onload 끝
+      
+		</script>
+		<script type="text/javascript">
+			
 		</script>
 		
     </head>
@@ -257,25 +312,35 @@
                                 <div class="col-md-10 text-center">
                                   <h2 class="mb-5 text-center">예약날짜 / 회차 선택</h2>
                                   <!-- calendar 17 -->
-                                  <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                                  <!-- <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
                                   <form action="#" class="row">
                                     <div class="col-md-12">
                                       <div id="inline_cal"></div>
                                     </div>
-                                  </form>
+                                  </form>  -->
 
                                   <!-- vanilla js-date picker -->
-	                                  <div class="form-floating mb-4 d-flex">
-	                                  <input 
-	                                         type="text"
-	                                         class="datepicker_input form-control border-2"
+	                                  <!-- <div class="form-floating mb-4 d-flex"> -->
+	                                 <!--  <form>
+	                                  <input type = "text" placeholder="날짜선택" class = "date_input">
+	                                  <div class="form-floating">
+	                                  	
+	                                  <div 
+	                                  		
+	                                         class="datepicker_input"
 	                                         id="datepicker1"
-	                                         required
-	                                         placeholder="DD/MM/YYYY"
+	                                        
                                              
                                              >
-	                                  <label for="datepicker1">날짜 선택</label>
-	                                </div>
+                                             </div>
+                                       
+	                                  
+	                                  
+	                                </div> 
+	                                </form> -->
+	                                
+	                                <input type = "text" id="datepicker">
+	                                
                                 </div>
                               </div>
                                   
@@ -495,6 +560,7 @@
 			}
 			
 		</script>
+		
 
     </body>
 </html>
