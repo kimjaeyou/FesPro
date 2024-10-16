@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/common/header.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,97 @@
       <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         
+<style>
+    table {
+        width: 65%;
+        padding: 20px;
+        border-top: solid black 2px;
+        border-bottom: solid black 2px;
+        border-right: none;
+        border-left: none;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+    }
+
+    th {
+        text-align: center;
+        background-color: rgba(0, 123, 255, 0.17);
+        width: 20%;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        border-bottom: solid rgba(199, 199, 199, 0.5) 1px;
+    }
+    
+    caption {
+	  	caption-side: top;
+	  	text-align: left;
+	  	font-size: large;
+        font-weight: bold;
+	}
+
+    [data-img] {
+        float: left;
+        margin-left: 17vw;
+        margin-top: 80px;
+        width: 28%;
+        height: 32%;
+    }
+    
+    .resv_data {
+    	float: right;
+    	width: 35%;
+        margin-right: 18vw;
+        margin-top: 20px;
+    }
+    
+    .moveBtn {
+    	text-align: left; margin-bottom: 50px;
+        margin-left: 18%;
+        margin-bottom: auto;
+    }
+    
+    .btn btn-primary {
+    	align-items: center;
+        width: 100px;
+    }
+
+    h3 {
+        text-align: left;
+        margin-left: 18%;
+    }
+
+</style>
+
+<script>
+    $(function () {
+        const getFesInfo = ()=>{
+            $.ajax({
+             url :"ajax" , //서버요청주소
+             type:"post", //요청방식(method방식 : get | post | put | delete )
+             dataType:"json"  , //서버가 보내온 데이터(응답)타입(text | html | xml | json )
+             data: {key:"fes" , methodName : "selectAll"}, //서버에게 보낼 데이터정보(parameter정보)
+             success :function(result){
+                 console.log(result);
+                 
+                 let str="";
+                 $.each(result, function(index, item){
+
+               });
+                 
+                 
+             } , //성공했을때 실행할 함수 
+             error : function(err){  
+                 alert(err+"에러 발생했어요.");
+             }  //실팽했을때 실행할 함수 
+         });//ajax끝
+        }//selectAll 함수끝
+    })
+
+</script>
         
 </head>
 <body>
@@ -122,5 +215,4 @@
     	<button class="btn btn-primary" id="cancle"  type="button">예약 취소</button>
     </div>
     </body>
-
 </html>

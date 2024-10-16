@@ -208,18 +208,11 @@ public class MypageController implements Controller {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
-		String password = request.getParameter("plus-password");
-		String balance = request.getParameter("plus-amount");
-
-		int account = ms.balancePlus(seq, password, Integer.parseInt(balance));
+		String password = request.getParameter("");
+		String balance = request.getParameter("");
+		
+		int account = ms.balancePlus(seq,password,Integer.parseInt(balance));
 		System.out.println("balance = " + balance); // 이것도 나옴
-		try {
-			if (account < 0) {
-				// 0원은 나오면 안되는데...ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=balancePlus");
@@ -227,5 +220,28 @@ public class MypageController implements Controller {
 
 	}
 
-	
+	// 잔액 출금하기
+	public ModelAndView balanceMinus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+		HttpSession session = request.getSession();
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		String password = request.getParameter("");
+		String balance = request.getParameter("");
+		
+		int account = ms.balanceMinus(seq,password,Integer.parseInt(balance));
+		System.out.println("balance = " + balance); // 이것도 나옴
+
+		try {
+			if (account > 0) {
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("front?key=mypage&methodName=balanceMinus");
+		return mv;
+
+	}
 }

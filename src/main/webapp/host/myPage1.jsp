@@ -73,6 +73,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">내가 주최한 서비스 내역</li>
                         </ol>
+                        <!--  
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
@@ -111,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        -->
                         <!-- 게시판 영역 -->
                         <%
                         	//세션에서 id 가져오는 일 합니다.
@@ -147,7 +149,7 @@
                         								<p align="center"><span>${FesDTO.SVCID}</span></p>
                         							</td>
                         							<td>
-                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=selectBySSVCID&SVCID=${FesDTO.SVCID}">${FesDTO.SVCNM}</a></span></p>
+                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=selectBySVCID&SVCID=${FesDTO.SVCID}">${FesDTO.SVCNM}</a></span></p>
                         							</td>
                         							<td>
                         								<p align="center"><span>${FesDTO.SVCSTATNM}</span></p>
@@ -171,6 +173,66 @@
                         							
                         							<td>
                         								<p align="center"><span><a href="${path}/front?key=fes&methodName=detail&SVCID=${FesDTO.SVCID}">서비스 통계보기</a></span></p>
+                        							</td>
+                        						</tr>
+
+                        						</c:forEach>
+                        					</c:otherwise>
+                        				</c:choose>
+                        			</tbody>
+                        		</table>
+                        		<!-- 여기부터는 WAIT_FES영역 -->
+                        		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+                        			<thead>
+                        				<tr>
+                        					<th style="background-color: #eeeeee; text-align: center;">서비스아이디</th>
+                        					<th style="background-color: #eeeeee; text-align: center;">서비스명</th>
+                        					<th style="background-color: #eeeeee; text-align: center;">서비스상태</th>
+                        					<th style="background-color: #eeeeee; text-align: center;">등록(수정)신청일시</th>
+                        					<th style="background-color: #eeeeee; text-align: center;">등록(수정)신청정보</th>
+                        					<th style="background-color: #eeeeee; text-align: center;">서비스 통계보기</th>
+                        				</tr>
+                        			</thead>
+                        			<tbody>
+                        				<c:choose>
+                        					<c:when test="${empty waitFesList}">
+                        						<tr>
+                        							<td colspan="7">
+                        								<p align="center"><b><span>신청된 행사가 없습니다.</span></b></p>
+                        							</td>
+                        						</tr>
+                        					</c:when>
+                        					<c:otherwise>
+                        						<c:forEach items="${waitFesList}" var="waitFesList">
+												<tr>
+                        							<td>
+                        								<p align="center"><span>${waitFesList.SVCID}</span></p>
+                        							</td>
+                        							<td>
+                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=fesWaitselectBySVCID&SVCID=${waitFesList.SVCID}">${waitFesList.SVCNM}</a></span></p>
+                        							</td>
+                        							<td>
+                        								<p align="center"><span>${waitFesList.SVCSTATNM}</span></p>
+                        							</td>
+                        							
+                        							<td>
+                        								<p align="center"><span>${waitFesList.getUpdate_date()}</span></p>
+                        							</td>
+                        							<td>
+                        								<p align="center"><span>
+                        								<c:set var="fesState" value="${waitFesList.getFes_state()}" />
+                        								<c:choose>
+                        								<c:when test="${fesState eq 0}">승인대기</c:when>
+                        								<c:when test="${fesState eq 1}">승인완료</c:when>
+                        								<c:when test="${fesState eq 2}">수정신청 승인대기</c:when>
+                        								<c:when test="${fesState eq 3}">비활성화(삭제)</c:when>
+                        								
+                        								</c:choose>
+                        								</span></p>
+                        							</td>
+                        							
+                        							<td>
+                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=detail&SVCID=${waitFesList.SVCID}">서비스 통계보기</a></span></p>
                         							</td>
                         						</tr>
 

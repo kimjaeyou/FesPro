@@ -37,9 +37,9 @@
             </form>
         </div>
 
-        <!-- 기업회원 -->
+           <!-- 기업회원 -->
         <div id="corporate-login" class="login-section">
-            <form id="corporate-login-form" method="get" action="${pageContext.request.contextPath}/front" onsubmit="return validateLogin('corporate')">
+            <form id="corporate-login-form" method="post" action="${pageContext.request.contextPath}/front" onsubmit="return validateLogin('corporate')">
               <input type="hidden" name="key" value="host" /> 
               <input type="hidden" name="methodName" value="login" />
              

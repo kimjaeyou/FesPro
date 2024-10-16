@@ -41,7 +41,42 @@ public class FesSereviceImpl implements FesSerevice{
 	@Override
 	public void update(WAIT_FES waitFes) throws SQLException {
 		if(fesDAO.update(waitFes)==0) {
-			throw new SQLException("수정 실패");
+			throw new SQLException("수정 신청하기 실패");
 		}
+	}
+
+	@Override
+	public void insertListener(FesDTO fesdto) throws SQLException {
+		int result = fesDAO.insertListener(fesdto);
+		if(result==0) throw new SQLException("등록되지 않았습니다");		
+	}
+
+	@Override
+	public List<WAIT_FES> selectWaitFesList(int host_seq) throws SQLException {
+		List<WAIT_FES> list = fesDAO.selectWaitFesList(host_seq);
+		return list;
+	}
+
+	@Override
+	public WAIT_FES fesWaitselectBySVCID(String sVCID) throws SQLException {
+		WAIT_FES waitFes = fesDAO.fesWaitselectBySVCID(sVCID);
+		
+		return waitFes;
+	}
+
+	@Override
+	public void updateFes(String SVCID) throws SQLException {
+		if(fesDAO.updateFes(SVCID)==0) {
+			throw new SQLException("삭제하기 실패");
+		}
+		
+	}
+
+	@Override
+	public void updateFes(String sVCID, int i) throws SQLException {
+		if(fesDAO.updateFes(sVCID, i)==0) {
+			throw new SQLException("수정 신청하기 실패");
+		}
+		
 	}
 }

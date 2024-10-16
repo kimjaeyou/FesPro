@@ -12,36 +12,36 @@ import wep.mvc.dto.USER_LIKE;
 
 public interface MypageDAO {
 	// 예약내역 전체검색
-		List<ReservationDTO2> resSelectAll(int seq) throws SQLException;
+	List<ReservationDTO2> resSelectAll(int seq) throws SQLException;
 
-		// 예약내역 부분검색
-		List<ReservationDTO2> resSelect(ReservationDTO dto) throws SQLException;
+	// 예약내역 부분검색
+	List<ReservationDTO2> resSelect(ReservationDTO dto) throws SQLException;
 
-		// 예약내역 삭제
-		int resDelete(int reserv_Seq) throws SQLException;
+	// 예약내역 삭제
+	int resDelete(int reserv_Seq) throws SQLException;
 
-		// 리뷰 전체검색
-		List<ReviewDTO2> reviewSelectAll(int seq) throws SQLException;
+	// 리뷰 전체검색
+	List<ReviewDTO2> reviewSelectAll(int seq) throws SQLException;
 
-		// 리뷰 부분검색
-		List<ReviewDTO2> reviewSelect(ReviewDTO dto) throws SQLException;
+	// 리뷰 부분검색
+	List<ReviewDTO2> reviewSelect(ReviewDTO dto) throws SQLException;
 
-		// 리뷰 삭제
-		int reviewDelete(int seq) throws SQLException;
+	// 리뷰 삭제
+	int reviewDelete(int seq) throws SQLException;
 
-		// 즐겨찾기 전체검색
-		List<FesDTO> likeSelectAll(int seq) throws SQLException;
+	// 즐겨찾기 전체검색
+	List<FesDTO> likeSelectAll(int seq) throws SQLException;
 
-		// 즐겨찾기 부분검색
-		List<FesDTO> likeSelect(USER_LIKE dto) throws SQLException;
+	// 즐겨찾기 부분검색
+	List<FesDTO> likeSelect(USER_LIKE dto) throws SQLException;
 
-		// 즐겨찾기 삭제
-		int likeDelete(String seq) throws SQLException;
+	// 즐겨찾기 삭제
+	int likeDelete(String seq) throws SQLException;
 
-		// 잔액 충전
-		int balancePlus(int seq, String password, int balance) throws SQLException;
+	// 잔액 충전
+	int balancePlus(int seq, String password, int balance) throws SQLException;
 
-		// 잔액 출금
-		int balanceMinus(int seq, String password, int balance) throws SQLException;
+	// 잔액 출금
+	int balanceMinus(int seq, String password, int balance) throws SQLException;
 
-	}
+}
