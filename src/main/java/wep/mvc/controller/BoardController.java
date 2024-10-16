@@ -24,6 +24,7 @@ public class BoardController implements Controller {
 
 	}
 
+<<<<<<< HEAD
 	/**
 	 * 공지
 	 */
@@ -34,6 +35,13 @@ public class BoardController implements Controller {
 
 		request.setAttribute("noti", filterCtg(selectAll, 0));
 
+=======
+	public ModelAndView read(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+
+		ServletContext a = request.getServletContext();
+		System.out.println(a);
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 		return new ModelAndView("/board/boardMain.jsp");
 	}
 
@@ -43,19 +51,49 @@ public class BoardController implements Controller {
 	public ModelAndView readQA(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 
+<<<<<<< HEAD
 		List<BoardDTO> selectAll = boardService.selectByCtg();
+=======
+		System.out.println("write 호출");
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 
+<<<<<<< HEAD
 		request.setAttribute("QA", filterCtg(selectAll, 1));
+=======
+		HttpSession session = request.getSession();
+		UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 
+<<<<<<< HEAD
 		return new ModelAndView("/board/boardQA.jsp");
 	}
+=======
+		System.out.println(SessionUsersDTO);
+		System.out.println(SessionHostDTO);
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 
+<<<<<<< HEAD
 	/**
 	 * 자게
 	 */
 	public ModelAndView readFree(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
+=======
+		int hostSeq = SessionHostDTO.getHost_seq();
+		int userSeq = SessionUsersDTO.getUser_seq();
 
+		System.out.println("userSeq: " + userSeq + " , hostSeq: " + hostSeq);
+
+		if (userSeq == 0 && hostSeq == 0) {
+			return new ModelAndView("front?key=user&methodName=login", true);
+		}
+
+		return new ModelAndView("front?key=board&methodName=write");
+	}
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
+
+<<<<<<< HEAD
 		List<BoardDTO> selectAll = boardService.selectByCtg();
 
 		request.setAttribute("Free", filterCtg(selectAll, 2));
@@ -90,10 +128,39 @@ public class BoardController implements Controller {
 	    HostDTO sessionHost = (HostDTO) session.getAttribute("logincom");
 	    
 	    
+=======
+	public ModelAndView select(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
 
+		System.out.println("상세보기 메소드 불러왔다");
+
+		HttpSession session = request.getSession();
+		UsersDTO SessionUsersDTO = (UsersDTO) session.getAttribute("loginUser");
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("logincom");
+
+		int hostSeq = SessionHostDTO.getHost_seq();
+		int userSeq = SessionUsersDTO.getUser_seq();
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
+
+<<<<<<< HEAD
 	    Integer userSeq = sessionUser != null ? sessionUser.getUser_seq() : null;
 	    Integer hostSeq = sessionHost != null ? sessionHost.getHost_seq() : null;
+=======
+		System.out.println(hostSeq);
+		System.out.println(userSeq);
 
+		int postUserSeq = Integer.parseInt(request.getParameter("loginUser"));
+
+		// 서비스 레이어에서 게시글 조회 및 권한 검증 처리
+		BoardDTO boardDTO = boardService.select(postUserSeq, userSeq, hostSeq);
+		System.out.println(boardDTO);
+		// 게시글이 존재하지 않거나, 권한이 없는 경우 처리
+		if (boardDTO == null) {
+			return new ModelAndView("board/error.jsp");
+		}
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
+
+<<<<<<< HEAD
 	    System.out.println("user세션 = "+ sessionUser);
 	    System.out.println("host세션 = "+ sessionHost);
 	    
@@ -101,6 +168,13 @@ public class BoardController implements Controller {
 	    if (userSeq == null && hostSeq == null) {
 	        return new ModelAndView("/user/login.jsp", true);
 	    }
+=======
+		request.setAttribute("list", boardDTO);
+
+		// 게시글을 보여줄 뷰로 이동
+		return new ModelAndView("board/MainView.jsp");
+	}
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 
 	    BoardDTO boardDTO = new BoardDTO(categorySeq, userSeq != null ? userSeq : 0, bContent, sub, hostSeq != null ? hostSeq : 0);
 
@@ -166,7 +240,11 @@ public class BoardController implements Controller {
 		}
 
 		if (userSeq == null && hostSeq == null) {
+<<<<<<< HEAD
 			return new ModelAndView("/board/error.jsp");
+=======
+			throw new SecurityException("사용자 또는 호스트 정보가 없습니다. 삭제 권한이 없습니다.");
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 		}
 
 		// 서비스에 삭제 요청
@@ -184,4 +262,13 @@ public class BoardController implements Controller {
 		return new ModelAndView("index.jsp", true);
 	}
 
+<<<<<<< HEAD
+=======
+	public ModelAndView reDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		return new ModelAndView("index.jsp", true);
+	}
+
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 }

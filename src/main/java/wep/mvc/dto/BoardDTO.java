@@ -24,6 +24,7 @@ public class BoardDTO {
 	
 	
 	
+<<<<<<< HEAD
 	public BoardDTO(int categorySeq, int userSeq, String sub, String bContent, int hostSeq) {
 		super();
 		this.categorySeq = categorySeq;
@@ -56,6 +57,8 @@ public class BoardDTO {
 		this.hostSeq = hostSeq;
 	}
 	
+=======
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 	public int getBoardSeq() {
 		return boardSeq;
 	}

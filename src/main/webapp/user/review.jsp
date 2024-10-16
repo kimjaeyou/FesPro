@@ -1,3 +1,4 @@
+<%@page import="wep.mvc.dto.ReviewDTO2"%>
 <%@page import="wep.mvc.dto.UsersDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,17 +13,15 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>나의 이용후기</title>
-<link href="../css/My_styles.css" rel="stylesheet" />
-<link href="../css/review.css" rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
+<link href="${path}/css/review.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
-<body class="sb-nav-fixed">
-	<jsp:include page="../common/myHeader.jsp" />
-	<div id="layoutSidenav">
+<body>
+	<jsp:include page="../common/header.jsp" />
 		<jsp:include page="../common/mySide.jsp" />
 		<div id="layoutSidenav_content">
-			<!-- 메인 페이지-->
 			<main>
 				<div class="container-fluid px-4">
 
@@ -57,23 +56,30 @@
 						</thead>
 						<tbody>
 						 <c:choose>
-    						<c:when test="${empty requestScope.like}">
+    						<c:when test="${empty requestScope.review}">
 	   						<tr>
-					        <td colspan="5">
+					        <td colspan="6">
             				<p align="center"><b><span style="font-size:9pt;">작성한 댓글이 없습니다.</span></b></p>
         					</td>
     						</tr>
     						</c:when>
     						
     						<c:otherwise>
-							<c:forEach items="${review}" var="review">
+							<c:forEach items="${review}" var="view">
 							<tr>
-								<td>${review.REVIEW_SEQ}</td>
-								<td>${review.SCORE}</td>
-								<td>${review.서비스명}</td>
-								<td>${review.RV_CONTENT}</td>
-								<td>${review.작성일자}</td>
-								<td><button>삭제</button></td>
+								<td>${view.review_SEQ}</td>
+								<td>${view.score}점</td>
+								<td>${view.svcnm}</td>
+								<td>${view.rv_Content}</td>
+								<td>${view.sysdate}</td>
+								<td>
+								<form id="delete-form" method="post" action="${path}/front">
+										<input type="hidden" name="key" value="mypage"> 
+										<input type="hidden" name="methodName" value="reviewDelete">
+										<input type="hidden" name="review_SEQ" value="${view.review_SEQ}">
+										<button type="submit" class="delete-button">삭제</button>
+									</form>
+								</td>
 							</tr>
 							</c:forEach>
 							</c:otherwise>

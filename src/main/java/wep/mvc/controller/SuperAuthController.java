@@ -77,11 +77,6 @@ SuperAuthService service = new SuperAuthServiceImpl();
 				user.setDisable(disable);
 				user.setUser_tel(user_tel);
 				user.setUser_ben_check(Integer.parseInt(user_ben_check));
-				
-			
-	 
-	   
-	    
 		
 		int result = service.update(user);
 		System.out.println(result);
