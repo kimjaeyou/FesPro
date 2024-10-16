@@ -33,8 +33,8 @@
                         <input type="hidden" name="methodName" value="balancePlus">
                         <div class="section">
                             <h3>충전하기</h3>
-                            <input type="text" id="charge-amount" name="charge" placeholder="충전할 금액을 입력하세요." />
-                            <input type="password" id="charge-password" name="charge-password" placeholder="비밀번호를 입력하세요." />
+                            <input type="text" id="plus-amount" name="charge" placeholder="충전할 금액을 입력하세요." />
+                            <input type="password" id="plus-password" name="plus-password" placeholder="비밀번호를 입력하세요." />
                             <button type="submit">충전하기</button>
                         </div>
                     </form>
@@ -43,8 +43,8 @@
                         <input type="hidden" name="methodName" value="balanceMinus">
                         <div class="section">
                             <h3>출금하기</h3>
-                            <input type="text" id="balance" name="balance" placeholder="출금하실 금액을 입력하세요." />
-                            <input type="password" id="withdraw-password" name="withdraw-password" placeholder="비밀번호를 입력하세요." />
+                            <input type="text" id="minus-amount" name="minus-amount" placeholder="출금하실 금액을 입력하세요." />
+                            <input type="password" id="minus-password" name="minus-password" placeholder="비밀번호를 입력하세요." />
                             <button type="submit">출금하기</button>
                         </div>
                     </form>
