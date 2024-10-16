@@ -233,7 +233,13 @@ public class SuperFestivalController implements Controller {
 		//System.out.println("형우 / update Call");
 		//System.out.println(req.getParameter("SVCID"));
 		//System.out.println(req.getParameter("festivalStateOptions"));
+		System.out.println("!!!!!!!!!!!!!!e 1번 카드 눌렀을때 나오는 Call");
 		int fesState = Integer.parseInt(req.getParameter("festivalStateOptions")); //라디오에서 넘어온 값
+		//System.out.println("페스티벌 스테이트" +fesState);
+		int originState = Integer.parseInt(req.getParameter("originState")); // 라디오에서 변경하기 전 값
+
+		System.out.println("오리진 스테이트 " + originState);
+		System.out.println("바꾸려는 스테이트 " + fesState);
 		
 		
 		FesDTO fes = new FesDTO();
@@ -263,16 +269,33 @@ public class SuperFestivalController implements Controller {
 	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
+	    fes.setRCPTENDDT(req.getParameter("RCPTENDDT"));
 		
 	    int result = 0;
-	    if (fesState == 1) {
-	        // 승인 완료 시 insert
-	        fesService.insert(fes);
-	    } else {
-	        result = festivalService.update(fes, fesState);
-	    }
 
-	    if (result == 1) {
+		// 등록대기에서 승인완료
+		if (originState == 0 && fesState == 1) {
+			// fes에 insert
+			fesService.insertListener(fes);
+			// waitfes에 delete
+			result = festivalService.delete(fes);
+		}
+		// 수정대기에서 승인완료
+		else if (originState == 2 && fesState == 1) {
+			// fes에 update
+			festivalService.update(fes);
+			// waitfes에서 delete
+			result = festivalService.delete(fes);
+		}
+		//나머지는 그냥 스테이트업데이트
+		else {
+			result = festivalService.update(fes, fesState);
+		}
+		
+		
+///////재구 페이지 처리
+	    if (result == 1) {//////////==========================================
+	    	System.out.println("3333333333333333333333333");
 	        // 업데이트 성공 시
 	        if (fesState == 2) {
 	            // 행사수정 미승인건 처리 후 이동
@@ -282,11 +305,12 @@ public class SuperFestivalController implements Controller {
 	            return new ModelAndView("front?key=superfestival&methodName=dashFesCancleWaitFesSelectAll", true);
 	        } else {
 	            // 그 외의 경우 기본 selectAll로 이동
-	            return new ModelAndView("front?key=superfestival&methodName=selectAll", true);
+	            return new ModelAndView("front?key=superfestival&methodName=dashFesSelectAll", true);
 	        }
 	    } else {
+	    	System.out.println("44444444444444444444");
 	        System.out.println("행사 업데이트 실패 Controller-update");
-	        return new ModelAndView("error.jsp", false); // 실패 시 에러 페이지로 이동
+	        return new ModelAndView("dashFesSelectAll");
 	    }
 	
 	}

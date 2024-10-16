@@ -154,7 +154,7 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-
+		System.out.println("dao에서 state = "+state);
 		String sql = "UPDATE FES SET FES_STATE = ? WHERE SVCID =?";
 
 		try {

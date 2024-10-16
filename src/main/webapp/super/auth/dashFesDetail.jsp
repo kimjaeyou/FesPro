@@ -85,6 +85,17 @@
 		    $("#radio_4").prop("checked", true); //비활성화
 		} 
     	});
+    	
+    	/*저장,뒤로 가기 버튼 */
+		$(document).ready(function() {
+	        $('#detailForm').on('submit', function(event) {
+	            event.preventDefault(); // 폼의 기본 제출 동작 방지
+	            
+	            if (confirm("저장하시겠습니까?")) {
+	                this.submit();
+	            }
+	        });
+	    });
     </script>
 </head>
 
@@ -92,7 +103,7 @@
 	<h1>문화행사 상세페이지</h1>
 	
 	<!-- 폼 -->
-	<form action="front?key=superfestival&methodName=dashFesAcceptUpdate" method="post">
+	<form action="front?key=superfestival&methodName=dashFesAcceptUpdate&originState=${fes.getFes_state()}" id="detailForm" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
@@ -298,17 +309,25 @@
 					<label for="PRICE">가격</label>
 				</div>
 			</div>
-			
 			<div class="col-md-6">
-			등록 상태
+	            <div class="form-floating">
+	                <textarea class="form-control" id="RCPTENDDT" name="RCPTENDDT" style="height: 100px;" readonly>${fes.getRCPTENDDT()}</textarea>
+	                <label for="RCPTENDDT">접수 종료 일시</label>
+	            </div>
+	        </div>
+	        <div>
+			
+		<div class="text-center">
+		<br>
+			등록 상태<br>
 			<br>
 			<!-- 등록상태 라디오 -->
 				<div class="form-check form-check-inline">
-					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_1" value="0">
+					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_1" value="0" onclick="alert('관리자는 대기 상태로 보낼 수 없습니다'); return false;">
 					<label class="form-check-label" for="inlineRadio1">승인 대기</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_2" value="2">
+					<input class="form-state-radio" type="radio" name="festivalStateOptions" id="radio_2" value="2" onclick="alert('관리자는 대기 상태로 보낼 수 없습니다'); return false;"	>
 					<label class="form-check-label" for="inlineRadio2">수정 대기</label>
 				</div>
 				<div class="form-check form-check-inline">
