@@ -53,6 +53,7 @@ public interface ReservationDAO {
 	 * 결제금액만큼 wallet에서 차감
 	 */
 	WALLET payment(int userSeq, int fee) throws SQLException;
+
 	
 	/**
 	 * 예약 상태 변경 : 결제대기 - 예약완료

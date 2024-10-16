@@ -208,6 +208,7 @@ public class ReservationController implements Controller {
 		
 		System.out.println("결제 후 남은 금액 : " + wallet.getMONEY());
 		
+
 		// 예약상태 : 결제 대기 - 예약완료로 변경
 		int result = service.changeReservation(resvSeq);
 		

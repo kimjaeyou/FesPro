@@ -324,52 +324,46 @@
 		});
 	});
 
-	document
-			.getElementById('review')
-			.addEventListener(
-					'click',
-					function(e) {
+	document.getElementById('review').addEventListener('click',function(e) {
 						let score = 0;
 						let cnt = 0;
 						document.querySelector('.data_explain').innerHTML = "";
 						const sid = $('input[name="SVCID"]').val();
-						$
-								.ajax({
+						$.ajax({
 									url : 'ajax?key=main&methodName=selecReview',
 									type : 'get',
 									dataType : 'json',
-									data : {
-										sid : sid
-									},
+									data : {sid : sid},
 									success : function(res) {
-										let str = '<div id=reviewsContainer><div id=reviews>';
-										$
-												.each(
-														res,
-														function(index, item) {
-															score += item.SCORE;
-															cnt = index;
-															str += "<div class=rv_con>"
-																	+ item.RV_CONTENT
-																	+ "<span>"
-																	+ "★"
-																			.repeat(item.SCORE)
-																	+ "☆"
-																			.repeat(5 - item.SCORE)
-																	+ "</span></div>";
-														});
-										str += "</div></div>";
-										avg = score / (cnt + 1);
-										str += '<br><div><h2>평점 : '
-												+ avg
-												+ '</h2></div>'
-												+ '<div class=avg_con><div class="avg_range">0</div><div style="'
-												+ 'font-size: 20px; background-color: #75DE27; height : 40px; width :'
-												+ 100
-												* (avg / 5)
-												+ '%; ">'
-												+ '</div><span style="margin-left:19%;">MAX</span></div>'
-										$('.data_explain').html(str);
+										if (res && res.length > 0) {
+											let str = '<div id=reviewsContainer><div id=reviews>';
+											$.each(res,function(index,item) {
+																score += item.SCORE;
+																cnt = index;
+																str += "<div class=rv_con>"
+																		+ item.RV_CONTENT
+																		+ "<span>"
+																		+ "★".repeat(item.SCORE)
+																		+ "☆".repeat(5 - item.SCORE)
+																		+ "</span></div>";
+															});
+											str += "</div></div>";
+											avg = score / (cnt + 1);
+											str += '<br><div><h2>평점 : '
+													+ avg
+													+ '</h2></div>'
+													+ '<div class=avg_con><div class="avg_range">0</div><div style="'
+													+ 'font-size: 20px; background-color: #75DE27; height : 40px; width :'
+													+ 100
+													* (avg / 5)
+													+ '%; ">'
+													+ '</div><span style="margin-left:19%;">MAX</span></div>'
+											$('.data_explain').html(str);
+										}
+										else{
+											$('.data_explain').html(
+													"<div style='align-content: center; text-align:center;'><h1>NO DATA<br><sapn style='font-size:20px;'>아직 리뷰 참여한 사람이 없어요</span></h1></div>");
+										}
 									},
 									error : function(err) {
 										console.log(err);
@@ -377,4 +371,9 @@
 								});
 					});
 </script>
+
+
+
+
 </html>
+
