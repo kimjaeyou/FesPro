@@ -48,7 +48,7 @@
 	<c:choose>
 		<c:when	test="${not empty sessionScope.loginUser}">
 			<div id="messageContainner">
-				<img alt="Logo" src="assets/img/FesProLogo_bg.png">
+				<img alt="Logo" src="${path}/assets/img/FesProLogo_bg.png">
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove"> <!--  <img id="messageImg" alt="message" src="${path}/assets/img/messageImg/message_0.png"/>-->
 						MY메세지
@@ -65,7 +65,7 @@
 		
 		<c:when test="${not empty sessionScope.loginCom}">
 			<div id="messageContainner">
-				<img alt="Logo" src="assets/img/FesProLogo_bg.png">
+				<img alt="Logo" src="${path}/assets/img/FesProLogo_bg.png">
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
 				</div>
