@@ -73,9 +73,9 @@
 								<td>${likes.PRICE}원</td>
 								<td>${likes.SVCSTATNM}</td>
 								<td>
-									<form id="delete-form" method="post" action="${path}/front?key=mypage&methodName=likeSelectAll">
+									<form id="delete-form" method="post" action="${path}/front">
 										<input type="hidden" name="key" value="mypage"> 
-										<input type="hidden" name="methodName" value="reviewDelete">
+										<input type="hidden" name="methodName" value="likeDelete">
 										<input type="hidden" name="SVCID" value="${likes.SVCID}">
 										<button type="submit" class="delete-button">삭제</button>
 									</form>

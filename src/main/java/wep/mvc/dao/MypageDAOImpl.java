@@ -13,6 +13,7 @@ import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
+import wep.mvc.dto.WALLET;
 import wep.mvc.util.DbUtil;
 
 public class MypageDAOImpl implements MypageDAO {
@@ -255,7 +256,6 @@ public class MypageDAOImpl implements MypageDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-
 			ps.setString(1, seq);
 			result = ps.executeUpdate();
 
@@ -265,46 +265,67 @@ public class MypageDAOImpl implements MypageDAO {
 		return result;
 	}
 
+	// 이건 먼저 비밀번호 체크 할 곳
 	@Override
-	public int balancePlus(int seq, String password, int balance) throws SQLException {
+	public int balanceCheck(int seq, String password) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		int result = 0;
-		String sql = "update users , wallet set money= money+? where user_seq=? and user_pw ";
+		String sql = "select count(*) from users where user_seq=? and user_pw =?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-
 			ps.setInt(1, seq);
 			ps.setString(2, password);
-			ps.setInt(3, balance);
-			result = ps.executeUpdate();
-
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
 		} finally {
 			DbUtil.dbClose(con, ps);
 		}
 		return result;
 	}
 
+	// 검증이 완료되면 입금을 한다.
 	@Override
-	public int balanceMinus(int seq, String password, int balance) throws SQLException {
+	public WALLET balancePlus(int amount, int seq) throws SQLException {
 		Connection con = null;
+		Connection con1 = null;
 		PreparedStatement ps = null;
-		int result = 0;
-		String sql = "update users , wallet set money= money-? where user_seq=? and user_pw ";
+		PreparedStatement ps1 = null;
+		ResultSet rs = null;
+		WALLET wallet = null;
+		String sql1 = "update wallet set money = money + ? where user_seq=?";
+		String sql2 = "select MONEY from wallet where user_seq = ?";
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sql1);
+			ps.setInt(1, amount);
+			ps.setInt(2, seq);
 
-			ps.setInt(1, seq);
-			ps.setString(2, password);
-			ps.setInt(3, balance);
-			result = ps.executeUpdate();
+			
+			ps.executeUpdate();
+			
+			
+			ps1 = con.prepareStatement(sql2);
+			ps1.setInt(1, seq);
+			rs = ps1.executeQuery();
+			
+			
+			while (rs.next()) {
+				int money = rs.getInt(1);
+				wallet = new WALLET();
+				wallet.setMONEY(money);
+			}
+			
+		} finally
 
-		} finally {
+		{
 			DbUtil.dbClose(con, ps);
 		}
-		return result;
+		return wallet;
 	}
 
 }

@@ -11,6 +11,7 @@ import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
+import wep.mvc.dto.WALLET;
 
 public class MypageServiceImpl implements MypageService {
 	private MypageDAO md = new MypageDAOImpl();
@@ -63,13 +64,8 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public int balancePlus(int seq, String password, int balance) throws SQLException {
-		return md.balancePlus(seq, password, balance);
-	}
-
-	@Override
-	public int balanceMinus(int seq, String password, int balance) throws SQLException {
-		return md.balanceMinus(seq, password, balance);
+	public int balanceCheck(int seq, String password) throws SQLException {
+		return md.balanceCheck(seq, password);
 	}
 
 }

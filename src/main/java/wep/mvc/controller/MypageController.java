@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import wep.mvc.dao.MypageDAO;
+import wep.mvc.dao.MypageDAOImpl;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReservationDTO2;
@@ -19,7 +21,8 @@ import wep.mvc.service.MypageServiceImpl;
 public class MypageController implements Controller {
 
 	private MypageService ms = new MypageServiceImpl();
-
+	private MypageDAO md = new MypageDAOImpl();
+	
 	// 예약내역 전체검색
 	public ModelAndView resSelectAll(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
@@ -203,45 +206,27 @@ public class MypageController implements Controller {
 		return mv;
 	}
 
-	// 잔액 충전하기
-	public ModelAndView balancePlus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	// 신원체크 후 잔액 충전하기 
+	public ModelAndView balanceCheck(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
-		String password = request.getParameter("");
-		String balance = request.getParameter("");
+		String password = request.getParameter("plus-password");
+		System.out.println("plus-password = " + password );
 		
-		int account = ms.balancePlus(seq,password,Integer.parseInt(balance));
-		System.out.println("balance = " + balance); // 이것도 나옴
-
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("front?key=mypage&methodName=balancePlus");
-		return mv;
-
-	}
-
-	// 잔액 출금하기
-	public ModelAndView balanceMinus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
-		HttpSession session = request.getSession();
-		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
-		int seq = dto.getUser_seq();
-		String password = request.getParameter("");
-		String balance = request.getParameter("");
-		
-		int account = ms.balanceMinus(seq,password,Integer.parseInt(balance));
-		System.out.println("balance = " + balance); // 이것도 나옴
-
-		try {
-			if (account > 0) {
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		String amount = request.getParameter("plus-amount");
+		System.out.println("plus-amount = " + amount );
+		int result = ms.balanceCheck(seq, password);
+		System.out.println("result = " + result); // 성공하면 1반환
+		if (result == 1) {
+			WALLET wallet = md.balancePlus(Integer.parseInt(amount), seq);
+			System.out.println(wallet);
+			request.setAttribute("money", wallet);
+		} else {
+			// 신원체크 실패
 		}
-
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("front?key=mypage&methodName=balanceMinus");
+		mv.setViewName("user/Wallet.jsp");
 		return mv;
-
 	}
 }
