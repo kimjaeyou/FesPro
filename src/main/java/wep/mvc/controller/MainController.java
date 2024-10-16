@@ -33,6 +33,7 @@ public class MainController implements Controller {
 		if (user != null) {
 			int user_seq = user.getUser_seq();
 			List<FesDTO> likeList = mainService.selecLike(user_seq, list);
+			System.out.println("!!!!!!!!");
 			req.setAttribute("listLike", list);
 		}
 
