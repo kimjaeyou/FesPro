@@ -1,4 +1,4 @@
-<%@page import="wep.mvc.dto.UsersDTO"%>
+<%--  --%><%@page import="wep.mvc.dto.UsersDTO"%>
 <%@page import="wep.mvc.dao.UsersDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -37,7 +37,7 @@
             </form>
         </div>
 
-        <!-- 기업회원 -->
+           <!-- 기업회원 -->
         <div id="corporate-login" class="login-section">
             <form id="corporate-login-form" method="post" action="${pageContext.request.contextPath}/front" onsubmit="return validateLogin('corporate')">
               <input type="hidden" name="key" value="host" /> 

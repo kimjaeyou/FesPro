@@ -23,12 +23,6 @@ public class BoardDTO {
 	
 	
 	
-	public BoardDTO(int userSeq, int hostSeq) {
-		super();
-		this.userSeq = userSeq;
-		this.hostSeq = hostSeq;
-	}
-	
 	public int getBoardSeq() {
 		return boardSeq;
 	}

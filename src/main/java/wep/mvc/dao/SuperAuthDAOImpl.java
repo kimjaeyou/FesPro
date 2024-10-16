@@ -359,4 +359,3 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 			 * } finally { DbUtil.dbClose( con , ps); } return result; }
 			 */
 	 
-

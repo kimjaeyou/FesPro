@@ -320,3 +320,51 @@ public class SuperFestivalController implements Controller {
 		return new ModelAndView("super/auth/dashFesSelectAll.jsp");
 	}
 }
+	
+	/**
+	 * 대시보드에서 행사 미승인건에 대한 수정
+	 */
+	public ModelAndView dashFesUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		System.out.println("update Call");
+		
+		FesDTO fes = new FesDTO();
+	    fes.setSVCID(req.getParameter("SVCID"));
+	    fes.setMAXCLASSNM(req.getParameter("MAXCLASSNM"));
+	    fes.setMINCLASSNM(req.getParameter("MINCLASSNM"));
+	    fes.setSVCSTATNM(req.getParameter("SVCSTATNM"));
+	    fes.setSVCNM(req.getParameter("SVCNM"));
+	    fes.setPAYATNM(req.getParameter("PAYATNM"));
+	    fes.setPLACENM(req.getParameter("PLACENM"));
+	    fes.setUSETGTINFO(req.getParameter("USETGTINFO"));
+	    fes.setX(req.getParameter("X"));
+	    fes.setY(req.getParameter("Y"));
+	    fes.setSVCOPNBGNDT(req.getParameter("SVCOPNBGNDT"));
+	    fes.setSVCOPNENDDT(req.getParameter("SVCOPNENDDT"));
+	    fes.setRCPTBGNDT(req.getParameter("RCPTBGNDT"));
+	    fes.setAREANM(req.getParameter("AREANM"));
+	    fes.setIMGURL(req.getParameter("IMGURL"));
+	    fes.setDTLCONT(req.getParameter("DTLCONT"));
+	    fes.setTELNO(req.getParameter("TELNO"));
+	    fes.setV_MAX(req.getParameter("V_MAX"));
+	    fes.setV_MIN(req.getParameter("V_MIN"));
+	    fes.setREVSTDDAY(req.getParameter("REVSTDDAY"));
+	    fes.setREVSTDDAYNM(req.getParameter("REVSTDDAYNM"));
+	    fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
+	    fes.setUpdate_date(req.getParameter("Update_date"));
+	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
+	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
+	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
+		
+		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
+		
+		if(result ==1) {
+			return new ModelAndView("front?key=superAuth&methodName=dashFesSelectAll",true);
+		}
+		else {
+			//에러페이지
+			System.out.println("형우 / 행사 업데이트 실패 Controller-update");
+			return null;
+		}
+	}
+	
+}

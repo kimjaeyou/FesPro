@@ -34,7 +34,7 @@ public class DispatcherServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String key = req.getParameter("key");
 		String methodName = req.getParameter("methodName");
-		System.out.println("key = "+key+"methodName = "+methodName);
+		System.out.println(key+" = " + methodName);
 		try {
 			Controller con = map.get(key);
 
