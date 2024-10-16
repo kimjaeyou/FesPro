@@ -6,6 +6,7 @@ import java.util.List;
 import wep.mvc.dao.FesDAO;
 import wep.mvc.dao.FesDAOImpl;
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.WAIT_FES;
 
 public class FesSereviceImpl implements FesSerevice{
@@ -79,4 +80,19 @@ public class FesSereviceImpl implements FesSerevice{
 		}
 		
 	}
+
+	@Override
+	public HostDTO myPage2(int host_seq) throws SQLException {
+		HostDTO hostDTO = fesDAO.myPage2(host_seq);
+		return hostDTO;
+	}
+
+	@Override
+	public void myHostDelete(int host_seq) throws SQLException {
+		if(fesDAO.myHostDelete(host_seq)==0) {
+			throw new SQLException("탈퇴하기 실패");
+		}
+	}
+
+	
 }

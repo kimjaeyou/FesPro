@@ -371,9 +371,51 @@ public class FesController implements Controller {
 		return new ModelAndView("host/myPage3.jsp");
 	}
 	
-	//회원정보 업데이트
+	//회원정보 불러오기(조회)
 	public ModelAndView myPage2(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
+		HttpSession session = req.getSession();
+		
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
+		
+		int host_seq = SessionHostDTO.getHost_seq();
+		
+		HostDTO hostDTO = fesSerevice.myPage2(host_seq);
+		
+		req.setAttribute("hostDTO", hostDTO);
+		
 		return new ModelAndView("host/myPage2.jsp");
+	}
+	
+	//회원 탈퇴신청
+	public ModelAndView myHostDelete(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+		HttpSession session = req.getSession();
+		
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
+		
+		int host_seq = SessionHostDTO.getHost_seq();
+
+		fesSerevice.myHostDelete(host_seq);
+		
+		session.invalidate();
+
+		return new ModelAndView("front?key=main&methodName=read", false);
+	}
+	
+	public ModelAndView pwUpdateForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		HttpSession session = req.getSession();
+		
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
+		
+		int host_seq = SessionHostDTO.getHost_seq();
+		
+		HostDTO hostDTO = fesSerevice.myPage2(host_seq); //현재 주최자의 dto를 꺼내온다.
+		String nowPw = hostDTO.getHost_pw();
+		
+		req.setAttribute("hostDTO", hostDTO);
+		req.setAttribute("nowPw", nowPw);
+		
+		return new ModelAndView("host/pwUpdate.jsp");//return 변경하는 폼으로 이동
 	}
 }
