@@ -52,7 +52,7 @@ public class MainSereviceImpl {
 	
 	public List<ReviewDTO> selecReview(String sid) throws SQLException {
 		List<ReviewDTO> list = dao.selecReview(sid);
-		return null;
+		return list;
 	}
 	
 	
