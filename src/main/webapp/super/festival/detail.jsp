@@ -82,10 +82,19 @@
 		    $("#radio_3").prop("checked", true); //승인완료
 		} else if (fesState === 3) {
 		    $("#radio_4").prop("checked", true); //비활성화
-		} 
+		}
     		
-    		const aa = "${fes.getRCPTENDDT()}";
-    		console.log(aa);
+    	/*저장,뒤로 가기 버튼 */
+    		$(document).ready(function() {
+    	        $('#detailForm').on('submit', function(event) {
+    	            event.preventDefault(); // 폼의 기본 제출 동작 방지
+    	            
+    	            if (confirm("저장하시겠습니까?")) {
+    	                this.submit();
+    	            }
+    	        });
+    	    });
+    		
     	});
     </script>
 </head>
@@ -94,7 +103,7 @@
 	<h1>문화행사 상세페이지</h1>
 	
 	<!-- 폼 -->
-	<form action="front?key=superfestival&methodName=update&originState=${fes.getFes_state()}" method="post">
+	<form action="front?key=superfestival&methodName=update&originState=${fes.getFes_state()}" method="post" id="detailForm">
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
@@ -331,7 +340,7 @@
 		
         <!-- 버튼 -->
     <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="submit">저장</button>
+        <button class="btn btn-primary" type="submit" >저장</button>
         <button class="btn btn-outline-danger" type="button"  onclick="history.back()">뒤로가기</button>
     </div>
 </form>
