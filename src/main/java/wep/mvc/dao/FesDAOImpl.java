@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.WAIT_FES;
 import wep.mvc.util.DbUtil;
 
@@ -196,7 +197,7 @@ public class FesDAOImpl implements FesDAO{
 										   rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20),
 										   rs.getString(21), rs.getInt(22), rs.getString(23), rs.getInt(24),
 										   rs.getInt(25), rs.getInt(26), rs.getString(27));
-				System.out.println("코코VER2");
+				//System.out.println("코코VER2");
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
@@ -360,4 +361,58 @@ public class FesDAOImpl implements FesDAO{
 		
 		return result;
 	}
+
+	@Override
+	public HostDTO myPage2(int host_seq) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs = null;
+		HostDTO hostDTO = null;
+		
+		String sql = "select * from HOST where HOST_SEQ=?";
+		
+		try {
+			con=DbUtil.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, host_seq);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				hostDTO = new HostDTO(
+						rs.getInt(1), rs.getString(2), rs.getString(9),
+						rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getInt(6), rs.getString(7), rs.getInt(8)
+				);
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		
+		
+		return hostDTO;
+	}
+
+	@Override
+	public int myHostDelete(int host_seq) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		
+		String sql = "update HOST set HOST_BEN_CHECK=0 where HOST_SEQ=?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, host_seq);
+			
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		
+		return result;
+	}
+
+	
 }
+
