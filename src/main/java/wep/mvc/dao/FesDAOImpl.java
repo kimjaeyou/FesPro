@@ -413,6 +413,26 @@ public class FesDAOImpl implements FesDAO{
 		return result;
 	}
 
+	@Override
+	public int pwUpdateForm22(String newPw, int host_seq) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps = null;
+		int result=0;
+		
+		String sql = "update HOST set HOST_PASSWORD=? where HOST_SEQ=?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, newPw);
+			ps.setInt(2, host_seq);
+			result=ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
 	
 }
 
