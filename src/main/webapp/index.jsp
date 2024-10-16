@@ -77,23 +77,38 @@ img {
 }
 
 .con_row img {
-	width: 200px;
+	width: 350px;
 	height: 200px;
 }
 
 .con_cell {
-	border: 1px solid black;
+	border: 1px solid #DCEBE6;
 	border-radius: 20px;
 	align-content: center;
 	text-align: center;
 	align-items: center;
 	display: table-cell;
-	width: 30%;
-	font-size: 25px;
+	width: 40%;
+	font-size: 20px;
 	font: bold;
 	font-family: Roboto;
 	color: black;
-	font-family: Roboto;
+}
+#con_name span{
+	margin-bottom:5px;
+	font-size: 30px;
+	color: #371AFC;
+}
+#con_name{
+	background-color: #A2DE96;
+}
+#con_p_name{
+	font-size: 25px;
+}
+#con_p_name span{
+	margin-bottom:5px;
+	font-size: 20px;
+	color: #371AFC;
 }
 </style>
 </head>
@@ -202,9 +217,8 @@ img {
 						<c:forEach items="${listLike}" var="option" varStatus="status">
 							<div class="con_row" id="${option.SVCID}">
 								<img src="${option.IMGURL}" class="con_cell">
-								<div class="con_cell">${option.MINCLASSNM}</div>
-								<div class="con_cell">${option.SVCNM}</div>
-								<div class="con_cell">${option.PLACENM}</div>
+								<div class="con_cell"id="con_name"><span>${option.MINCLASSNM}</span><br>${option.SVCNM}</div>
+								<div class="con_cell"id="con_p_name">${option.PLACENM}<br><span>${option.RCPTBGNDT}~</span></div>
 							</div>
 						</c:forEach>
 					</c:if>
