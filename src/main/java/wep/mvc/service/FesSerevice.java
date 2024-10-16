@@ -31,6 +31,8 @@ public interface FesSerevice{
 
 	void myHostDelete(int host_seq) throws SQLException;
 
+	void pwUpdateForm22(String newPw, int host_seq) throws SQLException;
+
 
 
 	//List<FesDTO> selectAll() throws SQLException;

@@ -1,8 +1,11 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.apache.tomcat.util.log.UserDataHelper.Mode;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -12,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 import wep.mvc.service.MainSereviceImpl;
 import wep.mvc.service.ReservationService;
 import wep.mvc.service.ReservationServiceImpl;
@@ -55,14 +59,29 @@ public class ReservationController implements Controller {
 		HttpSession session = request.getSession();
 	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
 		System.out.println(userDTO);
+		
+		ReservationDTO reservation = null;
 
-		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 0, cancleDate);
+		if(fee == 0) {
+			reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 1, cancleDate);
+		} else {
+			reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 2, cancleDate);
+		}
 		
 		int result = service.insert(reservation);
-		System.out.println(result);
+		//System.out.println(result);
 		
-		if(result != 0) {
-			return new ModelAndView("reservation/resvSuccess.jsp");
+	    
+		ReservationDTO resvData = service.selectByUserSeqAndSVCID(userDTO.getUser_seq(), SVCID);
+		System.out.println("resvDate = " + resvData);
+		request.setAttribute("resvData", resvData);
+		request.setAttribute("SVCNM", SVCNM);
+		
+		
+		if(result != 0 && fee == 0) {
+			return new ModelAndView("reservation/resvSuccess.jsp", false);
+		} else if (result != 0 && fee != 0) {
+			return new ModelAndView("reservation/resvSuccessPay.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp");
 		}
@@ -72,10 +91,18 @@ public class ReservationController implements Controller {
 	/**
 	 * 예약 내역 확인 시 유저 seq로 예약 내역을 검색해 가져온다
 	 */
-	public ModelAndView selectByUserSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ModelAndView selectByUserSeq (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		//
+		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		ReservationDTO resvDTO = service.selectByUserSeq(userSeq);
+		request.setAttribute("resvDTO", resvDTO);
 		
-		return null;
+		// 연결할 페이지
+		if (resvDTO != null) {
+			return new ModelAndView();
+		} else {
+			return new ModelAndView();
+		}
 	}
 	
 	/**
@@ -104,7 +131,6 @@ public class ReservationController implements Controller {
 			request.setAttribute("fes", fes);
 		
 		if(resvDTO != null && fesDTO != null) {
-
 			return new ModelAndView("reservation/resvDetail.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp", true);
@@ -130,6 +156,16 @@ public class ReservationController implements Controller {
 	 * 예약 페이지로 이동시 서비스 이름과 ID 가져가기
 	 */
 	public ModelAndView revMove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+	    String path = request.getContextPath();
+	    
+	    if(userDTO == null) {
+	    	request.setAttribute("errMsg", "로그인 후 이용해주세요");
+			return new ModelAndView("reservation/needsLogin.jsp");
+	    }
+		
 		String SVCNM = request.getParameter("SVCNM");
 		String SVCID = request.getParameter("SVCID");
 		String fesDTO = request.getParameter("fes");
@@ -155,4 +191,77 @@ public class ReservationController implements Controller {
 		return new ModelAndView("reservation/reservation.jsp", false);
 	}
 	
+	/**
+	 * 결제하기 누르면 지갑에서 차감
+	 */
+	public ModelAndView payment (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String SVCID = request.getParameter("SVCID");
+		String SVCNM = request.getParameter("SVCNM");
+		int fee = Integer.parseInt(request.getParameter("fee"));
+		int resvSeq = Integer.parseInt(request.getParameter("resvSeq"));
+		
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+		System.out.println(userDTO);
+		
+		WALLET wallet = service.payment(userDTO.getUser_seq(), fee);
+		
+		System.out.println("결제 후 남은 금액 : " + wallet.getMONEY());
+		
+		// 예약상태 : 결제 대기 - 예약완료로 변경
+		int result = service.changeReservation(resvSeq);
+		
+		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
+		request.setAttribute("resvData", resvDTO);
+		request.setAttribute("SVCNM", SVCNM);
+		
+		//request.setAttribute("fes", fes);
+		
+		if (wallet != null && result != 0) {
+			return new ModelAndView("reservation/reservPayComplete.jsp", false);
+		} else {
+			return new ModelAndView("reservation/fail.jsp");
+		}
+		
+	}
+	
+	/**
+	 * 확인증
+	 */
+	
+	
+	/**
+	 * 마이 페이지 - 예약 상세
+	 */
+	public ModelAndView viewDetail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		int resvSeq = Integer.parseInt(request.getParameter("reserv_Seq"));
+		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
+		request.setAttribute("resvDTO", resvDTO);
+		
+		// 예약번호로 검색 후 SVCID를 이용해 Festival 정보 가져온다
+		FesDTO fesDTO = service.selectBySVCIDFes(resvDTO.getSVCID());
+		request.setAttribute("fesDTO", fesDTO);
+		
+		HttpSession session = request.getSession();
+	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
+	    request.setAttribute("userDTO", userDTO);
+		
+		// application이 가지고 있는 fes 정보 가져오기
+		ServletContext app = request.getServletContext();
+		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
+		
+		FesDTO fes = mainService.selecOne(resvDTO.getSVCID(), list);
+		if(fes!=null)
+			request.setAttribute("fes", fes);
+		
+		if(resvDTO != null && fesDTO != null) {
+			return new ModelAndView("user/resvDetail.jsp", false);
+		} else {
+			request.setAttribute("errMsg", "예약 내역 가져오기 실패");
+			return new ModelAndView("reservation/fail.jsp", true);
+		}
+	}
+	
+	
 }
+

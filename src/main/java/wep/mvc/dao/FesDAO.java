@@ -33,6 +33,8 @@ public interface FesDAO {
 
 	int myHostDelete(int host_seq) throws SQLException;
 
+	int pwUpdateForm22(String newPw, int host_seq) throws SQLException;
+
 	
 }
 

@@ -403,7 +403,7 @@ public class FesController implements Controller {
 
 		return new ModelAndView("front?key=main&methodName=read", false);
 	}
-	
+	//주최자 비밀번호 변경하기
 	public ModelAndView pwUpdateForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		HttpSession session = req.getSession();
 		
@@ -414,10 +414,27 @@ public class FesController implements Controller {
 		HostDTO hostDTO = fesSerevice.myPage2(host_seq); //현재 주최자의 dto를 꺼내온다.
 		String nowPw = hostDTO.getHost_pw();
 		
-		req.setAttribute("hostDTO", hostDTO);
-		req.setAttribute("nowPw", nowPw);
+		req.setAttribute("hostDTO", hostDTO); //현재 로그인한 주최자
+		req.setAttribute("nowPw", nowPw); //현재 로그인한 주최자의 현재pw
 		
 		return new ModelAndView("host/pwUpdate.jsp");//return 변경하는 폼으로 이동
+	}
+	
+	public ModelAndView pwUpdateForm22(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		String newPw = req.getParameter("newPw");
+		//System.out.println("newPw: "+newPw);
+		HttpSession session = req.getSession();
+		
+		HostDTO SessionHostDTO = (HostDTO) session.getAttribute("loginCom");
+		
+		int host_seq = SessionHostDTO.getHost_seq();
+		
+		
+		fesSerevice.pwUpdateForm22(newPw,host_seq);
+		
+		session.invalidate();
+		
+		return new ModelAndView("front?key=main&methodName=read", false);
 	}
 
 }

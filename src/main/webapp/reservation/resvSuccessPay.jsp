@@ -65,6 +65,14 @@
                 document.goForm.resvSeq.value = seq;
                 document.goForm.submit();
             }
+            
+            function payment () {
+				let fee = ${resvData.resvPrice};
+				console.log(fee);
+				document.goForm.key.value = "reservation";
+				document.goForm.methodName.value = "payment";
+				document.goForm.submit();
+			}
 
         </script>
 
@@ -89,6 +97,7 @@
                     예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약 결제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
                     완료 <br><br>
                     <h1 class="fw-bolder">예약 신청이 정상적으로 처리되었습니다.</h1>
+                    <h3 class="fw-bolder">결제를 진행해주세요.</h3>
 
                 </div>
             </div>
@@ -125,11 +134,10 @@
 					</td>
                 </tr>
                 <tr>
-                    <th>이용요금</td>
+                    <th>이용요금</th>
                     <td name="resvPrice">
-                    <td name="resvPeo">
 					<c:if test="${not empty resvData}">
-						${resvData.resvPrice}
+						${resvData.resvPrice}원
 					</c:if>
 					</td>
                 </tr>
@@ -137,7 +145,7 @@
                     <th>예약상태</td>
                     <td name="resvCheck">
                     <c:choose>
-                    	<c:when test="${resvData.resvCheck eq 0}">예약접수</c:when>
+                    	<c:when test="${resvData.resvCheck eq 2}">결제대기중</c:when>
                     	<c:otherwise>예약완료</c:otherwise>
                     	
                     </c:choose>
@@ -152,8 +160,11 @@
             <form name="goForm" method = "post" action = "${path}/front">
 	        	<input type = "hidden" name = "key"/>
 	        	<input type = "hidden" name = "methodName"/>
-	        	<input type = "hidden" name = "resvSeq"/>
+	        	<input type = "hidden" name = "resvSeq" value = "${resvData.reservSeq}"/>
+	        	<input type = "hidden" name = "fee" value = "${resvData.resvPrice}"/>
+	        	<input type = "hidden" name = "SVCNM" value = "${SVCNM}"/>
 	        	<button class="btn btn-outline-primary" id="goMain" style="width: 10%;" type="button">메인페이지 바로가기</button> &nbsp;&nbsp;&nbsp;&nbsp;
+	            <button class="btn btn-primary" id="pay" style="width: 10%;" type="button" onClick = "payment()">결제하기</button>
 	            <button class="btn btn-primary" id="goDetail" style="width: 10%;" type="button" onClick = "sendSelect()">예약 상세 보기</button>
             </form>
         </div>
