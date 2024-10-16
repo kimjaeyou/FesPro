@@ -113,7 +113,7 @@
         
 </head>
 <body>
-    <h3>행사명 : ${fesDTO.SVCNM}</h3>
+    <%-- <h3>${fesDTO.SVCNM}</h3> --%>
     <c:choose>
     	<c:when test="${empty fes.IMGURL}">
     		<img alt="행사 이미지" src="https://picsum.photos/1000/1000" data-img="svcImg">
