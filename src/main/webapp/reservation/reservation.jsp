@@ -238,17 +238,16 @@
 					dateFormat: dateFormat
 				}) */
 				
-				$(function() {
-					$('#datepicker').datepicker({
-		                format: 'yyyy-mm-dd'
-		            });
-				})
 				
-        } // onload 끝
+        }	 // onload 끝
       
 		</script>
 		<script type="text/javascript">
-			
+		$(function() {
+			$('#datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+		})
 		</script>
 		
     </head>
@@ -321,7 +320,7 @@
 
                                   <!-- vanilla js-date picker -->
 	                                  <!-- <div class="form-floating mb-4 d-flex"> -->
-	                                 <!--  <form>
+	                                 <form>
 	                                  <input type = "text" placeholder="날짜선택" class = "date_input">
 	                                  <div class="form-floating">
 	                                  	
@@ -337,9 +336,9 @@
 	                                  
 	                                  
 	                                </div> 
-	                                </form> -->
+	                                </form>
 	                                
-	                                <input type = "text" id="datepicker">
+	                                <!-- <input type = "text" id="datepicker"> -->
 	                                
                                 </div>
                               </div>
