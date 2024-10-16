@@ -64,16 +64,23 @@
             #datepicker_input {
                 text-align: center;
                 align-items: center;
-                margin-bottom: 500px;
+                margin-bottom: 100px;
+                font-size: 1.5rem;
             }
             
             .content {
-            	margin-bottom: 200px;
+            	margin-bottom: 100px;
             }
             
-            #datepicker1 {
-            	display: block;
-            	
+            .form-floating {
+            	text-align: center;
+                align-items: center;
+                place-content: center;
+            }
+            
+            #datepicker {
+            	display: flex;
+            	justify-content: center;
             }
             
            
@@ -132,6 +139,23 @@
 				'-' + ( (cancleDate2.getDate()) < 10 ? "0" + (cancleDate2.getDate()) : (cancleDate2.getDate()) );
 				//let canclePeriod = date-1; // 취소기간 기준일 받아와서 넣기
 				$("[data-form=canclePeriod]").html(dateFormat3);
+			})
+			
+			   $(document).on("click", "#datepicker", function() {
+				let stringDate3 = $("#datepicker").val();
+				$("[data-form=date]").html(stringDate3);
+				console.log(stringDate3);
+				
+				let date3 = new Date(stringDate3);
+				let cancleDate3 = new Date(date3);
+				cancleDate3.setDate(date3.getDate()-1);
+				
+				console.log(cancleDate3);
+				let dateFormat4 = cancleDate3.getFullYear() +
+				'-' + ( (cancleDate3.getMonth()+1) < 10 ? "0" + (cancleDate3.getMonth()+1) : (cancleDate3.getMonth()+1) )+
+				'-' + ( (cancleDate3.getDate()) < 10 ? "0" + (cancleDate3.getDate()) : (cancleDate3.getDate()) );
+				//let canclePeriod = date-1; // 취소기간 기준일 받아와서 넣기
+				$("[data-form=canclePeriod]").html(dateFormat4);
 			})
 	
 			$(document).on("click", ".time", function() {
@@ -311,29 +335,31 @@
                                     <div class="col-md-12">
                                       <div id="inline_cal"></div>
                                     </div>
-                                  </form>  -->
+                                  </form>
 
                                   <!-- vanilla js-date picker -->
-	                                  <!-- <div class="form-floating mb-4 d-flex"> -->
-	                                 <!-- <form>
-	                                  <input type = "text" placeholder="날짜선택" class = "date_input">
+	                                 <div class="form-floating mb-4 d-flex">
+	                                 <form>
+	                                  
 	                                  <div class="form-floating">
 	                                  	
-	                                  <div 
+	                                  <input type = "text" 
 	                                  		
-	                                         class="datepicker_input"
+	                                         class="datepicker_input form-control w-30 mx-auto mb-3"
 	                                         id="datepicker1"
 	                                        
-                                             
-                                             >
+                                      >
+                                              <label for="datepicker1">날짜 선택</label>
                                              </div>
                                        
 	                                  
 	                                  
 	                                </div> 
-	                                </form> -->
+	                                </form>
 	                                
-	                                <input type = "text" id="datepicker">
+	                                <!-- <input type = "text" id="datepicker"> -->
+ 	                                <!-- <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" >
+	                                <div id="datepicker"> -->
 	                                
                                 </div>
                               </div>
@@ -466,7 +492,7 @@
                                 <h5>결제금액</h5><hr>
                                 <p>이용인원</p><p data-form="peopleNum" name="peopleNum"></p>
                                 <p>이용요금</p><p data-form="fee" name = "fee">0원</p> <!-- 요금 * 인원수 -->
-                                <p>할인/할증</p><p data-form="discount">내용</p>
+                                <p>할인/할증</p><p data-form="discount">-</p>
                             </div>
                         </div>
                         <div class="card-body" style="background-color: rgb(247, 247, 247);">
@@ -556,11 +582,37 @@
 			
 		</script>
 		<script type="text/javascript">
-		   $(function(){
+ 		   /* $(function(){
+			   let edDateStr = new Date("${fes.SVCOPNENDDT}");
+            	let stDateStr = new Date("${fes.SVCOPNBGNDT}");
 			   $('#datepicker').datepicker({
-				   format: 'YYYY-mm-DD'
-			   }).datepicker('show');
-		   })
+				   minDate: stDateStr,
+				   maxDate: edDateStr,
+				   onSelect: function(){
+					   let pickerDate = $.datepicker.formatDate("yy-mm-dd", $("#datepicker").datepicker("getDate"));
+					   console.log(pickerDate);
+					   $("#result").val(pickerDate);
+
+					   $("[data-form=date]").text(pickerDate);
+					   
+					   let pickerDate2 = new Date($("#datepicker").datepicker("getDate"));
+					   pickerDate2.setDate(pickerDate2.getDate()-1);
+					   
+					   let formattedDate2 = $.datepicker.formatDate("yy-mm-dd", pickerDate2)
+					   $("[data-form=canclePeriod]").html(formattedDate2);
+				   }
+			   
+			   }).datepicker();
+			   
+/* 			   $("#datepicker").datepicker({
+				   minDate: stDateStr,
+				   maxDate: edDateStr
+			   }).datepicker(); */
+			   
+			   $('.ui-datepicker').css('font-size', '1.5rem');
+			   
+		   }) */
+		   
 		</script>
 		
 
