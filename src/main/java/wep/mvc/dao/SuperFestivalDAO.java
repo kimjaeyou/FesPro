@@ -45,4 +45,9 @@ public interface SuperFestivalDAO {
 	 * 관리자용 모든행사 조회
 	 */
 	public List<FesDTO> selectAllSuper();
+
+	/**
+	 * 관리자가 waitfes에서 삭제
+	 */
+	public int delete(FesDTO fes);
 }

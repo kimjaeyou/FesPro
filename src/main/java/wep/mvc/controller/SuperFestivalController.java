@@ -91,6 +91,10 @@ public class SuperFestivalController implements Controller {
 		//System.out.println(req.getParameter("SVCID"));
 		//System.out.println(req.getParameter("festivalStateOptions"));
 		int fesState = Integer.parseInt(req.getParameter("festivalStateOptions")); //라디오에서 넘어온 값
+		int originState = Integer.parseInt(req.getParameter("originState")); //라디오에서 변경하기 전 값
+		
+		System.out.println("오리진 스테이트 " + originState);
+		System.out.println("바꾸려는 스테이트 " + fesState);
 		
 		
 		FesDTO fes = new FesDTO();
@@ -122,18 +126,29 @@ public class SuperFestivalController implements Controller {
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
 	    int result=0;
-	    if(fesState==1) {
-	    	 //대기에서 승인 완료로 가는 거 일시 fes에 insert + waitfes에서 delete
+	    
+	    //등록대기에서 승인완료
+	    if(originState ==0 && fesState ==1) {
+	    	//fes에 insert
 	    	fesService.insert(fes);
-	    	//result = festivalService.delete(fes);
+	    	//waitfes에 delete
+	    	result = festivalService.delete(fes);
 	    }
+	    //수정대기에서 승인완료
+	    else if(originState ==2 && fesState ==1) {
+	    	// fes에 update
+	    	fesService.update(fes);
+	    	//waitfes에서 delete
+	    	result = festivalService.delete(fes);
+	    }
+	    //나머지들은 그냥 FES에서 업데이트
 	    else {
-	    	result = festivalService.update(fes,fesState);
+	    	festivalService.update(fes, fesState);
 	    }
-		
-		if(result ==1) {
-		}
-		else {
+	    
+		if (result == 1) { 
+			// 성공
+		} else {
 			System.out.println("형우 / 행사 업데이트 실패 Controller-update");
 		}
 		

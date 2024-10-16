@@ -73,7 +73,7 @@
     		
     		
     		/* 등록상태 라디오 */
-    	 	const fesState = ${fes.getFes_state()};
+    	 	const fesState = ${fes.getFes_state()}; //초기 등록상태
     		//console.log("등록상태 : " + fesState);
     		if (fesState === 0) {
 		    $("#radio_1").prop("checked", true); //승인대기
@@ -92,7 +92,7 @@
 	<h1>문화행사 상세페이지</h1>
 	
 	<!-- 폼 -->
-	<form action="front?key=superfestival&methodName=update" method="post">
+	<form action="front?key=superfestival&methodName=update&originState=${fes.getFes_state()}" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="form-floating">

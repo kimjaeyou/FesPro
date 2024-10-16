@@ -394,4 +394,29 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		}
 		return list;
 	}
+
+	/**
+	 * waitfes에서 삭제
+	 */
+	@Override
+	public int delete(FesDTO fes) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql = "delete from WAIT_FES WHERE SVCID = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(fes.getSVCID()));
+			
+			result = ps.executeUpdate();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
 }

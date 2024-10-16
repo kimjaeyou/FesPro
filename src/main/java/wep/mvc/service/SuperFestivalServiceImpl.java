@@ -83,6 +83,15 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		
 		return result;
 	}
+
+	@Override
+	public int delete(FesDTO fes) {
+		int result=0;
+		
+		result = dao.delete(fes);
+		
+		return result;
+	}
 }
 
 
