@@ -24,6 +24,8 @@ public interface SuperAuthDAO {
 
 	List<FesDTO> sessionLocationAll(int sessionSeq);
 
+	List<HostDTO> hostWaitSelectAll();
+
 	/*
 	 * UsersDTO selectById(String id);
 	 * 

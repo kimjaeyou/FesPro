@@ -83,6 +83,26 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		
 		return result;
 	}
+	
+	@Override
+	public List<FesDTO> dashFesWaitFesSelectAll() {
+		
+		List<FesDTO> result=null;
+		
+		result = dao.dashFesWaitFesSelectAll();
+		
+		return result;
+	}
+	
+	@Override
+	public List<FesDTO> dashFesCancleWaitFesSelectAll() {
+		
+		List<FesDTO> result=null;
+		
+		result = dao.dashFesCancleWaitFesSelectAll();
+		
+		return result;
+	}
 }
 
 

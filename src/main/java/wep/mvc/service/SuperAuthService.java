@@ -27,6 +27,8 @@ public interface SuperAuthService{
 
 	public List<FesDTO> sessionLocationAll(int sessionSeq);
 
+	public List<HostDTO> hostWaitSelectAll();
+
 	/*
 	 * UsersDTO selectById(String id);
 	 * 

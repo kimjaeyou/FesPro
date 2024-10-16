@@ -42,11 +42,15 @@ public interface SuperFestivalService{
 	 */
 	public List<UsersDTO> selectReviewUser(FesDTO fes);
 
-	public List<FesDTO> dashFesSelectAll();
+	public List<FesDTO> dashFesWaitFesSelectAll();
 
 	/**
 	 * 관리자용 모든행사 조회
 	 */
 	public List<FesDTO> selectAllSuper();
+
+	List<FesDTO> dashFesSelectAll();
+
+	public List<FesDTO> dashFesCancleWaitFesSelectAll();
 	
 }

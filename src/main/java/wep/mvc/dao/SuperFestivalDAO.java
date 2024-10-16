@@ -45,4 +45,8 @@ public interface SuperFestivalDAO {
 	 * 관리자용 모든행사 조회
 	 */
 	public List<FesDTO> selectAllSuper();
+
+	public List<FesDTO> dashFesWaitFesSelectAll();
+
+	public List<FesDTO> dashFesCancleWaitFesSelectAll();
 }
