@@ -35,6 +35,8 @@ public interface FesDAO {
 
 	int pwUpdateForm22(String newPw, int host_seq) throws SQLException;
 
+	List<FesDTO> selectALL() throws SQLException;
+
 	
 }
 

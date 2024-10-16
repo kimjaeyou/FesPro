@@ -103,6 +103,12 @@ public class FesSereviceImpl implements FesSerevice {
 		
 	}
 
+	@Override
+	public List<FesDTO> selectALL() throws SQLException {
+		return fesDAO.selectALL();
+		
+	}
+
 	
 }
 
