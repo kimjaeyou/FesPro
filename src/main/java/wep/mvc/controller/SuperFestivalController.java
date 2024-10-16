@@ -310,7 +310,7 @@ public class SuperFestivalController implements Controller {
 	    } else {
 	    	System.out.println("44444444444444444444");
 	        System.out.println("행사 업데이트 실패 Controller-update");
-	        return new ModelAndView("dashFesSelectAll");
+	        return new ModelAndView("front?key=superfestival&methodName=dashFesSelectAll");
 	    }
 	
 	}
