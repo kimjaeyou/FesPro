@@ -313,7 +313,7 @@ public class FesController implements Controller {
 
 			if (fileName != null && !fileName.equals("")) {
 				IMGURL.write(saveDir + "/" + fileName);// 서버폴더에 파일 저장=업로드
-				waitFes.setIMGURL(fileName);
+				waitFes.setIMGURL("save/"+fileName);
 			}
 		}
 

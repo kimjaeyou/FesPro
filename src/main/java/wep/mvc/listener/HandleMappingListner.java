@@ -252,15 +252,22 @@ public class HandleMappingListner implements ServletContextListener {
 		}
 
 		// 3. 중복 비교
-		for (FesDTO adb : fesDTOList) { // application에 넣을 것들
-			for (FesDTO fdb : fesDTOListfromDB) { // db에서 꺼내온 것들
+		for (FesDTO fdb : fesDTOListfromDB) { // db에서 꺼내온 것들
+			boolean exist = false;
+			for (FesDTO adb : fesDTOList) { // application에 넣을 것들
 				if (fdb.getSVCID().equals(adb.getSVCID())) {
-					continue;
+					exist= true;
+					break;
 				}
+			}
+			if(!exist) {
 				fin.add(fdb); //db에만 있고 app에 없는거 담아
 			}
+		}	
+
+		for (FesDTO adb : fesDTOList) {
+			fin.add(adb);
 		}
-		fin.addAll(fesDTOList);
 
 		////// 끝: fes db에 있는거 뽑아와서
 		////// 넣어보아요//////////////////////////////////////////////////
