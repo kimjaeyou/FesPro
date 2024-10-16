@@ -71,7 +71,7 @@
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
 				</div>
 				<div id="yo1">
-					<a href="${path}/front?key=fes&methodName=select">MY페이지</a>
+					<a href="${path}/front?key=mypage&methodName=resSelectAll">MY페이지</a> <!-- 여기 주소로만 들어가진다. -->
 				</div>
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
