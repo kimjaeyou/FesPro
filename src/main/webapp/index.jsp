@@ -95,7 +95,13 @@ img {
 	color: black;
 	font-family: Roboto;
 }
+
+.container {
+	padding : 2px;
+}
+
 </style>
+
 </head>
 <body>
 	<jsp:include page="/common/alarm.jsp" />

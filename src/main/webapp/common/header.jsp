@@ -150,100 +150,85 @@ img {
 	justify-content: center;
 	width: 100%;
 }
+
+.active {
+	font-size: 1rem;
+	margin-left: 13px;
+}
+
 </style>
 </head>
 <main>
-	<div class="container">
-		<header
-			class="header-container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
-			<div class="col-md-3 mb-2 mb-md-0">
-				<a href="${path}/front?key=main&methodName=read"
-					class="d-inline-flex link-body-emphasis text-decoration-none">
-					<img alt="logo" src="${path}/assets/img/FesProLogo_bg.png">
-				</a>
-			</div>
-			<ul
-				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-				<li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> 문화체험 </a>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">교육체험</a></li>
-						<li><a class="dropdown-item" href="#">농장체험</a></li>
-						<li><a class="dropdown-item" href="#">문화행사</a></li>
-						<li><a class="dropdown-item" href="#">전시/관람</a></li>
-						<li><a class="dropdown-item" href="#">단체봉사</a></li>
-						<li><a class="dropdown-item" href="#">공원탐방</a></li>
-						<li><a class="dropdown-item" href="#">서울형키즈카페</a></li>
-						<li><a class="dropdown-item" href="#">산림여가</a></li>
-					</ul></li>
-				<li><a href="#" class="nav-link px-2">예약보기</a></li>
-				<li><a href="${path}/front?key=board&methodName=select"
-					class="nav-link px-2">게시판</a></li>
-				<li><a href="${path}/front?key=board&methodName=read"
-					class="nav-link px-2">공지사항</a></li>
-			</ul>
-
-			<div class="login-section">
-				<c:choose>
-					<c:when test="${not empty sessionScope.loginUser}">
-						<span class="login-info"> 안녕하세요,
-							${sessionScope.loginUser.user_name}님!</span>
-						
-						<form id="member-update-form" method="get"
-							action="${pageContext.request.contextPath}/front"
-							style="display: inline;">
-							<input type="hidden" name="key" value="user" /> <input
-								type="hidden" name="methodName" value="logout" />
-							<button type="button" name="btnYun" id="btnYun"
-								class="btn btn-danger btn-sm"
-								onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
-								로그아웃</button>
-						</form>
-					</c:when>
-
-					<c:when test="${not empty sessionScope.loginCom}">
-						<span class="login-info">
-							(${sessionScope.loginCom.host_name}/${sessionScope.loginCom.host_id})님
-							로그인 중입니다. </span>
-						<form id="member-update-form" method="get"
-							action="${pageContext.request.contextPath}/front"
-							style="display: inline;">
-							<input type="hidden" name="key" value="host" /> <input
-								type="hidden" name="methodName" value="logout" />
-							<button type="button" name="btnYun" id="btnYun"
-								class="btn btn-danger btn-sm"
-								onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
-								로그아웃</button>
-						</form>
-					</c:when>
-
-					<c:when test="${empty sessionScope.loginUser}">
-						<button type="button" class="btn btn-outline-primary me-2">
-							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
-						</button>
-						<button type="button" class="btn btn-primary">
-							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
-						</button>
-					</c:when>
-
-					<c:when test="${empty sessionScope.loginCom}">
-						<button type="button" class="btn btn-outline-primary me-2">
-							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
-						</button>
-						<button type="button" class="btn btn-primary">
-							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
-						</button>
-					</c:when>
-				</c:choose>
-			</div>
-		</header>
-	</div>
+    <div class="container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="${path}/front?key=main&methodName=read" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <img alt="logo" src="${path}/assets/img/FesProLogo_bg.png">
+                </a>
+            </div>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+                <!-- <li><a href="#" class="nav-link px-2">문화행사</a></li> -->
+                  <li class="nav-item dropdown">
+		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		            문화체험
+		          </a>
+		          <ul class="dropdown-menu">
+		            <li><a class="dropdown-item" href="#">교육체험</a></li>
+		            <li><a class="dropdown-item" href="#">농장체험</a></li>
+		            <li><a class="dropdown-item" href="#">문화행사</a></li>
+		            <li><a class="dropdown-item" href="#">전시/관람</a></li>
+		            <li><a class="dropdown-item" href="#">단체봉사</a></li>
+		            <li><a class="dropdown-item" href="#">공원탐방</a></li>
+		            <li><a class="dropdown-item" href="#">서울형키즈카페</a></li>
+		            <li><a class="dropdown-item" href="#">산림여가</a></li>
+		          </ul>
+		        </li>
+                <li><a href="#" class="nav-link px-2">예약보기</a></li>
+                <li><a href="${path}/front?key=board&methodName=select" class="nav-link px-2">게시판</a></li>
+                <li><a href="${path}/front?key=board&methodName=read" class="nav-link px-2">공지사항</a></li>
+            </ul>
+	<c:choose>
+    <c:when test="${not empty sessionScope.loginUser}">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active">[${sessionScope.loginUser.user_name} / ${sessionScope.loginUser.user_id} ]님 로그인 중 입니다.</li>
+            <form id="member-update-form" method="get" action="${pageContext.request.contextPath}/front">
+                <input type="hidden" name="key" value="user" /> 
+                <input type="hidden" name="methodName" value="logout" />
+                <button type="button" name="btnYun" id="btnYun" onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">로그아웃</button>
+            </form>
+        </ul>
+    </c:when>
+    
+    <c:when test="${not empty sessionScope.loginCom}">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active">(${sessionScope.loginCom.host_name}/${sessionScope.loginCom.host_id})님 로그인 중 입니다.</li>
+            <form id="member-update-form" method="get" action="${pageContext.request.contextPath}/front">
+                <input type="hidden" name="key" value="host" /> 
+                <input type="hidden" name="methodName" value="logout" />
+                <button type="button" name="btnYun" id="btnYun" onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">로그아웃</button>
+            </form>
+        </ul>
+    </c:when>
+    
+    <c:when test="${empty sessionScope.loginUser}">
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2"><a href="${path}/user/login.jsp">Login</a></button>
+            <button type="button" class="btn btn-primary"><a href="${path}/user/choice.jsp">Sign-up</a></button>
+        </div>
+    </c:when>
+    
+    <c:when test="${empty sessionScope.loginCom}">
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2"><a href="${path}/user/login.jsp">Login</a></button>
+            <button type="button" class="btn btn-primary"><a href="${path}/user/choice.jsp">Sign-up</a></button>
+        </div>
+    </c:when>
+</c:choose>
+	
+        </header>
+    </div>
 </main>
 
 <script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>
