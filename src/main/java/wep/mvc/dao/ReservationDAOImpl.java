@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 import wep.mvc.util.DbUtil;
 
 public class ReservationDAOImpl implements ReservationDAO {
@@ -51,6 +52,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		ResultSet rs = null;
 		ReservationDTO dto = new ReservationDTO();
 		
+		// select * from reservation where user_seq = ? 
 		String sql = "select * from reservation where user_seq = ?";
 		
 		try {
@@ -287,13 +289,47 @@ public class ReservationDAOImpl implements ReservationDAO {
 				String user_name = rs.getString("USER_NAME");
 				String user_tel = rs.getString("USER_TEL");
 				String disable = rs.getString("DISABLE");
-				dto = new UsersDTO(user_seq, user_id, null, age, addr, email, user_name, user_tel, gender, disable);
+				dto = new UsersDTO(user_seq, user_id, null, age, addr, gender, email, user_name, disable, user_tel);
 			}
 		
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return dto;
+	}
+	
+	@Override
+	public WALLET payment(int userSeq, int fee) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		WALLET wallet = null;
+		
+		// select * from wallet where user_seq = ?;
+		String sql = "select * from wallet where user_seq = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userSeq);
+
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int wallet_seq = rs.getInt("WALLET_SEQ");
+				int user_seq = rs.getInt("USER_SEQ");
+				int money = rs.getInt("MONEY");
+				int point = rs.getInt("W_POINT");
+				
+				money = money - fee;
+
+				wallet = new WALLET(wallet_seq, user_seq, money, point);
+			}
+		
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return wallet;
 	}
 
 }
