@@ -28,9 +28,7 @@
 						<p>기본정보</p>
 					</h4>
 					<hr>
-					
-				
-					<form id="member-update-form" method="post"
+					<form id="update-form" method="post"
 						action="${pageContext.request.contextPath}/front">
 						<input type="hidden" name="key" value="user" /> 
 						<input type="hidden" name="methodName" value="update" />
@@ -57,7 +55,7 @@
 									<th>비밀번호 확인</th>
 									<th><input type="password" id="check-pw"
 										name="check-pw" placeholder="비밀번호를 다시 입력하세요" required>
-										<p id="message" class="info-text"></p></th>
+										<span id="message" class="info-text"></span></th>
 								</tr>
 
 								<tr>
@@ -143,8 +141,8 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-	<script src="../js/scripts.js"></script>
-	<script src="../js/update.js"></script>
+	<script src="${path}/js/scripts.js"></script>
+	<script src="${path}/js/update.js"></script>
 </body>
 
 </html>

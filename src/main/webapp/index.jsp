@@ -110,7 +110,13 @@ img {
 	font-size: 20px;
 	color: #371AFC;
 }
+
+.container {
+	padding : 2px;
+}
+
 </style>
+
 </head>
 <body>
 	<jsp:include page="/common/alarm.jsp" />

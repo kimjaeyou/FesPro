@@ -17,7 +17,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <script>
 function checkValid(){
-	var f=window.document.writeForm;
+	var f=window.document.updateForm;
 	
 	if(!f.MAXCLASSNM.checked){
 		alert("대분류명을 체크해 주세요");
@@ -113,6 +113,10 @@ function checkValid(){
 		alert("장소명을 입력해 주세요");
 		return false;
 	}
+	if(f.IMGURL.files.length == 0){
+		alert("서비스 포스터 또는 이미지를 첨부해 주세요");
+		return false;
+	}
 
 	if(f.X.value == ""){
 		alert("지도에서 장소를 선택해 주세요");
@@ -129,10 +133,6 @@ function checkValid(){
 		return false;
 	}
 	
-	if(!document.querySelector('input[name="tag_content"]:checked')){
-	    alert("태그를 골라주세요");
-	    return false;
-	}
 	
 	return true;
 	
@@ -282,7 +282,7 @@ function checkValid(){
         		<td><p align="center"><b><span>서비스 포스터/이미지</span></b></p></td>
         		<td width="450" height="20"><b><span style="font-size:9pt;">
         		<input type="file" name="IMGURL" maxlength="60" size="40">
-        		<img src="${fesDTO.IMGURL}" alt="서비스 포스터/이미지" width="200"></span></b></td>
+        		</span></b></td>
     		</tr>
         	<!-- 지도API 활용 예정: 장소명o, 장소X좌표o,장소Y좌표o, 지역명 -->
         	<tr>

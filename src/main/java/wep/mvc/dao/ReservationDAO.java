@@ -54,4 +54,10 @@ public interface ReservationDAO {
 	 */
 	WALLET payment(int userSeq, int fee) throws SQLException;
 
+	
+	/**
+	 * 예약 상태 변경 : 결제대기 - 예약완료
+	 */
+	int changeReservation (int resvSeq) throws SQLException;
+
 }

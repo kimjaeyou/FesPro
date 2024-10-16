@@ -14,7 +14,6 @@
 <body>
 	<div class="signup-container">
 		<h2>회원가입</h2>
-
 	<form id="signup-form" method="post" action="${pageContext.request.contextPath}/front">
     <input type="hidden" name="key" value="user">
     <input type="hidden" name="methodName" value="insert">

@@ -48,10 +48,15 @@ public interface ReservationService {
 	 * userSeq로 유저정보 가져오는 selectUser 메소드 호출
 	 */
 	public UsersDTO selectUser(int userSeq) throws SQLException;
-	
+
 	/**
 	 * 행사 결제 - 지갑 차감하는 메소드 호출
 	 */
 	public WALLET payment(int userSeq, int fee) throws SQLException;
-
+	
+	/**
+	 * 예약 상태 결제대기 - 예약완료로 변경
+	 */
+	public int changeReservation (int resvSeq) throws SQLException;
+	
 }

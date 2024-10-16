@@ -6,6 +6,11 @@ rollback;
 
 --조회
 select * from FES;
+select * from FES WHERE FES_STATE = '1' or FES_STATE ='3'; --승인완료 + 비활성화
+
+select FES.SVCNM,FES.FES_STATE from FES WHERE SVCID='S240919144615203064';
+
+-- 수정
 
 --추가(더미)
 INSERT INTO FES VALUES (
@@ -109,5 +114,47 @@ SELECT * FROM FES_RESERV_USER_VIEW WHERE SVCID = 1;
 INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,1,1,'좋아요1',3);
 INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,2,1,'좋아요2',2);
 INSERT INTO REVIEW VALUES(REVIEW_SEQ.nextval,3,1,'좋아요3',5);
+
+SELECT * FROM REVIEW WHERE SVCID=1;
+
+-- 리뷰 쓴 유저 뷰생성
+
+-- 뷰 삭제
+DROP VIEW FES_REVIEW_USER_VIEW;
+
+CREATE VIEW FES_REVIEW_USER_VIEW AS
+SELECT
+    u.*,
+    r.SCORE
+    r
+FROM 
+    fes f
+JOIN 
+    REVIEW r ON f.SVCID = r.SVCID
+JOIN 
+    USERS u ON r.user_seq = u.user_seq
+;
+
+--뷰 조회
+SELECT * FROM FES_REVIEW_USER_VIEW;
+
+-- Wait_FES ============================================================
+
+--조회
+select * from WAIT_FES;
+
+--삭제
+delete from WAIT_FES WHERE SVCID = '1';
+
+-- FES + Wait_FES ============================================================
+SELECT Null as WAIT_FES_SEQ, f.*
+FROM fes f
+WHERE FES_STATE = '1' or FES_STATE = '3'
+
+UNION All
+
+SELECT  w.* 
+FROM WAIT_FES w;
+
 
 SELECT * FROM REVIEW WHERE SVCID=1;

@@ -67,6 +67,11 @@ public class ReservationServiceImpl implements ReservationService {
 		WALLET wallet = dao.payment(userSeq, fee);
 		return wallet;
 	}
-	
 
+	@Override
+	public int changeReservation(int resvSeq) throws SQLException {
+		int result = dao.changeReservation(resvSeq);
+		return result;
+	}
+	
 }

@@ -150,6 +150,12 @@ img {
 	justify-content: center;
 	width: 100%;
 }
+
+.active {
+	font-size: 1rem;
+	margin-left: 13px;
+}
+
 </style>
 </head>
 <main>
@@ -245,6 +251,7 @@ img {
 			</div>
 		</header>
 	</div>
+
 </main>
 
 <script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

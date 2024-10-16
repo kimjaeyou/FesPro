@@ -126,10 +126,10 @@
 
 #graphM {
 	align-content: center;
-	text-align:center; 
+	text-align: center;
 	padding: 15px;
 	background-color: #f1f1f1;
-	width:100%;
+	width: 100%;
 }
 
 .rv_con {
@@ -151,35 +151,31 @@
 }
 
 .avg_con {
-  display: flex;
-  align-items: center;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 20px;
-  color: #555;
-  width: 90%;
+	display: flex;
+	align-items: center;
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 15px;
+	margin-top: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	font-size: 20px;
+	color: #555;
+	width: 90%;
 }
 
 .avg_range {
-  font-size: 20px;
-  color: #555;
-  margin: 0 10px;
+	font-size: 20px;
+	color: #555;
+	margin: 0 10px;
 }
 
 #num {
-  position: relative;
-  float: left;
-  font-size: 20px;
-  color: #D9D748;
+	position: relative;
+	float: left;
+	font-size: 20px;
+	color: #D9D748;
 }
-
-
-
-
 </style>
 </head>
 <body>
@@ -328,40 +324,60 @@
 		});
 	});
 
-	document.getElementById('review').addEventListener('click',
+	document
+			.getElementById('review')
+			.addEventListener(
+					'click',
 					function(e) {
-						let score=0;
-						let cnt=0;
+						let score = 0;
+						let cnt = 0;
 						document.querySelector('.data_explain').innerHTML = "";
 						const sid = $('input[name="SVCID"]').val();
-						$.ajax({
+						$
+								.ajax({
 									url : 'ajax?key=main&methodName=selecReview',
 									type : 'get',
 									dataType : 'json',
-									data : {sid : sid},
+									data : {
+										sid : sid
+									},
 									success : function(res) {
-									if(!res){
-										let str = '<div id=reviewsContainer><div id=reviews>';
-										$.each(res,function(index, item) {
-															score+=item.SCORE;
-															cnt=index;
-															str += "<div class=rv_con>"
-																	+ item.RV_CONTENT
-																	+ "<span>"
-																	+ "★".repeat(item.SCORE)
-																	+ "☆".repeat(5 - item.SCORE)
-																	+ "</span></div>";
-														});
-										str += "</div></div>";
-										avg = score/(cnt+1);
-										str +='<br><div><h2>평점 : '+avg+'</h2></div>'+'<div class=avg_con><div class="avg_range">0</div><div style="'+ 
-												'font-size: 20px; background-color: #75DE27; height : 40px; width :' +100*(avg/5)+'%; ">'
-										+'</div><span style="margin-left:19%;">MAX</span></div>'
-										$('.data_explain').html(str);
-									}else{
-										$('.data_explain').html("<div style='align-content: center; text-align:center;'><h1>NO DATA<br><sapn style='font-size:20px;'>아직 리뷰 참여한 사람이 없어요</span></h1></div>");
-									}
-								},
+										if (!res) {
+											let str = '<div id=reviewsContainer><div id=reviews>';
+											$
+													.each(
+															res,
+															function(index,
+																	item) {
+																score += item.SCORE;
+																cnt = index;
+																str += "<div class=rv_con>"
+																		+ item.RV_CONTENT
+																		+ "<span>"
+																		+ "★"
+																				.repeat(item.SCORE)
+																		+ "☆"
+																				.repeat(5 - item.SCORE)
+																		+ "</span></div>";
+															});
+											str += "</div></div>";
+											avg = score / (cnt + 1);
+											str += '<br><div><h2>평점 : '
+													+ avg
+													+ '</h2></div>'
+													+ '<div class=avg_con><div class="avg_range">0</div><div style="'
+													+ 'font-size: 20px; background-color: #75DE27; height : 40px; width :'
+													+ 100
+													* (avg / 5)
+													+ '%; ">'
+													+ '</div><span style="margin-left:19%;">MAX</span></div>'
+											$('.data_explain').html(str);
+										} else {
+											$('.data_explain')
+													.html(
+															"<div style='align-content: center; text-align:center;'><h1>NO DATA<br><sapn style='font-size:20px;'>아직 리뷰 참여한 사람이 없어요</span></h1></div>");
+										}
+									},
 									error : function(err) {
 										console.log(err);
 									}
@@ -373,3 +389,4 @@
 
 
 </html>
+

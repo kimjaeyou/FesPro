@@ -59,9 +59,14 @@ public class ReservationController implements Controller {
 		HttpSession session = request.getSession();
 	    UsersDTO userDTO = (UsersDTO)session.getAttribute("loginUser");
 		System.out.println(userDTO);
-
 		
-		ReservationDTO reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 1, cancleDate);
+		ReservationDTO reservation = null;
+
+		if(fee == 0) {
+			reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 1, cancleDate);
+		} else {
+			reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 2, cancleDate);
+		}
 		
 		int result = service.insert(reservation);
 		//System.out.println(result);
@@ -203,13 +208,17 @@ public class ReservationController implements Controller {
 		
 		System.out.println("결제 후 남은 금액 : " + wallet.getMONEY());
 		
+
+		// 예약상태 : 결제 대기 - 예약완료로 변경
+		int result = service.changeReservation(resvSeq);
+		
 		ReservationDTO resvDTO = service.selectByResvSeq(resvSeq);
 		request.setAttribute("resvData", resvDTO);
 		request.setAttribute("SVCNM", SVCNM);
 		
 		//request.setAttribute("fes", fes);
 		
-		if (wallet != null) {
+		if (wallet != null && result != 0) {
 			return new ModelAndView("reservation/reservPayComplete.jsp", false);
 		} else {
 			return new ModelAndView("reservation/fail.jsp");
@@ -254,4 +263,6 @@ public class ReservationController implements Controller {
 		}
 	}
 	
+	
 }
+
