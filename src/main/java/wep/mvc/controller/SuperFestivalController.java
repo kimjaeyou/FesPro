@@ -197,7 +197,7 @@ public class SuperFestivalController implements Controller {
 		fes.setSVCID(svcid);
 
 		boolean isWaitFes = (state.equals("0") || state.equals("2")); 	//승인대기 또는 수정대기인 행사를 자세히 보기했는지 
-		//System.out.println("isWaitFes / " +isWaitFes);
+		System.out.println("isWaitFes / " +isWaitFes);
 		FesDTO searchFes=festivalService.select(fes,isWaitFes);
 		System.out.println("searchFes="+searchFes);
 		req.setAttribute("fes", searchFes);
@@ -297,12 +297,20 @@ public class SuperFestivalController implements Controller {
 	 */
 	public ModelAndView dashFesWaitFesSelectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
 		
-		String search = req.getParameter("search");
-		System.out.println("search = "+search);
+		/*
+		 * String search = req.getParameter("search");
+		 * System.out.println("search = "+search);
+		 */
 		List<FesDTO> list =  festivalService.dashFesWaitFesSelectAll();
+		System.out.println("재구/행사수정");
 		
+		for(FesDTO fes:list)
+		{
+			System.out.println(fes.getSVCNM());
+		}
 		req.setAttribute("festivalList", list);
-		req.setAttribute("search", search);
+		
+		/* req.setAttribute("search", search); */
 		return new ModelAndView("super/auth/dashFesSelectAll.jsp");
 	}
 	
@@ -319,7 +327,7 @@ public class SuperFestivalController implements Controller {
 		req.setAttribute("search", search);
 		return new ModelAndView("super/auth/dashFesSelectAll.jsp");
 	}
-}
+
 	
 	/**
 	 * 대시보드에서 행사 미승인건에 대한 수정

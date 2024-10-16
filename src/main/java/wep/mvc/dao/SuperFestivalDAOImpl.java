@@ -81,6 +81,7 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		// List<FesDTO> list = new ArrayList<FesDTO>();
+		System.out.println(fes.getSVCID());
 		FesDTO result = null;
 
 		String sql;
@@ -103,6 +104,7 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 
 			if (rs.next()) {
 				String svcid = rs.getString("SVCID");
+				System.out.println("다오에서 찍은 svcid="+svcid);
 				String MaxClassNm = rs.getString("MAXCLASSNM");
 				String MinClassNm = rs.getString("MINCLASSNM");
 				String svcStateNm = rs.getString("SVCSTATNM");
@@ -371,7 +373,7 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		ResultSet rs = null;
 		List<FesDTO> list = new ArrayList<FesDTO>();
 
-		String sql = "select * from FES where FES_STATE = 0";
+		String sql = "select * from WAIT_FES where FES_STATE = 0";
 
 		try {
 			con = DbUtil.getConnection();
@@ -484,7 +486,7 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		ResultSet rs = null;
 		List<FesDTO> list = new ArrayList<FesDTO>();
 
-		String sql = "select * from FES where FES_STATE = 2";
+		String sql = "select * from WAIT_FES where FES_STATE = 2";
 
 		try {
 			con = DbUtil.getConnection();

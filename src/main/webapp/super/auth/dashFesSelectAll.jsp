@@ -47,9 +47,9 @@
 			//console.log("상세보기 버튼 클릭");
 			const svcid = $(this).data("svcid");
 			const state = $(this).data("state");
-			//console.log(svcid);
+			console.log(svcid);
 			//행사에 대해 svcid와 행사승인상태를 실어서 보내줌
-			console.log("state : " +state);
+			//console.log("state : " +state);
 			window.location.href = "${path}/front?key=superfestival&methodName=dashWaitAcceptDetail&svcid="+ svcid +"&state=" +state;
 		}); 
 	});
