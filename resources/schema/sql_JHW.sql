@@ -8,6 +8,8 @@ rollback;
 select * from FES;
 select * from FES WHERE FES_STATE = '1' or FES_STATE ='3'; --승인완료 + 비활성화
 
+select FES.SVCNM,FES.FES_STATE from FES WHERE SVCID='S240919144615203064';
+
 
 --추가(더미)
 INSERT INTO FES VALUES (

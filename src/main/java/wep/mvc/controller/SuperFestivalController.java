@@ -141,6 +141,13 @@ public class SuperFestivalController implements Controller {
 	    	//waitfes에서 delete
 	    	result = festivalService.delete(fes);
 	    }
+	    //완료상태에서 대기상태로
+	    else if(originState ==1 && (fesState ==0 || fesState==1)){
+	    	//fes에서 update
+	    	fesService.update(fes);
+	    	//waitfes에서 insert
+	    	//result = festivalService.insert(fes);
+	    }
 	    //나머지들은 그냥 FES에서 업데이트
 	    else {
 	    	festivalService.update(fes, fesState);
