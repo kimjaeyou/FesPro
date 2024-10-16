@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.ReservationDTO;
+import wep.mvc.dto.ReviewDTO;
 import wep.mvc.util.DbUtil;
 
 public class MainDAOImpl {
@@ -60,4 +61,31 @@ public class MainDAOImpl {
 		}
 		return dto;
 	}
+	
+	public List<ReviewDTO> selecReview(String sid) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ReviewDTO> dto = new ArrayList<>();
+		
+		String sql = "select * from REVIEW where SVCID = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				dto.add(new ReviewDTO(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5)));
+			}
+		
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dto;
+	}
+	
+	
+	
 }
