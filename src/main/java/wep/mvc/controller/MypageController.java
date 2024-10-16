@@ -12,6 +12,7 @@ import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 import wep.mvc.service.MypageService;
 import wep.mvc.service.MypageServiceImpl;
 
@@ -32,7 +33,7 @@ public class MypageController implements Controller {
 		try {
 			if (list == null) {
 				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -78,8 +79,7 @@ public class MypageController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=resSelectAll");
 		return mv;
-		}
-
+	}
 
 	// 리뷰 전체검색
 	public ModelAndView reviewSelectAll(HttpServletRequest request, HttpServletResponse resp) throws Exception {
@@ -126,7 +126,6 @@ public class MypageController implements Controller {
 		return mv;
 	}
 
-
 	// 리뷰 삭제
 	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		String Seq = request.getParameter("review_SEQ");
@@ -141,7 +140,7 @@ public class MypageController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=reviewSelectAll");
 		return mv;
-		}
+	}
 
 	// 즐겨찾기 전체검색
 	public ModelAndView likeSelectAll(HttpServletRequest request, HttpServletResponse resp) throws Exception {
@@ -184,9 +183,10 @@ public class MypageController implements Controller {
 		}
 		request.setAttribute("like", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("");
+		mv.setViewName("user/Bookmark.jsp");
 		return mv;
 	}
+
 	// 즐겨찾기 삭제
 	public ModelAndView likeDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		String seq = request.getParameter("SVCID");
@@ -201,6 +201,47 @@ public class MypageController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=likeSelectAll");
 		return mv;
+	}
+
+	// 잔액 충전하기
+	public ModelAndView balancePlus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+		HttpSession session = request.getSession();
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		String password = request.getParameter("");
+		String balance = request.getParameter("");
+		
+		int account = ms.balancePlus(seq,password,Integer.parseInt(balance));
+		System.out.println("balance = " + balance); // 이것도 나옴
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("front?key=mypage&methodName=balancePlus");
+		return mv;
+
+	}
+
+	// 잔액 출금하기
+	public ModelAndView balanceMinus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+		HttpSession session = request.getSession();
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		String password = request.getParameter("");
+		String balance = request.getParameter("");
+		
+		int account = ms.balanceMinus(seq,password,Integer.parseInt(balance));
+		System.out.println("balance = " + balance); // 이것도 나옴
+
+		try {
+			if (account > 0) {
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("front?key=mypage&methodName=balanceMinus");
+		return mv;
+
+	}
 }

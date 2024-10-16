@@ -62,4 +62,14 @@ public class MypageServiceImpl implements MypageService {
 		return md.likeDelete(seq);
 	}
 
+	@Override
+	public int balancePlus(int seq, String password, int balance) throws SQLException {
+		return md.balancePlus(seq, password, balance);
+	}
+
+	@Override
+	public int balanceMinus(int seq, String password, int balance) throws SQLException {
+		return md.balanceMinus(seq, password, balance);
+	}
+
 }

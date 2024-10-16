@@ -73,6 +73,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">내가 주최한 서비스 내역</li>
                         </ol>
+                        <!--  
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
@@ -111,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        -->
                         <!-- 게시판 영역 -->
                         <%
                         	//세션에서 id 가져오는 일 합니다.
@@ -147,7 +149,7 @@
                         								<p align="center"><span>${FesDTO.SVCID}</span></p>
                         							</td>
                         							<td>
-                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=selectBySSVCID&SVCID=${FesDTO.SVCID}">${FesDTO.SVCNM}</a></span></p>
+                        								<p align="center"><span><a href="${path}/front?key=fes&methodName=selectBySVCID&SVCID=${FesDTO.SVCID}">${FesDTO.SVCNM}</a></span></p>
                         							</td>
                         							<td>
                         								<p align="center"><span>${FesDTO.SVCSTATNM}</span></p>

@@ -12,4 +12,3 @@ public interface Fes_tagDAO {
 
 	//int update(String sVCID, String tag_content) throws SQLException;
 }
-
