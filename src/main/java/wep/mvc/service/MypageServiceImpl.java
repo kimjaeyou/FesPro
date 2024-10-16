@@ -6,12 +6,11 @@ import java.util.List;
 import wep.mvc.dao.MypageDAO;
 import wep.mvc.dao.MypageDAOImpl;
 import wep.mvc.dto.FesDTO;
-import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
-import wep.mvc.dto.WALLET;
+import wep.mvc.dto.UsersDTO;
 
 public class MypageServiceImpl implements MypageService {
 	private MypageDAO md = new MypageDAOImpl();
@@ -24,8 +23,8 @@ public class MypageServiceImpl implements MypageService {
 
 	// 예약내역 부분검색
 	@Override
-	public List<ReservationDTO2> resSelect(ReservationDTO dto) throws SQLException {
-		return md.resSelect(dto);
+	public List<ReservationDTO2> resSelect(int seq,String svcnm) throws SQLException {
+		return md.resSelect(seq,svcnm);
 	}
 
 	@Override
@@ -39,8 +38,8 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<ReviewDTO2> reviewSelect(ReviewDTO dto) throws SQLException {
-		return md.reviewSelect(dto);
+	public List<ReviewDTO2> reviewSelect(int seq , String svcnm) throws SQLException {
+		return md.reviewSelect(seq, svcnm);
 	}
 
 	@Override
@@ -54,8 +53,8 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<FesDTO> likeSelect(USER_LIKE dto) throws SQLException {
-		return md.likeSelect(dto);
+	public List<FesDTO> likeSelect(int seq, String svcnm) throws SQLException {
+		return md.likeSelect(seq, svcnm);
 	}
 
 	@Override

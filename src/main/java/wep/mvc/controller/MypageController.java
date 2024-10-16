@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpSession;
 import wep.mvc.dao.MypageDAO;
 import wep.mvc.dao.MypageDAOImpl;
 import wep.mvc.dto.FesDTO;
-import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
@@ -22,7 +21,7 @@ public class MypageController implements Controller {
 
 	private MypageService ms = new MypageServiceImpl();
 	private MypageDAO md = new MypageDAOImpl();
-	
+
 	// 예약내역 전체검색
 	public ModelAndView resSelectAll(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
@@ -49,10 +48,13 @@ public class MypageController implements Controller {
 	// 예약내역 부분검색
 	public ModelAndView resSelect(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
-		ReservationDTO dto = (ReservationDTO) session.getAttribute("loginUser");
-		System.out.println("seq = " + dto); // 데이터 나옴
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		String svcnm = request.getParameter("svcnm");
 
-		List<ReservationDTO2> list = ms.resSelect(dto);
+		System.out.println("svcnm = " + svcnm); // 데이터 나옴
+
+		List<ReservationDTO2> list = ms.resSelect(seq, svcnm);
 		System.out.println("list = " + list); // 이것도 나옴
 
 		try {
@@ -110,10 +112,13 @@ public class MypageController implements Controller {
 	// 리뷰 부분검색
 	public ModelAndView reviewSelect(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
-		ReviewDTO dto = (ReviewDTO) session.getAttribute("loginUser");
-		System.out.println("seq = " + dto); // 데이터 나옴
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		String svcnm = request.getParameter("svcnm");
 
-		List<ReviewDTO2> list = ms.reviewSelect(dto);
+		System.out.println(" svcnm = " + svcnm); // 데이터 나옴
+
+		List<ReviewDTO2> list = ms.reviewSelect(seq, svcnm);
 		System.out.println("list = " + list); // 이것도 나옴
 
 		try {
@@ -123,7 +128,7 @@ public class MypageController implements Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("reservation", list);
+		request.setAttribute("review", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/review.jsp");
 		return mv;
@@ -171,10 +176,13 @@ public class MypageController implements Controller {
 	// 즐겨찾기 부분검색
 	public ModelAndView likeSelect(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
-		USER_LIKE dto = (USER_LIKE) session.getAttribute("loginUser");
-		System.out.println("seq = " + dto); // 데이터 나옴
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		String svcnm = request.getParameter("svcnm");
 
-		List<FesDTO> list = ms.likeSelect(dto);
+		System.out.println(" svcnm = " + svcnm); // 데이터 나옴
+
+		List<FesDTO> list = ms.likeSelect(seq, svcnm);
 		System.out.println("list = " + list); // 이것도 나옴
 
 		try {
@@ -184,9 +192,9 @@ public class MypageController implements Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("like", list);
+		request.setAttribute("review", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/Bookmark.jsp");
+		mv.setViewName("user/review.jsp");
 		return mv;
 	}
 
@@ -206,18 +214,28 @@ public class MypageController implements Controller {
 		return mv;
 	}
 
-	// 신원체크 후 잔액 충전하기 
-	public ModelAndView balanceCheck(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	// 잔액조회
+	public ModelAndView balanceSelect(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+		HttpSession session = request.getSession();
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		int seq = dto.getUser_seq();
+		WALLET wallet = md.balanceSelect(seq);
+		request.setAttribute("money", wallet);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/Wallet.jsp");
+		return mv;
+	}
+
+	
+	// 신원체크 후 잔액 충전하기
+	public ModelAndView balancePlus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
 		String password = request.getParameter("plus-password");
-		System.out.println("plus-password = " + password );
-		
 		String amount = request.getParameter("plus-amount");
-		System.out.println("plus-amount = " + amount );
 		int result = ms.balanceCheck(seq, password);
-		System.out.println("result = " + result); // 성공하면 1반환
 		if (result == 1) {
 			WALLET wallet = md.balancePlus(Integer.parseInt(amount), seq);
 			System.out.println(wallet);
@@ -226,7 +244,8 @@ public class MypageController implements Controller {
 			// 신원체크 실패
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/Wallet.jsp");
+		mv.setViewName("front?key=mypage&methodName=balanceSelect");
 		return mv;
 	}
+
 }

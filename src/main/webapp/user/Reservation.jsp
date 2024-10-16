@@ -41,88 +41,79 @@
 						</ul>
 					</div>
 				</div>
-				<div class="card mb-4 search-card">
-					<div class="d-flex align-items-center justify-content-between">
-						<div class="d-flex align-items-center me-3">
-							<label for="startDate" class="me-2">신청일:</label> <input
-								type="date" class="form-control me-2" id="startDate"
-								placeholder="시작 날짜" style="width: 150px;"> <span
-								class="me-2"> ~ </span> <input type="date"
-								class="form-control me-2" id="endDate" placeholder="종료 날짜"
-								style="width: 150px;">
-						</div>
-						<div class="d-flex align-items-center">
-							<label for="searchInput" class="me-2">서비스명:</label> <input
-								type="text" class="form-control me-2" id="searchInput"
-								placeholder="검색어를 입력하세요" style="width: 200px;">
-
-							<form method="post"
-								action="${pageContext.request.contextPath}/front">
-								<input type="hidden" name="key" value="mypage" /> <input
+				<form method="post"
+					action="${pageContext.request.contextPath}/front">
+					<div class="card mb-4 search-card">
+						<div class="d-flex align-items-center justify-content-between">
+							<div class="d-flex align-items-center">
+								<label for="searchInput" class="me-2">서비스명:</label> <input
+									type="text" class="form-control me-2" id="searchInput"
+									placeholder="검색어를 입력하세요" style="width: 200px;" id="svcnm" name="svcnm" value="${re.svcnm}"> 
+									<input type="hidden" name="key" value="mypage" /> <input
 									type="hidden" name="methodName" value="resSelect" /> <input
-									type="hidden" name="name" value="${re.svcnm}" />
-								<button class="btn btn-secondary text-white" type="button">
+									type="hidden" name="svcnm" id="svcnm" value="${re.svcnm}" />
+								${re.svcnm}
+								<button class="btn btn-secondary text-white" type="submit">
 									검색</button>
-							</form>
+				</form>
 
-						</div>
-					</div>
-				</div>
-				<h5>
-					<i class="fas fa-table me-1"></i> 예약내역 <span id="rowCount"></span>
-				</h5>
-				<table id="festable">
-					<thead>
-						<tr>
-							<th>예약번호</th>
-							<th>서비스명</th>
-							<th>이용일자</th>
-							<th>신청일</th>
-							<th>이용요금</th>
-							<th>예약현황</th>
-							<th>삭제</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:choose>
-							<c:when test="${empty reservation}">
-								<tr>
-									<td colspan="6">
-										<p align="center">
-											<b><span style="font-size: 9pt;">예약정보가 없습니다.</span></b>
-										</p>
-									</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${reservation}" var="re">
-									<tr>
-										<td><a
-											href="${path}/front?key=&methodName=/${re.reserv_Seq}"
-											class="no-underline1">${re.reserv_Seq}</a></td>
-										<td><a href="${path}/front?key=&methodName="
-											class="no-underline2">${re.svcnm}</a></td>
-										<td>${re.resv_Date}/ ${re.svc_Time}차</td>
-										<td>${re.svc_Date}</td>
-										<td>${re.resv_Price}원</td>
-										<td>${re.resv_Check}</td>
-										<td>
-											<form id="delete-form" method="post" action="${path}/front">
-												<input type="hidden" name="key" value="mypage"> <input
-													type="hidden" name="methodName" value="resDelete">
-												<input type="hidden" name="reserv_Seq"
-													value="${re.reserv_Seq}">
-												<button type="submit" class="delete-button">예약취소</button>
-											</form>
-										</td>
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</tbody>
-				</table>
 			</div>
-		</main>
+	</div>
+	</div>
+	<h5>
+		<i class="fas fa-table me-1"></i> 예약내역 <span id="rowCount"></span>
+	</h5>
+	<table id="festable">
+		<thead>
+			<tr>
+				<th>예약번호</th>
+				<th>서비스명</th>
+				<th>이용일자</th>
+				<th>신청일</th>
+				<th>이용요금</th>
+				<th>예약현황</th>
+				<th>삭제</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:choose>
+				<c:when test="${empty reservation}">
+					<tr>
+						<td colspan="6">
+							<p align="center">
+								<b><span style="font-size: 9pt;">예약정보가 없습니다.</span></b>
+							</p>
+						</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${reservation}" var="re">
+						<tr>
+							<td><a
+								href="${path}/front?key=&methodName=/${re.reserv_Seq}"
+								class="no-underline1">${re.reserv_Seq}</a></td>
+							<td><a href="${path}/front?key=&methodName="
+								class="no-underline2" id="svcnm">${re.svcnm}</a></td>
+							<td>${re.resv_Date}/${re.svc_Time}차</td>
+							<td>${re.svc_Date}</td>
+							<td>${re.resv_Price}원</td>
+							<td>${re.resv_Check}</td>
+							<td>
+								<form id="delete-form" method="post" action="${path}/front">
+									<input type="hidden" name="key" value="mypage"> <input
+										type="hidden" name="methodName" value="resDelete"> <input
+										type="hidden" name="reserv_Seq" value="${re.reserv_Seq}">
+									<button type="submit" class="delete-button">예약취소</button>
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</tbody>
+	</table>
+	</div>
+	</main>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

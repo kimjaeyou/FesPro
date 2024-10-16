@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
-import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.dto.WALLET;
 import wep.mvc.util.DbUtil;
 
@@ -49,18 +49,18 @@ public class MypageDAOImpl implements MypageDAO {
 
 	// 예약내역 부분검색
 	@Override
-	public List<ReservationDTO2> resSelect(ReservationDTO dto) throws SQLException {
+	public List<ReservationDTO2> resSelect(int seq, String svcnm) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ReservationDTO2> list = new ArrayList<ReservationDTO2>();
-		String sql = "select * from reservation where user_seq = ? and 서비스명 = ?;";
+		String sql = "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check FROM fes, reservation WHERE fes.svcid = reservation.svcid and user_seq = ? and reserv_check = 1 and svcnm like ? order by reserv_seq asc";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, seq);
+			ps.setString(2, "%" + svcnm + "%");
 			rs = ps.executeQuery();
-			ps.setInt(1, dto.getUserSeq());
-			// ps.setInt(2, dto.get서비스명());
 			while (rs.next()) {
 				ReservationDTO2 res = new ReservationDTO2(rs.getInt(1), // reservSeq
 						rs.getString(2), // 서비스명 넣어줘야해여
@@ -128,24 +128,26 @@ public class MypageDAOImpl implements MypageDAO {
 
 	// 리뷰 부분검색
 	@Override
-	public List<ReviewDTO2> reviewSelect(ReviewDTO dto) throws SQLException {
+	public List<ReviewDTO2> reviewSelect(int seq , String svcnm) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ReviewDTO2> list = new ArrayList<ReviewDTO2>();
-		String sql = "select * from review where user_seq=? AND review_seq=?;";
+		String sql = "SELECT review_seq, score, svcnm , rv_content, sysdate FROM fes, review\r\n"
+				+ "WHERE fes.svcid= review.svcid and user_seq = ? and svcnm like ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, seq);
+			ps.setString(2, "%" + svcnm + "%");
 			rs = ps.executeQuery();
-			// ps.setInt(1, dto.getUserSeq());
-			// ps.setInt(2, dto.get서비스명());
 			while (rs.next()) {
-				ReviewDTO2 res = new ReviewDTO2(rs.getInt(1), // 리뷰시퀀스
-						rs.getInt(2), // 별점
-						rs.getString(3), // 서비스명
-						rs.getString(4), // 내용
-						rs.getString(5)); // 작성일자 (sysdate)
+				ReviewDTO2 res = new ReviewDTO2(
+						rs.getInt(1), // reservSeq
+						rs.getInt(2), // 서비스명 넣어줘야해여
+						rs.getString(3), // svcDate
+						rs.getString(4), // resvDate
+						rs.getString(5));
 
 				list.add(res);
 			}
@@ -212,18 +214,18 @@ public class MypageDAOImpl implements MypageDAO {
 
 	// 즐겨찾기 부분검색
 	@Override
-	public List<FesDTO> likeSelect(USER_LIKE dto) throws SQLException {
+	public List<FesDTO> likeSelect(int seq, String svcnm) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<FesDTO> list = new ArrayList<FesDTO>();
-		String sql = ";";
+		String sql = "SELECT  u.svcid , svcnm, placenm, RCPTBGNDT, RCPTENDDT, SVCOPNBGNDT, SVCOPNENDDT, V_MAX, V_MIN, price, SVCSTATNM  FROM fes f , user_like u WHERE f.svcid = u.svcid and u.user_seq = ? and svcnm like ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, seq);
+			ps.setString(2, "%"+svcnm+"%");
 			rs = ps.executeQuery();
-			// ps.setInt(1, dto.getUserSeq());
-			// ps.setInt(2, dto.get서비스명());
 			while (rs.next()) {
 				FesDTO res = new FesDTO(rs.getString(1), // 서비스 아이디
 						rs.getString(2), // 서비스명
@@ -231,20 +233,20 @@ public class MypageDAOImpl implements MypageDAO {
 						rs.getString(4), // 접수 시작 기간
 						rs.getString(5), // 접수 시작 기간
 						rs.getString(6), // 이용시작기간
-						rs.getString(7), // 이용기간
-						rs.getString(8), // 이용기간
-						rs.getString(9), // 이용기간
+						rs.getString(7), //
+						rs.getString(8), //
+						rs.getString(9), //
 						rs.getInt(10), // 이용요금
-						rs.getString(11)); // 접수상태
+						rs.getString(11)); // 상태
 
 				list.add(res);
 			}
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		return null;
-		// return list;
+		return list;
 	}
+
 
 	// 즐겨찾기 삭제
 	@Override
@@ -288,6 +290,31 @@ public class MypageDAOImpl implements MypageDAO {
 		return result;
 	}
 
+	@Override
+	public WALLET balanceSelect(int seq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		WALLET wallet = null;
+		String sql = "select MONEY from wallet where user_seq = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, seq);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int money = rs.getInt(1);
+				wallet = new WALLET();
+				wallet.setMONEY(money);
+			}
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return wallet;
+	}
+
 	// 검증이 완료되면 입금을 한다.
 	@Override
 	public WALLET balancePlus(int amount, int seq) throws SQLException {
@@ -305,24 +332,19 @@ public class MypageDAOImpl implements MypageDAO {
 			ps.setInt(1, amount);
 			ps.setInt(2, seq);
 
-			
 			ps.executeUpdate();
-			
-			
+
 			ps1 = con.prepareStatement(sql2);
 			ps1.setInt(1, seq);
 			rs = ps1.executeQuery();
-			
-			
+
 			while (rs.next()) {
 				int money = rs.getInt(1);
 				wallet = new WALLET();
 				wallet.setMONEY(money);
 			}
-			
-		} finally
 
-		{
+		} finally {
 			DbUtil.dbClose(con, ps);
 		}
 		return wallet;

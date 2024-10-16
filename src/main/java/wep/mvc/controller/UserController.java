@@ -149,7 +149,7 @@ public class UserController implements Controller {
 			int result = us.update(dto);
 			if (result == 1) {
 				// req.set애트리뷰트("내맘대로", true);
-				return new ModelAndView("update.jsp", true); // jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert
+				return new ModelAndView("front?key=user&methodName=selectUser", true); // jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert
 			} else {
 				// return new ModelAndView("login.jsp", true);
 			}

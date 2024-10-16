@@ -31,7 +31,7 @@
                 </div>
                     <form action="${path}/front" method="post">
                         <input type="hidden" name="key" value="mypage">
-                        <input type="hidden" name="methodName" value="balanceCheck">
+                        <input type="hidden" name="methodName" value="balancePlus">
                         <div class="section">
                             <h3>충전하기</h3>
                             <input type="text" id="plus-amount" name="plus-amount" placeholder="충전할 금액을 입력하세요." />
