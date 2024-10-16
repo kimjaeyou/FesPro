@@ -138,7 +138,7 @@ img {
 	border: 2px solid blue;
 	padding: 15px;
 	border-radius: 15px;
-	box-shadow : 0 4px 10px rgba( 0, 0,	0, 0.2);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -156,6 +156,32 @@ img {
 	margin-left: 13px;
 }
 
+#profil {
+	position: relative;
+	float: left;
+}
+
+.con_table {
+	display: table;
+}
+
+.con_row {
+	display: table-row;
+}
+
+.con_cell {
+	border: none;
+	align-content : center;
+	text-align: center;
+	align-items: center;
+	display: table-cell;
+	width: 40%;
+	font-size: 20px;
+	font: bold;
+	font-family: Roboto;
+	color: black;
+	align-content: center;
+}
 </style>
 </head>
 <main>
@@ -175,15 +201,24 @@ img {
 					class="nav-link dropdown-toggle" href="#" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> 문화체험 </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=all">전체검색</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=교육체험">교육체험</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=농장체험">농장체험</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=문화행사">문화행사</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=전시/관람">전시/관람</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=단체봉사">단체봉사</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=공원탐방">공원탐방</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=서울형키즈카페">서울형키즈카페</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=산림여가">산림여가</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=all">전체검색</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=교육체험">교육체험</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=농장체험">농장체험</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=문화행사">문화행사</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=전시/관람">전시/관람</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=단체봉사">단체봉사</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=공원탐방">공원탐방</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=서울형키즈카페">서울형키즈카페</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=산림여가">산림여가</a></li>
 					</ul></li>
 				<li><a href="#" class="nav-link px-2">예약보기</a></li>
 				<li><a href="${path}/front?key=board&methodName=select"
@@ -195,9 +230,26 @@ img {
 			<div class="login-section">
 				<c:choose>
 					<c:when test="${not empty sessionScope.loginUser}">
+						<div class="con_table">
+							<div class="con_row">
+								<div class="con_cell">
+									<img id="profil" alt="profil"
+										src="${path}/assets/img/profil.png"
+										style="width: 30px; height: 20px">
+								</div>
+								<div class="con_cell">${sessionScope.loginUser.user_name}
+								</div>
+								<div class="con_cell">
+									<img id="profil" alt="profil"
+										src="${path}/assets/img/messageImg/message_0.png"
+										style="width: 30px; height: 20px">
+								</div>
+							</div>
+						</div>
+
 						<span class="login-info"> 안녕하세요,
 							${sessionScope.loginUser.user_name}님!</span>
-						
+
 						<form id="member-update-form" method="get"
 							action="${pageContext.request.contextPath}/front"
 							style="display: inline;">

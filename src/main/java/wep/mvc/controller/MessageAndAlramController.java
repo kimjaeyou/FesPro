@@ -12,7 +12,7 @@ public class MessageAndAlramController implements Controller {
 	public ModelAndView mMove(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
 		
-		return new ModelAndView("index.jsp", true);
+		return new ModelAndView("message/messagePage.jsp", true);
 	}
 
 	public ModelAndView cancle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
