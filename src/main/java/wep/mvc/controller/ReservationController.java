@@ -62,6 +62,9 @@ public class ReservationController implements Controller {
 		
 		ReservationDTO reservation = null;
 
+		// 예약인원 다 찼는지 체크
+		
+		
 		if(fee == 0) {
 			reservation = new ReservationDTO(userDTO.getUser_seq(), SVCID, date, time, peopelNum, fee, 1, cancleDate);
 		} else {
