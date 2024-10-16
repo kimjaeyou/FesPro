@@ -33,6 +33,8 @@ public interface FesSerevice{
 
 	void pwUpdateForm22(String newPw, int host_seq) throws SQLException;
 
+	List<FesDTO> selectALL() throws SQLException;
+
 
 
 	//List<FesDTO> selectAll() throws SQLException;

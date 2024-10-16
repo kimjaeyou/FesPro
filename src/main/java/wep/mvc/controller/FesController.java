@@ -155,7 +155,7 @@ public class FesController implements Controller {
 
 			if (fileName != null && !fileName.equals("")) {
 				IMGURL.write(saveDir + "/" + fileName);// 서버폴더에 파일 저장=업로드
-				fesDTO.setIMGURL(fileName);
+				fesDTO.setIMGURL("save/"+fileName);
 			}
 		}
 		System.out.println("날짜가 문젠가? 접수종료일시: " + RCPTENDDT);

@@ -295,8 +295,8 @@ function checkValid(){
         		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
         		<div id="map" style="width:100%;height:350px;"></div>
         		
-     			<label>위도: <input type="text" id="latitude" name="X" readonly></label>
-				<label>경도: <input type="text" id="longitude" name="Y" readonly></label>
+     			<label>위도: <input type="text" id="latitude" name="Y" readonly></label>
+				<label>경도: <input type="text" id="longitude" name="X" readonly></label>
      			<input type="text" name="AREANM" size="15" placeholder="XX구 입력해 주세요.">
      			</span></p></td>
         	</tr>

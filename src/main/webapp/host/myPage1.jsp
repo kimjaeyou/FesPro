@@ -208,6 +208,7 @@
 									</c:choose>
 								</tbody>
 							</table>
+							<h1>등록/수정 신청한 서비스 내역</h1>
 							<!-- 여기부터는 WAIT_FES영역 -->
 							<table class="table table-striped"
 								style="text-align: center; border: 1px solid #dddddd">
