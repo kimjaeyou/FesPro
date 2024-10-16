@@ -30,11 +30,16 @@ public class MainController implements Controller {
 		UsersDTO user = (UsersDTO) req.getSession().getAttribute("loginUser");
 		req.setAttribute("list", list);
 		
+		List<FesDTO> likeList =new ArrayList<>();
+		
 		if (user != null) {
 			int user_seq = user.getUser_seq();
-			List<FesDTO> likeList = mainService.selecLike(user_seq, list);
-			req.setAttribute("listLike", likeList);
+			likeList = mainService.selecLike(user_seq, list);
+		}else {
+			likeList = mainService.selecMost();
 		}
+		
+		req.setAttribute("listLike", likeList);
 
 		return new ModelAndView("index.jsp");
 	}
@@ -52,6 +57,24 @@ public class MainController implements Controller {
 
 		return new ModelAndView("detail.jsp");
 	}
+	
+	public ModelAndView searchPage(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		String search = req.getParameter("search");
+
+		ServletContext app = req.getServletContext();
+		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
+		
+		if(!search.equals("all")) {
+			list = mainService.searchList(search, list);
+		}
+		req.setAttribute("searchList", list);
+		
+		return new ModelAndView("list.jsp");
+	}
+	
+	
+	
 
 	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {

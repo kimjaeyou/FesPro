@@ -52,4 +52,28 @@ public class MainSereviceImpl {
 		List<ReviewDTO> list = dao.selecReview(sid);
 		return list;
 	}
+
+	public List<FesDTO> searchList(String search, List<FesDTO> fesList) throws SQLException {
+		List<FesDTO> serchList = new ArrayList<>();
+		serchList = reList(fesList, search);
+		return serchList;
+	}
+
+	public List<FesDTO> reList(List<FesDTO> list, String search) {
+		List<FesDTO> serchList = new ArrayList<>();
+
+		for (FesDTO fes : list) {
+			if (fes.getMINCLASSNM().equals(search)) {
+				serchList.add(fes);
+			}
+		}
+
+		return serchList;
+	}
+
+	public List<FesDTO> selecMost() throws SQLException {
+		List<FesDTO> list = dao.selecMost();
+		return list;
+	}
+
 }

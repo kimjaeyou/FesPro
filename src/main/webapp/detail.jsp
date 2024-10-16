@@ -340,6 +340,7 @@
 									dataType : 'json',
 									data : {sid : sid},
 									success : function(res) {
+									if(!res){
 										let str = '<div id=reviewsContainer><div id=reviews>';
 										$.each(res,function(index, item) {
 															score+=item.SCORE;
@@ -357,7 +358,10 @@
 												'font-size: 20px; background-color: #75DE27; height : 40px; width :' +100*(avg/5)+'%; ">'
 										+'</div><span style="margin-left:19%;">MAX</span></div>'
 										$('.data_explain').html(str);
-									},
+									}else{
+										$('.data_explain').html("<div style='align-content: center; text-align:center;'><h1>NO DATA<br><sapn style='font-size:20px;'>아직 리뷰 참여한 사람이 없어요</span></h1></div>");
+									}
+								},
 									error : function(err) {
 										console.log(err);
 									}
