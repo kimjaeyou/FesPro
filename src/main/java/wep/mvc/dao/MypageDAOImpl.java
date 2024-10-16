@@ -351,5 +351,40 @@ public class MypageDAOImpl implements MypageDAO {
 		}
 		return wallet;
 	}
+	
+	public boolean checkReview(int reSeq, int seq) {
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String sql = "SELECT * FROM REVIEW WHERE REVIEW_SEQ = ? AND USER_SEQ = ?";
+	    boolean reviewExists = false; // 리뷰 존재 여부를 저장할 변수
+
+	    try {
+	        // DB 연결
+	        con = DbUtil.getConnection();
+	        // 쿼리 준비
+	        ps = con.prepareStatement(sql);
+	        // 쿼리 파라미터 설정
+	        ps.setInt(1, reSeq); // 예약 시퀀스
+	        ps.setInt(2, seq);   // 사용자 시퀀스
+	        // 쿼리 실행
+	        rs = ps.executeQuery();
+
+	        // 결과가 있으면 리뷰가 존재하는 것
+	        if (rs.next()) {
+	            reviewExists = true;
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // 예외 처리
+	    } finally {
+	        // 리소스 해제
+	        DbUtil.dbClose(con, ps, rs);
+	    }
+
+	    // 리뷰 존재 여부 반환
+	    return reviewExists;
+	}
+	
 
 }

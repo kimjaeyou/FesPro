@@ -38,6 +38,8 @@ public interface MypageService {
 	int likeDelete(String seq) throws SQLException;
 
 	// 잔액 충전
-	int balanceCheck(int seq, String password) throws SQLException;;
+	int balanceCheck(int seq, String password) throws SQLException;
+
+	boolean checkReview(int reSeq, int seq);;
 
 }

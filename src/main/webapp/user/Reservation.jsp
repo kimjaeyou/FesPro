@@ -100,9 +100,9 @@
 							<td>${re.resv_Check}</td>
 							<td>
 								<form id="delete-form" method="post" action="${path}/front">
-									<input type="hidden" name="key" value=""> 
-									<input type="hidden" name="methodName" value=""> 
-									<input type="hidden" name="reserv_Seq" value="">
+									<input type="hidden" name="key" value="mypage"> 
+									<input type="hidden" name="methodName" value="writeReview"> 
+									<input type="hidden" name="reserv_Seq" value="${re.reserv_Seq}">
 									<button type="submit" class="delete-button">작성</button>
 								</form>
 							</td>
