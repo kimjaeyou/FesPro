@@ -66,6 +66,8 @@ public class FesController implements Controller {
 	 * 전체검색
 	 */
 	public ModelAndView select(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		//1. fes 테이블 db에서 꺼내와서 조회
+		
 		// List<FesDTO> fesDTOList = fesSerevice.selectAll();
 
 		HttpSession session = req.getSession();
@@ -92,13 +94,18 @@ public class FesController implements Controller {
 		List<FesDTO> fesDTOList = fesSerevice.select(host_seq);
 		
 		
-		
-		
 		req.setAttribute("fesDTOList", fesDTOList);
+		
+		//2. wait_fes 테이블 db에서 꺼내와서 조회
+		List<WAIT_FES> waitFesList = fesSerevice.selectWaitFesList(host_seq);
+		req.setAttribute("waitFesList", waitFesList);
+		
+		
 
 		return new ModelAndView("host/myPage1.jsp");
 	}
-
+	
+	//C-등록을 신청하는 것이지 fes db에 넣는 게 아니다! wait_fes db에 넣는다.! fes_state=0으로 넣는다!
 	public ModelAndView insert(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
 		// 서비스 아이디 그냥 uuid로 뽑을게요
@@ -188,7 +195,7 @@ public class FesController implements Controller {
 		return null;
 	}
 
-	// 서비스등록신청보기(R)
+	// 서비스등록신청보기(R) - Fes db 조회
 	public ModelAndView selectBySVCID(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String SVCID = req.getParameter("SVCID");
 		FesDTO fesDTO = fesSerevice.selectBySVCID(SVCID);
@@ -198,7 +205,21 @@ public class FesController implements Controller {
 		List<String> fes_tag = fes_tagSerevice.selectBySVCID(SVCID);
 		req.setAttribute("fesDTO", fesDTO);
 		req.setAttribute("fes_tag", fes_tag);
+		
 		return new ModelAndView("host/read.jsp");
+	}
+	// 서비스등록신청보기(R) - WAIT_FES db 조회
+	public ModelAndView fesWaitselectBySVCID(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		String SVCID = req.getParameter("SVCID");
+		
+		List<String> fes_tag = fes_tagSerevice.selectBySVCID(SVCID);
+
+		req.setAttribute("fes_tag", fes_tag);
+		
+		WAIT_FES waitFes = fesSerevice.fesWaitselectBySVCID(SVCID);
+		req.setAttribute("waitFes", waitFes);
+		
+		return new ModelAndView("host/read2.jsp");
 	}
 
 	// U - 수정폼 열기
@@ -299,27 +320,19 @@ public class FesController implements Controller {
 		System.out.println("뽀삐?");
 
 		fesSerevice.update(waitFes);
+		fesSerevice.updateFes(SVCID, 2);
 
 		System.out.println("여기까지는 오는가");
 
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("front?key=fes&methodName=selectBySVCID&SVCID=" + SVCID);
-		mv.setRedirect(true);
-		
-		
-		
-		return mv;
+		return new ModelAndView("front?key=fes&methodName=select", true);
 	}
 
-	// D-삭제신청
+	// D-삭제신청 FES db에 바로 값 변경
 	public ModelAndView delete(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
 		String SVCID = req.getParameter("SVCID");
-		FesDTO fesDTO = fesSerevice.selectBySVCID(SVCID);
 
-		fesDTO.setFes_state(3);
-
-		//fesSerevice.update(fesDTO);
+		fesSerevice.updateFes(SVCID);
 
 		return new ModelAndView("front?key=fes&methodName=select", true);
 	}

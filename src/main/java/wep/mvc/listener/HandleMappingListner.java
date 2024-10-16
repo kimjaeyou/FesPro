@@ -253,7 +253,7 @@ public class HandleMappingListner implements ServletContextListener {
 				if(fesSerevice.selectBySVCID(fesdto.getSVCID())!=null) {
 					continue;
 				}else {
-					fesSerevice.insert(fesdto);
+					fesSerevice.insertListener(fesdto);
 				}
 			} 
 			
