@@ -9,6 +9,7 @@ import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
+import wep.mvc.dto.WALLET;
 
 public interface MypageService {
 
@@ -38,5 +39,11 @@ public interface MypageService {
 
 	// 즐겨찾기 삭제
 	int likeDelete(String seq) throws SQLException;
+
+	// 잔액 충전
+	int balancePlus(int seq, String password, int balance) throws SQLException;;
+
+	// 잔액 출금
+	int balanceMinus(int seq,String password, int balance) throws SQLException;;
 
 }

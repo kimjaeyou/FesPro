@@ -24,9 +24,9 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     회원정보변경
                 </a>
-                <a class="nav-link" href="like.jsp">
+                <a class="nav-link" href="user/Wallet.jsp">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    관심정보 설정
+                    지갑
                 </a>
                 <a class="nav-link" href="${path}/front?key=mypage&methodName=reviewSelectAll">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

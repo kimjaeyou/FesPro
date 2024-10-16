@@ -38,4 +38,10 @@ public interface MypageDAO {
 		// 즐겨찾기 삭제
 		int likeDelete(String seq) throws SQLException;
 
+		// 잔액 충전
+		int balancePlus(int seq, String password, int balance) throws SQLException;
+
+		// 잔액 출금
+		int balanceMinus(int seq, String password, int balance) throws SQLException;
+
 	}

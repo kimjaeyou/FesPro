@@ -16,17 +16,6 @@ import wep.mvc.dto.USER_LIKE;
 import wep.mvc.util.DbUtil;
 
 public class MypageDAOImpl implements MypageDAO {
-	/**
-	리뷰 삭제
-	delete from review where user_seq = ? and review_seq;
-
-	즐겨찾기 검색
-	select 서비스명, 장소명, 기간, 요금, 접수상태, 신청방법, 예약방법 from fes
-	where svcid = (select svcid from like where user_seq = ?);
-
-	즐겨찾기 삭제
-	delete from review where user_seq = ? and like_seq = ?;
-	*/
 	
 	// 예약내역 전체검색
 	@Override
@@ -283,4 +272,48 @@ public class MypageDAOImpl implements MypageDAO {
 		}
 		return result;
 	}
+
+	@Override
+	public int balancePlus(int seq, String password, int balance) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result= 0 ;
+		String sql= "update users , wallet set money= money+? where user_seq=? and user_pw ";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, seq);
+			ps.setString(2, password);
+			ps.setInt(3, balance);
+			result = ps.executeUpdate();
+
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+		
+
+	@Override
+	public int balanceMinus(int seq, String password, int balance) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result= 0 ;
+		String sql= "update users , wallet set money= money-? where user_seq=? and user_pw ";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, seq);
+			ps.setString(2, password);
+			ps.setInt(3, balance);
+			result = ps.executeUpdate();
+
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+		
 }
