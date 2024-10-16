@@ -21,10 +21,10 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 	}
 
 	@Override
-	public FesDTO select(FesDTO festivalDto) {
+	public FesDTO select(FesDTO festivalDto, boolean isWaitFes) {
 		FesDTO result = null;
 		
-		result =dao.select(festivalDto);
+		result =dao.select(festivalDto,isWaitFes);
 				
 		return result;
 	}
@@ -74,4 +74,62 @@ public class SuperFestivalServiceImpl implements SuperFestivalService {
 		
 		return result;
 	}
+
+	@Override
+	public List<FesDTO> selectAllSuper() {
+		List<FesDTO> result = null;
+		
+		result = dao.selectAllSuper();
+		
+		return result;
+	}
+	
+	@Override
+	public List<FesDTO> dashFesWaitFesSelectAll() {
+		
+		List<FesDTO> result=null;
+		
+		result = dao.dashFesWaitFesSelectAll();
+		
+		return result;
+	}
+	
+	@Override
+	public List<FesDTO> dashFesCancleWaitFesSelectAll() {
+		
+		List<FesDTO> result=null;
+		
+		result = dao.dashFesCancleWaitFesSelectAll();
+		
+		return result;
+	}
+
+	@Override
+	public int delete(FesDTO fes) {
+		int result=0;
+		
+		result = dao.delete(fes);
+		
+		return result;
+	}
+
+	@Override
+	public int update(FesDTO fesDto) {
+		int result = 0;
+		
+		result = dao.update(fesDto);
+	
+		return result;
+	}
+
+	@Override
+	public int deleteFes(FesDTO fes) {
+		int result = 0;
+		
+		result = dao.deleteFes(fes);
+	
+		return result;
+	}
 }
+
+

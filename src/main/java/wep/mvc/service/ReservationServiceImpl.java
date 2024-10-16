@@ -7,6 +7,7 @@ import wep.mvc.dao.ReservationDAOImpl;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.dto.WALLET;
 
 public class ReservationServiceImpl implements ReservationService {
 	ReservationDAO dao = new ReservationDAOImpl();
@@ -61,5 +62,17 @@ public class ReservationServiceImpl implements ReservationService {
 		return userDTO;
 	}
 
+	@Override
+	public WALLET payment(int userSeq, int fee) throws SQLException {
+		WALLET wallet = dao.payment(userSeq, fee);
+		return wallet;
+	}
 
+	@Override
+	public int changeReservation(int resvSeq) throws SQLException {
+		int result = dao.changeReservation(resvSeq);
+		return result;
+	}
+	
 }
+

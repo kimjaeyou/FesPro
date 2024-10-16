@@ -84,6 +84,15 @@ public class SuperAuthServiceImpl implements SuperAuthService {
 		return list;
 	
 	}
+
+	@Override
+	public List<HostDTO> hostWaitSelectAll() {
+		System.out.println("셀렉트올 서비스");
+		List<HostDTO> list = new ArrayList<HostDTO>();
+		list = dao.hostWaitSelectAll();
+		System.out.println("서비스에서 list = "+list);
+		return list;
+	}
 	
 	/*
 	 * @Override public UsersDTO selectById(String id) { UsersDTO user = new

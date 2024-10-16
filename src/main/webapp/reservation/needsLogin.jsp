@@ -8,6 +8,7 @@
 
 <script type="text/javascript">
 	alert("${requestScope.errMsg}");
+	location.href="${path}/user/login.jsp";
 </script>
 </head>
 <body>
