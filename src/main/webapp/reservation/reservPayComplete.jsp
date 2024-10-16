@@ -31,7 +31,7 @@
             th {
                 text-align: center;
                 background-color: rgba(0, 123, 255, 0.17);
-                
+                width: 20%;
             }
 
             th,
@@ -80,11 +80,13 @@
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(138, 138, 138);"></i>
+                        <i class="bi bi-caret-right-fill" style="color: rgb(138, 138, 138);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
                         <i class="bi bi-caret-right-fill" style="color: rgb(0, 123, 255);"></i>
-                        <i class="bi bi-2-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
+                        <i class="bi bi-3-circle" style="font-size:2rem; color: rgb(0, 123, 255);"></i>
                     </div>
-                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
+                    예약 정보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약 결제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예약
                     완료 <br><br>
                     <h1 class="fw-bolder">예약 신청이 정상적으로 처리되었습니다.</h1>
 
@@ -93,7 +95,6 @@
         </header>
         <div class="divTable">
             <table>
-            <colgroup><col witdh="20%"><col width="auto"></colgroup>
                  <tr>
                     <th>예약번호</td>
                     <td name="resvNo" data-form="resvSeq">
@@ -135,7 +136,7 @@
                     <th>예약상태</td>
                     <td name="resvCheck">
                     <c:choose>
-                    	<c:when test="${resvData.resvCheck eq 0}">예약접수</c:when>
+                    	<c:when test="${resvData.resvCheck eq 0}">결제대기중</c:when>
                     	<c:otherwise>예약완료</c:otherwise>
                     	
                     </c:choose>

@@ -95,6 +95,14 @@ public class FesSereviceImpl implements FesSerevice {
 		}
 	}
 
+	@Override
+	public void pwUpdateForm22(String newPw, int host_seq) throws SQLException {
+		if(fesDAO.pwUpdateForm22(newPw, host_seq)==0) {
+			throw new SQLException("비밀번호 변경 실패");
+		}
+		
+	}
+
 	
 }
 

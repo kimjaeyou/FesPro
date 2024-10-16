@@ -1,5 +1,4 @@
 <%@page import="wep.mvc.dto.UsersDTO"%>
-<%@page import="wep.mvc.dto.ReservationDTO2"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
