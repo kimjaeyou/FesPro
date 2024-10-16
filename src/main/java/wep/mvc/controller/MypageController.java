@@ -183,7 +183,7 @@ public class MypageController implements Controller {
 		}
 		request.setAttribute("like", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("");
+		mv.setViewName("user/Bookmark.jsp");
 		return mv;
 	}
 
@@ -210,7 +210,6 @@ public class MypageController implements Controller {
 		int seq = dto.getUser_seq();
 		String password = request.getParameter("");
 		String balance = request.getParameter("");
-		
 		
 		int account = ms.balancePlus(seq,password,Integer.parseInt(balance));
 		System.out.println("balance = " + balance); // 이것도 나옴
@@ -241,7 +240,7 @@ public class MypageController implements Controller {
 		}
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("front?key=mypage&methodName=balancePlus");
+		mv.setViewName("front?key=mypage&methodName=balanceMinus");
 		return mv;
 
 	}

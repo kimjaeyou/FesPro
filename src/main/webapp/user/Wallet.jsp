@@ -16,13 +16,6 @@
     <link href="${path}/css/Wallet.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#charge-amount, #balance').on('input', function() {
-                this.value = this.value.replace(/[^0-9]/g, '');
-            });
-        });
-    </script>
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
