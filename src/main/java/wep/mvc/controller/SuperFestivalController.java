@@ -12,32 +12,32 @@ import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.service.FesSerevice;
+import wep.mvc.service.FesSereviceImpl;
 import wep.mvc.service.SuperFestivalService;
 import wep.mvc.service.SuperFestivalServiceImpl;
 
 public class SuperFestivalController implements Controller {
 	SuperFestivalService festivalService = new SuperFestivalServiceImpl();
+	FesSerevice fesService = new FesSereviceImpl();
 	
 	public SuperFestivalController() {
-		System.out.println("형우 / SuperFestivalController 생성자 Call");
+		//System.out.println("형우 / SuperFestivalController 생성자 Call");
 	}
 
 	/**
 	 *  문화행사 전체조회
 	 */
 	public ModelAndView selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-		System.out.println("형우 / selectAll Call");
-		//System.out.println("!!" +(String)req.getParameter("search"));
+		//System.out.println("형우 / selectAll Call");
 		
-		List<FesDTO> list =  festivalService.selectAll();
+		//List<FesDTO> list =  festivalService.selectAll();
+		
+		//fes테이블의 승인완료, 비활성화인 리스트 + waitfes테이블의 모든 리스트
+		List<FesDTO> list = festivalService.selectAllSuper();
 		
 		req.setAttribute("festivalList", list);
 
-		/*
-		 * //검색하고자할때 신호를 보냄 if(req.getParameter("search") !=null) {
-		 * req.setAttribute("search", (String)req.getParameter("search")); }
-		 */
-		
 		return new ModelAndView("super/festival/selectAll.jsp");
 	}
 	
@@ -45,14 +45,20 @@ public class SuperFestivalController implements Controller {
 	 * 문화행사 상세
 	 */
 	public ModelAndView detail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-		System.out.println("형우 / detail Call");
+		//System.out.println("형우 / detail Call");
 		
 		String svcid = req.getParameter("svcid");
+		String state = req.getParameter("state");
+		//System.out.println(state);
+		
 		
 		//FesDTO 정보 보내기
 		FesDTO fes = new FesDTO();
 		fes.setSVCID(svcid);
-		FesDTO searchFes = festivalService.select(fes);
+
+		boolean isWaitFes = (state.equals("0") || state.equals("2")); 	//승인대기 또는 수정대기인 행사를 자세히 보기했는지 
+		//System.out.println("isWaitFes / " +isWaitFes);
+		FesDTO searchFes=festivalService.select(fes,isWaitFes);
 		req.setAttribute("fes", searchFes);
 		
 		//USERsDTO 정보 보내기
@@ -80,11 +86,15 @@ public class SuperFestivalController implements Controller {
 	 * 문화행사 수정
 	 */
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-		System.out.println("update Call");
-		System.out.println("형우 / update Call");
+		//System.out.println("update Call");
+		//System.out.println("형우 / update Call");
 		//System.out.println(req.getParameter("SVCID"));
 		//System.out.println(req.getParameter("festivalStateOptions"));
-		int fesState = Integer.parseInt(req.getParameter("festivalStateOptions"));
+		int fesState = Integer.parseInt(req.getParameter("festivalStateOptions")); //라디오에서 넘어온 값
+		int originState = Integer.parseInt(req.getParameter("originState")); //라디오에서 변경하기 전 값
+		
+		System.out.println("오리진 스테이트 " + originState);
+		System.out.println("바꾸려는 스테이트 " + fesState);
 		
 		
 		FesDTO fes = new FesDTO();
@@ -109,24 +119,47 @@ public class SuperFestivalController implements Controller {
 	    fes.setV_MIN(req.getParameter("V_MIN"));
 	    fes.setREVSTDDAY(req.getParameter("REVSTDDAY"));
 	    fes.setREVSTDDAYNM(req.getParameter("REVSTDDAYNM"));
-	    //fes.setFes_state(Integer.parseInt(req.getParameter("Fes_state")));
 	    fes.setFes_state(fesState); //등록상태
 	    fes.setUpdate_date(req.getParameter("Update_date"));
 	    fes.setMAXNUM(Integer.parseInt(req.getParameter("MAXNUM")));
 	    fes.setPRICE(Integer.parseInt(req.getParameter("PRICE")));
 	    fes.setHost_seq(Integer.parseInt(req.getParameter("host_seq")));
 		
-		//int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
-		int result = festivalService.update(fes,fesState);
-		
-		if(result ==1) {
-			return new ModelAndView("front?key=superfestival&methodName=selectAll",true);
-		}
-		else {
-			//에러페이지
+	    int result=0;
+	    
+	    //등록대기에서 승인완료
+	    if(originState ==0 && fesState ==1) {
+	    	//fes에 insert
+	    	fesService.insert(fes);
+	    	//waitfes에 delete
+	    	result = festivalService.delete(fes);
+	    }
+	    //수정대기에서 승인완료
+	    else if(originState ==2 && fesState ==1) {
+	    	// fes에 update
+	    	fesService.update(fes);
+	    	//waitfes에서 delete
+	    	result = festivalService.delete(fes);
+	    }
+	    //완료상태에서 대기상태로
+	    else if(originState ==1 && (fesState ==0 || fesState==1)){
+	    	//fes에서 update
+	    	fesService.update(fes);
+	    	//waitfes에서 insert
+	    	//result = festivalService.insert(fes);
+	    }
+	    //나머지들은 그냥 FES에서 업데이트
+	    else {
+	    	festivalService.update(fes, fesState);
+	    }
+	    
+		if (result == 1) { 
+			// 성공
+		} else {
 			System.out.println("형우 / 행사 업데이트 실패 Controller-update");
-			return null;
 		}
+		
+		return new ModelAndView("front?key=superfestival&methodName=selectAll",true);
 	}
 	
 	/**
@@ -154,7 +187,7 @@ public class SuperFestivalController implements Controller {
 		//FesDTO 정보 보내기
 		FesDTO fes = new FesDTO();
 		fes.setSVCID(svcid);
-		FesDTO searchFes = festivalService.select(fes);
+		FesDTO searchFes = festivalService.select(fes,false);
 		req.setAttribute("fes", searchFes);
 		
 		//USERsDTO 정보 보내기
