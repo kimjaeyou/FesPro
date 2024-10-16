@@ -8,6 +8,10 @@ rollback;
 select * from FES;
 select * from FES WHERE FES_STATE = '1' or FES_STATE ='3'; --승인완료 + 비활성화
 
+select FES.SVCNM,FES.FES_STATE from FES WHERE SVCID='S240919144615203064';
+
+-- 수정
+
 --추가(더미)
 INSERT INTO FES VALUES (
     'SVC001', '문화', '음악', '운영중', '서울재즈페스티벌', '현장결제', '서울 올림픽공원', '일반', '37.520454', '127.121788', 
@@ -138,6 +142,9 @@ SELECT * FROM FES_REVIEW_USER_VIEW;
 
 --조회
 select * from WAIT_FES;
+
+--삭제
+delete from WAIT_FES WHERE SVCID = '1';
 
 -- FES + Wait_FES ============================================================
 SELECT Null as WAIT_FES_SEQ, f.*

@@ -5,9 +5,15 @@
 <html lang="UTF-8">
 <jsp:include page="/common/header.jsp" />
 
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 
 <style>
 .body_containner .area1 {
@@ -94,7 +100,7 @@
 	left: 6%;
 	position: relative; /* relative로 변경 */
 	float: left;
-	border: 1px solid rgb(0,123,255);
+	border: 1px solid rgb(0, 123, 255);
 	border-radius: 10px;
 	clear: both; /* float 해제 */
 	margin-top: 30px; /* 여백 추가 */
@@ -106,6 +112,74 @@
 	font: bold;
 	font-family: 'Noto Sans';
 }
+
+#reviewsContainer {
+	display: flex;
+}
+
+#reviews {
+	flex: 2;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+}
+
+#graphM {
+	align-content: center;
+	text-align:center; 
+	padding: 15px;
+	background-color: #f1f1f1;
+	width:100%;
+}
+
+.rv_con {
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 15px;
+	margin-bottom: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	font-size: 20px;
+	color: #555;
+	width: 90%;
+}
+
+.rv_con span {
+	margin-left: 5%;
+	font-size: 20px;
+	color: #D9D748;
+}
+
+.avg_con {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  color: #555;
+  width: 90%;
+}
+
+.avg_range {
+  font-size: 20px;
+  color: #555;
+  margin: 0 10px;
+}
+
+#num {
+  position: relative;
+  float: left;
+  font-size: 20px;
+  color: #D9D748;
+}
+
+
+
+
 </style>
 </head>
 <body>
@@ -127,15 +201,16 @@
 				<div class="cost">이용요금 : ${fes.PRICE}</div>
 				<div class="how">예약방법 : 현장 결제/사전 결제</div>
 				<div class="tel">문의 : ${fes.TELNO}</div>
-				<form action="front?key=reservation&methodName=revMove">
+				<form action="front">
 					<input type="hidden" name="key" value="reservation" /> <input
 						type="hidden" name="methodName" value="revMove" /> <input
-						type="hidden" name="SVCID" value="${fes.SVCID}" />
-						<input type = "hidden" name="SVCNM" value = "${fes.SVCNM}"/>
-						<input type = "hidden" name="fes" value = "${fes}"/>
+						type="hidden" name="SVCID" value="${fes.SVCID}" /> <input
+						type="hidden" name="SVCNM" value="${fes.SVCNM}" /> <input
+						type="hidden" name="fes" value="${fes}" />
 					<button class="btn btn-primary" id="reservation">예약하기</button>
 					<button class="btn btn-primary" id="like">좋아요</button>
 				</form>
+
 
 			</div>
 
@@ -153,7 +228,8 @@
 					const data = `${fes.DTLCONT}`;
 					let formattedData = data.replace(/다\./g, '다.<br>');
 					/* formattedData = formattedData.replace(/(\d)\. /g, '<br>$1.'); */
-					formattedData = formattedData.replace(/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g, '<br>$1');
+					formattedData = formattedData.replace(
+							/(\★|\※|\▣|\■|\▶|\□|\○|\❐|\ㅇ)/g, '<br>$1');
 
 					document.querySelector('.data_explain').innerHTML = formattedData
 							+ "<br><br>";
@@ -170,12 +246,33 @@
 <!-- <script src="js/scripts.js"></script> -->
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
 <script type="text/javascript">
-	document.getElementById('like').addEventListener('click', function(e) {
-		document.querySelector('input[name="key"]').value = 'main';
-		document.querySelector('input[name="methodName"]').value = 'setLike';
+	$('#like').on('click', function(e) {
+		e.preventDefault(); // 기본 동작 막기
+
+		// 필요한 데이터 가져오기
+		const sid = $('input[name="SVCID"]').val();
+
+		$.ajax({
+			url : 'ajax?key=main&methodName=setLike',
+			type : 'POST',
+			dataType : 'json',
+			data : {
+				sid : sid
+			},
+			success : function(res) {
+
+				alert(res === 1 ? '좋아요가 등록되었습니다.' : '좋아요 등록에 실패했습니다.');
+			},
+			error : function(err) {
+
+				console.log(err);
+			}
+		});
 	});
 
 	document
@@ -188,56 +285,84 @@
 						let formattedData = data.replace(/다\./g, '다.<br>');
 						/* formattedData = formattedData.replace(/(\d)\./g,
 								'<br>$1.'); */
-						formattedData = formattedData.replace(/(\★|\※|\▣|\■|\▶|\□|\○|\❐ )/g,
-								'<br>$1');
+						formattedData = formattedData.replace(
+								/(\★|\※|\▣|\■|\▶|\□|\○|\❐|\ㅇ)/g, '<br>$1');
 
 						document.querySelector('.data_explain').innerHTML = formattedData
 								+ '<br><br>';
 					});
 
-	document.getElementById('maps').addEventListener(
-			'click',
-			function(e) {
-				const x = parseFloat('${fes.getX()}').toFixed(4);
-				const y = parseFloat('${fes.getY()}').toFixed(4);
-				// .data_explain 영역을 초기화
-				document.querySelector('.data_explain').innerHTML = "";
+	document.getElementById('maps').addEventListener('click', function(e) {
+		const x = parseFloat('${fes.getX()}').toFixed(4);
+		const y = parseFloat('${fes.getY()}').toFixed(4);
+		// .data_explain 영역을 초기화
+		document.querySelector('.data_explain').innerHTML = "";
 
-				// 카카오맵 API 로드 후 지도 생성
-				kakao.maps.load(function() {
-					// 지도가 들어갈 HTML 요소 생성
-					const mapContainer = document.createElement('div');
-					mapContainer.style.width = '100%'; // 너비 조정
-					mapContainer.style.height = '400px'; // 높이 조정
-					document.querySelector('.data_explain').appendChild(
-							mapContainer);
+		// 카카오맵 API 로드 후 지도 생성
+		kakao.maps.load(function() {
+			// 지도가 들어갈 HTML 요소 생성
+			const mapContainer = document.createElement('div');
+			mapContainer.style.width = '100%'; // 너비 조정
+			mapContainer.style.height = '400px'; // 높이 조정
+			document.querySelector('.data_explain').appendChild(mapContainer);
 
-					// 지도의 중심좌표 설정 (여기서는 서울 시청 좌표 사용)
-					const mapOption = {
-						center : new kakao.maps.LatLng(y, x), // 지도의 중심좌표
-						level : 3
-					// 지도의 확대 레벨
-					};
-					// 지도 생성
-					const map = new kakao.maps.Map(mapContainer, mapOption);
+			// 지도의 중심좌표 설정 (여기서는 서울 시청 좌표 사용)
+			const mapOption = {
+				center : new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+			// 지도 생성
+			const map = new kakao.maps.Map(mapContainer, mapOption);
 
-					// 마커 추가 (마커를 지도에 표시할 위치)
-					const markerPosition = new kakao.maps.LatLng(
-							y, x);
+			// 마커 추가 (마커를 지도에 표시할 위치)
+			const markerPosition = new kakao.maps.LatLng(y, x);
 
-					// 마커 생성
-					const marker = new kakao.maps.Marker({
-						position : markerPosition
-					});
-
-					// 마커를 지도 위에 표시
-					marker.setMap(map);
-				});
+			// 마커 생성
+			const marker = new kakao.maps.Marker({
+				position : markerPosition
 			});
 
-	document.getElementById('review').addEventListener('click', function(e) {
-
+			// 마커를 지도 위에 표시
+			marker.setMap(map);
+		});
 	});
+
+	document.getElementById('review').addEventListener('click',
+					function(e) {
+						let score=0;
+						let cnt=0;
+						document.querySelector('.data_explain').innerHTML = "";
+						const sid = $('input[name="SVCID"]').val();
+						$.ajax({
+									url : 'ajax?key=main&methodName=selecReview',
+									type : 'get',
+									dataType : 'json',
+									data : {sid : sid},
+									success : function(res) {
+										let str = '<div id=reviewsContainer><div id=reviews>';
+										$.each(res,function(index, item) {
+															score+=item.SCORE;
+															cnt=index;
+															str += "<div class=rv_con>"
+																	+ item.RV_CONTENT
+																	+ "<span>"
+																	+ "★".repeat(item.SCORE)
+																	+ "☆".repeat(5 - item.SCORE)
+																	+ "</span></div>";
+														});
+										str += "</div></div>";
+										avg = score/(cnt+1);
+										str +='<br><div><h2>평점 : '+avg+'</h2></div>'+'<div class=avg_con><div class="avg_range">0</div><div style="'+ 
+												'font-size: 20px; background-color: #75DE27; height : 40px; width :' +100*(avg/5)+'%; ">'
+										+'</div><span style="margin-left:19%;">MAX</span></div>'
+										$('.data_explain').html(str);
+									},
+									error : function(err) {
+										console.log(err);
+									}
+								});
+					});
 </script>
 
 

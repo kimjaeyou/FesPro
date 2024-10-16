@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.WAIT_FES;
 
 public interface FesSerevice{
 
@@ -13,7 +14,17 @@ public interface FesSerevice{
 
 	FesDTO selectBySVCID(String sVCID) throws SQLException;
 
-	void update(FesDTO fesDTO) throws SQLException;
+	void update(WAIT_FES waitFes) throws SQLException;
+
+	void insertListener(FesDTO fesdto) throws SQLException;
+
+	List<WAIT_FES> selectWaitFesList(int host_seq) throws SQLException;
+
+	WAIT_FES fesWaitselectBySVCID(String sVCID) throws SQLException;
+
+	void updateFes(String sVCID) throws SQLException;
+
+	void updateFes(String sVCID, int i) throws SQLException;
 
 	//List<FesDTO> selectAll() throws SQLException;
 

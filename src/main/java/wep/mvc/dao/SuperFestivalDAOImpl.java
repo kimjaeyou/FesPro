@@ -132,6 +132,9 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 				result = new FesDTO(svcid, MaxClassNm, MinClassNm, svcStateNm, svcNm, payAtNm, placeNm, useTgtInfo, x,
 						y, svcOpnbgndt, svcOpnenddt, rcptdgndt, areaNm, imgUrl, dtlCont, telNo, vMax, vMin, revStdDay,
 						revStdDayNm, fesState, updateDate, maxNum, price, hostSeq);
+				result.setRCPTENDDT(rs.getString("RCPTENDDT")); //누락된 부분 객체에 넣어주기
+				
+				//System.out.println("@@@@@@@@@@@@@@@@" +rs.getString("RCPTENDDT"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -158,6 +161,85 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 			
 			ps.setInt(1, state);
 			ps.setString(2, festivalDto.getSVCID());
+
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
+	}
+	
+	/**
+	 * 행사 수정
+	 */
+	@Override
+	public int update(FesDTO fesDto) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		String sql = "UPDATE FES SET "
+				+ "MAXCLASSNM =?, "
+				+ "MINCLASSNM =?, "
+				+ "SVCSTATNM=?, "
+				+ "SVCNM =?, "
+				+ "PAYATNM=?, "
+				+ "PLACENM=?, "
+				+ "USETGTINFO =?, "
+				+ "X=?, "
+				+ "Y=?, "
+				+ "SVCOPNBGNDT=?, "
+				+ "SVCOPNENDDT=?, "
+				+ "RCPTBGNDT=?, "
+				+ "AREANM=?, "
+				+ "IMGURL=?, "
+				+ "DTLCONT=?, "
+				+ "TELNO=?, "
+				+ "V_MAX=?, "
+				+ "V_MIN=?, "
+				+ "REVSTDDAY=?, "
+				+ "REVSTDDAYNM=?, "
+				+ "FES_STATE=?, "
+				+ "UPDATE_DATE=?, "
+				+ "MAXNUM=?, "
+				+ "PRICE=?, "
+				//+ "HOST_SEQ =? "
+				+ "RCPTENDDT=? "
+				+ "WHERE SVCID = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, fesDto.getMAXCLASSNM());
+		    ps.setString(2, fesDto.getMINCLASSNM());
+		    ps.setString(3, fesDto.getSVCSTATNM());
+		    ps.setString(4, fesDto.getSVCNM());
+		    ps.setString(5, fesDto.getPAYATNM());
+		    ps.setString(6, fesDto.getPLACENM());
+		    ps.setString(7, fesDto.getUSETGTINFO());
+		    ps.setString(8, fesDto.getX());
+		    ps.setString(9, fesDto.getY());
+		    ps.setString(10, fesDto.getSVCOPNBGNDT());
+		    ps.setString(11, fesDto.getSVCOPNENDDT());
+		    ps.setString(12, fesDto.getRCPTBGNDT());
+		    ps.setString(13, fesDto.getAREANM());
+		    ps.setString(14, fesDto.getIMGURL());
+		    ps.setString(15, fesDto.getDTLCONT());
+		    ps.setString(16, fesDto.getTELNO());
+		    ps.setString(17, fesDto.getV_MAX());
+		    ps.setString(18, fesDto.getV_MIN());
+		    ps.setString(19, fesDto.getREVSTDDAY());
+		    ps.setString(20, fesDto.getREVSTDDAYNM());
+		    ps.setInt(21, fesDto.getFes_state());
+		    ps.setString(22, fesDto.getUpdate_date());
+		    ps.setInt(23, fesDto.getMAXNUM());
+		    ps.setInt(24, fesDto.getPRICE());
+		    ps.setString(25, fesDto.getRCPTENDDT());
+		    ps.setString(26, fesDto.getSVCID());
 
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -504,4 +586,52 @@ public class SuperFestivalDAOImpl implements SuperFestivalDAO {
 		}
 		return list;
 	}
+	/**
+	 * waitfes에서 삭제
+	 */
+	@Override
+	public int delete(FesDTO fes) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql = "delete from WAIT_FES WHERE SVCID = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, fes.getSVCID());
+			
+			result = ps.executeUpdate();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteFes(FesDTO fes) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql = "delete from FES WHERE SVCID = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, fes.getSVCID());
+			
+			result = ps.executeUpdate();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	
 }
