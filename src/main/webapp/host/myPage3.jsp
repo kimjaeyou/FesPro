@@ -21,7 +21,7 @@
         <meta name="author" content="" />
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="css/My_styles.css" rel="stylesheet" />
+        <link href="${path}/css/My_styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <script>
    	/* 캔버스엘리먼트 이름으로 찾기 */
@@ -31,7 +31,7 @@
 
     /* 리퀘스트 데이터 - 유저 */
    	const userList = ${requestScope.userList};
-   	//console.log(userList);
+   	console.log(userList);
    		
 	/* 리퀘스트 데이터 - 리뷰 */
   	const reviewFunc= function(){
@@ -51,7 +51,7 @@
 	  	
   	/* 리퀘스트 데이터 - 리뷰쓴 유저 */
 	const reviewUserList = ${requestScope.reviewUserList};
-  	//console.log(reviewUserList);
+  	console.log(reviewUserList);
 	   	 
     	$(function(){
     		reviewFunc();
@@ -180,7 +180,7 @@
 						<i class="fas fa-chart-area me-1"></i> 연령, 성별 통계
 					</div>
 					<div class="card-body">
-						<canvas id="ageGender" width="100%" height="40"></canvas>
+						<canvas id="ageGender" width="90%" height="400"></canvas>
 					</div>
 				</div>
 			</div>
@@ -191,7 +191,7 @@
 						<i class="fas fa-chart-area me-1"></i> 남녀 비율
 					</div>
 					<div class="card-body">
-						<canvas id="genderRatio" width="100%" height="40"></canvas>
+						<canvas id="genderRatio" width="90%" height="40"></canvas>
 					</div>
 				</div>
 			</div>
@@ -202,7 +202,7 @@
 						<i class="fas fa-chart-area me-1"></i> 연령대 별 비율
 					</div>
 					<div class="card-body">
-						<canvas id="ageRatio" width="100%" height="40"></canvas>
+						<canvas id="ageRatio" width="90%" height="40"></canvas>
 					</div>
 				</div>
 			</div>
@@ -213,7 +213,7 @@
 						<i class="fas fa-chart-bar me-1"></i> 성별 별 평균 평점
 					</div>
 					<div class="card-body">
-						<canvas id="genderReviewAvg" width="100%" height="40" ></canvas>
+						<canvas id="genderReviewAvg" width="90%" height="40" ></canvas>
 					</div>
 				</div>
 			</div>
@@ -224,7 +224,7 @@
 							<i class="fas fa-chart-bar me-1"></i> 연령대 별 평균 평점
 						</div>
 						<div class="card-body">
-							<canvas id="ageReviewAvg" width="100%" height="40"></canvas>
+							<canvas id="ageReviewAvg" width="90%" height="40"></canvas>
 						</div>
 					</div>
 			</div>
@@ -249,12 +249,12 @@
                 </main>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<!--         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/My_scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="js/datatables-simple-demo.js"></script> -->
     </body>
 </html>

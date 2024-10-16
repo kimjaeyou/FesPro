@@ -60,4 +60,3 @@ public interface ReservationService {
 	public int changeReservation (int resvSeq) throws SQLException;
 	
 }
-

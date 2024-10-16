@@ -290,8 +290,8 @@ function checkValid(){
         		<td width="1000"><p align="center"><span><input type="text" id="placenm" name="PLACENM" size="100" onkeyup="getPLACENMValue()" value="${fesDTO.PLACENM}"></span></p>
         		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13ac0c7b043360f46d8f5ed642147a6a&libraries=services&onload=false"></script>
         		
-     			<label>위도: <input type="text" id="latitude" name="X" readonly value="${fesDTO.getX()}"></label>
-				<label>경도: <input type="text" id="longitude" name="Y" readonly value="${fesDTO.getY()}"></label>
+     			<label>위도: <input type="text" id="latitude" name="Y" readonly value="${fesDTO.getY()}"></label>
+				<label>경도: <input type="text" id="longitude" name="X" readonly value="${fesDTO.getX()}"></label>
         		<div id="map" style="width:100%;height:350px;"></div>
      			<input type="text" name="AREANM" size="15" value="${fesDTO.AREANM}">
      			</span></p></td>
@@ -317,8 +317,8 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(
-        	${fesDTO.getX() != null ? fesDTO.getX() : 37.566826}, 
-            ${fesDTO.getY() != null ? fesDTO.getY() : 126.9786567}), // 지도의 중심좌표
+        	${fesDTO.getY() != null ? fesDTO.getY() : 37.566826}, 
+            ${fesDTO.getX() != null ? fesDTO.getX() : 126.9786567}), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
