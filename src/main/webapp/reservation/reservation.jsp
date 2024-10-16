@@ -80,14 +80,14 @@
 
         </style>
 		
-		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		
 		<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
 		
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
  		<link rel="stylesheet" href="/resources/demos/style.css">
-  		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+ 
   		<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
 		
 		<script type="text/javascript">
@@ -238,17 +238,12 @@
 					dateFormat: dateFormat
 				}) */
 				
+	           
 				
         }	 // onload 끝
       
 		</script>
-		<script type="text/javascript">
-		$(function() {
-			$('#datepicker').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-		})
-		</script>
+
 		
     </head>
     <body>
@@ -320,7 +315,7 @@
 
                                   <!-- vanilla js-date picker -->
 	                                  <!-- <div class="form-floating mb-4 d-flex"> -->
-	                                 <form>
+	                                 <!-- <form>
 	                                  <input type = "text" placeholder="날짜선택" class = "date_input">
 	                                  <div class="form-floating">
 	                                  	
@@ -336,9 +331,9 @@
 	                                  
 	                                  
 	                                </div> 
-	                                </form>
+	                                </form> -->
 	                                
-	                                <!-- <input type = "text" id="datepicker"> -->
+	                                <input type = "text" id="datepicker">
 	                                
                                 </div>
                               </div>
@@ -495,7 +490,8 @@
         <!-- Core theme JS-->
         <script src="${path}/reservation/js/scripts.js"></script>
 
-        <script src="${path}/reservation/js/jquery-3.3.1.min.js"></script>
+       <%--  <script src="${path}/reservation/js/jquery-3.3.1.min.js"></script> --%>
+       
         <script src="${path}/reservation/js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="${path}/reservation/js/rome.js"></script>
@@ -558,6 +554,13 @@
                 }
 			}
 			
+		</script>
+		<script type="text/javascript">
+		   $(function(){
+			   $('#datepicker').datepicker({
+				   format: 'YYYY-mm-DD'
+			   }).datepicker('show');
+		   })
 		</script>
 		
 
