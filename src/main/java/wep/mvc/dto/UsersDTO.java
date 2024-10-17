@@ -59,12 +59,13 @@ public class UsersDTO {
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 	}
-	public UsersDTO(String user_id, String user_name, int user_seq, String email, String user_tel) {
+	public UsersDTO(String user_id, String user_name, int user_seq, String email, String user_tel, int user_ben_check) {
 		this.user_id = user_id;
 		this.user_name = user_name;
 		this.user_seq = user_seq;
 		this.email = email;
 		this.user_tel = user_tel;
+		this.user_ben_check= user_ben_check;
 	}
 
 	public UsersDTO(int user_seq, String user_id, String user_pw, int age, String addr, String gender, String email,

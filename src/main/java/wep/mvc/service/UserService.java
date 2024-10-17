@@ -15,13 +15,4 @@ public interface UserService {
 	// 회원가입
 	int insert(UsersDTO usersDTO) throws SQLException;
 
-	// 회원탈퇴
-	int delete(String id) throws SQLException;
-
-	// 회원수정
-	int update(UsersDTO usersDTO) throws SQLException;
-
-	// 회원데이터 가져오기 - 수정할때 필요
-	UsersDTO selectUser(String user) throws SQLException;
-
 }

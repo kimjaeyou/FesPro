@@ -149,6 +149,7 @@ img {
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	gap: 20px;
 }
 
 .active {
@@ -227,13 +228,14 @@ img {
 					</c:when>
 
 					<c:when test="${empty sessionScope.loginUser}">
-						<button type="button" class="btn btn-outline-primary me-2">
+						<button type="button" class="btn btn-outline-primary me2">
 							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
+								style=" color: inherit;">로그인</a>
 						</button>
+						<br>
 						<button type="button" class="btn btn-primary">
 							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
+								style=" color: inherit;">회원가입</a>
 						</button>
 					</c:when>
 
