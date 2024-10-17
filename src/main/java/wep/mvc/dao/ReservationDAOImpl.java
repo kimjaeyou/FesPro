@@ -31,13 +31,19 @@ public class ReservationDAOImpl implements ReservationDAO {
 		try {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
+			num = this.getReservNumForInsert (reservation, con); 
+			
+			
+			
+			System.out.println("getReservNumForInsert 호출합니다~~~");
+			
+			
+			if (num >= 10) {
+				con.rollback(); throw new SQLException("예약인원 초과"); 
+			}
+			 
+			
 			ps = con.prepareStatement(sql);
-			
-			/*
-			 * num = this.getReservNumForInsert (reservation, con); if (num >= 10) {
-			 * con.rollback(); throw new SQLException("예약인원 초과"); }
-			 */
-			
 			ps.setInt(1, reservation.getUserSeq());
 			ps.setString(2, reservation.getSVCID());
 			ps.setString(3, reservation.getSvcDate());
@@ -48,13 +54,16 @@ public class ReservationDAOImpl implements ReservationDAO {
 			ps.setString(8, reservation.getCancleDate());
 			
 			result = ps.executeUpdate();
+			
 			if(result == 1) {
 				System.out.println("성공");
+				con.commit();
 			}
 		
 		}finally {
 			DbUtil.dbClose(con, ps);
 		}
+		
 		return result;
 	}
    
@@ -449,6 +458,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		ResultSet rs = null;
 		int count=0;
 		
+		System.out.println("getReservNumForInsert 호출되었습니다~~");
 		// select * from reservation where SVCID = ? and svc_date = ?;
 		String sql = "select * from reservation where SVCID = ? and svc_date = ? and svc_time = ?";
 		

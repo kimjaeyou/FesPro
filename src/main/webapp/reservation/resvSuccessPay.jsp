@@ -51,7 +51,7 @@
         <script>
             $(function () {
                 $(document).on("click", "#goMain", function(){
-                    location.href="${path}/index.jsp";
+                    location.href="${path}/front?key=main&methodName=read";
                 });
                 
             }) // function end
@@ -122,6 +122,14 @@
                     <td name="svcDate">
 						<c:if test="${not empty resvData}">
 								${resvData.svcDate}
+						</c:if>
+					</td>
+                </tr>
+                <tr>
+                    <th>회차</td>
+                    <td name="svcTime">
+						<c:if test="${not empty resvData}">
+								${resvData.svcTime}
 						</c:if>
 					</td>
                 </tr>

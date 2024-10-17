@@ -87,4 +87,10 @@ public class MypageServiceImpl implements MypageService {
 		return md.balanceCheck(seq, password);
 	}
 
+	@Override
+	public boolean checkReview(int reSeq, int seq) {
+		
+		return md.checkReview(reSeq,seq);
+	}
+
 }

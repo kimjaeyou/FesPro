@@ -55,5 +55,7 @@ public interface MypageDAO {
 	WALLET balancePlus(int amount, int seq) throws SQLException;
 
 	// 잔액 조회
-	WALLET balanceSelect(int seq) throws SQLException;
+	WALLET balanceSelect(int seq)throws SQLException;
+	
+	boolean checkReview(int reSeq, int seq);
 }
