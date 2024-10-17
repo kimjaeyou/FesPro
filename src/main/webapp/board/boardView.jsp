@@ -61,7 +61,14 @@
                                 </c:when>
 									<c:when test="${not empty post.hostSeq}">
                                     ${post.hostSeq}
-                                </c:when></td>
+                                </c:when>
+<<<<<<< HEAD
+                                </c:choose></td>
+                             
+=======
+                                </c:choose>
+                             </td>
+>>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 						</tr>
 						<tr>
 							<td>제목</td>

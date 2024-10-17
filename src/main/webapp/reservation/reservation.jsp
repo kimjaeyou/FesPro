@@ -189,7 +189,8 @@
 			})
 	
 			$(document).on("click", ".time", function() {
-				let time = $(this).text();
+				let time = $(this).text().trim();
+				console.log(time);
 				$("[data-form=time]").html(time);
 			})
 	
@@ -567,7 +568,7 @@
 			// 유효성 검사 : 날짜 회차 인원
 			function sendInsert() {
 			    let date = $("[data-form=date]").text().trim();
-			    let time = $(".selectTime").text().trim();
+			    let time = $(".selectTime").text().trim().substr(0,2);
 			    let peopleNum = $("[data-form=peopleNum]").text();
 			    let feeString = $("[data-form=fee]").text();
 			    
@@ -582,7 +583,7 @@
                let testnum1 = Number($("[data-form=peopleNum]").text());
       		   let testnum2_1 = $("[data-form=time]").text().substr(4,2).trim();
       		   
-      		   let testnum3 = $("[data-form=time]").text().slice(-3, 9).trim() // 정원 통일하면 값 조정해주기
+      		   let testnum3 = $("[data-form=time]").text().slice(-3, 10).trim() // 정원 통일하면 값 조정해주기
       		   let testnum3_1 = Number(testnum3);
       		   
       		   let testnum2 = Number(testnum2_1);

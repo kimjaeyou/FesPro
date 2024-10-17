@@ -26,7 +26,7 @@ public class MypageDAOImpl implements MypageDAO {
 		ResultSet rs = null;
 		List<ReservationDTO2> list = new ArrayList<ReservationDTO2>();
 
-		String sql = "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check FROM fes, reservation WHERE fes.svcid= reservation.svcid and user_seq = ? and reserv_check = 1 order by reserv_seq asc";
+		String sql = "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check,fes.SVCID FROM fes, reservation WHERE fes.svcid= reservation.svcid and user_seq = ? and reserv_check = 1 order by reserv_seq asc";
 
 		try {
 			con = DbUtil.getConnection();
@@ -39,14 +39,87 @@ public class MypageDAOImpl implements MypageDAO {
 						rs.getString(3), // svcDate
 						rs.getString(4), // resvDate
 						rs.getString(5), rs.getInt(6), // resvPrice
-						rs.getInt(7)); // resvCheck
-
+						rs.getInt(7), // resvCheck
+						rs.getString(8)); // resvCheck
 				list.add(res);
 			}
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return list;
+	}
+
+	// 회원탈퇴
+	@Override
+	public int delete(String id) throws SQLException {
+		PreparedStatement ps = null;
+		Connection con = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("update users set user_ben_check = 0 where user_id = ?");
+			ps.setString(1, id);
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	// 회원수정
+	@Override
+	public int update(UsersDTO usersDTO) throws SQLException {
+		PreparedStatement ps = null;
+		Connection con = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(
+					"update users	set user_pw=?, age=?, addr=?, gender=?, email=?, user_name=?, disable=?, user_tel=? where user_id=?");
+
+			ps.setString(1, usersDTO.getUser_pw());
+			ps.setInt(2, usersDTO.getAge());
+			ps.setString(3, usersDTO.getAddr());
+			ps.setString(4, usersDTO.getGender());
+			ps.setString(5, usersDTO.getEmail());
+			ps.setString(6, usersDTO.getUser_name());
+			ps.setString(7, usersDTO.getDisable());
+			ps.setString(8, usersDTO.getUser_tel());
+			ps.setString(9, usersDTO.getUser_id());
+
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	// 회원수정 할때 데이터 넣기위해 DB 자료 꺼내기
+	@Override
+	public UsersDTO selectUser(String usersDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		UsersDTO dbDTO = null;
+		String sql = "select * from users where user_id=?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, usersDTO);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				dbDTO = new UsersDTO(rs.getInt("user_seq"), rs.getString("user_id"), rs.getString("user_pw"),
+						rs.getInt("age"), rs.getString("addr"), rs.getString("gender"), rs.getString("email"),
+						rs.getString("user_name"), rs.getString("disable"), rs.getString("user_tel"));
+
+			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dbDTO;
 	}
 
 	// 예약내역 부분검색
@@ -130,7 +203,7 @@ public class MypageDAOImpl implements MypageDAO {
 
 	// 리뷰 부분검색
 	@Override
-	public List<ReviewDTO2> reviewSelect(int seq , String svcnm) throws SQLException {
+	public List<ReviewDTO2> reviewSelect(int seq, String svcnm) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -144,8 +217,7 @@ public class MypageDAOImpl implements MypageDAO {
 			ps.setString(2, "%" + svcnm + "%");
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				ReviewDTO2 res = new ReviewDTO2(
-						rs.getInt(1), // reservSeq
+				ReviewDTO2 res = new ReviewDTO2(rs.getInt(1), // reservSeq
 						rs.getInt(2), // 서비스명 넣어줘야해여
 						rs.getString(3), // svcDate
 						rs.getString(4), // resvDate
@@ -226,7 +298,7 @@ public class MypageDAOImpl implements MypageDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, seq);
-			ps.setString(2, "%"+svcnm+"%");
+			ps.setString(2, "%" + svcnm + "%");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				FesDTO res = new FesDTO(rs.getString(1), // 서비스 아이디
@@ -248,7 +320,6 @@ public class MypageDAOImpl implements MypageDAO {
 		}
 		return list;
 	}
-
 
 	// 즐겨찾기 삭제
 	@Override
@@ -351,5 +422,40 @@ public class MypageDAOImpl implements MypageDAO {
 		}
 		return wallet;
 	}
+	
+	public boolean checkReview(int reSeq, int seq) {
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String sql = "SELECT * FROM REVIEW WHERE REVIEW_SEQ = ? AND USER_SEQ = ?";
+	    boolean reviewExists = false; // 리뷰 존재 여부를 저장할 변수
+
+	    try {
+	        // DB 연결
+	        con = DbUtil.getConnection();
+	        // 쿼리 준비
+	        ps = con.prepareStatement(sql);
+	        // 쿼리 파라미터 설정
+	        ps.setInt(1, reSeq); // 예약 시퀀스
+	        ps.setInt(2, seq);   // 사용자 시퀀스
+	        // 쿼리 실행
+	        rs = ps.executeQuery();
+
+	        // 결과가 있으면 리뷰가 존재하는 것
+	        if (rs.next()) {
+	            reviewExists = true;
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // 예외 처리
+	    } finally {
+	        // 리소스 해제
+	        DbUtil.dbClose(con, ps, rs);
+	    }
+
+	    // 리뷰 존재 여부 반환
+	    return reviewExists;
+	}
+	
 
 }

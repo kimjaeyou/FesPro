@@ -117,6 +117,14 @@
 					</td>
                 </tr>
                 <tr>
+                    <th>회차</td>
+                    <td name="svcTime">
+						<c:if test="${not empty resvData}">
+								${resvData.svcTime}
+						</c:if>
+					</td>
+                </tr>
+                <tr>
                     <th>이용인원</td>
                     <td name="resvPeo">
 						<c:if test="${not empty resvData}">

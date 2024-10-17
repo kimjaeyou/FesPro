@@ -446,7 +446,7 @@
 													+ 100
 													* (avg / 5)
 													+ '%; ">'
-													+ '</div><span style="margin-left:19%;">MAX</span></div>'
+													+ '</div><span style="position:absolute; left:83%;">MAX</span></div>'
 											$('.data_explain').html(str);
 										}
 										else{

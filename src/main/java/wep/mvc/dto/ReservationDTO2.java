@@ -43,6 +43,20 @@ public class ReservationDTO2 {
 		this.resv_Check = resv_Check;
 	}
 
+	
+	public ReservationDTO2(int reserv_Seq, String svcnm, String svc_Time, String svc_Date, String resv_Date,
+			int resv_Price, int resv_Check, String sVCID) {
+		super();
+		this.reserv_Seq = reserv_Seq;
+		this.svcnm = svcnm;
+		this.svc_Time = svc_Time;
+		this.svc_Date = svc_Date;
+		this.resv_Date = resv_Date;
+		this.resv_Price = resv_Price;
+		this.resv_Check = resv_Check;
+		this.SVCID = sVCID;
+	}
+
 	public int getReserv_Seq() {
 		return reserv_Seq;
 	}
