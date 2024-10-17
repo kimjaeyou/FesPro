@@ -215,18 +215,11 @@ th:nth-child(2), td:nth-child(2) {
 				</tbody>
 			</table>
 
-<<<<<<< HEAD
                 <!-- 글쓰기 버튼을 오른쪽 아래에 고정 -->
                 <a href="${path}/front?key=board&methodName=moveWritePage" class="btn-custom">글쓰기</a>
             </div>
         </div>
     </div>
-=======
-			<a href="${path}/front?key=board&methodName=moveWritePageFree"
-				class="btn btn-primary pull-right">글쓰기</a>
-		</div>
-	</div>
->>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="${path}/js/bootstrap.js"></script>

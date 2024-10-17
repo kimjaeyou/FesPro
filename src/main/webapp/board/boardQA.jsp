@@ -18,7 +18,7 @@
 
 /* 배경 이미지 설정 스타일 */
 #head {
-    background-image: url("${path}/assets/img/Main_bg.png"); /* 경로 수정 */
+    background-image: url("${path}/assets/img/Main_bg.png");
     background-size: cover; /* 이미지가 요소를 꽉 채우도록 설정 */
     background-position: center;
     background-repeat: no-repeat;

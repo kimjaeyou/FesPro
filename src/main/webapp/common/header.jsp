@@ -227,15 +227,9 @@ img {
 							href="${path}/front?key=main&methodName=searchPage&search=산림여가">산림여가</a></li>
 					</ul></li>
 				<li><a href="#" class="nav-link px-2">예약보기</a></li>
-<<<<<<< HEAD
 				<li><a href="${path}/front?key=board&methodName=readFree"
 					class="nav-link px-2">자유 게시판</a></li>
 				<li><a href="${path}/front?key=board&methodName=readNoti"
-=======
-				<li><a href="${path}/front?key=board&methodName=select"
-					class="nav-link px-2">게시판</a></li>
-				<li><a href="${path}/front?key=board&methodName=read"
->>>>>>> branch 'Integration' of https://github.com/kimjaeyou/FesPro.git
 					class="nav-link px-2">공지사항</a></li>
 			</ul>
 
@@ -286,7 +280,7 @@ img {
 								<div class="con_cells">
 									<img id="profil" alt="profil"
 										src="${path}/assets/img/profil.png">안녕하세요,
-									${sessionScope.loginCom.com_name}님!
+									${sessionScope.loginCom.user_name}님!
 								</div>
 							</div>
 							<div class="con_rows">
