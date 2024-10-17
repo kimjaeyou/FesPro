@@ -126,5 +126,4 @@ public class BoardController implements Controller {
 
 		return new ModelAndView("index.jsp", true);
 	}
-
 }

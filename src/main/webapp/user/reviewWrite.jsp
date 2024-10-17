@@ -105,15 +105,15 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>리뷰 작성 페이지</h2>
+        <h2>간단 리뷰 작성</h2>
         <c:choose>
             <c:when test="${reviewExists}">
                 <p class="already-exists">이미 해당 예약에 대한 리뷰를 작성하셨습니다.</p>
             </c:when>
             <c:otherwise>
-                <form action="${path}/submitReview" method="post">
-                    <input type="hidden" name="reSeq" value="${reSeq}">
-                    
+                <form action="${path}/front?key=superAuth&methodName=reviewInsert" method="post">
+                    <input type="hidden" name="svcId" value="${svcId}">
+                    <input type="hidden" name="userSeq" value="${userSeq}">
                     <label for="reviewContent">리뷰 내용:</label>
                     <textarea id="reviewContent" name="reviewContent"></textarea>
 

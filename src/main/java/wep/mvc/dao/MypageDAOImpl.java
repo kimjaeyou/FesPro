@@ -26,7 +26,7 @@ public class MypageDAOImpl implements MypageDAO {
 		ResultSet rs = null;
 		List<ReservationDTO2> list = new ArrayList<ReservationDTO2>();
 
-		String sql = "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check FROM fes, reservation WHERE fes.svcid= reservation.svcid and user_seq = ? and reserv_check = 1 order by reserv_seq asc";
+		String sql = "SELECT reserv_seq, svcnm, svc_time, svc_date, resv_date, resv_price, reserv_check,fes.SVCID FROM fes, reservation WHERE fes.svcid= reservation.svcid and user_seq = ? and reserv_check = 1 order by reserv_seq asc";
 
 		try {
 			con = DbUtil.getConnection();
@@ -39,8 +39,8 @@ public class MypageDAOImpl implements MypageDAO {
 						rs.getString(3), // svcDate
 						rs.getString(4), // resvDate
 						rs.getString(5), rs.getInt(6), // resvPrice
-						rs.getInt(7)); // resvCheck
-
+						rs.getInt(7), // resvCheck
+						rs.getString(8)); // resvCheck
 				list.add(res);
 			}
 		} finally {
