@@ -134,7 +134,7 @@ public class FesController implements Controller {
 		String REVSTDDAYNM = req.getParameter("REVSTDDAYNM");
 		int Fes_state = 0; // 승인전
 		String Update_date = ""; // sysdate
-		int MAXNUM = 20;
+		int MAXNUM = 30;
 		int PRICE = Integer.parseInt(req.getParameter("PRICE"));
 
 		HttpSession session = req.getSession();
@@ -333,7 +333,20 @@ public class FesController implements Controller {
 		String SVCID = req.getParameter("SVCID");
 
 		fesSerevice.updateFes(SVCID);
-
+		
+		//삭제 신청하면 application영역에서 제거
+		
+		ServletContext context = req.getServletContext();
+		
+		List<FesDTO> fesdto = (List<FesDTO>)context.getAttribute("fesList");
+		for(FesDTO f : fesdto) {
+			if(f.getSVCID().equals(SVCID)) {
+				fesdto.remove(f);
+				break;
+			}
+		}
+		req.setAttribute("fesList", fesdto);
+		
 		return new ModelAndView("front?key=fes&methodName=select", true);
 	}
 	
