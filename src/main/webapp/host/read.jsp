@@ -150,6 +150,14 @@
 									<tbody>
 										<tr>
 											<td><p align="center">
+													<span>서비스 이미지/포스터</span>
+												</p></td>
+											<td><p align="center">
+													<span><b><img src="${path}/${fesDTO.IMGURL}"></b></span>
+												</p></td>
+										</tr>
+										<tr>
+											<td><p align="center">
 													<span>서비스아이디</span>
 												</p></td>
 											<td><p align="center">
@@ -261,14 +269,14 @@
 			<td><p align="center"><span><b>${fesDTO.getY()}</b></span></p></td>
 		</tr>-->
 										<!-- 여기까지 15개 -->
-										<tr>
+										<%-- <tr>
 											<td><p align="center">
 													<span>서비스 이미지/포스터</span>
 												</p></td>
 											<td><p align="center">
 													<span><b>${fesDTO.IMGURL}</b></span>
 												</p></td>
-										</tr>
+										</tr> --%>
 										<tr>
 											<td><p align="center">
 													<span>상세내용</span>
@@ -359,14 +367,14 @@
 													<span><b>${fesDTO.PRICE}</b></span>
 												</p></td>
 										</tr>
-										<tr>
+										<%-- <tr>
 											<td><p align="center">
 													<span>주최자 sequence</span>
 												</p></td>
 											<td><p align="center">
 													<span><b>${fesDTO.host_seq}</b></span>
 												</p></td>
-										</tr>
+										</tr> --%>
 										<tr>
 											<td><p align="center">
 													<span>태그 정보</span>

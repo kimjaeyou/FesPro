@@ -1,12 +1,10 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
@@ -14,8 +12,11 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import wep.mvc.dto.BoardDTO;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.service.BoardService;
+import wep.mvc.service.BoardServiceImpl;
 import wep.mvc.service.MainSereviceImpl;
 import wep.mvc.service.SuperFestivalService;
 import wep.mvc.service.SuperFestivalServiceImpl;
@@ -33,6 +34,10 @@ public class MainController implements Controller {
 		req.setAttribute("list", list);
 		
 		List<FesDTO> likeList =new ArrayList<>();
+		BoardService boardService = new BoardServiceImpl();
+		List<BoardDTO> selectAll = boardService.selectByCtg();
+
+		req.setAttribute("noti", filterCtg(selectAll, 0));
 		
 		if (user != null) {
 			int user_seq = user.getUser_seq();
@@ -44,6 +49,9 @@ public class MainController implements Controller {
 		req.setAttribute("listLike", likeList);
 
 		return new ModelAndView("index.jsp");
+	}
+	private List<BoardDTO> filterCtg(List<BoardDTO> posts, int categorySeq) {
+		return posts.stream().filter(post -> post.getCategorySeq() == categorySeq).collect(Collectors.toList());
 	}
 
 	public ModelAndView oneSelec(HttpServletRequest req, HttpServletResponse resp)

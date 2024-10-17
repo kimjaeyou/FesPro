@@ -33,6 +33,8 @@ img {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
 	height: 27%;
+	background-size: cover;
+	background-position: 50% 80%;
 }
 
 #card_main {
@@ -130,7 +132,7 @@ img {
 				<div class="col-xl-6">
 					<div class="text-center text-white">
 						<!-- Page heading-->
-						<h1 class="mb-5">서울컬투</h1>
+						<h1 class="mb-5">-</h1>
 						<form class="form-subscribe" id="contactForm" action="front">
 							<div class="row">
 								<div class="col" id="searchSelec">
@@ -254,7 +256,38 @@ img {
 	<!-- Testimonials-->
 	<section class="testimonials text-center bg-light">
 		<div class="container">
+			<br>
 			<h1>공지사항</h1>
+			<br>
+			<div class="content">
+            <div class="row">
+                <table style="text-align: center; border: 2px solid #dddddd !important; background-color: white">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #eeeeee; text-align: center;">번호</th>
+                            <th style="background-color: #eeeeee; text-align: center;">제목</th>
+                            <th style="background-color: #eeeeee; text-align: center;">작성자</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="post" items="${noti}">
+                            <tr>
+                                <td>${post.boardSeq}</td>
+                                <td><a href="${path}/front?key=board&methodName=select">${post.sub}</a></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty post.userSeq}">
+                                            ${post.userSeq}
+                                        </c:when>
+                                        <c:when test="${not empty post.hostSeq}">
+                                            ${post.hostSeq}
+                                        </c:when>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
 		</div>
 	</section>
 

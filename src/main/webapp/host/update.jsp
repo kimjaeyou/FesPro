@@ -416,9 +416,10 @@ function checkValid(){
 												</p></td>
 											<td width="450" height="20"><b><span
 													style="font-size: 9pt;"> <input type="file"
-														name="IMGURL" maxlength="60" size="40">
+														name="IMGURL" maxlength="60" size="40"">
 												</span></b></td>
 										</tr>
+
 										<!-- 지도API 활용 예정: 장소명o, 장소X좌표o,장소Y좌표o, 지역명 -->
 										<tr>
 											<td><p align="center">
@@ -439,7 +440,7 @@ function checkValid(){
 												<div id="map" style="width: 100%; height: 350px;"></div> <input
 												type="text" name="AREANM" size="15" value="${fesDTO.AREANM}">
 												</span>
-											</p></td>
+												</p></td>
 										</tr>
 										<tr>
 											<td width="450" height="20" colspan="2" align="center"><b><span
