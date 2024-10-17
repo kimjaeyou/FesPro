@@ -27,36 +27,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDTO select(int postUserSeq, Integer userSeq, Integer hostSeq) throws SQLException {
+	public BoardDTO select(int boardSeq) throws SQLException {
 		System.out.println("service select 세부 ===>");
-		BoardDTO bDTO = boardDAO.select(postUserSeq);
+		BoardDTO bDTO = boardDAO.select(boardSeq);
 
-		if (bDTO == null) {
-			return null;
-		}
-
-		int categorySeq = bDTO.getCategorySeq();
-
-		if (categorySeq == 0 || categorySeq == 2) {
-			return bDTO; // 게시글 정보를 반환
-		}
-
-		if (categorySeq == 1) {
-			// 로그인 확인
-			if (userSeq == null && hostSeq == null) {
-				return null; // 로그인 필요
-			}
-
-			// 작성자 또는 호스트 확인
-			if (bDTO.getUserSeq() != userSeq && hostSeq == null) {
-				return null; // 권한이 없는 경우
-			}
-
-			return bDTO; // 게시글 반환
-		}
-
-		// 기본 처리 (잘못된 카테고리 번호일 경우)
-		return null;
+		return bDTO;
 	}
 
 	@Override

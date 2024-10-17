@@ -210,5 +210,9 @@ public class UsersDTO {
 	public void setUser_ben_check(int user_ben_check) {
 		this.user_ben_check = user_ben_check;
 	}
+	
+	public UsersDTO(int seq) {
+		this.user_seq=seq;
+	}
 
 }

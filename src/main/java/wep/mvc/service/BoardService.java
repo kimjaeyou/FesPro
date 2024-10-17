@@ -28,13 +28,15 @@ public interface BoardService {
 	/**
 	 * 상세보기
 	 * */
-	BoardDTO select(int postUserSeq, Integer userSeq, Integer hostSeq) throws SQLException;
+	BoardDTO select(BoardDTO boardDTO) throws SQLException;
 	
 	/**
 	 * 목록 조회
 	 * */
 	
 	List<BoardDTO> selectByCtg () throws SQLException;
+
+	BoardDTO select(int boardSeq) throws SQLException;
 	
 	
 	

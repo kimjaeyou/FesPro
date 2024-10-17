@@ -32,6 +32,12 @@ public interface BoardDAO {
 		
 		/** 선택 게시글 조회*/
 		
-	BoardDTO select (int userSeq) throws SQLException;
+	BoardDTO select (BoardDTO boardDTO) throws SQLException;
+
+
+		/**
+		 * 상세보기
+		 */
+		BoardDTO select(int boardSeq) throws SQLException;
 	
 }

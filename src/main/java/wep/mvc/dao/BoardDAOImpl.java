@@ -110,8 +110,8 @@ public class BoardDAOImpl implements BoardDAO {
 			con.commit();
 			
 			while (rs.next()) {
-					BoardDTO board = new BoardDTO(rs.getInt("BOARD_SEQ"), rs.getInt("CATEGORY_SEQ"),
-							rs.getString("SUB"), rs.getInt("USER_SEQ"), rs.getInt("HOST_SEQ"));
+					BoardDTO board = new BoardDTO(rs.getInt(1), rs.getInt(2),
+							rs.getInt(4), rs.getString(3), rs.getInt(5));
 					list.add(board);
 			}
 		} finally {
@@ -125,16 +125,16 @@ public class BoardDAOImpl implements BoardDAO {
 	 * 상세보기
 	 */
 	@Override
-	public BoardDTO select(int userSeq) throws SQLException {
+	public BoardDTO select(int boardSeq) throws SQLException {
 		System.out.println("=====>  DAOImpl select ");
 		BoardDTO board = null;
 
-		String sql = "SELECT * FROM board WHERE user_seq = ?";
+		String sql = "SELECT * FROM board WHERE BOARD_SEQ= ?";
 		try {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, userSeq);
+			ps.setInt(1, boardSeq);
 
 			rs = ps.executeQuery();
 			con.commit();
