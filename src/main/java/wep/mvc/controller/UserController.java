@@ -21,7 +21,7 @@ public class UserController implements Controller {
 
 	// 회원가입
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws Exception {
 		String id = request.getParameter("username");
 		String pwd = request.getParameter("password");
 		String age = request.getParameter("age");
@@ -41,61 +41,25 @@ public class UserController implements Controller {
 			if (result == 1) { // 성공 메세지 = 회원가입 성공
 				int seq = ud.selectWallet(id);
 				int count = ud.insertWallet(seq);
-				if (count == 1) {
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('회원가입이 되었습니다.'); </script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
+				
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("front?key=main&methodName=read");
 				mv.setRedirect(true);
 				return mv;
 				}
-			} else if (result == 0) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('회원가입 실패했습니다.'); history.go(-1);</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
+		}
 
 	// 로그인
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String userId = request.getParameter("member-id");
 		String userPw = request.getParameter("member-password");
-		UsersDTO dbDTO = null;
+		UsersDTO dbDTO = us.login(new UsersDTO(userId, userPw));
 		try {
-			dbDTO = us.login(new UsersDTO(userId, userPw));
-			if (dbDTO == null) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('아이디 또는 비밀번호 오류 입니다.'); history.go(-1);</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-			} else if (dbDTO.getUser_ben_check() == 1) {
-				System.out.println(dbDTO.getUser_ben_check());
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('로그인 되었습니다.') location.href='main.jsp';</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-			} else if (dbDTO.getUser_ben_check() != 1) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('정지된 계정 입니다.'); history.go(-1);</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-			}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,13 +78,6 @@ public class UserController implements Controller {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate(); // 세션정보 무효화 시키기
-		// 가능하면 로그아웃 되었다는 메세지 출력해주고 싶다
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>alert('로그아웃 되었습니다.');" + "	location.href='main.jsp'; </script>");
-		out.flush();
-		response.flushBuffer();
-		out.close();
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");

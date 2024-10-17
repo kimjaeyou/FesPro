@@ -41,12 +41,6 @@ public class MypageController implements Controller {
 		try {
 			int result = ms.delete(id);
 			if (result == 1) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('회원탈퇴 되었습니다.'); </script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("front?key=main&methodName=read");
 				mv.setRedirect(true);
@@ -76,12 +70,6 @@ public class MypageController implements Controller {
 		try {
 			int result = ms.update(dto);
 			if (result == 1) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('회원수정이 완료 되었습니다.'); </script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
 				return new ModelAndView("front?key=user&methodName=selectUser", true);
 			} // 설마 수정이 안될리는 없으니까... 귀찮다...
 		} catch (Exception e) {
@@ -119,19 +107,6 @@ public class MypageController implements Controller {
 	public ModelAndView resDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String reserv_Seq = request.getParameter("reserv_Seq");
 		int result = ms.resDelete(Integer.parseInt(reserv_Seq));
-		try {
-			if (result == 0) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('예약내역이 삭제 되었습니다.'); </script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=resSelectAll");
 		return mv;
@@ -166,18 +141,6 @@ public class MypageController implements Controller {
 	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String Seq = request.getParameter("review_SEQ");
 		int result = ms.reviewDelete(Integer.parseInt(Seq));
-		try {
-			if (result == 0) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('리뷰가 삭제 되었습니다.'); </script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=reviewSelectAll");
 		return mv;
@@ -188,18 +151,7 @@ public class MypageController implements Controller {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
-		System.out.println("seq = " + seq); // 데이터 나옴
-
 		List<FesDTO> list = ms.likeSelectAll(seq);
-		System.out.println("list = " + list); // 이것도 나옴
-
-		try {
-			if (list == null) {
-				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("like", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/Bookmark.jsp");
@@ -212,19 +164,7 @@ public class MypageController implements Controller {
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
 		String svcnm = request.getParameter("svcnm");
-
-		System.out.println(" svcnm = " + svcnm); // 데이터 나옴
-
 		List<FesDTO> list = ms.likeSelect(seq, svcnm);
-		System.out.println("list = " + list); // 이것도 나옴
-
-		try {
-			if (list == null) {
-				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("review", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/review.jsp");
@@ -235,18 +175,6 @@ public class MypageController implements Controller {
 	public ModelAndView likeDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String seq = request.getParameter("SVCID");
 		int result = ms.likeDelete(seq);
-		try {
-			if (result == 0) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('즐겨찾기 목록이 삭제 되었습니다.'); </script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=likeSelectAll");
 		return mv;
@@ -259,7 +187,6 @@ public class MypageController implements Controller {
 		int seq = dto.getUser_seq();
 		WALLET wallet = md.balanceSelect(seq);
 		request.setAttribute("money", wallet);
-
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/Wallet.jsp");
 		return mv;
@@ -275,12 +202,6 @@ public class MypageController implements Controller {
 		int result = ms.balanceCheck(seq, password);
 		if (result == 1) {
 			WALLET wallet = md.balancePlus(Integer.parseInt(amount), seq);
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('" + wallet + "원이 충전 되었습니다.'); </script>");
-			out.flush();
-			response.flushBuffer();
-			out.close();
 			request.setAttribute("money", wallet);
 		} else {
 			// 신원체크 실패
