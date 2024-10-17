@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="UTF-8" data-bs-theme="light">
 <jsp:include page="/common/header.jsp" />
 
 <link
@@ -190,6 +190,11 @@
 	font-size: 20px;
 	color: #D9D748;
 }
+
+body {
+	background-color: white;
+	color: black;
+  }
 </style>
 </head>
 <body>
@@ -491,7 +496,12 @@
 	ageReviewAvg(getCanvas('ageReviewAvg'),reviewUserList);
 	
 </script>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // data-bs-theme 속성을 light로 강제 변경
+        document.documentElement.setAttribute("data-bs-theme", "light");
+    });
+</script>
 
 
 </html>
