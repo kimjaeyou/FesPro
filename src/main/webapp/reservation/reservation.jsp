@@ -69,7 +69,9 @@
             }
             
             .content {
-            	margin-bottom: 100px;
+            	height: 558px;
+            	background-image : url("${fes.IMGURL}");
+            	background-size: cover;
             }
             
             .form-floating {
@@ -359,7 +361,7 @@
                               
                               <div class="row justify-content-center">
                                 <div class="col-md-10 text-center">
-                                  <h2 class="mb-5 text-center">예약날짜 / 회차 선택</h2>
+                                  <h2 class="mb-5 text-center" style="font-weight: bolder; -webkit-text-stroke: 0.5px white;">예약날짜 / 회차 선택</h2>
                                   <!-- calendar 17 -->
                                   <!-- <input type="text" class="form-control w-30 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
                                   <form action="#" class="row">
@@ -462,25 +464,51 @@
                                     <h2 class="card-title h4">동의절차</h2>
                                     <p class="card-text">개인정보 수집 및 이용안내 (필수)</p>
                                     <!-- <a class="btn btn-primary" href="#!">동의합니다</a> -->
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <p style="font-weight: bold;">개인정보 수집 및 이용안내</p>
+
+									당사는 귀하의 개인정보를 다음과 같은 목적으로 수집 및 이용합니다: <br>
+									
+									1. 서비스 제공: 회원 가입, 서비스 이용 및 고객 지원을 위한 기본 정보 수집. <br>
+									2. 정보 전달: 서비스 관련 공지사항, 이벤트, 프로모션 등 정보 제공. <br>
+									3. 서비스 개선: 이용자 경험 개선 및 신규 서비스 개발을 위한 통계 분석. <br><p></p>
+									<span> 수집하는 개인정보 항목</span><br>
+									
+									이름, 이메일 주소, 전화번호 등 기본 정보 <br>
+									서비스 이용 기록, 쿠키, IP 주소 등 <br><p><p></p>
+
+									<span>개인정보 보유 및 이용 기간</span><br>
+									
+									수집된 개인정보는 서비스 제공 기간 동안 보유하며, 이용 목적 달성 후 지체 없이 파기합니다. <br><p><p></p>
+									<span>개인정보의 제3자 제공</span><br>
+									
+									귀하의 동의 없이는 제3자에게 개인정보를 제공하지 않습니다. <br><p><p></p><p></p>
+									<span>개인정보 보호</span><br>
+									
+									귀하의 개인정보는 안전하게 보호되며, 관련 법령을 준수합니다. <br><p></p>
+									
                                     <div class="chk"><input type="checkbox" id="chk1" name = "agreement"><label for="chk1" class="chkLabel">동의합니다</label></div>
                                 </div>
                             </div>
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <div class="small text-muted">개인정보 제 3자 제공 (필수)</div>
-                                    <h2 class="card-title h4">Post Title</h2>
+                                    <!-- <div class="small text-muted">개인정보 제 3자 제공 (필수)</div>
+                                    <h2 class="card-title h4">Post Title</h2> -->
                                     <p class="card-text">개인정보 제 3자 제공 (필수)</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <p style="font-weight: bold;"></p>
+                                    당사는 귀하의 개인정보를 아래의 경우에 한하여 제3자에게 제공할 수 있습니다: <br><p></p>
+
+                                    법적 의무 이행: 관련 법령에 따라 수사기관이나 법원 등으로부터 법적 요구가 있는 경우. <br>
+                                    서비스 제공: 특정 서비스 제공을 위해 필요한 경우, 아래와 같은 제휴업체에 귀하의 정보를 제공할 수 있습니다. <br>
+                                    제휴업체: [제휴업체명] <br>
+                                    제공 목적: [제공 목적] <br>
+                                    제공 항목: [제공되는 개인정보 항목] <br>
+                                    보유 및 이용 기간: [보유 기간] <br><p></p>
+                                    제공에 대한 동의 <br>
+
+                                    귀하의 개인정보가 제3자에게 제공되는 것에 대해 사전 동의를 받습니다. 동의하지 않으실 경우, 서비스 이용에 제한이 있을 수 있습니다. <br> <p></p>
+                                    <p></p>
+
                                     <div class="chk"><input type="checkbox" id="chk2" name="agreement"><label for="chk2" class="chkLabel">동의합니다</label></div>
                                     <!-- <a class="btn btn-primary" href="#!" style="width: 100%;">예약하기</a> -->
                                 </div>
