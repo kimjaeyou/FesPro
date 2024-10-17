@@ -93,6 +93,14 @@ public class SuperAuthServiceImpl implements SuperAuthService {
 		System.out.println("서비스에서 list = "+list);
 		return list;
 	}
+
+	@Override
+	public int reviewInsert(String reviewContent, int reviewRate, String svcId, int userSeq) {
+		int result = dao.reviewInsert(reviewContent,reviewRate,svcId,userSeq);
+		
+		return result;
+		
+	}
 	
 	/*
 	 * @Override public UsersDTO selectById(String id) { UsersDTO user = new

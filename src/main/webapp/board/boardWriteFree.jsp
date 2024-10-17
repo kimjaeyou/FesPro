@@ -56,7 +56,7 @@
             <form method="post" action="${pageContext.request.contextPath}/front">
                 <input type="hidden" name="key" value="board">
                 <input type="hidden" name="methodName" value="write">
-                <input type="hidden" name="categorySeq" value="1">
+                <input type="hidden" name="categorySeq" value="2">
                 
                 <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
                     <thead>

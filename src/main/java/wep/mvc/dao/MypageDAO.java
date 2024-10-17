@@ -8,6 +8,7 @@ import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
 import wep.mvc.dto.USER_LIKE;
+import wep.mvc.dto.UsersDTO;
 import wep.mvc.dto.WALLET;
 
 public interface MypageDAO {
@@ -20,11 +21,20 @@ public interface MypageDAO {
 	// 예약내역 삭제
 	int resDelete(int reserv_Seq) throws SQLException;
 
+	// 회원탈퇴
+	int delete(String id) throws SQLException;
+
+	// 회원수정
+	int update(UsersDTO usersDTO) throws SQLException;
+
+	// 회원정보 가져오기
+	UsersDTO selectUser(String usersDTO) throws SQLException;
+
 	// 리뷰 전체검색
 	List<ReviewDTO2> reviewSelectAll(int seq) throws SQLException;
 
 	// 리뷰 부분검색
-	List<ReviewDTO2> reviewSelect(int seq , String svcnm) throws SQLException;
+	List<ReviewDTO2> reviewSelect(int seq, String svcnm) throws SQLException;
 
 	// 리뷰 삭제
 	int reviewDelete(int seq) throws SQLException;
@@ -46,4 +56,6 @@ public interface MypageDAO {
 
 	// 잔액 조회
 	WALLET balanceSelect(int seq)throws SQLException;
+	
+	boolean checkReview(int reSeq, int seq);
 }

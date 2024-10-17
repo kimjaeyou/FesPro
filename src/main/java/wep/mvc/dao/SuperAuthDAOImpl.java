@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
@@ -314,6 +315,34 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 		  }
 		  return list;
 		
+		
+	}
+
+	@Override
+	public int reviewInsert(String reviewContent, int reviewRate, String svcId,int userSeq) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("INSERT INTO REVIEW(REVIEW_SEQ,USER_SEQ,SVCID,RV_CONTENT,SCORE) "
+					+ "VALUES(REVIEW_SEQ.NEXTVAL,?, ?, ?, ?) ");
+			
+			ps.setInt(1, userSeq);
+			ps.setString(2, svcId);
+			ps.setString(3, reviewContent);
+			ps.setInt(4, reviewRate);
+			result = ps.executeUpdate();
+
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 		
 	}
 

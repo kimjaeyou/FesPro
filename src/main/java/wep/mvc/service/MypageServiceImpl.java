@@ -21,10 +21,30 @@ public class MypageServiceImpl implements MypageService {
 		return md.resSelectAll(seq);
 	}
 
+	// 회원탈퇴
+	@Override
+	public int delete(String id) throws SQLException {
+
+		return md.delete(id);
+	}
+
+	// 회원수정
+	@Override
+	public int update(UsersDTO usersDTO) throws SQLException {
+
+		return md.update(usersDTO);
+	}
+
+	@Override
+	public UsersDTO selectUser(String usersDTO) throws SQLException {
+
+		return md.selectUser(usersDTO);
+	}
+
 	// 예약내역 부분검색
 	@Override
-	public List<ReservationDTO2> resSelect(int seq,String svcnm) throws SQLException {
-		return md.resSelect(seq,svcnm);
+	public List<ReservationDTO2> resSelect(int seq, String svcnm) throws SQLException {
+		return md.resSelect(seq, svcnm);
 	}
 
 	@Override
@@ -38,7 +58,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<ReviewDTO2> reviewSelect(int seq , String svcnm) throws SQLException {
+	public List<ReviewDTO2> reviewSelect(int seq, String svcnm) throws SQLException {
 		return md.reviewSelect(seq, svcnm);
 	}
 
@@ -65,6 +85,12 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public int balanceCheck(int seq, String password) throws SQLException {
 		return md.balanceCheck(seq, password);
+	}
+
+	@Override
+	public boolean checkReview(int reSeq, int seq) {
+		
+		return md.checkReview(reSeq,seq);
 	}
 
 }
