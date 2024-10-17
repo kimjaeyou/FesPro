@@ -1,9 +1,8 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-
-import com.google.gson.JsonObject;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,28 +48,46 @@ public class HostController implements Controller {
 	}
 
 	// 로그인
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 
 		String userId = request.getParameter("corporate-id");
 		String userpw = request.getParameter("corporate-pw");
 		HostDTO dbDTO = hs.login(new HostDTO(userId, userpw));
+
 		try {
 			if (dbDTO == null) {
-				// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-				// return new ModelAndView("login.jsp", true);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); history.go(-1);</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
+
+			} else if (dbDTO.getHost_ben_check() != 1) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('정지된 계정입니다'); history.go(-1);</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
+
+			} else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('로그인 되었습니다.'); history.go(-1);</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 			}
-			if (dbDTO.getHost_ben_check() != 1) {
-				// 오류메세지 = 정지된 아이디 입니다.
-				// return new ModelAndView("login.jsp", true);
-			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		HttpSession session = request.getSession();
-		session.setAttribute("loginCom", new HostDTO(dbDTO.getHost_id(), dbDTO.getHost_name(), dbDTO.getHost_seq(),
-				dbDTO.getHost_ben_check()));
+		session.setAttribute("loginCom",
+				new HostDTO(dbDTO.getHost_id(), dbDTO.getHost_name(), dbDTO.getHost_seq(), dbDTO.getHost_ben_check()));
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");
 		mv.setRedirect(true);
@@ -78,16 +95,17 @@ public class HostController implements Controller {
 	}
 
 	// 로그아웃
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userId = request.getParameter("");
-		String pwd = request.getParameter("");
-
-		HostDTO dto = new HostDTO(userId, pwd);
-		// 가능하면 로그아웃 되었다는 메세지 출력해주고 싶다
-
 		HttpSession session = request.getSession();
 		session.invalidate(); // 세션정보 무효화 시키기
+
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그아웃 되었습니다.'); location.href='main.jsp'; </script>");
+		out.flush();
+		response.flushBuffer();
+		out.close();
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");

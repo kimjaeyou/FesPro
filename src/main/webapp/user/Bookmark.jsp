@@ -61,7 +61,7 @@
 							<c:choose>
 								<c:when test="${empty requestScope.like}">
 									<tr>
-										<td colspan="5">
+										<td colspan="9">
 											<p align="center">
 												<b><span style="font-size: 9pt;">즐겨찾기 목록이 없습니다.</span></b>
 											</p>

@@ -41,11 +41,18 @@ public class UserController implements Controller {
 			if (result == 1) { // 성공 메세지 = 회원가입 성공
 				int seq = ud.selectWallet(id);
 				int count = ud.insertWallet(seq);
+				if (count == 1) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('회원가입이 되었습니다.'); </script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("front?key=main&methodName=read");
 				mv.setRedirect(true);
 				return mv;
-			} else {
+				}
+			} else if (result == 0) {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('회원가입 실패했습니다.'); history.go(-1);</script>");
@@ -77,8 +84,7 @@ public class UserController implements Controller {
 				System.out.println(dbDTO.getUser_ben_check());
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('로그인 되었습니다.')"
-						+ "	location.href='main.jsp';</script>");
+				out.println("<script>alert('로그인 되었습니다.') location.href='main.jsp';</script>");
 				out.flush();
 				response.flushBuffer();
 				out.close();
@@ -111,8 +117,7 @@ public class UserController implements Controller {
 		// 가능하면 로그아웃 되었다는 메세지 출력해주고 싶다
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('로그아웃 되었습니다.');"
-				+ "	location.href='main.jsp'; </script>");
+		out.println("<script>alert('로그아웃 되었습니다.');" + "	location.href='main.jsp'; </script>");
 		out.flush();
 		response.flushBuffer();
 		out.close();

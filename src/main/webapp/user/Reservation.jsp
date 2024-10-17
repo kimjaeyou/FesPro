@@ -79,7 +79,7 @@
 			<c:choose>
 				<c:when test="${empty reservation}">
 					<tr>
-						<td colspan="6">
+						<td colspan="8">
 							<p align="center">
 								<b><span style="font-size: 9pt;">예약정보가 없습니다.</span></b>
 							</p>

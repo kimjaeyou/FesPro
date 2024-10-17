@@ -1,6 +1,7 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -11,9 +12,7 @@ import wep.mvc.dao.MypageDAO;
 import wep.mvc.dao.MypageDAOImpl;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO2;
-import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
-import wep.mvc.dto.USER_LIKE;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.dto.WALLET;
 import wep.mvc.service.MypageService;
@@ -23,18 +22,12 @@ public class MypageController implements Controller {
 
 	private MypageService ms = new MypageServiceImpl();
 	private MypageDAO md = new MypageDAOImpl();
+
 	// 회원수정 데이터 꺼내기
 	public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse resp) throws Exception {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("loginUserId");
 		UsersDTO dbDTO = ms.selectUser(user);
-		try {
-			if (dbDTO == null) {
-				// 오류 메시지 처리
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("users", dbDTO);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/update.jsp");
@@ -42,12 +35,18 @@ public class MypageController implements Controller {
 	}
 
 	// 회원탈퇴
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 		try {
 			int result = ms.delete(id);
-			if (result == 1) { // 성공메세지 = 회원탈퇴 되었습니다.
+			if (result == 1) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('회원탈퇴 되었습니다.'); </script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("front?key=main&methodName=read");
 				mv.setRedirect(true);
@@ -59,10 +58,8 @@ public class MypageController implements Controller {
 		return null;
 	}
 
-	
-	
 	// 회원수정
-	public ModelAndView update(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView update(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String pwd = request.getParameter("pw");
 		String age = request.getParameter("age");
@@ -79,11 +76,14 @@ public class MypageController implements Controller {
 		try {
 			int result = ms.update(dto);
 			if (result == 1) {
-				// req.set애트리뷰트("내맘대로", true);
-				return new ModelAndView("front?key=user&methodName=selectUser", true); // jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert
-			} else {
-				// return new ModelAndView("login.jsp", true);
-			}
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('회원수정이 완료 되었습니다.'); </script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
+				return new ModelAndView("front?key=user&methodName=selectUser", true);
+			} // 설마 수정이 안될리는 없으니까... 귀찮다...
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,18 +95,7 @@ public class MypageController implements Controller {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
-		System.out.println("seq = " + seq); // 데이터 나옴
-
 		List<ReservationDTO2> list = ms.resSelectAll(seq);
-		System.out.println("list = " + list); // 이것도 나옴
-
-		try {
-			if (list == null) {
-				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("reservation", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/Reservation.jsp");
@@ -119,19 +108,7 @@ public class MypageController implements Controller {
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
 		String svcnm = request.getParameter("svcnm");
-
-		System.out.println("svcnm = " + svcnm); // 데이터 나옴
-
 		List<ReservationDTO2> list = ms.resSelect(seq, svcnm);
-		System.out.println("list = " + list); // 이것도 나옴
-
-		try {
-			if (list == null) {
-				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("reservation", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/Reservation.jsp");
@@ -139,12 +116,18 @@ public class MypageController implements Controller {
 	}
 
 	// 예약내역 삭제
-	public ModelAndView resDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	public ModelAndView resDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String reserv_Seq = request.getParameter("reserv_Seq");
 		int result = ms.resDelete(Integer.parseInt(reserv_Seq));
 		try {
 			if (result == 0) {
-				// 삭제 되었다는 메세지 출력하고 싶당 ㅎ
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('예약내역이 삭제 되었습니다.'); </script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,18 +142,7 @@ public class MypageController implements Controller {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
-		System.out.println("seq = " + seq); // 데이터 나옴
-
 		List<ReviewDTO2> list = ms.reviewSelectAll(seq);
-		System.out.println("list = " + list); // 이것도 나옴
-
-		try {
-			if (list == null) {
-				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("review", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/review.jsp");
@@ -183,19 +155,7 @@ public class MypageController implements Controller {
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
 		String svcnm = request.getParameter("svcnm");
-
-		System.out.println(" svcnm = " + svcnm); // 데이터 나옴
-
 		List<ReviewDTO2> list = ms.reviewSelect(seq, svcnm);
-		System.out.println("list = " + list); // 이것도 나옴
-
-		try {
-			if (list == null) {
-				// 뭐,, 항목이 없다는? 그런 처리할건데,, 도와줘요ㅠ
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		request.setAttribute("review", list);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/review.jsp");
@@ -203,12 +163,17 @@ public class MypageController implements Controller {
 	}
 
 	// 리뷰 삭제
-	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String Seq = request.getParameter("review_SEQ");
 		int result = ms.reviewDelete(Integer.parseInt(Seq));
 		try {
 			if (result == 0) {
-				// 삭제 되었다는 메세지 출력하고 싶당 ㅎ
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('리뷰가 삭제 되었습니다.'); </script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,12 +232,17 @@ public class MypageController implements Controller {
 	}
 
 	// 즐겨찾기 삭제
-	public ModelAndView likeDelete(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	public ModelAndView likeDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String seq = request.getParameter("SVCID");
 		int result = ms.likeDelete(seq);
 		try {
 			if (result == 0) {
-				// 삭제 되었다는 메세지 출력하고 싶당 ㅎ
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('즐겨찾기 목록이 삭제 되었습니다.'); </script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -289,15 +259,14 @@ public class MypageController implements Controller {
 		int seq = dto.getUser_seq();
 		WALLET wallet = md.balanceSelect(seq);
 		request.setAttribute("money", wallet);
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/Wallet.jsp");
 		return mv;
 	}
 
-	
 	// 신원체크 후 잔액 충전하기
-	public ModelAndView balancePlus(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	public ModelAndView balancePlus(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
@@ -306,7 +275,12 @@ public class MypageController implements Controller {
 		int result = ms.balanceCheck(seq, password);
 		if (result == 1) {
 			WALLET wallet = md.balancePlus(Integer.parseInt(amount), seq);
-			System.out.println(wallet);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('" + wallet + "원이 충전 되었습니다.'); </script>");
+			out.flush();
+			response.flushBuffer();
+			out.close();
 			request.setAttribute("money", wallet);
 		} else {
 			// 신원체크 실패
@@ -315,24 +289,22 @@ public class MypageController implements Controller {
 		mv.setViewName("front?key=mypage&methodName=balanceSelect");
 		return mv;
 	}
-	
+
 	// 리뷰달기
-	public ModelAndView writeReview(HttpServletRequest request,HttpServletResponse response)
-	{
+	public ModelAndView writeReview(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		String reservSeq = request.getParameter("reserv_Seq");
 		String svcId = request.getParameter("svc_Id");
 		String user_seq = request.getParameter("userSeq");
-		
-		
+
 		int reSeq = Integer.parseInt(reservSeq);
 		int seq = dto.getUser_seq();
 		int userSeq = Integer.parseInt(user_seq);
-		System.out.println("마이페이지 WriteReview 에서 reSeq = "+ reSeq+"seq = "+seq);
-		boolean reviewExists = ms.checkReview(reSeq,seq);
+		System.out.println("마이페이지 WriteReview 에서 reSeq = " + reSeq + "seq = " + seq);
+		boolean reviewExists = ms.checkReview(reSeq, seq);
 		System.out.println(reviewExists);
-		
+
 		request.setAttribute("userSeq", user_seq);
 		request.setAttribute("svcId", svcId);
 		request.setAttribute("reSeq", reSeq);

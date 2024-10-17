@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
 
-@WebFilter(urlPatterns = "/front")
+//@WebFilter(urlPatterns = "/front")
 public class SessionCheckFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
