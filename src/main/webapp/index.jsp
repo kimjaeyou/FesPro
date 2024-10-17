@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="UTF-8" data-bs-theme="light">
 <jsp:include page="/common/header.jsp" />
 <head>
 <meta charset="utf-8" />
@@ -32,9 +32,9 @@ img {
 #head {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
-	height: 27%;
+	height: 35%;
 	background-size: cover;
-	background-position: 50% 80%;
+	background-position: 50% 50%;
 }
 
 #card_main {

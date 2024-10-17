@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="light">
 <head>
 <script src="${path}/reservation/assets/js/color-modes.js"></script>
 <meta charset="utf-8">
@@ -11,7 +11,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.122.0">
-<title>Headers · Bootstrap v5.3</title>
+<title>CultoSeoul</title>
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.3/examples/headers/">
 <link rel="stylesheet"
@@ -311,7 +311,8 @@ img {
 						</div>
 					</c:when>
 
-					<c:when test="${empty sessionScope.loginUser || empty sessionScope.loginCom}" >
+					<c:when
+						test="${empty sessionScope.loginUser || empty sessionScope.loginCom}">
 						<div class="con_tables">
 							<div class="con_rows2">
 								<div class="con_cells">

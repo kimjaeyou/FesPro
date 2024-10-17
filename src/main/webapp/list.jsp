@@ -32,7 +32,9 @@ img {
 #head {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
-	height: 27%;
+	height: 35%;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 
 #card_main {
