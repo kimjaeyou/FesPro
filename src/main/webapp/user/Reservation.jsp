@@ -98,11 +98,15 @@
 							<td>${re.svc_Date}</td>
 							<td>${re.resv_Price}원</td>
 							<td>${re.resv_Check}</td>
+							
 							<td>
 								<form id="delete-form" method="post" action="${path}/front">
-									<input type="hidden" name="key" value=""> 
-									<input type="hidden" name="methodName" value=""> 
-									<input type="hidden" name="reserv_Seq" value="">
+									<input type="hidden" name="key" value="mypage"> 
+									<input type="hidden" name="methodName" value="writeReview"> 
+									<input type="hidden" name="reserv_Seq" value="${re.reserv_Seq}">
+									<input type="hidden" name="svc_Id" value="${re.SVCID}">
+									
+									<input type="hidden" name="userSeq" value="${re.userSeq}">
 									<button type="submit" class="delete-button">작성</button>
 								</form>
 							</td>
@@ -118,6 +122,11 @@
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
+			<script>
+    // ${re.SVCID}의 값을 콘솔에 출력
+    var svcId = "${re.SVCID}";
+    console.log("SVCID:", svcId);
+</script>
 		</tbody>
 	</table>
 	</div>
