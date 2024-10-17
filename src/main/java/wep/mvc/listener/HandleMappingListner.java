@@ -260,8 +260,8 @@ public class HandleMappingListner implements ServletContextListener {
 					break;
 				}
 			}
-			if(!exist) {
-				fin.add(fdb); //db에만 있고 app에 없는거 담아
+			if(!exist && fdb.getFes_state()==1) {
+				fin.add(fdb); //db에만 있고 app에 없는거 담아 근데 승인완료상태인 것만 담아
 			}
 		}	
 

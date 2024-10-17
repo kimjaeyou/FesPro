@@ -2,10 +2,12 @@ package wep.mvc.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.gson.Gson;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +22,47 @@ import wep.mvc.service.SuperFestivalServiceImpl;
 public class SuperFestivalController implements Controller {
 	SuperFestivalService festivalService = new SuperFestivalServiceImpl();
 	FesSerevice fesService = new FesSereviceImpl();
+	
+	/**
+	 * 행사 변경될때 애플리케이션 영역에 업로드
+	 * @param req
+	 * @param fesDto
+	 * @param action 0-넣기 1-빼기
+	 */
+	private void setfesDtoApplication(HttpServletRequest req,FesDTO fesDto, int action) {
+		ServletContext application = req.getServletContext();
+		List<FesDTO> fesList = (List<FesDTO>)application.getAttribute("fesList");
+		
+		//넣기
+		if(action ==0) {
+			boolean exist=false; //이미 있는지
+			FesDTO origin=null; //있으면 바꿔줄 데이터
+			
+			for (FesDTO originData : fesList) {
+				if(originData.getSVCID().equals(fesDto.getSVCID())) {
+					exist =true;
+					origin = originData;
+					break;
+				}
+			}
+			
+			if(exist) {
+				fesList.remove(origin);
+			}
+			fesList.add(fesDto);
+		}
+		//빼기
+		else if(action ==1) {
+			for (FesDTO originData : fesList) {
+				if(originData.getSVCID().equals(fesDto.getSVCID())) {
+					fesList.remove(originData);
+					break;
+				}
+			}
+		}
+		
+		application.setAttribute("fesList", fesList);
+	}
 
 	public SuperFestivalController() {
 		// System.out.println("형우 / SuperFestivalController 생성자 Call");
@@ -155,9 +198,22 @@ public class SuperFestivalController implements Controller {
 		else {
 			festivalService.update(fes, fesState);
 		}
+		
+		
+		
+		
 
 		if (result == 1) {
 			// 성공
+			/* 애플리케이션 로직*/
+			if(fesState ==1) {
+				//넣기
+				setfesDtoApplication(req,fes,0); 
+			}
+			else {
+				 //빼기
+				setfesDtoApplication(req,fes,1);
+			}
 		} else {
 			System.out.println("형우 / 행사 업데이트 실패 Controller-update");
 		}
@@ -291,14 +347,27 @@ public class SuperFestivalController implements Controller {
 		else {
 			result = festivalService.update(fes, fesState);
 		}
+
 		
 		
 ///////재구 페이지 처리
 	    if (result == 1) {//////////==========================================
+	    	
+	    	/* 애플리케이션 로직*/
+			if(fesState ==1) {
+				//넣기
+				setfesDtoApplication(req,fes,0);
+			}
+			else {//(비활성화)
+				 //빼기
+				setfesDtoApplication(req,fes,1);
+			}
+	    	
 	    	System.out.println("3333333333333333333333333");
+
 	        // 업데이트 성공 시
 	        if (fesState == 2) {
-	            // 행사수정 미승인건 처리 후 이동
+	            // 행사수정 미승인건 처리 후 이동       	
 	            return new ModelAndView("front?key=superfestival&methodName=dashFesWaitFesSelectAll", true);
 	        } else if (fesState == 3) {
 	            // 행사 취소 미승인건 처리 후 이동
@@ -390,6 +459,16 @@ public class SuperFestivalController implements Controller {
 		int result = festivalService.update(fes,Integer.parseInt(req.getParameter("Fes_state")));
 		
 		if(result ==1) {
+			/* 애플리케이션 로직*/
+			if(fes.getFes_state() ==1) {
+				//넣기
+				setfesDtoApplication(req,fes,0);
+			}
+			else {//(비활성화)
+				 //빼기
+				setfesDtoApplication(req,fes,1);
+			}
+			
 			return new ModelAndView("front?key=superAuth&methodName=dashFesSelectAll",true);
 		}
 		else {

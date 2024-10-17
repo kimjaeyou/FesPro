@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
@@ -378,6 +380,55 @@ public class ReservationDAOImpl implements ReservationDAO {
 			DbUtil.dbClose(con, ps);
 		}
 		return result;
+	}
+
+	@Override
+	public List<Integer> getReservNum(String svcId, String date) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Integer> list = new ArrayList<Integer>();
+		int count1=0, count2=0, count3=0;
+		
+		// select * from reservation where SVCID = ? and svc_date = ?;
+		String sql = "select * from reservation where SVCID = ? and svc_date = ?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, svcId);
+			ps.setString(2, date);
+
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String svc_time = rs.getString("SVC_TIME");
+				int resv_peo = rs.getInt("RESV_PEO");
+				
+				switch(svc_time) {
+					case "1회" : 
+						count1+=resv_peo;
+						break;
+					case "2회" : 
+						count2+=resv_peo;
+						break;
+					case "3회" : 
+						count3+=resv_peo;
+						break;
+				}
+				
+				System.out.println("1회 : " + count1 + " | " + "2회 : " + count2 + " | " + "3회 : " + count3);
+
+			}
+			
+			list.add(count1);
+			list.add(count2);
+			list.add(count3);
+		
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
 	}
 
 }

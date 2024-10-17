@@ -1,6 +1,7 @@
 package wep.mvc.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
@@ -59,5 +60,10 @@ public interface ReservationDAO {
 	 * 예약 상태 변경 : 결제대기 - 예약완료
 	 */
 	int changeReservation (int resvSeq) throws SQLException;
+	
+	/**
+	 * 예약된 회차 인원 수 가져오기
+	 */
+	List<Integer> getReservNum (String svcId, String date) throws SQLException;
 
 }

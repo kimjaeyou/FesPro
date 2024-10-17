@@ -1,6 +1,7 @@
 package wep.mvc.service;
 
-import java.sql.SQLException; 
+import java.sql.SQLException;
+import java.util.List;
 
 import wep.mvc.dao.ReservationDAO;
 import wep.mvc.dao.ReservationDAOImpl;
@@ -72,6 +73,12 @@ public class ReservationServiceImpl implements ReservationService {
 	public int changeReservation(int resvSeq) throws SQLException {
 		int result = dao.changeReservation(resvSeq);
 		return result;
+	}
+
+	@Override
+	public List<Integer> getReservNum(String svcId, String date) throws SQLException {
+		List<Integer> list = dao.getReservNum(svcId, date);
+		return list;
 	}
 	
 }

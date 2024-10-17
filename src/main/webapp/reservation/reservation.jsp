@@ -139,6 +139,36 @@
 				'-' + ( (cancleDate2.getDate()) < 10 ? "0" + (cancleDate2.getDate()) : (cancleDate2.getDate()) );
 				//let canclePeriod = date-1; // 취소기간 기준일 받아와서 넣기
 				$("[data-form=canclePeriod]").html(dateFormat3);
+				
+				// 남은 예약인원수 확인하는 ajax
+				$.ajax({
+					url:"${path}/ajax",
+					method: 'GET',
+					dataType: 'json',
+					data: {key:"reservation", methodName:"getReservNum", svcId: "${SVCID}", svcDate: $("#datepicker1").val() }, 
+					success: function (num) {
+						let time = Math.ceil(${fes.MAXNUM}/3);
+						
+						//console.log(num[0]);
+						$.each(num, function(index, item){
+							//console.log(index+ " = " +item);
+							console.log(index+ " = " + item);
+							
+						});
+						
+						let str = "1회 (" +num[0]+" / "+time +")";
+						$("[data-time=time1]").text(str);
+						str = "2회 (" +num[1]+" / "+time +")";
+						$("[data-time=time2]").text(str);
+						str = "3회 (" +num[1]+" / "+time +")";
+						$("[data-time=time3]").text(str);
+						
+						
+					}, // 성공시
+					error : function (errMsg) {
+						console.log("Error : ", errMsg);
+					}
+				})
 			})
 			
 			   $(document).on("click", "#datepicker", function() {
@@ -375,9 +405,9 @@
                                 <div class="card-body">
                                     <h2 class="card-title h4">회차</h2>
                                     <ul>
-                                        <li><a href="#!" class="time">1회</a></li>
-                                        <li><a href="#!" class="time">2회</a></li>
-                                        <li><a href="#!" class="time">3회</a></li>
+                                        <li><a href="#!" data-time = "time1" class="time">1회</a></li>
+                                        <li><a href="#!" data-time = "time2" class="time">2회</a></li>
+                                        <li><a href="#!" data-time = "time3" class="time">3회</a></li>
                                     </ul>
 
                                 </div>
@@ -547,6 +577,22 @@
 			    let cancleDate = $("[data-form=canclePeriod]").text();
                 let agreement1 = $("#chk1").is(":checked");
                 let agreement2 = $("#chk2").is(":checked");
+                
+                // 인원수 체크 변수
+               let testnum1 = Number($("[data-form=peopleNum]").text());
+      		   let testnum2_1 = $("[data-form=time]").text().substr(4,2).trim();
+      		   
+      		   let testnum3 = $("[data-form=time]").text().slice(-3, 9).trim() // 정원 통일하면 값 조정해주기
+      		   let testnum3_1 = Number(testnum3);
+      		   
+      		   let testnum2 = Number(testnum2_1);
+      		   let sum = testnum1+testnum2;
+      		   
+     		   console.log("인원수 : "+ testnum1);
+     		   console.log("기존 인원수 : "+testnum2_1);
+     		   console.log("정원 : "+testnum3_1);
+     		   console.log("총 인원수 : "+sum);
+     		   
 			    console.log(date);
 			    console.log(time);
 			    console.log(peopleNum);
@@ -567,8 +613,11 @@
                 } else if (!agreement2) {
                     alert("개인정보 제 3자 제공 동의가 필요합니다");
                     return false;
+                } else if (sum > testnum3_1) {
+					alert("인원수 초과입니다");
+					return false;
                 }
-
+                	
                 else {
                     document.resvForm.date.value = date;
                     document.resvForm.time.value = time;
@@ -607,7 +656,7 @@
 /* 			   $("#datepicker").datepicker({
 				   minDate: stDateStr,
 				   maxDate: edDateStr
-			   }).datepicker(); */
+			   }).datepicker(); 
 			   
 			   $('.ui-datepicker').css('font-size', '1.5rem');
 			   

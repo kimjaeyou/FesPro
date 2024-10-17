@@ -138,7 +138,7 @@ img {
 	border: 2px solid blue;
 	padding: 15px;
 	border-radius: 15px;
-	box-shadow : 0 4px 10px rgba( 0, 0,	0, 0.2);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -156,7 +156,39 @@ img {
 	margin-left: 13px;
 }
 
+.con_tables {
+	display: table;
+	border: none;
+}
+
+.con_rows {
+	display: table-row;
+	border: none;
+}
+
+.con_rows2 {
+	display: table-row;
+}
+
+.con_cells {
+	border: none;
+	align-content: center;
+	text-align: center;
+	align-items: center;
+	display: table-cell;
+	font-size: 20px;
+	font: bold;
+	font-family: Roboto;
+	color: black;
+	align-content: center;
+}
+
+.con_cells img {
+	width: 30px;
+	height: 30px;
+}
 </style>
+
 </head>
 <main>
 	<div class="container">
@@ -175,15 +207,24 @@ img {
 					class="nav-link dropdown-toggle" href="#" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> 문화체험 </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=all">전체검색</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=교육체험">교육체험</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=농장체험">농장체험</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=문화행사">문화행사</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=전시/관람">전시/관람</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=단체봉사">단체봉사</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=공원탐방">공원탐방</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=서울형키즈카페">서울형키즈카페</a></li>
-						<li><a class="dropdown-item" href="${path}/front?key=main&methodName=searchPage&search=산림여가">산림여가</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=all">전체검색</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=교육체험">교육체험</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=농장체험">농장체험</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=문화행사">문화행사</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=전시/관람">전시/관람</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=단체봉사">단체봉사</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=공원탐방">공원탐방</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=서울형키즈카페">서울형키즈카페</a></li>
+						<li><a class="dropdown-item"
+							href="${path}/front?key=main&methodName=searchPage&search=산림여가">산림여가</a></li>
 					</ul></li>
 				<li><a href="#" class="nav-link px-2">예약보기</a></li>
 				<li><a href="${path}/front?key=board&methodName=select"
@@ -195,63 +236,104 @@ img {
 			<div class="login-section">
 				<c:choose>
 					<c:when test="${not empty sessionScope.loginUser}">
-						<span class="login-info"> 안녕하세요,
-							${sessionScope.loginUser.user_name}님!</span>
-						
-						<form id="member-update-form" method="get"
-							action="${pageContext.request.contextPath}/front"
-							style="display: inline;">
-							<input type="hidden" name="key" value="user" /> <input
-								type="hidden" name="methodName" value="logout" />
-							<button type="button" name="btnYun" id="btnYun"
-								class="btn btn-danger btn-sm"
-								onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
-								로그아웃</button>
-						</form>
+						<div class="con_tables">
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="profil" alt="profil"
+										src="${path}/assets/img/profil.png">안녕하세요,
+									${sessionScope.loginUser.user_name}님!
+								</div>
+							</div>
+							<div class="con_rows">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="message" alt="message"
+										src="${path}/assets/img/messageImg/message_0.png"> 메세지
+								</div>
+								<div class="con_cells"></div>
+
+							</div>
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<form id="member-update-form" method="get"
+										action="${pageContext.request.contextPath}/front"
+										style="display: inline;">
+										<input type="hidden" name="key" value="user" /> <input
+											type="hidden" name="methodName" value="logout" />
+										<button type="button" name="btnYun" id="btnYun"
+											class="btn btn-danger btn-sm"
+											onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
+											로그아웃</button>
+									</form>
+								</div>
+								<div class="con_cells"></div>
+							</div>
+						</div>
 					</c:when>
 
 					<c:when test="${not empty sessionScope.loginCom}">
-						<span class="login-info">
-							(${sessionScope.loginCom.host_name}/${sessionScope.loginCom.host_id})님
-							로그인 중입니다. </span>
-						<form id="member-update-form" method="get"
-							action="${pageContext.request.contextPath}/front"
-							style="display: inline;">
-							<input type="hidden" name="key" value="host" /> <input
-								type="hidden" name="methodName" value="logout" />
-							<button type="button" name="btnYun" id="btnYun"
-								class="btn btn-danger btn-sm"
-								onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
-								로그아웃</button>
-						</form>
+						<div class="con_tables">
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="profil" alt="profil"
+										src="${path}/assets/img/profil.png">안녕하세요,
+									${sessionScope.loginCom.user_name}님!
+								</div>
+							</div>
+							<div class="con_rows">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="message" alt="message"
+										src="${path}/assets/img/messageImg/message_0.png"> 메세지
+								</div>
+								<div class="con_cells"></div>
+
+							</div>
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<form id="member-update-form" method="get"
+										action="${pageContext.request.contextPath}/front"
+										style="display: inline;">
+										<input type="hidden" name="key" value="user" /> <input
+											type="hidden" name="methodName" value="logout" />
+										<button type="button" name="btnYun" id="btnYun"
+											class="btn btn-danger btn-sm"
+											onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
+											로그아웃</button>
+									</form>
+								</div>
+								<div class="con_cells"></div>
+							</div>
+						</div>
 					</c:when>
 
-					<c:when test="${empty sessionScope.loginUser}">
-						<button type="button" class="btn btn-outline-primary me-2">
-							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
-						</button>
-						<button type="button" class="btn btn-primary">
-							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
-						</button>
-					</c:when>
-
-					<c:when test="${empty sessionScope.loginCom}">
-						<button type="button" class="btn btn-outline-primary me-2">
-							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
-						</button>
-						<button type="button" class="btn btn-primary">
-							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
-						</button>
+					<c:when test="${empty sessionScope.loginUser || empty sessionScope.loginCom}" >
+						<div class="con_tables">
+							<div class="con_rows2">
+								<div class="con_cells">
+									<button type="button" class="btn btn-outline-primary me-2"
+										style="width: 100%; margin: 1px;">
+										<a href="${path}/user/login.jsp"
+											style="text-decoration: none; color: inherit;">Login</a>
+									</button>
+									<button type="button" class="btn btn-primary"
+										style="width: 100%; margin: 1px;">
+										<a href="${path}/user/choice.jsp"
+											style="text-decoration: none; color: inherit;">Sign-up</a>
+									</button>
+								</div>
+								<div class="con_cells"></div>
+							</div>
+						</div>
 					</c:when>
 				</c:choose>
 			</div>
 		</header>
 	</div>
-
 </main>
 
 <script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>
