@@ -45,14 +45,6 @@ img {
 	height: 30%;
 }
 
-#card_main #heart_state {
-	width: 8%;
-	height: 8%;
-	position: absolute;
-	z-index: 1000;
-	left: 90%;
-}
-
 .searchRES {
 	position: absolute;
 	width: 95%;
@@ -74,9 +66,57 @@ img {
 
 #likeArea {
 	position: relative;
-	float: none;
 }
+
+.con_table {
+	display: table;
+}
+
+.con_row {
+	display: table-row;
+}
+
+.con_row img {
+	width: 350px;
+	height: 200px;
+}
+
+.con_cell {
+	border: 1px solid #DCEBE6;
+	border-radius: 20px;
+	align-content: center;
+	text-align: center;
+	align-items: center;
+	display: table-cell;
+	width: 40%;
+	font-size: 20px;
+	font: bold;
+	font-family: Roboto;
+	color: black;
+}
+#con_name span{
+	margin-bottom:5px;
+	font-size: 30px;
+	color: #371AFC;
+}
+#con_name{
+	background-color: #A2DE96;
+}
+#con_p_name{
+	font-size: 25px;
+}
+#con_p_name span{
+	margin-bottom:5px;
+	font-size: 20px;
+	color: #371AFC;
+}
+
+.container {
+	padding : 2px;
+}
+
 </style>
+
 </head>
 <body>
 	<jsp:include page="/common/alarm.jsp" />
@@ -172,14 +212,32 @@ img {
 
 		</div>
 	</section>
-	<!-- Image Showcases-->
-	<section class="features-icons bg-light text-center">
+	<!-- 추천 목록 -->
+	<section class="features-icons bg-light text-center" id=likeArea>
 		<div class="container">
 			<div class="container px-4 px-lg-5 mt-5">
-				<h1>행사 목록</h1>
+				<h1>추천 목록</h1>
 				<br>
+				<div class="con_table">
+					<c:if test="${not empty listLike}">
+						<c:forEach items="${listLike}" var="option" varStatus="status">
+							<div class="con_row" id="${option.SVCID}">
+								<img src="${option.IMGURL}" class="con_cell">
+								<div class="con_cell"id="con_name"><span>${option.MINCLASSNM}</span><br>${option.SVCNM}</div>
+								<div class="con_cell"id="con_p_name">${option.PLACENM}<br><span>${option.RCPTBGNDT}~</span></div>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
+
+				<!-- Like List Pagination Controls -->
+				<div class="pagination-controls-like">
+					<button id="prevLikeBtn" class="btn btn-dark position-absolute start-0 top-50 translate-middle-y" style="margin-left: 15%;" onclick="prevLikePage()">이전</button>
+					<button id="nextLikeBtn" class="btn btn-dark position-absolute end-0 top-50 translate-middle-y" style="margin-right: 15%;" onclick="nextLikePage()">다음</button>
+				</div>
 			</div>
 		</div>
+
 	</section>
 
 
@@ -204,6 +262,11 @@ img {
 
 
 	<script type="text/javascript">
+	$('.con_row').click(function(){
+		let SVCid=$(this).attr('id');
+		location.replace('front?key=main&methodName=oneSelec&sid='+SVCid);
+	})
+	
 	let value, name, item, i;
 	
 	$('#search').keyup(function(){
@@ -270,6 +333,55 @@ img {
 	}
 	
 	
+	
+	$(document).ready(function() {
+	    const itemsPerPageLike = 3;  // 한 페이지에 보여줄 아이템 수 (Like 리스트)
+	    let currentPageLike = 1;     // 현재 Like 리스트 페이지 번호
+	    const itemsLike = $('.con_row'); // 모든 con_row_like 요소들을 가져옴
+	    const totalItemsLike = itemsLike.length; // 총 Like 리스트 아이템 수
+	    const totalPagesLike = Math.ceil(totalItemsLike / itemsPerPageLike); // 전체 Like 리스트 페이지 수 계산
+
+	    // 초기 페이지 로드
+	    showLikePage(currentPageLike);
+
+	    // 페이지에 해당하는 콘텐츠만 보여주는 함수 (Like 리스트 전용)
+	    function showLikePage(page) {
+	        const start = (page - 1) * itemsPerPageLike;
+	        const end = start + itemsPerPageLike;
+
+	        itemsLike.hide(); // 모든 Like 리스트 콘텐츠 숨기기
+	        itemsLike.slice(start, end).show(); // 현재 페이지의 콘텐츠만 표시
+
+	        // Like 리스트 버튼 활성화/비활성화 처리
+	        $('#prevLikeBtn').prop('disabled', page === 1);
+	        $('#nextLikeBtn').prop('disabled', page === totalPagesLike);
+	    }
+
+	    // 다음 페이지로 이동하는 함수 (Like 리스트 전용)
+	    function nextLikePage() {
+	        if (currentPageLike < totalPagesLike) {
+	            currentPageLike++;
+	            showLikePage(currentPageLike);
+	        }
+	    }
+
+	    // 이전 페이지로 이동하는 함수 (Like 리스트 전용)
+	    function prevLikePage() {
+	        if (currentPageLike > 1) {
+	            currentPageLike--;
+	            showLikePage(currentPageLike);
+	        }
+	    }
+
+	    // 버튼 클릭 시 함수 연결 (Like 리스트 전용)
+	    $('#nextLikeBtn').click(nextLikePage);
+	    $('#prevLikeBtn').click(prevLikePage);
+	});
+
+	
 	</script>
+
+
+
 </body>
 </html>

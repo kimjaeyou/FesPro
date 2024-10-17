@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import wep.mvc.dto.ReservationDTO2;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.util.DbUtil;
 
@@ -105,6 +106,47 @@ public class UsersDAOImpl implements UsersDAO {
 		return result;
 	}
 
+	
+	// 시퀀스 찾아서
+	@Override
+	public int selectWallet(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int seq = 0;
+		String sql = "select user_seq from users where user_id = ?"; 
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				UsersDTO dto = new UsersDTO(rs.getInt(1));
+				 seq = dto.getUser_seq();
+			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return seq;
+	}
+
+	// 지갑 데이터 넣기
+	@Override
+	public int insertWallet(int seq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("INSERT INTO wallet VALUES(WALLET_SEQ.NEXTVAL,? ,20000 , 0)");
+			ps.setInt(1, seq);
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
 	// 아이디 중복체크
 	@Override
 	public boolean idCheck(String id) throws SQLException {

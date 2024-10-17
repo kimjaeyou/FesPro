@@ -81,14 +81,13 @@ public class HostDAOImpl implements HostDAO {
 		boolean result = false;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select host_id from host where hostid=?");
+			ps = con.prepareStatement("select hostid from host where hostid=?");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				result = true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}

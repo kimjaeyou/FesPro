@@ -30,9 +30,9 @@ img {
 }
 /*배경 이미지 설정 스타일 */
 #head {
-	background-image: url("assets/img/Main_bg.png");
+	background-image: url("${path}/assets/img/Main_bg.png");
 	width: 100%;
-	height: 27%;
+	height: 300px;
 }
 
 #card_main {
@@ -154,61 +154,12 @@ img {
 	</header>
 	<!-- Icons Grid-->
 	<section class="features-icons bg-light text-center">
-		<div class="container">
-			<div class="container px-4 px-lg-5 mt-5">
-				<h1>행사 목록</h1>
-				<br>
-				<c:if test="${not empty searchList}">
-					<div id="cardContent" class="container position-relative">
-						<!-- Cards container for pagination -->
-						<div id="card-container"
-							class="row gx-4 gx-lg-5 justify-content-center">
-							<c:forEach items="${searchList}" var="option" varStatus="status">
-								<!-- Ensure the columns take equal width and display horizontally -->
-								<div class="col-md-3 mb-5 card-item" id="card_main">
-									<div class="card h-100">
-										<!-- Product image-->
-										<img id="card_img" class="card-img-top" src="${option.IMGURL}"
-											alt="..." />
-										<!-- Product details-->
-										<div class="card-body p-4">
-											<div class="text-center">
-												<!-- Product name-->
-												<h5 class="fw-bolder">${option.SVCNM}</h5>
-												<!-- Product price-->
-												${option.MINCLASSNM}
-											</div>
-										</div>
-										<!-- Product actions-->
-										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-											<div class="text-center">
-												<form action="${path}/front" method="post">
-													<input type="hidden" name="key" value="main" /> <input
-														type="hidden" name="methodName" value="oneSelec" /> <input
-														value="${option.SVCID}" name="sid" type="hidden">
-													<input class="btn btn-outline-dark mt-auto" type="submit"
-														name="View options" value="더보기">
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-						<button id="direcBtn"
-							class="btn btn-dark position-absolute start-0 translate-middle-y"
-							onclick="prevPage()">이전</button>
-
-						<span id="pagination-numbers"></span>
-
-						<button id="direcBtn"
-							class="btn btn-dark position-absolute end-0 translate-middle-y"
-							onclick="nextPage()">다음</button>
-					</div>
-				</c:if>
-
+		<div class="container mt-5">
+			<h1>알람 메시지</h1>
+			<div id="alarmContainer" class="alert alert-info" role="alert"
+				style="display: none;">
+				<ul id="alarmList"></ul>
 			</div>
-
 		</div>
 	</section>
 

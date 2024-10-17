@@ -1,10 +1,10 @@
 <%@page import="wep.mvc.dto.UsersDTO"%>
+<%@page import="wep.mvc.dto.WALLET"%>
 <%@page import="wep.mvc.dto.ReservationDTO2"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="myPageCheck.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,30 +26,20 @@
                 <div class="balance-container">
                     <h2 class="mt-4">돈을 벌고싶니?</h2>               
                     <h2 class="mt-4">부자가 되고싶니?</h2>
+                    <h3>───────────────────────────────────────────────</h3>
+                    <h4 class="mt-4">${sessionScope.loginUser.user_name}님의 잔액은 ${requestScope.money.MONEY}원 있습니다.</h4>                    
                 </div>
-                <div class="section-container">
                     <form action="${path}/front" method="post">
                         <input type="hidden" name="key" value="mypage">
                         <input type="hidden" name="methodName" value="balancePlus">
                         <div class="section">
                             <h3>충전하기</h3>
-                            <input type="text" id="plus-amount" name="charge" placeholder="충전할 금액을 입력하세요." />
+                            <input type="text" id="plus-amount" name="plus-amount" placeholder="충전할 금액을 입력하세요." />
                             <input type="password" id="plus-password" name="plus-password" placeholder="비밀번호를 입력하세요." />
                             <button type="submit">충전하기</button>
                         </div>
                     </form>
-                    <form action="${path}/front" method="post">
-                        <input type="hidden" name="key" value="mypage">
-                        <input type="hidden" name="methodName" value="balanceMinus">
-                        <div class="section">
-                            <h3>출금하기</h3>
-                            <input type="text" id="minus-amount" name="minus-amount" placeholder="출금하실 금액을 입력하세요." />
-                            <input type="password" id="minus-password" name="minus-password" placeholder="비밀번호를 입력하세요." />
-                            <button type="submit">출금하기</button>
-                        </div>
-                    </form>
                 </div>
-            </div>
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

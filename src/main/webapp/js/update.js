@@ -16,7 +16,7 @@ $(document).ready(function() {
         }
     });
 
-    const signupForm = $('#member-update-form');
+    const signupForm = $('#update-form');
 
     signupForm.on('submit', function(event) {
         if (password.val() !== confirmPassword.val()) {

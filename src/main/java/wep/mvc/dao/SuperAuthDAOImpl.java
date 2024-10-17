@@ -283,6 +283,40 @@ public class SuperAuthDAOImpl implements SuperAuthDAO {
 		  return list;
 		 }
 
+	@Override
+	public List<HostDTO> hostWaitSelectAll() {
+		System.out.println("셀렉트올 다오");
+		  Connection con = null;
+		  PreparedStatement ps = null;
+		  ResultSet rs = null;
+		  List<HostDTO> list = new ArrayList<HostDTO>();
+		  try {
+		   con = DbUtil.getConnection();
+		   ps = con.prepareStatement("SELECT * FROM HOST WHERE HOST_CHECK = 0 ");
+		   rs  = ps.executeQuery();
+		   while(rs.next()){
+		    list.add(new HostDTO(
+		    		rs.getInt("HOST_SEQ"),
+		    		rs.getString("HOSTID"),
+		    		rs.getString("COM_NAME"), 
+		    		rs.getString("HOST_PASSWORD"), 
+		    		rs.getString("HOST_TEL"),
+		    		rs.getString("HOST_NAME"),
+		    		rs.getInt("HOST_CHECK"),
+		    		rs.getString("REP_NAME"),
+		    		rs.getInt("HOST_BEN_CHECK")));
+		   }
+
+		  } catch (SQLException e) {
+		   e.printStackTrace();
+		  } finally {
+		   DbUtil.dbClose(con, ps, rs);
+		  }
+		  return list;
+		
+		
+	}
+
 
 	
 	

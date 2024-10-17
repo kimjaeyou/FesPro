@@ -29,5 +29,46 @@ public class SuperFestivalAjaxController implements RestController {
 		 */
 	}
 	
+	
+	public void waitAcceptSelectAll(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		System.out.println("재구 / selectAll() Call");
+
+		List<FesDTO> festivalList = service.dashFesSelectAll();
+		int fesListNum = festivalList.size();
+		System.out.println(fesListNum);
+
+		PrintWriter out = resp.getWriter(); // out.print("형우 / selectAll 로직");
+		out.print(String.valueOf(fesListNum));
+
+	}
+	
+	public void waitUpdateSelectAll(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		System.out.println("재구 / selectAll() Call");
+
+		List<FesDTO> festivalList = service.dashFesWaitFesSelectAll();
+		int fesListNum = festivalList.size();
+		System.out.println(fesListNum);
+
+		PrintWriter out = resp.getWriter(); // out.print("형우 / selectAll 로직");
+		out.print(String.valueOf(fesListNum));
+
+	}
+	
+	public void getPendingCancelCount(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, SQLException {
+		System.out.println("재구 / selectAll() Call");
+
+		List<FesDTO> festivalList = service.dashFesCancleWaitFesSelectAll();
+		int fesListNum = festivalList.size();
+		System.out.println(fesListNum);
+
+		PrintWriter out = resp.getWriter(); // out.print("형우 / selectAll 로직");
+		out.print(String.valueOf(fesListNum));
+
+	}
+	 
+	
 
 }

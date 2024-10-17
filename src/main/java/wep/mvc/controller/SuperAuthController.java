@@ -146,14 +146,21 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		int result = service.hostUpdate(host);
 		System.out.println(result);
 		
-		if(result > 0) {
-			return new ModelAndView("front?key=superAuth&methodName=hostSelectAll",true);
-		}
-		else {
-			//에러페이지
-			System.out.println("회원 업데이트 실패 Controller-update");
-			return null;
-		}
+		// 성공 여부에 따른 리다이렉션 처리
+	    if (result > 0) {
+	        // host_ben_check 값에 따라 적절한 페이지로 이동
+	        if (Integer.parseInt(host_check) == 1) {
+	            // 활성화 상태일 경우 승인 대기 목록으로 이동
+	            return new ModelAndView("front?key=superAuth&methodName=hostWaitSelectAll", true);
+	        } else {
+	            // 그 외의 경우 전체 목록으로 이동
+	            return new ModelAndView("front?key=superAuth&methodName=hostSelectAll", true);
+	        }
+	    } else {
+	        // 실패 시 에러 페이지로 이동
+	        System.out.println("업데이트 실패 Controller-update");
+	        return new ModelAndView("error.jsp", false);
+	    }
 	}
 	
 	public ModelAndView sessionLocationAll(HttpServletRequest request, HttpServletResponse response)
@@ -169,6 +176,18 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		
 		request.setAttribute("FesList", list);
 		return new ModelAndView("super/auth/authChart.js");
+		 
+	}
+	
+	public ModelAndView hostWaitSelectAll(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("호스트셀렉트올 컨트롤러");
+		List<HostDTO> list = new ArrayList<HostDTO>();
+		list = service.hostWaitSelectAll();
+		System.out.println("컨트롤러에서 호스트list = "+list);
+		
+		request.setAttribute("hostList", list);
+		return new ModelAndView("super/auth/hostSelectAll.jsp");
 		 
 	}
 }

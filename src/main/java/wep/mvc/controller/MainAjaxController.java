@@ -35,6 +35,10 @@ public class MainAjaxController implements RestController {
 		Gson gson = new Gson();
 		String sid=request.getParameter("sid");
 		List<ReviewDTO> res=mainService.selecReview(sid);
+		for(ReviewDTO r:res) {
+			System.out.println(r.getSCORE());
+		}
+		
 		String json = gson.toJson(res);
 		
 		PrintWriter out = response.getWriter();

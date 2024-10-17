@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import wep.mvc.dto.FesDTO;
+import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.WAIT_FES;
 
 public interface FesSerevice{
@@ -25,6 +26,16 @@ public interface FesSerevice{
 	void updateFes(String sVCID) throws SQLException;
 
 	void updateFes(String sVCID, int i) throws SQLException;
+
+	HostDTO myPage2(int host_seq) throws SQLException;
+
+	void myHostDelete(int host_seq) throws SQLException;
+
+	void pwUpdateForm22(String newPw, int host_seq) throws SQLException;
+
+	List<FesDTO> selectALL() throws SQLException;
+
+
 
 	//List<FesDTO> selectAll() throws SQLException;
 

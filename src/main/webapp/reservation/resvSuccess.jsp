@@ -31,7 +31,7 @@
             th {
                 text-align: center;
                 background-color: rgba(0, 123, 255, 0.17);
-                width: 20%;
+                
             }
 
             th,
@@ -93,6 +93,7 @@
         </header>
         <div class="divTable">
             <table>
+            <colgroup><col witdh="20%"><col width="auto"></colgroup>
                  <tr>
                     <th>예약번호</td>
                     <td name="resvNo" data-form="resvSeq">
@@ -123,11 +124,10 @@
 					</td>
                 </tr>
                 <tr>
-                    <th>이용요금</td>
+                    <th>이용요금</th>
                     <td name="resvPrice">
-                    <td name="resvPeo">
 					<c:if test="${not empty resvData}">
-						${resvData.resvPrice}
+						${resvData.resvPrice}원
 					</c:if>
 					</td>
                 </tr>
