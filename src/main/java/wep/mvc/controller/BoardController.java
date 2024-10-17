@@ -32,6 +32,14 @@ public class BoardController implements Controller {
 		
 	}
 	
+	public ModelAndView moveWritePageFree (HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		
+		
+		return new ModelAndView("board/boardWriteFree.jsp");
+		
+	}
+	
 
 	/**
 	 * 공지

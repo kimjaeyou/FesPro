@@ -126,7 +126,7 @@ th, td {
 				</tbody>
 			</table>
 
-			<a href="${path}/front?key=board&methodName=write"
+			<a href="${path}/front?key=board&methodName=moveWritePageFree"
 				class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
