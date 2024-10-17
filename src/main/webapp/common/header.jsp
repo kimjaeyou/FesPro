@@ -311,26 +311,24 @@ img {
 						</div>
 					</c:when>
 
-					<c:when test="${empty sessionScope.loginUser}">
-						<button type="button" class="btn btn-outline-primary me-2">
-							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
-						</button>
-						<button type="button" class="btn btn-primary">
-							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
-						</button>
-					</c:when>
-
-					<c:when test="${empty sessionScope.loginCom}">
-						<button type="button" class="btn btn-outline-primary me-2">
-							<a href="${path}/user/login.jsp"
-								style="text-decoration: none; color: inherit;">Login</a>
-						</button>
-						<button type="button" class="btn btn-primary">
-							<a href="${path}/user/choice.jsp"
-								style="text-decoration: none; color: inherit;">Sign-up</a>
-						</button>
+					<c:when test="${empty sessionScope.loginUser || empty sessionScope.loginCom}" >
+						<div class="con_tables">
+							<div class="con_rows2">
+								<div class="con_cells">
+									<button type="button" class="btn btn-outline-primary me-2"
+										style="width: 100%; margin: 1px;">
+										<a href="${path}/user/login.jsp"
+											style="text-decoration: none; color: inherit;">Login</a>
+									</button>
+									<button type="button" class="btn btn-primary"
+										style="width: 100%; margin: 1px;">
+										<a href="${path}/user/choice.jsp"
+											style="text-decoration: none; color: inherit;">Sign-up</a>
+									</button>
+								</div>
+								<div class="con_cells"></div>
+							</div>
+						</div>
 					</c:when>
 				</c:choose>
 			</div>
