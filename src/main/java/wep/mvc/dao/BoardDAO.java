@@ -27,11 +27,10 @@ public interface BoardDAO {
 		
 		/** 카테고리별 전체 목록 조회 */
 	
-	List<BoardDTO> selectByCtg (BoardDTO boardDTO , BoardCategoryDTO boardCategoryDTO) throws SQLException;
+	List<BoardDTO> selectByCtg () throws SQLException;
 	
 		
 		/** 선택 게시글 조회*/
 		
-	BoardDTO select (int userSeq) throws SQLException;
-	
+	BoardDTO select (int boardSeq) throws SQLException;
 }

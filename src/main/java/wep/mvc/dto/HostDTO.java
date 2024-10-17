@@ -32,10 +32,11 @@ public class HostDTO {
 		this.host_id = host_id;
 		this.host_pw = host_pw;
 	}
-	public HostDTO(String host_id ,String host_name, int host_seq) {
+	public HostDTO(String host_id ,String host_name, int host_seq,int host_ben_check) {
 		this.host_id = host_id;
 		this.host_name = host_name;
 		this.host_seq = host_seq;
+		this.host_ben_check = host_ben_check;
 	}
 
 	//회원가입
@@ -163,6 +164,10 @@ public class HostDTO {
 	public void setCom_name(String com_name) {
 		this.com_name = com_name;
 	}
-
+	
+	
+	public HostDTO(int seq) {
+		this.host_seq=seq;
+	}
 
 }

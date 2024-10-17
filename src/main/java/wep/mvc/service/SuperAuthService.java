@@ -1,10 +1,7 @@
 package wep.mvc.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import wep.mvc.dao.SuperAuthDAO;
-import wep.mvc.dao.SuperAuthDAOImpl;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;

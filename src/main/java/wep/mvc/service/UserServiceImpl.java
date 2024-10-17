@@ -2,7 +2,6 @@ package wep.mvc.service;
 
 import java.sql.SQLException;
 
-import wep.mvc.controller.ModelAndView;
 import wep.mvc.dao.UsersDAO;
 import wep.mvc.dao.UsersDAOImpl;
 import wep.mvc.dto.UsersDTO;
@@ -31,25 +30,4 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	// 회원탈퇴
-	@Override
-	public int delete(String id) throws SQLException {
-
-		return user.delete(id);
-	}
-
-	// 회원수정
-	@Override
-	public int update(UsersDTO usersDTO) throws SQLException {
-
-		return user.update(usersDTO);
-	}
-
-	@Override
-	public UsersDTO selectUser(String usersDTO)  throws SQLException{
-		
-		return user.selectUser(usersDTO);
-	}
-
-	
 }
