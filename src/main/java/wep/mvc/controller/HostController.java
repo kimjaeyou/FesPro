@@ -69,7 +69,8 @@ public class HostController implements Controller {
 		}
 
 		HttpSession session = request.getSession();
-		session.setAttribute("loginCom", new HostDTO(dbDTO.getHost_id(), dbDTO.getHost_name(), dbDTO.getHost_seq()));
+		session.setAttribute("loginCom", new HostDTO(dbDTO.getHost_id(), dbDTO.getHost_name(), dbDTO.getHost_seq(),
+				dbDTO.getHost_ben_check()));
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");
 		mv.setRedirect(true);

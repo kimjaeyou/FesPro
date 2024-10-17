@@ -46,7 +46,7 @@
 <body>
 
 	<c:choose>
-		<c:when	test="${not empty sessionScope.loginUser}">
+		<c:when	test="${not empty sessionScope.loginUser && empty sessionScope.loginCom}">
 			<div id="messageContainner">
 				<img alt="Logo" src="${path}/assets/img/FesProLogo_bg.png">
 				<div id="yo1">
@@ -63,14 +63,17 @@
 			</div>
 		</c:when>
 		
-		<c:when test="${not empty sessionScope.loginCom}">
+		<c:when test="${not empty sessionScope.loginCom && empty sessionScope.loginUser}">
 			<div id="messageContainner">
 				<img alt="Logo" src="${path}/assets/img/FesProLogo_bg.png">
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">MY메세지</a>
 				</div>
 				<div id="yo1">
-					<a href="${path}/front?key=fes&methodName=selectAll">MY페이지</a> <!-- 마이페이지 이슈 여기로밖에 안들어가진다. -->
+				<!-- 여기 밑에 있는 두줄은 주석 달면서 사용하시면 됩니다. 지금 좀 에러가 많아서 아무래도 여기서만 바꿔치기 하시면서 사용하셔야 합니다.
+					제가 필터 얼른 만들어 보겠습니다..ㅠㅠㅠ 제성합니다 -->
+					<!-- <a href="${path}/front?key=fes&methodName=selectAll">MY페이지</a> <!-- 마이페이지 이슈 여기로밖에 안들어가진다. -->
+					<a href="${path}/front?key=mypage&methodName=resSelectAll">MY페이지</a>
 				</div>
 				<div id="yo1">
 					<a href="${path}/front?key=messageAndAlram&methodName=mMove">Q&A</a>
