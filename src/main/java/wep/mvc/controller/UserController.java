@@ -67,28 +67,11 @@ public class UserController implements Controller {
 		try {
 			dbDTO = us.login(new UsersDTO(userId, userPw));
 			if (dbDTO == null) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('아이디 또는 비밀번호 오류 입니다.'); history.go(-1);</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
+
 			} else if (dbDTO.getUser_ben_check() == 1) {
-				System.out.println(dbDTO.getUser_ben_check());
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('로그인 되었습니다.')"
-						+ "	location.href='main.jsp';</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
+
 			} else if (dbDTO.getUser_ben_check() != 1) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('정지된 계정 입니다.'); history.go(-1);</script>");
-				out.flush();
-				response.flushBuffer();
-				out.close();
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

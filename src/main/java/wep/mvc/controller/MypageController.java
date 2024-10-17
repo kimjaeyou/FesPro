@@ -80,7 +80,7 @@ public class MypageController implements Controller {
 			int result = ms.update(dto);
 			if (result == 1) {
 				// req.set애트리뷰트("내맘대로", true);
-				return new ModelAndView("front?key=user&methodName=selectUser", true); // jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert
+				return new ModelAndView("front?key=mypage&methodName=selectUser", true); // jsp에ㅛㅓ req.getatttibu("내맘대로") -> 있으면 alert
 			} else {
 				// return new ModelAndView("login.jsp", true);
 			}
