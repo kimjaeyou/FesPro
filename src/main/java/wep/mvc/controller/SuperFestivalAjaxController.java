@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

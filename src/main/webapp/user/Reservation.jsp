@@ -90,9 +90,9 @@
 					<c:forEach items="${reservation}" var="re">
 						<tr>
 							<td><a
-								href="${path}/front?key=&methodName=/${re.reserv_Seq}"
+								href="${path}/front?key=reservation&methodName=viewDetail/${re.reserv_Seq}"
 								class="no-underline1">${re.reserv_Seq}</a></td>
-							<td><a href="${path}/front?key=&methodName="
+							<td><a href="${path}/front?key=reservation&methodName=revMove"
 								class="no-underline2" id="svcnm">${re.svcnm}</a></td>
 							<td>${re.resv_Date}/${re.svc_Time}차</td>
 							<td>${re.svc_Date}</td>

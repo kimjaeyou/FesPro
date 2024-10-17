@@ -15,7 +15,6 @@ import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.SuperAuthService;
 import wep.mvc.service.SuperAuthServiceImpl;
 
-
 public class SuperAuthAjaxController implements RestController {
 	SuperAuthService service = new SuperAuthServiceImpl();
 	
