@@ -291,8 +291,10 @@ img {
 	});
 	
 	$(document).on('mouseover', '.item', function() {
+		let str=$(this).text();
 		document.getElementById('selecSVCID').value = $(this).attr('data-item');
- 		document.getElementById("search").value = $(this).text();
+		document.getElementById("search").value ="";
+ 		document.getElementById("search").value = str;
 	});
 
 	
