@@ -134,7 +134,7 @@ public class FesController implements Controller {
 		String REVSTDDAYNM = req.getParameter("REVSTDDAYNM");
 		int Fes_state = 0; // 승인전
 		String Update_date = ""; // sysdate
-		int MAXNUM = 20;
+		int MAXNUM = 30;
 		int PRICE = Integer.parseInt(req.getParameter("PRICE"));
 
 		HttpSession session = req.getSession();
@@ -313,7 +313,7 @@ public class FesController implements Controller {
 
 			if (fileName != null && !fileName.equals("")) {
 				IMGURL.write(saveDir + "/" + fileName);// 서버폴더에 파일 저장=업로드
-				waitFes.setIMGURL(fileName);
+				waitFes.setIMGURL("save/"+fileName);
 			}
 		}
 
@@ -333,7 +333,20 @@ public class FesController implements Controller {
 		String SVCID = req.getParameter("SVCID");
 
 		fesSerevice.updateFes(SVCID);
-
+		
+		//삭제 신청하면 application영역에서 제거
+		
+		ServletContext context = req.getServletContext();
+		
+		List<FesDTO> fesdto = (List<FesDTO>)context.getAttribute("fesList");
+		for(FesDTO f : fesdto) {
+			if(f.getSVCID().equals(SVCID)) {
+				fesdto.remove(f);
+				break;
+			}
+		}
+		req.setAttribute("fesList", fesdto);
+		
 		return new ModelAndView("front?key=fes&methodName=select", true);
 	}
 	

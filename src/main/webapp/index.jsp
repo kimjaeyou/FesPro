@@ -294,20 +294,19 @@ img {
          }
           
         }
-   })
-   
-   $('#search').blur(function(){
-      document.getElementById("item").style.display="none";
-   });
-   
-   $(document).on('mouseover', '.item', function() {
-      document.getElementById('selecSVCID').value = $(this).attr('data-item');
-       document.getElementById("search").value = $(this).text();
-   });
 
-   
-   
-   
+	})
+	
+	$('#search').blur(function(){
+		document.getElementById("item").style.display="none";
+	});
+	
+	$(document).on('mouseover', '.item', function() {
+		let str=$(this).text();
+		document.getElementById('selecSVCID').value = $(this).attr('data-item');
+		document.getElementById("search").value ="";
+ 		document.getElementById("search").value = str;
+	});
    
    let currentPage = 1;
    const itemsPerPage = 3;

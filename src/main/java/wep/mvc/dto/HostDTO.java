@@ -164,6 +164,10 @@ public class HostDTO {
 	public void setCom_name(String com_name) {
 		this.com_name = com_name;
 	}
-
+	
+	
+	public HostDTO(int seq) {
+		this.host_seq=seq;
+	}
 
 }
