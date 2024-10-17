@@ -216,7 +216,7 @@ th:nth-child(2), td:nth-child(2) {
 			</table>
 
                 <!-- 글쓰기 버튼을 오른쪽 아래에 고정 -->
-                <a href="${path}/front?key=board&methodName=moveWritePage" class="btn-custom">글쓰기</a>
+                <a href="${path}/front?key=board&methodName=moveWritePageFree" class="btn-custom">글쓰기</a>
             </div>
         </div>
     </div>
