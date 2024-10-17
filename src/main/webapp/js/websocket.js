@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:8081/FesPro/notification");
+const socket = new WebSocket("ws://localhost:8081/FesPro/sendNotification");
 
 socket.onmessage = function(event) {
 	const notificationDiv = document.getElementById("notifications");

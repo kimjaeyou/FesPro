@@ -28,7 +28,7 @@ public class SessionCheckFilter implements Filter {
 		HostDTO host = (HostDTO) session.getAttribute("loginCom");
 
 		// 로그인 안한채로 가려고 하면 login하라고 한다( mypage, fes, messagerAndAlram, reservation )
-		if (key == null || key.equals("mypage") || key.equals("fes") || key.equals("messagerAndAlram")
+		if (key == null || key.equals("mypage") || key.equals("fes") || key.equals("messageAndAlram")
 				|| key.equals("reservation") || key.equals("board")) {
 			req = (HttpServletRequest) request;
 			session = req.getSession();

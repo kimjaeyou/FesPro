@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Notification Example</title>
+<title>Notification Page</title>
 </head>
 <body>
-    <h1>Real-time Notifications</h1>
-    <div id="notifications"></div>
-
-    <script>
-        const socket = new WebSocket("ws://localhost:8080/your-app/notification");
-
-        socket.onmessage = function(event) {
-            const notificationDiv = document.getElementById("notifications");
-            const message = document.createElement("p");
-            message.textContent = event.data;
-            notificationDiv.appendChild(message);
-        };
-
-        socket.onopen = function() {
-            console.log("WebSocket connection established.");
-        };
-
-        socket.onclose = function() {
-            console.log("WebSocket connection closed.");
-        };
-    </script>
+	<h1>Notification: ${param.message}</h1>
 </body>
+
+<script type="text/javascript">
+	//WebSocket 연결 코드 (JSP 파일 내 script 영역)
+	let socket = new WebSocket("ws://localhost:8081/FesPro/websocket");
+
+	socket.onopen = function() {
+		console.log("WebSocket connection opened.");
+	};
+
+	socket.onmessage = function(event) {
+		console.log("Message received: " + event.data);
+		// 여기서 알림 UI를 업데이트하는 코드를 작성하면 됩니다.
+	};
+
+	socket.onclose = function() {
+		console.log("WebSocket connection closed.");
+	};
+</script>
 </html>
