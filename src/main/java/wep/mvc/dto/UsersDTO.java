@@ -215,8 +215,6 @@ public class UsersDTO {
 		this.user_ben_check = user_ben_check;
 	}
 	
-	public UsersDTO(int seq) {
-		this.user_seq=seq;
-	}
+
 
 }

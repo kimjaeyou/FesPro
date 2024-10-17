@@ -158,33 +158,39 @@ img {
 	margin-left: 13px;
 }
 
-#profil {
-	position: relative;
-	float: left;
-}
-
-.con_table {
+.con_tables {
 	display: table;
+	border: none;
 }
 
-.con_row {
+.con_rows {
+	display: table-row;
+	border: none;
+}
+
+.con_rows2 {
 	display: table-row;
 }
 
-.con_cell {
+.con_cells {
 	border: none;
-	align-content : center;
+	align-content: center;
 	text-align: center;
 	align-items: center;
 	display: table-cell;
-	width: 40%;
 	font-size: 20px;
 	font: bold;
 	font-family: Roboto;
 	color: black;
 	align-content: center;
 }
+
+.con_cells img {
+	width: 30px;
+	height: 30px;
+}
 </style>
+
 </head>
 <main>
     <div class="container">
@@ -304,52 +310,79 @@ img {
 			<div class="login-section">
 				<c:choose>
 					<c:when test="${not empty sessionScope.loginUser}">
-						<div class="con_table">
-							<div class="con_row">
-								<div class="con_cell">
+						<div class="con_tables">
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
 									<img id="profil" alt="profil"
-										src="${path}/assets/img/profil.png"
-										style="width: 30px; height: 20px">
-								</div>
-								<div class="con_cell">${sessionScope.loginUser.user_name}
-								</div>
-								<div class="con_cell">
-									<img id="profil" alt="profil"
-										src="${path}/assets/img/messageImg/message_0.png"
-										style="width: 30px; height: 20px">
+										src="${path}/assets/img/profil.png">안녕하세요,
+									${sessionScope.loginUser.user_name}님!
 								</div>
 							</div>
+							<div class="con_rows">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="message" alt="message"
+										src="${path}/assets/img/messageImg/message_0.png"> 메세지
+								</div>
+								<div class="con_cells"></div>
+
+							</div>
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<form id="member-update-form" method="get"
+										action="${pageContext.request.contextPath}/front"
+										style="display: inline;">
+										<input type="hidden" name="key" value="user" /> <input
+											type="hidden" name="methodName" value="logout" />
+										<button type="button" name="btnYun" id="btnYun"
+											class="btn btn-danger btn-sm"
+											onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
+											로그아웃</button>
+									</form>
+								</div>
+								<div class="con_cells"></div>
+							</div>
 						</div>
-
-						<span class="login-info"> 안녕하세요,
-							${sessionScope.loginUser.user_name}님!</span>
-
-						<form id="member-update-form" method="get"
-							action="${pageContext.request.contextPath}/front"
-							style="display: inline;">
-							<input type="hidden" name="key" value="user" /> <input
-								type="hidden" name="methodName" value="logout" />
-							<button type="button" name="btnYun" id="btnYun"
-								class="btn btn-danger btn-sm"
-								onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
-								로그아웃</button>
-						</form>
 					</c:when>
 
 					<c:when test="${not empty sessionScope.loginCom}">
-						<span class="login-info">
-							(${sessionScope.loginCom.host_name}/${sessionScope.loginCom.host_id})님
-							로그인 중입니다. </span>
-						<form id="member-update-form" method="get"
-							action="${pageContext.request.contextPath}/front"
-							style="display: inline;">
-							<input type="hidden" name="key" value="host" /> <input
-								type="hidden" name="methodName" value="logout" />
-							<button type="button" name="btnYun" id="btnYun"
-								class="btn btn-danger btn-sm"
-								onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
-								로그아웃</button>
-						</form>
+						<div class="con_tables">
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="profil" alt="profil"
+										src="${path}/assets/img/profil.png">안녕하세요,
+									${sessionScope.loginCom.user_name}님!
+								</div>
+							</div>
+							<div class="con_rows">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<img id="message" alt="message"
+										src="${path}/assets/img/messageImg/message_0.png"> 메세지
+								</div>
+								<div class="con_cells"></div>
+
+							</div>
+							<div class="con_rows2">
+								<div class="con_cells"></div>
+								<div class="con_cells">
+									<form id="member-update-form" method="get"
+										action="${pageContext.request.contextPath}/front"
+										style="display: inline;">
+										<input type="hidden" name="key" value="user" /> <input
+											type="hidden" name="methodName" value="logout" />
+										<button type="button" name="btnYun" id="btnYun"
+											class="btn btn-danger btn-sm"
+											onclick="location.href='${pageContext.request.contextPath}/front?key=user&methodName=logout'">
+											로그아웃</button>
+									</form>
+								</div>
+								<div class="con_cells"></div>
+							</div>
+						</div>
 					</c:when>
 
 					<c:when test="${empty sessionScope.loginUser}">
@@ -378,7 +411,6 @@ img {
 			</div>
 		</header>
 	</div>
-
 </main>
 
 <script src="${path}/reservation/assets/dist/js/bootstrap.bundle.min.js"></script>

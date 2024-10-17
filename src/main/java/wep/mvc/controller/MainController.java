@@ -17,6 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.MainSereviceImpl;
+import wep.mvc.service.SuperFestivalService;
+import wep.mvc.service.SuperFestivalServiceImpl;
 
 public class MainController implements Controller {
 	MainSereviceImpl mainService = new MainSereviceImpl();
@@ -54,6 +56,24 @@ public class MainController implements Controller {
 		FesDTO fes = mainService.selecOne(sid, list);
 		if (fes != null)
 			req.setAttribute("fes", fes);
+		
+		/* 차트 데이터 가져오기 */
+		SuperFestivalService festivalService = new SuperFestivalServiceImpl();
+		
+		// 행사에 등록한 유저들 리스트 보내기
+		List<UsersDTO> userList = festivalService.selectUser(fes);
+		// System.out.println(userList);
+		Gson g = new Gson();
+		String data = g.toJson(userList);
+		req.setAttribute("chartUserList", data);
+		
+		// 리뷰 쓴 유저 정보 보내기
+		List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
+		data = g.toJson(reviewUserList);
+		//System.out.println(data);
+		req.setAttribute("reviewUserList", data);
+
+	
 
 		return new ModelAndView("detail.jsp");
 	}
