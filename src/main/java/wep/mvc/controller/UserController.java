@@ -1,6 +1,7 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
@@ -19,7 +20,7 @@ public class UserController implements Controller {
 	private UsersDAO ud = new UsersDAOImpl();
 
 	// 회원가입
-	public ModelAndView insert(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("username");
 		String pwd = request.getParameter("password");
@@ -45,8 +46,12 @@ public class UserController implements Controller {
 				mv.setRedirect(true);
 				return mv;
 			} else {
-				// 회원가입 실패했으면 실패 메세지 출력
-				// return new ModelAndView("user.jsp", true);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('회원가입 실패했습니다.'); history.go(-1);</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,26 +60,42 @@ public class UserController implements Controller {
 	}
 
 	// 로그인
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
 		String userId = request.getParameter("member-id");
 		String userPw = request.getParameter("member-password");
-		UsersDTO dbDTO = us.login(new UsersDTO(userId, userPw));
+		UsersDTO dbDTO = null;
 		try {
+			dbDTO = us.login(new UsersDTO(userId, userPw));
 			if (dbDTO == null) {
-				// 오류메세지 = 아이디 또는 비밀번호를 다시 입력하세요.
-				// return new ModelAndView("login.jsp");
-			}
-
-			if (dbDTO.getUser_ben_check() != 1) {
-				// 오류메세지 = 정지된 아이디 입니다.
-				// return new ModelAndView("login.jsp");
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('아이디 또는 비밀번호 오류 입니다.'); history.go(-1);</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
+			} else if (dbDTO.getUser_ben_check() == 1) {
+				System.out.println(dbDTO.getUser_ben_check());
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('로그인 되었습니다.')"
+						+ "	location.href='main.jsp';</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
+			} else if (dbDTO.getUser_ben_check() != 1) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('정지된 계정 입니다.'); history.go(-1);</script>");
+				out.flush();
+				response.flushBuffer();
+				out.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", new UsersDTO(dbDTO.getUser_id(), dbDTO.getUser_name(), dbDTO.getUser_seq(),
-				dbDTO.getEmail(), dbDTO.getUser_tel(),dbDTO.getUser_ben_check()));
+				dbDTO.getEmail(), dbDTO.getUser_tel(), dbDTO.getUser_ben_check()));
 		session.setAttribute("loginUserId", dbDTO.getUser_id());
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");
@@ -83,11 +104,19 @@ public class UserController implements Controller {
 	}
 
 	// 로그아웃
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse resp)
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate(); // 세션정보 무효화 시키기
 		// 가능하면 로그아웃 되었다는 메세지 출력해주고 싶다
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그아웃 되었습니다.');"
+				+ "	location.href='main.jsp'; </script>");
+		out.flush();
+		response.flushBuffer();
+		out.close();
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=main&methodName=read");
 		return mv;
