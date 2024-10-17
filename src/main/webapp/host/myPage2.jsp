@@ -180,14 +180,14 @@
 													<span><b>${hostDTO.host_name}</b></span>
 												</p></td>
 										</tr>
-										<tr>
+										<%-- <tr>
 											<td><p align="center">
 													<span>승인여부</span>
 												</p></td>
 											<td><p align="center">
 													<span><b>${hostDTO.host_check}</b></span>
 												</p></td>
-										</tr>
+										</tr> --%>
 										<tr>
 											<td><p align="center">
 													<span>가입자명</span>
@@ -196,14 +196,14 @@
 													<span><b>${hostDTO.rep_name}</b></span>
 												</p></td>
 										</tr>
-										<tr>
+										<%-- <tr>
 											<td><p align="center">
 													<span>정지여부</span>
 												</p></td>
 											<td><p align="center">
 													<span><b>${hostDTO.host_ben_check}</b></span>
 												</p></td>
-										</tr>
+										</tr> --%>
 										<tr>
 
 											<td width="450" height="20" colspan="2" align="center">

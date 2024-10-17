@@ -1,23 +1,27 @@
 package wep.mvc.service;
 
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.OnOpen;
-import jakarta.websocket.OnClose;
-import jakarta.websocket.Session;
+import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.server.HandshakeRequest;
+import jakarta.websocket.server.ServerEndpointConfig;
+
 import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@ServerEndpoint("/websocket")
+@ServerEndpoint(value = "/websocket", configurator = HttpSessionConfigurator.class)
 public class NotificationWebSocket {
-    // 클라이언트 세션을 관리할 Set
     private static Set<Session> clients = new CopyOnWriteArraySet<>();
 
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session, EndpointConfig config) {
+        // HTTP 세션 정보 가져오기
+        HttpSession httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
+        String userId = (String) httpSession.getAttribute("loginUserId"); // 로그인한 사용자 ID 가져오기
+
+        System.out.println("New connection opened: " + session.getId() + " UserID: " + userId);
         clients.add(session);
-        System.out.println("New connection opened: " + session.getId());
     }
 
     @OnMessage
@@ -44,4 +48,5 @@ public class NotificationWebSocket {
             }
         }
     }
+    
 }

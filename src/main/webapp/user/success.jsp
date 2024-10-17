@@ -7,8 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript"> // 시작하면 바로 밑에있는 주소로 바로간다.
-   location.href="${path}/front?key=main&methodName=read"
+
+<script type="text/javascript">
+  alert("${requestScope.where}");
+  location.href=".jsp";
 </script>
+
+
+
 </body>
 </html>

@@ -256,9 +256,38 @@ img {
 	<!-- Testimonials-->
 	<section class="testimonials text-center bg-light">
 		<div class="container">
-			<br><br><h1>공지사항</h1><br>
-			
-		</div>
+			<br> <br>
+			<h1>공지사항</h1>
+			<br> <br>
+			<div class="content">
+				<div class="row">
+					<table
+						style="text-align: center; border: 2px solid #dddddd !important; background-color: white">
+						<thead>
+							<tr>
+								<th style="background-color: #eeeeee; text-align: center;">번호</th>
+								<th style="background-color: #eeeeee; text-align: center;">제목</th>
+								<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="post" items="${noti}">
+								<tr>
+									<td>${post.boardSeq}</td>
+									<td><a href="${path}/front?key=board&methodName=select">${post.sub}</a></td>
+									<td><c:choose>
+											<c:when test="${not empty post.userSeq}">
+                                            ${post.userSeq}
+                                        </c:when>
+											<c:when test="${not empty post.hostSeq}">
+                                            ${post.hostSeq}
+                                        </c:when>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 	</section>
 
 
@@ -392,7 +421,23 @@ img {
 
    
    </script>
+	<script type="text/javascript">
+	//WebSocket 연결 코드 (JSP 파일 내 script 영역)
+	let socket = new WebSocket("ws://localhost:8081/FesPro/websocket");
 
+	socket.onopen = function() {
+		console.log("WebSocket connection opened.");
+	};
+
+	socket.onmessage = function(event) {
+		console.log("Message received: " + event.data);
+		// 여기서 알림 UI를 업데이트하는 코드를 작성하면 됩니다.
+	};
+
+	socket.onclose = function() {
+		console.log("WebSocket connection closed.");
+	};
+</script>
 
 
 </body>
