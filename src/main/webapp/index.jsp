@@ -33,6 +33,8 @@ img {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
 	height: 27%;
+	background-size: cover;
+	background-position: 50% 80%;
 }
 
 #card_main {
@@ -130,7 +132,7 @@ img {
 				<div class="col-xl-6">
 					<div class="text-center text-white">
 						<!-- Page heading-->
-						<h1 class="mb-5">서울컬투</h1>
+						<h1 class="mb-5">-</h1>
 						<form class="form-subscribe" id="contactForm" action="front">
 							<div class="row">
 								<div class="col" id="searchSelec">

@@ -61,8 +61,8 @@ public class HandleMappingListner implements ServletContextListener {
 		}
 
 		ServletContext app = e.getServletContext();
-		System.out.println(map);
-		System.out.println(classMap);
+		System.out.println("map = " + map);
+		System.out.println("classMap = "+classMap);
 		app.setAttribute("classMap", classMap);
 		app.setAttribute("map", map);
 		app.setAttribute("path", app.getContextPath());

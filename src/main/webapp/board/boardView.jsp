@@ -62,8 +62,8 @@
 									<c:when test="${not empty post.hostSeq}">
                                     ${post.hostSeq}
                                 </c:when>
-                                </c:choose>
-                             </td>
+                                </c:choose></td>
+                             
 						</tr>
 						<tr>
 							<td>제목</td>
