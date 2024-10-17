@@ -315,5 +315,28 @@ public class MypageController implements Controller {
 		mv.setViewName("front?key=mypage&methodName=balanceSelect");
 		return mv;
 	}
-
+	
+	// 리뷰달기
+	public ModelAndView writeReview(HttpServletRequest request,HttpServletResponse response)
+	{
+		HttpSession session = request.getSession();
+		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
+		String reservSeq = request.getParameter("reserv_Seq");
+		String svcId = request.getParameter("svc_Id");
+		String user_seq = request.getParameter("userSeq");
+		
+		
+		int reSeq = Integer.parseInt(reservSeq);
+		int seq = dto.getUser_seq();
+		int userSeq = Integer.parseInt(user_seq);
+		System.out.println("마이페이지 WriteReview 에서 reSeq = "+ reSeq+"seq = "+seq);
+		boolean reviewExists = ms.checkReview(reSeq,seq);
+		System.out.println(reviewExists);
+		
+		request.setAttribute("userSeq", user_seq);
+		request.setAttribute("svcId", svcId);
+		request.setAttribute("reSeq", reSeq);
+		request.setAttribute("reviewExists", reviewExists);
+		return new ModelAndView("user/reviewWrite.jsp");
+	}
 }

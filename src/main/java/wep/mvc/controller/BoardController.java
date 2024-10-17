@@ -148,8 +148,7 @@ public class BoardController implements Controller {
 		System.out.println("상세보기 메소드 불러왔다");
 		
 		String boardSeq = request.getParameter("boardSeq");
-	
-	   
+
 
 		BoardDTO boardDTO = boardService.select(Integer.parseInt(boardSeq));
 		System.out.println(boardDTO);

@@ -76,4 +76,13 @@ public class MainSereviceImpl {
 		return list;
 	}
 
+	public void setAlarm(int user,String content) throws SQLException {
+		int succ = dao.insertAlarm(user,content);
+		if (succ != 0) {
+			
+		} else {
+			throw new SQLException();
+		}
+	}
+
 }

@@ -28,9 +28,6 @@ public class MainDAOImpl {
 			ps.setString(2, sid);
 
 			result = ps.executeUpdate();
-			if (result == 1) {
-				System.out.println("성공");
-			}
 
 		} finally {
 			DbUtil.dbClose(con, ps);
@@ -124,6 +121,31 @@ public class MainDAOImpl {
 		}
 
 		return list;
+	}
+	
+	
+	public int insertAlarm(int user,String content) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		String sql = "insert into ALARM values(ALARM_SEQ.NEXTVAL,?, ?)";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, user);
+			ps.setString(2, content);
+
+			result = ps.executeUpdate();
+			if (result == 1) {
+				System.out.println("성공");
+			}
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
 }

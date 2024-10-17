@@ -26,6 +26,8 @@ public interface SuperAuthDAO {
 
 	List<HostDTO> hostWaitSelectAll();
 
+	int reviewInsert(String reviewContent, int reviewRate, String svcId, int userSeq);
+
 	/*
 	 * UsersDTO selectById(String id);
 	 * 

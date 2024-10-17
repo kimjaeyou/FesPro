@@ -26,6 +26,8 @@ public interface SuperAuthService{
 
 	public List<HostDTO> hostWaitSelectAll();
 
+	public int reviewInsert(String reviewContent, int reviewRate, String svcId, int userSeq);
+
 	/*
 	 * UsersDTO selectById(String id);
 	 * 

@@ -12,12 +12,15 @@ import jakarta.servlet.http.HttpSession;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
+import wep.mvc.service.ReservationService;
+import wep.mvc.service.ReservationServiceImpl;
 import wep.mvc.service.SuperAuthService;
 import wep.mvc.service.SuperAuthServiceImpl;
 
 public class SuperAuthController implements Controller {
 	
 SuperAuthService service = new SuperAuthServiceImpl();
+ReservationService resService = new ReservationServiceImpl();
 	
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -190,4 +193,44 @@ SuperAuthService service = new SuperAuthServiceImpl();
 		return new ModelAndView("super/auth/hostSelectAll.jsp");
 		 
 	}
+	
+	//리뷰달고 예약 상세보기로 가기
+	public ModelAndView reviewInsert(HttpServletRequest request, HttpServletResponse response)
+	{
+		String reviewContent = request.getParameter("reviewContent");
+		String reviewRating = request.getParameter("reviewRating");
+		String svcId = request.getParameter("svcId");
+		System.out.println("svcId = "+ svcId);
+		String user_Seq = request.getParameter("userSeq");
+		System.out.println(reviewContent+ " " + reviewRating+" " + user_Seq +" " + svcId);
+		int userSeq = Integer.parseInt(user_Seq);
+		int reviewRate = Integer.parseInt(reviewRating);
+		
+		System.out.println(reviewContent+ " " + reviewRate+" " + userSeq +" " + svcId);
+		int result = service.reviewInsert(reviewContent,reviewRate,svcId,userSeq);
+		System.out.println("result = "+result);
+		FesDTO fes = null;
+		try {
+			fes = resService.selectFes(svcId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String SVCNM= fes.getSVCNM();
+		System.out.println("fes = "+ fes);
+		
+		if(result == 1)
+		{
+			request.setAttribute("SVCNM", SVCNM);
+			request.setAttribute("SVCID", svcId);
+			request.setAttribute("fes", fes);
+		return new ModelAndView("front?key=main&methodName=oneSelec");
+		}
+		else
+		{
+			System.out.println("등록실패");
+			return new ModelAndView("front?key=reservation&methodName=revMove");
+		}
+	}
+	
 }
