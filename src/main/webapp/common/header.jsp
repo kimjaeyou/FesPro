@@ -280,7 +280,7 @@ img {
 								<div class="con_cells">
 									<img id="profil" alt="profil"
 										src="${path}/assets/img/profil.png">안녕하세요,
-									${sessionScope.loginCom.user_name}님!
+									${sessionScope.loginCom.rep_name}님!
 								</div>
 							</div>
 							<div class="con_rows">
