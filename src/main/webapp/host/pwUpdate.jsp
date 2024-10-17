@@ -16,7 +16,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
-<link href="css/My_styles.css" rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <script>
@@ -90,7 +90,10 @@ function checkValid(){
 													<span>기존 비밀번호 입력하기</span>
 												</p></td>
 											<td><p align="center">
-													<span><b><input type="password" name="nowPwIn" id="nowPwIn" placeholder="맞는 비밀번호를 입력하고 엔터를 누르면 변경하기 버튼이 생깁니다." style="width: 500px" onkeyup="enterKey();"></b></span>
+													<span><b><input type="password" name="nowPwIn"
+															id="nowPwIn"
+															placeholder="맞는 비밀번호를 입력하고 엔터를 누르면 변경하기 버튼이 생깁니다."
+															style="width: 500px" onkeyup="enterKey();"></b></span>
 												</p></td>
 										</tr>
 										<tr>
@@ -98,20 +101,21 @@ function checkValid(){
 													<span>새 비밀번호 입력하기</span>
 												</p></td>
 											<td><p align="center">
-													<span><b><input type="password" name="newPw" id="newPw" style="width: 500px"></b></span>
+													<span><b><input type="password" name="newPw"
+															id="newPw" style="width: 500px"></b></span>
 												</p></td>
 										</tr>
-										
+
 										<tr>
 
 											<td width="450" height="20" colspan="2" align="center">
 												<input type=hidden name="host_seq"
 												value="${hostDTO.host_seq}"> <input type=hidden
 												name="key" value="fes"> <input type=hidden
-												name="methodName" value="pwUpdateForm22"> 
-												
+												name="methodName" value="pwUpdateForm22">
+
 												<div id="btn">
-												<!-- <input type=button
+													<!-- <input type=button
 												value="비밀번호 수정하기" onClick="checkValid()"> -->
 												</div>
 											</td>
@@ -140,27 +144,24 @@ function checkValid(){
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="js/datatables-simple-demo.js"></script>
-<script>
+	<script>
 function enterKey(){
 	console.log("여긴 오니")
 	if(window.event.keyCode==13){
-		<%
-			String nowPw = (String) request.getAttribute("nowPw");
-		%>
-		let nowPw = '<%= nowPw %>';
-		
-		//console.log(nowPwIn.value);
-		
-		if(nowPw == nowPwIn.value){
-			
-			let btn= document.getElementById("btn");
-			btn.innerHTML = "<input type='submit' value='비밀번호 수정하기' onClick='return checkValid()'>"
+		<%String nowPw = (String) request.getAttribute("nowPw");%>
+		let nowPw = '<%=nowPw%>';
+
+				//console.log(nowPwIn.value);
+
+				if (nowPw == nowPwIn.value) {
+
+					let btn = document.getElementById("btn");
+					btn.innerHTML = "<input type='submit' value='비밀번호 수정하기' onClick='return checkValid()'>"
+				}else{
+					alert('기존 비밀번호가 틀렸습니다');
+				}
+			}
 		}
-	}
-}
-
-
-
-</script>
+	</script>
 </body>
 </html>

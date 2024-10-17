@@ -2,7 +2,6 @@ package wep.mvc.service;
 
 import java.sql.SQLException;
 
-import wep.mvc.controller.ModelAndView;
 import wep.mvc.dao.UsersDAO;
 import wep.mvc.dao.UsersDAOImpl;
 import wep.mvc.dto.UsersDTO;

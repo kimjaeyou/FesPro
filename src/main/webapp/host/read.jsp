@@ -16,7 +16,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
-<link href="css/My_styles.css" rel="stylesheet" />
+<link href="${path}/css/My_styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <script>
@@ -384,12 +384,14 @@
 												type=hidden name="methodName"> <c:set var="fesState"
 													value="${fesDTO.getFes_state()}" /> <c:choose>
 													<c:when test="${fesState eq 0}">승인대기 상태입니다.</c:when>
-													<c:when test="${fesState eq 1}"><input type=button value="수정하기" onClick="sendUpdate()">
-												<input type=button value="삭제하기" onClick="sendDelete()"></c:when>
+													<c:when test="${fesState eq 1}">
+														<input type=button value="수정하기" onClick="sendUpdate()">
+														<input type=button value="삭제하기" onClick="sendDelete()">
+													</c:when>
 													<c:when test="${fesState eq 2}">승인대기 상태입니다.</c:when>
 													<c:when test="${fesState eq 3}">비활성화(삭제)상태입니다.</c:when>
 
-												</c:choose> 
+												</c:choose>
 											</td>
 
 										</tr>

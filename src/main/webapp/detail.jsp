@@ -113,6 +113,20 @@
 	font-family: 'Noto Sans';
 }
 
+/* 차트 영역 */
+.area3 {
+	width: 80%;
+	left: 6%;
+	position: relative; /* relative로 변경 */
+	float: left;
+	border: 1px solid rgb(0, 123, 255);
+	border-radius: 10px;
+	clear: both; /* float 해제 */
+	margin-top: 30px; /* 여백 추가 */
+	padding: 40px;
+	margin-bottom: 50px;
+}
+
 #reviewsContainer {
 	display: flex;
 }
@@ -232,6 +246,81 @@
 				</script>
 
 			</div>
+		</div>
+		
+		<!-- 차트 div -->
+		<div class="area3">
+			<!-- 캐러셀 -->
+			<div id="carouselExample" class="carousel carousel-dark slide" >
+			  <div class="carousel-inner">
+			  
+			<div class="carousel-item active">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-area me-1"></i> 연령, 성별 통계
+					</div>
+					<div class="card-body">
+						<canvas id="ageGender" width="100%" height="400"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="carousel-item">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-area me-1"></i> 남녀 비율
+					</div>
+					<div class="card-body">
+						<canvas id="genderRatio" width="100%" height="400"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="carousel-item">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-area me-1"></i> 연령대 별 비율
+					</div>
+					<div class="card-body">
+						<canvas id="ageRatio" width="100%" height="400"></canvas>
+					</div>
+				</div>
+			</div>
+			
+			<div class="carousel-item">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1"></i> 성별 별 평균 평점
+					</div>
+					<div class="card-body">
+						<canvas id="genderReviewAvg" width="100%" height="400" ></canvas>
+					</div>
+				</div>
+			</div>
+			
+			<div class="carousel-item">
+				<div class="card mb-4">
+						<div class="card-header">
+							<i class="fas fa-chart-bar me-1"></i> 연령대 별 평균 평점
+						</div>
+						<div class="card-body">
+							<canvas id="ageReviewAvg" width="100%" height="400"></canvas>
+						</div>
+					</div>
+			</div>
+		</div>
+			  
+			  <!-- 전환 버튼 -->
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
+			</div>
+<!-- 캐러셀 끝 -->
 		</div>
 
 	</div>
@@ -372,6 +461,36 @@
 					});
 </script>
 
+<!-- 차트js 라이브러리  -->
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- 차트 만들어논 js 파일-->
+ <script type="text/javascript" src="${path}/super/festival/chart.js"></script>
+  <!-- 부트스트랩 스타일(차트에도 필요) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- 차트 데이터 뿌리기 -->
+<script type="text/javascript">
+	/* 리퀘스트 데이터 - 유저 */
+	const userList = ${requestScope.chartUserList};
+	/* 리퀘스트 데이터 - 리뷰쓴 유저 */
+  	const reviewUserList = ${requestScope.reviewUserList};
+	
+	/* 캔버스엘리먼트 이름으로 찾기 */
+	const getCanvas = function(canvasName){
+		return document.getElementById(canvasName).getContext('2d');
+	};
+	/* 차트 Call ============*/
+	//연령, 성별 통계
+	ageGender(getCanvas('ageGender'),userList);
+	//성별 비율
+	genderRatio(getCanvas('genderRatio'),userList);
+	//연령별 비율
+	ageRatio(getCanvas('ageRatio'),userList);
+	//성별별 평균 평점
+	genderReviewAvg(getCanvas('genderReviewAvg'),reviewUserList);
+	//연령별 평균 평점
+	ageReviewAvg(getCanvas('ageReviewAvg'),reviewUserList);
+	
+</script>
 
 
 
