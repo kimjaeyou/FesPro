@@ -28,7 +28,7 @@ public interface BoardService {
 	/**
 	 * 상세보기
 	 * */
-	BoardDTO select(BoardDTO boardDTO) throws SQLException;
+	BoardDTO select(int boardSeq) throws SQLException;
 	
 	/**
 	 * 목록 조회
@@ -36,7 +36,6 @@ public interface BoardService {
 	
 	List<BoardDTO> selectByCtg () throws SQLException;
 
-	BoardDTO select(int boardSeq) throws SQLException;
 	
 	
 	

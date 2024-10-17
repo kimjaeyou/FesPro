@@ -1,6 +1,5 @@
 package wep.mvc.controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import wep.mvc.dto.HostDTO;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.service.SuperAuthService;
 import wep.mvc.service.SuperAuthServiceImpl;
-
 
 public class SuperAuthAjaxController implements RestController {
 	SuperAuthService service = new SuperAuthServiceImpl();

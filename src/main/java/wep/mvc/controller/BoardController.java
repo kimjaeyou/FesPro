@@ -143,7 +143,7 @@ public class BoardController implements Controller {
 	
 	   
 
-		BoardDTO boardDTO = boardService.select(boardSeq);
+		BoardDTO boardDTO = boardService.select(Integer.parseInt(boardSeq));
 		System.out.println(boardDTO);
 
 		if (boardDTO == null) {
@@ -175,16 +175,6 @@ public class BoardController implements Controller {
 
 
 		String boardSeqParam = request.getParameter("boardSeq");
-		int boardSeq = 0;
-		
-		  if (boardSeqParam != null && !boardSeqParam.isEmpty()) { boardSeq =
-		  Integer.parseInt(boardSeqParam); }
-		  
-		  if (userSeq == null && hostSeq == null) { return new
-		  ModelAndView("/board/error.jsp"); }
-		 
-		 서비스에 삭제 요청
-		boardService.delete(boardSeq, userSeq, hostSeq);
 
 		return new ModelAndView("front?key=board&methodName=read", true);
 
