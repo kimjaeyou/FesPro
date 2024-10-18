@@ -24,9 +24,9 @@
         <main>
             <div class="container-fluid px-4">
                 <div class="balance-container">
-                    <h2 class="mt-4">돈을 벌고싶니?</h2>               
+                    <!-- <h2 class="mt-4">돈을 벌고싶니?</h2>               
                     <h2 class="mt-4">부자가 되고싶니?</h2>
-                    <h3>───────────────────────────────────────────────</h3>
+                    <h3>───────────────────────────────────────────────</h3> -->
                     <h4 class="mt-4">${sessionScope.loginUser.user_name}님의 잔액은 ${requestScope.money.MONEY}원 있습니다.</h4>                    
                 </div>
                     <form action="${path}/front" method="post">

@@ -163,9 +163,48 @@ img {
 	<section class="features-icons bg-light text-center">
 		<div class="container mt-5">
 			<h1>알람 메시지</h1>
-			<div id="alarmContainer" class="alert alert-info" role="alert"
-				style="display: none;">
+			<div id="alarmContainer" class="alert alert-info" role="alert">
 				<ul id="alarmList"></ul>
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th style="background-color: #eeeeee; text-align: center;">작성
+								일자</th>
+							<th style="background-color: #eeeeee; text-align: center;">메시지
+								내용</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${empty messageDTOList}">
+								<tr>
+									<td colspan="2">
+										<p align="center">
+											<b><span>등록된 메시지가 없습니다.</span></b>
+										</p>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${messageDTOList}" var="m">
+									<tr>
+										<td>
+											<p align="center">
+												<span>${m.MESSAGE_DATE}</span>
+											</p>
+										</td>
+										<td>
+											<p align="center">
+												<span>${m.CONTENT}</span>
+											</p>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</section>
