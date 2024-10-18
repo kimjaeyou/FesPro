@@ -7,7 +7,7 @@ import wep.mvc.dto.UsersDTO;
 public interface UserService {
 
 	// 로그인
-	UsersDTO login(UsersDTO usersDTO) throws SQLException;
+	UsersDTO login(UsersDTO usersDTO) throws Exception;
 
 	// 아이디 중복체크
 	boolean idCheck(String id) throws SQLException;

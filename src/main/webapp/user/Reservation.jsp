@@ -79,7 +79,7 @@
 			<c:choose>
 				<c:when test="${empty reservation}">
 					<tr>
-						<td colspan="6">
+						<td colspan="8">
 							<p align="center">
 								<b><span style="font-size: 9pt;">예약정보가 없습니다.</span></b>
 							</p>
@@ -90,7 +90,7 @@
 					<c:forEach items="${reservation}" var="re">
 						<tr>
 							<td><a
-								href="${path}/front?key=reservation&methodName=viewDetail/${re.reserv_Seq}"
+								href="${path}/front?key=reservation&methodName=selectByResvSeq&resvSeq=${re.reserv_Seq}"
 								class="no-underline1">${re.reserv_Seq}</a></td>
 							<td><a href="${path}/front?key=reservation&methodName=revMove"
 								class="no-underline2" id="svcnm">${re.svcnm}</a></td>
