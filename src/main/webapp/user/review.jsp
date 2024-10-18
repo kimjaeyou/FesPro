@@ -31,7 +31,8 @@
 						<div class="d-flex align-items-center justify-content-between">
 							<label for="searchInput" class="me-2">서비스명:</label> 
 							<input type="text" class="form-control me-2" id="searchInput" 
-							placeholder="검색어를 입력하세요" style="width: 200px;" id="svcnm" name="svcnm" value="${view.svcnm}">
+							placeholder="검색어를 입력하세요" style="width: 200px;" 
+							id="svcnm" name="svcnm" value="${view.svcnm}">
 							<input type="hidden" name="key" value="mypage" /> 
 							<input type="hidden" name="methodName" value="reviewSelect" />
 							<input type="hidden" name="svcnm" id="svcnm" value="${view.svcnm}" />
@@ -77,10 +78,9 @@
 							<td>${view.sysdate}</td>
 							<td>
 								<form id="delete-form" method="post" action="${path}/front">
-									<input type="hidden" name="key" value="mypage"> <input
-										type="hidden" name="methodName" value="reviewDelete">
-									<input type="hidden" name="review_SEQ"
-										value="${view.review_SEQ}">
+									<input type="hidden" name="key" value="mypage"> 
+									<input type="hidden" name="methodName" value="reviewDelete">
+									<input type="hidden" name="review_SEQ" value="${view.review_SEQ}">
 									<button type="submit" class="delete-button">삭제</button>
 								</form>
 							</td>

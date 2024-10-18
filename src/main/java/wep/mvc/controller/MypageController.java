@@ -1,7 +1,6 @@
 package wep.mvc.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -28,6 +27,8 @@ public class MypageController implements Controller {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("loginUserId");
 		UsersDTO dbDTO = ms.selectUser(user);
+		session.setAttribute("loginUser", new UsersDTO(dbDTO.getUser_id(), dbDTO.getUser_name(), dbDTO.getUser_seq(),
+				dbDTO.getEmail(), dbDTO.getUser_tel(), dbDTO.getUser_ben_check()));
 		request.setAttribute("users", dbDTO);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/update.jsp");
@@ -70,7 +71,7 @@ public class MypageController implements Controller {
 		try {
 			int result = ms.update(dto);
 			if (result == 1) {
-				return new ModelAndView("front?key=user&methodName=selectUser", true);
+				return new ModelAndView("front?key=mypage&methodName=selectUser", true);
 			} // 설마 수정이 안될리는 없으니까... 귀찮다...
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,7 +107,7 @@ public class MypageController implements Controller {
 	// 예약내역 삭제
 	public ModelAndView resDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String reserv_Seq = request.getParameter("reserv_Seq");
-		int result = ms.resDelete(Integer.parseInt(reserv_Seq));
+		ms.resDelete(Integer.parseInt(reserv_Seq));
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=resSelectAll");
 		return mv;
@@ -130,6 +131,7 @@ public class MypageController implements Controller {
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
 		String svcnm = request.getParameter("svcnm");
+		System.out.println(seq + " 또는 " + svcnm );
 		List<ReviewDTO2> list = ms.reviewSelect(seq, svcnm);
 		request.setAttribute("review", list);
 		ModelAndView mv = new ModelAndView();
@@ -140,7 +142,7 @@ public class MypageController implements Controller {
 	// 리뷰 삭제
 	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String Seq = request.getParameter("review_SEQ");
-		int result = ms.reviewDelete(Integer.parseInt(Seq));
+		ms.reviewDelete(Integer.parseInt(Seq));
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("front?key=mypage&methodName=reviewSelectAll");
 		return mv;
@@ -164,10 +166,12 @@ public class MypageController implements Controller {
 		UsersDTO dto = (UsersDTO) session.getAttribute("loginUser");
 		int seq = dto.getUser_seq();
 		String svcnm = request.getParameter("svcnm");
+		System.out.println(seq + " 또는 " + svcnm);
 		List<FesDTO> list = ms.likeSelect(seq, svcnm);
-		request.setAttribute("review", list);
+		System.out.println(list);
+		request.setAttribute("like", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/review.jsp");
+		mv.setViewName("user/Bookmark.jsp");
 		return mv;
 	}
 

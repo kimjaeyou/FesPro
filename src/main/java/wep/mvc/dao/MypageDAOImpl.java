@@ -9,9 +9,7 @@ import java.util.List;
 
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO2;
-import wep.mvc.dto.ReviewDTO;
 import wep.mvc.dto.ReviewDTO2;
-import wep.mvc.dto.USER_LIKE;
 import wep.mvc.dto.UsersDTO;
 import wep.mvc.dto.WALLET;
 import wep.mvc.util.DbUtil;
@@ -293,7 +291,7 @@ public class MypageDAOImpl implements MypageDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<FesDTO> list = new ArrayList<FesDTO>();
-		String sql = "SELECT  u.svcid , svcnm, placenm, RCPTBGNDT, RCPTENDDT, SVCOPNBGNDT, SVCOPNENDDT, V_MAX, V_MIN, price, SVCSTATNM  FROM fes f , user_like u WHERE f.svcid = u.svcid and u.user_seq = ? and svcnm like ?";
+		String sql = "SELECT  u.svcid , svcnm, placenm, RCPTBGNDT, RCPTENDDT, SVCOPNBGNDT, SVCOPNENDDT, V_MAX, V_MIN, price, SVCSTATNM  FROM fes f , user_like u WHERE f.svcid = u.svcid and u.user_seq = ? and svcnm like ? order by svcid asc";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

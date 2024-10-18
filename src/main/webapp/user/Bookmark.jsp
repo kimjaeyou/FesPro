@@ -26,18 +26,18 @@
 			<div class="container-fluid px-4">
 				<h2 class="mt-4 text-center">즐겨찾기 목록</h2>
 				<br>
-				<form method="post"
-					action="${pageContext.request.contextPath}/front">
+				<form method="post" action="${pageContext.request.contextPath}/front">
 					<div class="card mb-4 search-card">
 						<div class="d-flex align-items-center justify-content-between">
 							<label for="searchInput" class="me-2">서비스명:</label> 
 							<input type="text" class="form-control me-2" id="searchInput" 
-							placeholder="검색어를 입력하세요" style="width: 200px;" id="svcnm" name="svcnm" value="${view.svcnm}">
+							placeholder="검색어를 입력하세요" style="width: 200px;" 
+							id="svcnm" name="svcnm" value="${likes.svcnm}">
 							<input type="hidden" name="key" value="mypage" /> 
-							<input type="hidden" name="methodName" value="reviewSelect" />
+							<input type="hidden" name="methodName" value="likeSelect" />
 							<input type="hidden" name="svcnm" id="svcnm" value="${likes.svcnm}" />
-							<button class="btn btn-secondary text-white large-button"
-								type="button">검색</button>
+							<button class="btn btn-secondary text-white large-button"type="submit">검색</button>
+						</form>
 						</div>
 					</div>
 					<h5>
@@ -81,8 +81,8 @@
 											<td>${likes.SVCSTATNM}</td>
 											<td>
 												<form id="delete-form" method="post" action="${path}/front">
-													<input type="hidden" name="key" value="mypage"> <input
-														type="hidden" name="methodName" value="likeDelete">
+													<input type="hidden" name="key" value="mypage"> 
+													<input type="hidden" name="methodName" value="likeDelete">
 													<input type="hidden" name="SVCID" value="${likes.SVCID}">
 													<button type="submit" class="delete-button">삭제</button>
 												</form>
