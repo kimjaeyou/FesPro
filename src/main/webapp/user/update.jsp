@@ -30,7 +30,7 @@
 					<hr>
 					<form id="update-form" method="post"
 						action="${pageContext.request.contextPath}/front">
-						<input type="hidden" name="key" value="user" /> 
+						<input type="hidden" name="key" value="mypage" /> 
 						<input type="hidden" name="methodName" value="update" />
 
 						<table id="festable">
@@ -38,7 +38,7 @@
 								<tr>
 									<th>이름</th>
 									<th><input type="text" placeholder="이름을 입력하세요" name="name"
-										value="${sessionScope.loginUser.user_name}" required></th>
+										value="${requestScope.users.user_name}" required></th>
 								</tr>
 								<tr>
 									<th>아이디</th>
@@ -48,14 +48,15 @@
 								<tr>
 									<th>비밀번호</th>
 									<th><input type="password" id="pw" name="pw"
-										placeholder="비밀번호를 입력하세요" required></th>
+										placeholder="비밀번호를 입력하세요" autoComplete="off"  required></th>
 								</tr>
 								
 								<tr>
 									<th>비밀번호 확인</th>
 									<th><input type="password" id="check-pw"
-										name="check-pw" placeholder="비밀번호를 다시 입력하세요" required>
-										<span id="message" class="info-text"></span></th>
+										name="check-pw" autoComplete="off" placeholder="비밀번호를 다시 입력하세요" required>								
+										<p id="print"> </p>
+									</th> 
 								</tr>
 
 								<tr>
@@ -80,9 +81,9 @@
 										<div class="email-input-container">
 											<input type="text" id="email1" name="email1"
 												placeholder="이메일 입력"
-												value="${sessionScope.loginUser.email.split('@')[0]}" required /> @ <input
+												value="${requestScope.users.email.split('@')[0]}" required /> @ <input
 												type="text" id="email2" name="email2" placeholder="이메일 입력"
-												value="${sessionScope.loginUser.email.split('@')[1]}" required />
+												value="${requestScope.users.email.split('@')[1]}" required />
 										</div>
 									</th>
 								</tr>
@@ -95,9 +96,9 @@
 									<th>성별</th>
 									<td>
 										<div class="gender-container">
-											<label> <input type="radio" name="gender" value="1"
+											<label> <input type="radio" name="gender" value="남성"
 												required>남성
-											</label> <label> <input type="radio" name="gender" value="2">
+											</label> <label> <input type="radio" name="gender" value="여성">
 												여성
 											</label>
 										</div>
@@ -108,9 +109,9 @@
 									<td>
 										<div class="hindrance-container">
 											<label> <input type="radio" name="hindrance"
-												value="1" required> 예
+												value="O" required> 예
 											</label> <label> <input type="radio" name="hindrance"
-												value="0"> 아니오
+												value="X"> 아니오
 											</label>
 										</div>
 									</td>
@@ -121,7 +122,6 @@
 						</table>
 						<button type="submit" class="update-button">수정하기</button>
 					</form>
-
 					<form id="member-delete-form" method="post"
 						action="${pageContext.request.contextPath}/front">
 						<input type="hidden" name="key" value="user" /> <input
@@ -132,17 +132,13 @@
 					</form>
 				</div>
 			</main>
-
-			<!-- 푸터입니다. -->
-
 		</div>
-	</div>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="${path}/js/update.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-	<script src="${path}/js/scripts.js"></script>
-	<script src="${path}/js/update.js"></script>
 </body>
 
 </html>
