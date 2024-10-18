@@ -492,6 +492,7 @@
 	
 </script>
 
+<script type="${path}/js/checkSocket"></script>
 
 
 </html>

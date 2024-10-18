@@ -58,7 +58,6 @@
 
 			</div>
 	</div>
-	</div>
 	<h5>
 		<i class="fas fa-table me-1"></i> 예약내역 <span id="rowCount"></span>
 	</h5>
@@ -112,9 +111,9 @@
 							</td>
 							<td>
 								<form id="delete-form" method="post" action="${path}/front">
-									<input type="hidden" name="key" value="mypage"> <input
-										type="hidden" name="methodName" value="resDelete"> <input
-										type="hidden" name="reserv_Seq" value="${re.reserv_Seq}">
+									<input type="hidden" name="key" value="mypage"> 
+									<input type="hidden" name="methodName" value="resDelete"> 
+									<input type="hidden" name="reserv_Seq" value="${re.reserv_Seq}">
 									<button type="submit" class="delete-button">예약취소</button>
 								</form>
 							</td>

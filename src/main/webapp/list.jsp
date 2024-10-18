@@ -32,7 +32,9 @@ img {
 #head {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
-	height: 27%;
+	height: 31%;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 
 #card_main {
@@ -125,7 +127,7 @@ img {
 				<div class="col-xl-6">
 					<div class="text-center text-white">
 						<!-- Page heading-->
-						<h1 class="mb-5">서울컬투</h1>
+						<h1 class="mb-5">-</h1>
 						<form class="form-subscribe" id="contactForm" action="front">
 							<div class="row">
 								<div class="col" id="searchSelec">
@@ -135,7 +137,7 @@ img {
 										<input type="hidden" name="key" value="main" /> <input
 											type="hidden" name="methodName" value="oneSelec" /> <input
 											id="selecSVCID" type="hidden" name="sid" value=" " />
-										<c:forEach items="${fesList}" var="option" varStatus="status">
+										<c:forEach items="${list}" var="option" varStatus="status">
 											<div id="selectSearch" class="item"
 												data-item="${option.SVCID}">${option.SVCNM}</div>
 										</c:forEach>
@@ -322,7 +324,7 @@ img {
 
 	
 	</script>
-
+<script type="${path}/js/checkSocket"></script>
 
 
 </body>

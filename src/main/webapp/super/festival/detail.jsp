@@ -80,6 +80,7 @@
 		    $("#radio_2").prop("checked", true); //수정대기
 		} else if (fesState === 1) {
 		    $("#radio_3").prop("checked", true); //승인완료
+		    
 		} else if (fesState === 3) {
 		    $("#radio_4").prop("checked", true); //비활성화
 		}

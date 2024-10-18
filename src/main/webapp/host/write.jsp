@@ -399,15 +399,15 @@
 													<b><span>분류태그</span></b>
 												</p></td>
 											<td><p align="center">
-													<span> <label><input type="checkbox"
-															name="tag_content" value="가족">가족</label> <label><input
-															type="checkbox" name="tag_content" value="효도">효도</label>
-														<label><input type="checkbox" name="tag_content"
-															value="연인">연인</label> <label><input
-															type="checkbox" name="tag_content" value="학습">학습</label>
-														<label><input type="checkbox" name="tag_content"
-															value="건강">건강</label> <label><input
-															type="checkbox" name="tag_content" value="키즈">키즈</label></span>
+													<span> <label><input type="checkbox" name="tag_content" value="체험">체험</label> 
+													<label><input type="checkbox" name="tag_content" value="역사">역사</label>
+														<label><input type="checkbox" name="tag_content" value="건축">건축</label> 
+														<label><input type="checkbox" name="tag_content" value="박물관">박물관</label>
+														<label><input type="checkbox" name="tag_content" value="산">산</label>
+														<label><input type="checkbox" name="tag_content" value="강">강</label>
+														<label><input type="checkbox" name="tag_content" value="장애">장애</label>
+														
+													</span>
 												</p></td>
 										</tr>
 										<tr>

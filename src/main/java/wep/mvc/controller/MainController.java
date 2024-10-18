@@ -42,6 +42,7 @@ public class MainController implements Controller {
 		if (user != null) {
 			int user_seq = user.getUser_seq();
 			likeList = mainService.selecLike(user_seq, list);
+			likeList = mainService.TagSelecMost(user.getUser_seq(),list,likeList);
 		}else {
 			likeList = mainService.selecMost();
 		}

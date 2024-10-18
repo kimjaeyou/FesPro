@@ -3,8 +3,10 @@ package wep.mvc.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import wep.mvc.dao.MainDAOImpl;
+import wep.mvc.dto.FES_TAG;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReviewDTO;
 
@@ -84,5 +86,48 @@ public class MainSereviceImpl {
 			throw new SQLException();
 		}
 	}
+	
+	
+	public void setLikeTag(int user,String sid) throws SQLException {
+		List<FES_TAG>tagList = dao.selectTag(sid);
+		List<Integer>Tagseq = new ArrayList<>();
+		
+		for(FES_TAG tag:tagList) {
+			Tagseq.add(tag.getTAG_SEQ());
+		}
+		
+		int succ = dao.insertTagLike(user,Tagseq);
+		if (succ != 0) {
+			
+		} else {
+			throw new SQLException();
+		}
+	}
 
+	
+	public List<FesDTO> TagSelecMost(int user,List<FesDTO> list,List<FesDTO> Like_list) throws SQLException {
+		
+		List<FES_TAG>tagList = dao.selectTagS();
+		List<String> strList = new ArrayList<>();
+		List<FesDTO> Most_list = new ArrayList<>();
+		
+		for(FES_TAG tag: tagList) {
+			strList.add(tag.getSVCID());
+		}
+		
+		for(FesDTO tag: Like_list) {
+			strList.add(tag.getSVCID());
+		}
+		
+		 
+		for(String tag : List.copyOf(Set.copyOf(strList))) {
+			for(FesDTO fes : list) {
+				if(tag.equals(fes.getSVCID())) {
+					Most_list.add(fes);
+				}
+			}
+		}
+		return Most_list;
+	}
+	
 }

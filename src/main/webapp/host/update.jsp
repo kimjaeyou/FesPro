@@ -539,6 +539,26 @@ function getPLACENMValue(){
 }
 
 </script>
+
+<script>
+$(document).ready(function() {
+    $('#radio_3').on('click', function() {
+        $.ajax({
+            url: 'ajax?key=messageAndAlram&methodName=alarmLike',
+            type: 'get',
+            dataType: 'json',
+            success: function(res) {
+                console.log('알림 성공', res);
+            },
+            error: function(err) {
+                console.log('알림 실패', err);
+            }
+        });
+    });
+
+});
+</script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>

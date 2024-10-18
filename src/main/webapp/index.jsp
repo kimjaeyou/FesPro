@@ -32,7 +32,7 @@ img {
 #head {
 	background-image: url("assets/img/Main_bg.png");
 	width: 100%;
-	height: 32%;
+	height: 31%;
 	background-size: cover;
 	background-position: 50% 50%;
 }
@@ -120,10 +120,43 @@ img {
 .container {
 	padding: 2px;
 }
+
+/* 알림 영역 스타일 */
+#notifications {
+	display: none; /* 기본적으로 숨김 */
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	padding: 20px;
+	background-color: #f1f1f1;
+	border: 2px solid #333;
+	text-align: center;
+	z-index: 1000; /* 화면 최상위 */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#notifications button {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#notifications button:hover {
+	background-color: #0056b3;
+}
 </style>
 
 </head>
 <body>
+	<div id="notifications">
+		<p id="messageContents"></p>
+		<button onclick="hideNotification()">닫기</button>
+	</div>
 	<jsp:include page="/common/alarm.jsp" />
 	<!-- Masthead-->
 	<header class="masthead" id="head">
@@ -159,6 +192,8 @@ img {
 			</div>
 		</div>
 	</header>
+
+
 	<!-- Icons Grid-->
 	<section class="features-icons bg-light text-center">
 		<div class="container">
@@ -256,39 +291,38 @@ img {
 	<!-- Testimonials-->
 	<section class="testimonials text-center bg-light">
 		<div class="container">
-			<br>
+			<br> <br>
 			<h1>공지사항</h1>
-			<br>
+			<br> <br>
 			<div class="content">
-            <div class="row">
-                <table style="text-align: center; border: 2px solid #dddddd !important; background-color: white">
-                    <thead>
-                        <tr>
-                            <th style="background-color: #eeeeee; text-align: center;">번호</th>
-                            <th style="background-color: #eeeeee; text-align: center;">제목</th>
-                            <th style="background-color: #eeeeee; text-align: center;">작성자</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="post" items="${noti}">
-                            <tr>
-                                <td>${post.boardSeq}</td>
-                                <td><a href="${path}/front?key=board&methodName=select">${post.sub}</a></td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${not empty post.userSeq}">
+				<div class="row">
+					<table
+						style="text-align: center; border: 2px solid #dddddd !important; background-color: white">
+						<thead>
+							<tr>
+								<th style="background-color: #eeeeee; text-align: center;">번호</th>
+								<th style="background-color: #eeeeee; text-align: center;">제목</th>
+								<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="post" items="${noti}">
+								<tr>
+									<td>${post.boardSeq}</td>
+									<td><a href="${path}/front?key=board&methodName=select">${post.sub}</a></td>
+									<td><c:choose>
+											<c:when test="${not empty post.userSeq}">
                                             ${post.userSeq}
                                         </c:when>
-                                        <c:when test="${not empty post.hostSeq}">
+											<c:when test="${not empty post.hostSeq}">
                                             ${post.hostSeq}
                                         </c:when>
-                                    </c:choose>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-		</div>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 	</section>
 
 
@@ -423,7 +457,24 @@ img {
    
    </script>
 
+	<script type="text/javascript">
+	//WebSocket 연결 코드 (JSP 파일 내 script 영역)
+	let socket = new WebSocket("ws://localhost:8081/FesPro/websocket");
 
+	socket.onopen = function() {
+		console.log("WebSocket connection opened.");
+	};
+
+	socket.onmessage = function(event) {
+		console.log("Message received: " + event.data);
+		// 여기서 알림 UI를 업데이트하는 코드를 작성하면 됩니다.
+	};
+
+	socket.onclose = function() {
+		console.log("WebSocket connection closed.");
+	};
+</script>
+	<script type="${path}/js/checkSocket"></script>
 
 </body>
 </html>

@@ -247,10 +247,12 @@ img {
 							</div>
 							<div class="con_rows">
 								<div class="con_cells"></div>
-								<div class="con_cells">
-									<img id="message" alt="message"
-										src="${path}/assets/img/messageImg/message_0.png"> 메세지
-								</div>
+								<a href="${path}/front?key=messageAndAlram&methodName=mMove">
+									<div class="con_cells">
+										<img id="message" alt="message"
+											src="${path}/assets/img/messageImg/message_0.png"> 메세지
+									</div>
+								</a>
 								<div class="con_cells"></div>
 
 							</div>
@@ -285,10 +287,12 @@ img {
 							</div>
 							<div class="con_rows">
 								<div class="con_cells"></div>
-								<div class="con_cells">
-									<img id="message" alt="message"
-										src="${path}/assets/img/messageImg/message_0.png"> 메세지
-								</div>
+								<a href="${path}/front?key=messageAndAlram&methodName=mMove">
+									<div class="con_cells">
+										<img id="message" alt="message"
+											src="${path}/assets/img/messageImg/message_0.png"> 메세지
+									</div>
+								</a>
 								<div class="con_cells"></div>
 
 							</div>
@@ -311,7 +315,8 @@ img {
 						</div>
 					</c:when>
 
-					<c:when test="${empty sessionScope.loginUser || empty sessionScope.loginCom}" >
+					<c:when
+						test="${empty sessionScope.loginUser || empty sessionScope.loginCom}">
 						<div class="con_tables">
 							<div class="con_rows2">
 								<div class="con_cells">

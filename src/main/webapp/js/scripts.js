@@ -4,25 +4,6 @@
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
     */
 // 
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const table = document.getElementById("festable");
-    const rowCount = table.getElementsByTagName("tbody")[0].rows.length; // tbody의 행 개수 가져오기
-    document.getElementById("rowCount").textContent = `(총 ${rowCount}건)`; // 행 개수 표시
-});
-
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
-const passwordMessage = document.getElementById('passwordMessage');
-
-
-
-
-
 window.addEventListener('DOMContentLoaded', event => {
 
     // Toggle the side navigation

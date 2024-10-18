@@ -20,6 +20,7 @@ public class MessageAndAlramController implements Controller {
 		//0.로그인 안했으면 못가
 		HttpSession session = req.getSession();
 
+
 		if (session.getAttribute("loginUser") == null) { // 기업회원으로 로그인 되어있는지 확인
 			System.out.println("로그인 안했지롱");
 			return new ModelAndView("user/login.jsp"); // 로그인 페이지로 보낼 것
@@ -35,6 +36,5 @@ public class MessageAndAlramController implements Controller {
 		
 		return new ModelAndView("message/messagePage.jsp");
 	}
-
 	
 }

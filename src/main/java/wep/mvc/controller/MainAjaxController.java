@@ -25,7 +25,7 @@ public class MainAjaxController implements RestController {
 		UsersDTO user =(UsersDTO)request.getSession().getAttribute("loginUser"); 
 		int res=mainService.setLike(sid, user.getUser_seq());
 		mainService.setAlarm(user.getUser_seq(), "like+++"+sid);
-		
+		mainService.setLikeTag(user.getUser_seq(), sid);
 		String json = gson.toJson(res);
 		
 		PrintWriter out = response.getWriter();
