@@ -33,6 +33,8 @@ img {
 	background-image: url("${path}/assets/img/Main_bg.png");
 	width: 100%;
 	height: 300px;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 
 #card_main {
