@@ -26,7 +26,6 @@ public class SessionCheckFilter implements Filter {
 		UsersDTO user = (UsersDTO) session.getAttribute("loginUser");
 		HostDTO host = (HostDTO) session.getAttribute("loginCom");
 
-
 		// 로그인 안하고 사용하면 막기
 		if (key == null || key.equals("mypage") || key.equals("fes") || key.equals("messagerAndAlram")
 				|| key.equals("reservation") || key.equals("board")) {

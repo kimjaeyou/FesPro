@@ -120,10 +120,43 @@ img {
 .container {
 	padding: 2px;
 }
+
+/* 알림 영역 스타일 */
+#notifications {
+	display: none; /* 기본적으로 숨김 */
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	padding: 20px;
+	background-color: #f1f1f1;
+	border: 2px solid #333;
+	text-align: center;
+	z-index: 1000; /* 화면 최상위 */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#notifications button {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#notifications button:hover {
+	background-color: #0056b3;
+}
 </style>
 
 </head>
 <body>
+	<div id="notifications">
+		<p id="messageContents"></p>
+		<button onclick="hideNotification()">닫기</button>
+	</div>
 	<jsp:include page="/common/alarm.jsp" />
 	<!-- Masthead-->
 	<header class="masthead" id="head">
@@ -159,6 +192,8 @@ img {
 			</div>
 		</div>
 	</header>
+
+
 	<!-- Icons Grid-->
 	<section class="features-icons bg-light text-center">
 		<div class="container">
@@ -421,6 +456,7 @@ img {
 
    
    </script>
+
 	<script type="text/javascript">
 	//WebSocket 연결 코드 (JSP 파일 내 script 영역)
 	let socket = new WebSocket("ws://localhost:8081/FesPro/websocket");
@@ -438,7 +474,7 @@ img {
 		console.log("WebSocket connection closed.");
 	};
 </script>
-
+	<script type="${path}/js/checkSocket"></script>
 
 </body>
 </html>

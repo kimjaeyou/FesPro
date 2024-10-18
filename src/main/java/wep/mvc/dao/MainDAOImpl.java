@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import wep.mvc.dto.FES_TAG;
 import wep.mvc.dto.FesDTO;
 import wep.mvc.dto.ReservationDTO;
 import wep.mvc.dto.ReviewDTO;
@@ -147,5 +148,87 @@ public class MainDAOImpl {
 		}
 		return result;
 	}
+	
+	
+	public List<FES_TAG> selectTag(String sid) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<FES_TAG> dto = new ArrayList<>();
+
+		String sql = "select * from FES_TAG where SVCID = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				dto.add(new FES_TAG(rs.getInt(1), rs.getString(2), rs.getString(3)));
+			}
+
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dto;
+	}
+	
+	
+	
+	
+	
+	public int insertTagLike(int user,List<Integer>Tagseq) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		String sql = "insert into TAG_LIKE values(TAG_LIKE_SEQ.NEXTVAL,?, ?)";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			for(int seq:Tagseq) {
+				ps.setInt(1, seq);
+				ps.setInt(2, user);
+
+				result = ps.executeUpdate();
+				
+				if (result == 1) {
+					System.out.println("성공");
+				}
+			}
+			
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+	
+	public List<FES_TAG> selectTagS() throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<FES_TAG> dto = new ArrayList<>();
+
+		String sql = "select * from FES_TAG";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				dto.add(new FES_TAG(rs.getInt(1), rs.getString(2), rs.getString(3)));
+			}
+
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dto;
+	}
+	
+	
+	
 
 }

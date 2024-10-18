@@ -15,10 +15,6 @@ public class MessageAndAlramController implements Controller {
 
 		return new ModelAndView("message/messagePage.jsp");
 	}
+	
 
-	 public void sendAlarm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	        String message = req.getParameter("message");
-	        NotificationWebSocket.broadcast(message); // 웹소켓을 통해 알림 전송
-	        resp.getWriter().write("Alarm sent: " + message);
-	    }
 }
