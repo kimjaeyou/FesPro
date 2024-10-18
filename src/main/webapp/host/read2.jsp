@@ -143,7 +143,7 @@
 												<span>서비스 이미지/포스터</span>
 											</p></td>
 										<td><p align="center">
-												<span><b><img src="${path}/${fesDTO.IMGURL}"></b></span>
+												<span><b><img src="${path}/${waitFes.IMGURL}"></b></span>
 											</p></td>
 									</tr>
 									<tr>
@@ -266,7 +266,8 @@
 										<td><p align="center">
 												<span><b>${waitFes.IMGURL}</b></span>
 											</p></td>
-									</tr> --%> --%>
+									</tr> --%>
+									
 									<tr>
 										<td><p align="center">
 												<span>상세내용</span>
