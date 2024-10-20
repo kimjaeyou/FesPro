@@ -444,7 +444,7 @@ function checkValid(){
 										</tr>
 										<tr>
 											<td width="450" height="20" colspan="2" align="center"><b><span
-													style="font-size: 9pt;"><input type=submit
+													style="font-size: 9pt;"><input id="test" type=submit
 														value=수정하기> <input type=reset value=다시쓰기></span></b></td>
 										</tr>
 									</tbody>
@@ -539,10 +539,11 @@ function getPLACENMValue(){
 }
 
 </script>
-
-<script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
 $(document).ready(function() {
-    $('#radio_3').on('click', function() {
+    $('#test').on('click', function() {
         $.ajax({
             url: 'ajax?key=messageAndAlram&methodName=alarmLike',
             type: 'get',
@@ -558,7 +559,6 @@ $(document).ready(function() {
 
 });
 </script>
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>

@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Landing Page - Start Bootstrap Theme</title>
+<title>서울 컬투</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -458,23 +458,33 @@ img {
    </script>
 
 	<script type="text/javascript">
-	//WebSocket 연결 코드 (JSP 파일 내 script 영역)
-	let socket = new WebSocket("ws://localhost:8081/FesPro/websocket");
+window.onload = function() {
+    let socket = new WebSocket("ws://localhost:8081/FesPro/websocket");
 
-	socket.onopen = function() {
-		console.log("WebSocket connection opened.");
-	};
+    socket.onopen = function() {
+        console.log("WebSocket connection opened.");
+    };
 
-	socket.onmessage = function(event) {
-		console.log("Message received: " + event.data);
-		// 여기서 알림 UI를 업데이트하는 코드를 작성하면 됩니다.
-	};
+    socket.onmessage = function(event) {
+        console.log("Message received: " + event.data);
+        showNotification(event.data);
+    };
 
-	socket.onclose = function() {
-		console.log("WebSocket connection closed.");
-	};
+    socket.onclose = function() {
+        console.log("WebSocket connection closed.");
+    };
+};
+
+function showNotification(message) {
+    document.getElementById("messageContents").textContent = message;
+    document.getElementById("notifications").style.display = "block";
+}
+
+function hideNotification() {
+    document.getElementById("notifications").style.display = "none";
+}
+
 </script>
-	<script type="${path}/js/checkSocket"></script>
 
 </body>
 </html>

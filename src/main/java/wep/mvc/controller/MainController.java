@@ -32,25 +32,31 @@ public class MainController implements Controller {
 
 		UsersDTO user = (UsersDTO) req.getSession().getAttribute("loginUser");
 		req.setAttribute("list", list);
-		
-		List<FesDTO> likeList =new ArrayList<>();
+
+		List<FesDTO> likeList = new ArrayList<>();
 		BoardService boardService = new BoardServiceImpl();
 		List<BoardDTO> selectAll = boardService.selectByCtg();
 
 		req.setAttribute("noti", filterCtg(selectAll, 0));
-		
+
 		if (user != null) {
 			int user_seq = user.getUser_seq();
 			likeList = mainService.selecLike(user_seq, list);
-			likeList = mainService.TagSelecMost(user.getUser_seq(),list,likeList);
-		}else {
+			if (likeList.size() > 1) {
+				likeList = mainService.TagSelecMost(user.getUser_seq(), list, likeList);
+			} else {
+				likeList = mainService.selecMost();
+			}
+
+		} else {
 			likeList = mainService.selecMost();
 		}
-		
+
 		req.setAttribute("listLike", likeList);
 
 		return new ModelAndView("index.jsp");
 	}
+
 	private List<BoardDTO> filterCtg(List<BoardDTO> posts, int categorySeq) {
 		return posts.stream().filter(post -> post.getCategorySeq() == categorySeq).collect(Collectors.toList());
 	}
@@ -65,49 +71,44 @@ public class MainController implements Controller {
 		FesDTO fes = mainService.selecOne(sid, list);
 		if (fes != null)
 			req.setAttribute("fes", fes);
-		
+
 		/* 차트 데이터 가져오기 */
 		SuperFestivalService festivalService = new SuperFestivalServiceImpl();
-		
+
 		// 행사에 등록한 유저들 리스트 보내기
 		List<UsersDTO> userList = festivalService.selectUser(fes);
 		// System.out.println(userList);
 		Gson g = new Gson();
 		String data = g.toJson(userList);
 		req.setAttribute("chartUserList", data);
-		
+
 		// 리뷰 쓴 유저 정보 보내기
 		List<UsersDTO> reviewUserList = festivalService.selectReviewUser(fes);
 		data = g.toJson(reviewUserList);
-		//System.out.println(data);
+		// System.out.println(data);
 		req.setAttribute("reviewUserList", data);
-
-	
 
 		return new ModelAndView("detail.jsp");
 	}
-	
+
 	public ModelAndView searchPage(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
 		String search = req.getParameter("search");
 
 		ServletContext app = req.getServletContext();
 		List<FesDTO> list = (List<FesDTO>) app.getAttribute("fesList");
-		
-		if(!search.equals("all")) {
+
+		if (!search.equals("all")) {
 			list = mainService.searchList(search, list);
 		}
 		req.setAttribute("searchList", list);
-		
+
 		return new ModelAndView("list.jsp");
 	}
-	
-	
-	
 
 	public ModelAndView review(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		
+
 		return new ModelAndView("detail.jsp");
 	}
 

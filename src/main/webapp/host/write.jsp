@@ -392,28 +392,31 @@
 											</label> <label>경도: <input type="text" id="longitude"
 													name="X" readonly></label> <input type="text" name="AREANM"
 												size="15" placeholder="XX구 입력해 주세요."> </span>
-											</p></td>
+												</p></td>
 										</tr>
 										<tr>
 											<td><p align="center">
 													<b><span>분류태그</span></b>
 												</p></td>
 											<td><p align="center">
-													<span> <label><input type="checkbox" name="tag_content" value="체험">체험</label> 
-													<label><input type="checkbox" name="tag_content" value="역사">역사</label>
-														<label><input type="checkbox" name="tag_content" value="건축">건축</label> 
-														<label><input type="checkbox" name="tag_content" value="박물관">박물관</label>
-														<label><input type="checkbox" name="tag_content" value="산">산</label>
-														<label><input type="checkbox" name="tag_content" value="강">강</label>
-														<label><input type="checkbox" name="tag_content" value="장애">장애</label>
-														
+													<span> <label><input type="checkbox"
+															name="tag_content" value="체험">체험</label> <label><input
+															type="checkbox" name="tag_content" value="역사">역사</label>
+														<label><input type="checkbox" name="tag_content"
+															value="건축">건축</label> <label><input
+															type="checkbox" name="tag_content" value="박물관">박물관</label>
+														<label><input type="checkbox" name="tag_content"
+															value="산">산</label> <label><input type="checkbox"
+															name="tag_content" value="강">강</label> <label><input
+															type="checkbox" name="tag_content" value="장애">장애</label>
+
 													</span>
 												</p></td>
 										</tr>
 										<tr>
-											<td width="450" height="20" colspan="2" align="center"><b><span
-													style="font-size: 9pt;"><input type=submit value=글쓰기>
-														<input type=reset value=다시쓰기></span></b></td>
+											<td width="450" height="20" colspan="2" align="center" id="test"><b><span
+													style="font-size: 9pt;"><input type=submit value=글쓰기
+														> <input type=reset value=다시쓰기></span></b></td>
 										</tr>
 									</tbody>
 								</table>
@@ -426,6 +429,26 @@
 			</main>
 		</div>
 	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#test').on('click', function() {
+				$.ajax({
+					url : 'ajax?key=messageAndAlram&methodName=alarmRecomand',
+					type : 'get',
+					dataType : 'json',
+					success : function(res) {
+						console.log('알림 성공', res);
+					},
+					error : function(err) {
+						console.log('알림 실패', err);
+					}
+				});
+			});
+
+		});
+	</script>
 	<script>
 		// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 		var infowindow = new kakao.maps.InfoWindow({
