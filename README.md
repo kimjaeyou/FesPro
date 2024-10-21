@@ -19,7 +19,7 @@ KOSTA_286기 Web 2차 미니프로젝트
 - IDE : Eclipse
 
 ## 레퍼런스 사이트
-- [서울시 문화행사 공공서비스 예]([https://data.seoul.go.kr/dataList/OA-2269/S/1/datasetView.do](https://yeyak.seoul.go.kr/web/main.do))
+- [서울시 문화행사 공공서비스](https://yeyak.seoul.go.kr/web/main.do)
 ## 사용 API
 - [서울시 문화행사 공공서비스예약 정보](https://data.seoul.go.kr/dataList/OA-2269/S/1/datasetView.do)
 
