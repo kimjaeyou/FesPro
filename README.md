@@ -21,7 +21,7 @@ KOSTA_286기 Web 2차 미니프로젝트(Web Mini Project)
 
 ## 레퍼런스 사이트(Reference site)
 - [서울시 문화행사 공공서비스(Public Service for Cultural Events in Seoul)](https://yeyak.seoul.go.kr/web/main.do)
-## 사용 API
+## 사용 API(Used API)
 - [서울시 문화행사 공공서비스예약 정보(Public service reservation information for cultural events in Seoul)](https://data.seoul.go.kr/dataList/OA-2269/S/1/datasetView.do)
 
 
